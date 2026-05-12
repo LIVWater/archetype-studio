@@ -1,0 +1,233 @@
+import type { SolutionPackage } from "@/types";
+
+export const solutionPackages: SolutionPackage[] = [
+  {
+    id: "pkg-001",
+    slug: "household-water-security-starter",
+    name: "Household Water Security Starter",
+    audience: "household",
+    description:
+      "A starter package for homes seeking continuity, quality and visibility — leak detection, filtration and tank backup.",
+    includedProducts: [
+      "LIVSmart Leak Detection Kit",
+      "Whole-House Filtration",
+      "Backup Tank (2,500L)",
+      "Tank Level Sensor",
+    ],
+    includedServices: ["Installation", "Annual maintenance"],
+    optionalAddOns: ["UV disinfection", "Solar pump backup"],
+    buyingMode: "request_quote",
+    cta: "Request Quote",
+    division: "LIVSmart",
+    priceFrom: 38500,
+    highlights: [
+      "Designed for 4–6 person homes",
+      "Compatible with the LIVSmart customer app",
+      "Approved installer dispatch",
+    ],
+  },
+  {
+    id: "pkg-002",
+    slug: "smart-metering-leak-detection-kit",
+    name: "Smart Metering & Leak Detection Kit",
+    audience: "estate",
+    description:
+      "Bulk and sub-meter telemetry with leak detection rules and dashboard access — a starting point for estate water visibility.",
+    includedProducts: [
+      "Ultrasonic Bulk Meter",
+      "Pressure Sensor",
+      "Dashboard Access Plan",
+    ],
+    includedServices: ["Installation", "Dashboard onboarding"],
+    buyingMode: "request_quote",
+    cta: "Request Quote",
+    division: "LIVSmart",
+    priceFrom: 64500,
+    highlights: [
+      "Estate inlet + zone visibility",
+      "Leak alerts in dashboard & app",
+      "Foundation for billing reconciliation",
+    ],
+  },
+  {
+    id: "pkg-003",
+    slug: "estate-water-management-package",
+    name: "Estate Water Management Package",
+    audience: "estate",
+    description:
+      "Full estate water management — bulk and sub-metering, dashboards, backup supply, wastewater treatment and reuse-ready effluent.",
+    includedProducts: [
+      "Bulk + sub-meter fleet",
+      "LIVSupply containerised treatment",
+      "LIVWaste package plant",
+      "Reuse storage tanks",
+    ],
+    includedServices: [
+      "Estate water audit",
+      "Installation",
+      "Monthly maintenance",
+      "Off-site monitoring",
+    ],
+    buyingMode: "project_assessment",
+    cta: "Request Project Assessment",
+    division: "LIVSupply",
+    highlights: [
+      "Designed for medium-to-large estates",
+      "Closed-loop supply & reuse",
+      "Portfolio dashboard ready",
+    ],
+    placeholderNotice:
+      "Package is scoped per estate — flows, tariffs and reuse pathways drive sizing.",
+  },
+  {
+    id: "pkg-004",
+    slug: "borehole-monitoring-package",
+    name: "Borehole Monitoring Package",
+    audience: "agriculture",
+    description:
+      "Monitoring stack for boreholes — flow, pressure, level and pump performance — bundled with dashboard access.",
+    includedProducts: [
+      "Flow sensor",
+      "Pressure sensor",
+      "Tank level sensor",
+      "Telemetry gateway",
+      "Dashboard Access Plan",
+    ],
+    includedServices: ["Installation", "Dashboard onboarding"],
+    buyingMode: "request_quote",
+    cta: "Request Quote",
+    division: "LIVSmart",
+    priceFrom: 42000,
+    highlights: [
+      "Field-ready for remote sites",
+      "Yield + pump performance trends",
+      "Alerts for low-level / dry-run",
+    ],
+  },
+  {
+    id: "pkg-005",
+    slug: "commercial-water-control-package",
+    name: "Commercial Water Control Package",
+    audience: "commercial",
+    description:
+      "Tenant-level metering, leak detection and dashboards for commercial properties and mixed-use sites.",
+    includedProducts: [
+      "Bulk + tenant meters",
+      "Smart valves",
+      "Dashboard Access Plan",
+    ],
+    includedServices: ["Installation", "Operations support"],
+    buyingMode: "request_quote",
+    cta: "Request Quote",
+    division: "LIVSmart",
+    priceFrom: 78000,
+    highlights: [
+      "Tenant-level visibility & billing",
+      "Cost recovery & water loss control",
+      "Suitable for office, retail and mixed-use",
+    ],
+  },
+  {
+    id: "pkg-006",
+    slug: "industrial-monitoring-reporting-package",
+    name: "Industrial Monitoring & Reporting Package",
+    audience: "industrial",
+    description:
+      "Process water and wastewater monitoring, compliance reporting and SLA-backed operations.",
+    includedProducts: [
+      "Industrial sensors",
+      "Process water monitoring",
+      "Wastewater monitoring",
+      "Dashboard Access Plan",
+    ],
+    includedServices: ["Installation", "Compliance reporting", "Operations"],
+    buyingMode: "project_assessment",
+    cta: "Request Project Assessment",
+    division: "LIVSmart",
+    highlights: [
+      "Audit-ready reporting",
+      "Process + effluent visibility",
+      "SLA-backed operations",
+    ],
+  },
+  {
+    id: "pkg-007",
+    slug: "wastewater-treatment-package",
+    name: "Wastewater Treatment Package",
+    audience: "project",
+    description:
+      "Decentralised wastewater treatment plant with options for reuse-ready effluent, telemetry and SLA-backed operations.",
+    includedProducts: [
+      "LIVWaste Package Plant",
+      "Effluent monitoring",
+      "Reuse storage tanks",
+    ],
+    includedServices: [
+      "Wastewater feasibility",
+      "Installation",
+      "On-site operator",
+    ],
+    buyingMode: "project_assessment",
+    cta: "Request Project Assessment",
+    division: "LIVWaste",
+    highlights: [
+      "Reuse-ready effluent options",
+      "Modular sizing 10–500 kL/day",
+      "Telemetry + dashboard integration",
+    ],
+  },
+  {
+    id: "pkg-008",
+    slug: "water-reuse-package",
+    name: "Water Reuse Package",
+    audience: "estate",
+    description:
+      "Greywater and treated effluent reuse for irrigation, toilet flushing and commercial reuse — designed for estates and lodges.",
+    includedProducts: [
+      "LIVReuse Greywater System",
+      "Reuse tanks",
+      "Reuse pumping",
+      "Reuse monitoring",
+    ],
+    includedServices: ["Reuse feasibility", "Installation", "Maintenance"],
+    buyingMode: "request_quote",
+    cta: "Request Quote",
+    division: "LIVReuse",
+    priceFrom: 145000,
+    highlights: [
+      "Reduces municipal & potable demand",
+      "Designed for hospitality & estates",
+      "Compatible with LIVSmart dashboards",
+    ],
+  },
+  {
+    id: "pkg-009",
+    slug: "full-decentralised-water-infrastructure",
+    name: "Full Decentralised Water Infrastructure Package",
+    audience: "project",
+    description:
+      "End-to-end decentralised water infrastructure — supply, treatment, storage, wastewater, reuse, monitoring and lifecycle operations.",
+    includedProducts: [
+      "LIVSupply Containerised Plant",
+      "LIVWaste Package Plant",
+      "LIVReuse Systems",
+      "Full LIVSmart telemetry",
+    ],
+    includedServices: [
+      "Feasibility",
+      "Project assessment",
+      "Installation",
+      "Operations & SLA",
+    ],
+    buyingMode: "project_assessment",
+    cta: "Request Project Assessment",
+    division: "LIVSupply",
+    highlights: [
+      "Full lifecycle delivery",
+      "Optional Water-as-a-Service structuring",
+      "Portfolio dashboard included",
+    ],
+    placeholderNotice:
+      "Available structures depend on project size, site conditions, commercial viability and LIVWater approval.",
+  },
+];

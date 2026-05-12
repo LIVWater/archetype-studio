@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 110" width="520" height="110">
+  <title>LIVWATER wordmark (placeholder — replace with official wordmark.png)</title>
+  <g fill="#133D75">
+    <text x="20" y="78" font-family="Montserrat, system-ui, sans-serif" font-weight="800" font-size="72" letter-spacing="-2">LIV</text>
+    <text x="200" y="78" font-family="Montserrat, system-ui, sans-serif" font-weight="500" font-style="italic" font-size="72" letter-spacing="-1">WATER</text>
+  </g>
+</svg>

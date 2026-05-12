@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <title>LIVWater mark (placeholder — replace with official mark-dark.png)</title>
+  <defs>
+    <clipPath id="circle"><circle cx="100" cy="100" r="74"/></clipPath>
+  </defs>
+  <g clip-path="url(#circle)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2">
+    <g stroke="#A9DBFE" opacity="0.85">
+      <path d="M30 70 Q70 50 110 70 T190 75"/>
+      <path d="M28 88 Q70 70 115 92 T200 96"/>
+      <path d="M26 110 Q70 92 116 112 T200 118"/>
+      <path d="M30 132 Q72 116 118 134 T200 140"/>
+      <path d="M34 156 Q74 142 120 158 T200 162"/>
+    </g>
+    <g stroke="#1AA3E8">
+      <path d="M55 60 Q90 78 125 64"/>
+      <path d="M50 96 Q92 112 132 100"/>
+      <path d="M48 124 Q92 140 138 128"/>
+      <path d="M60 152 Q98 162 134 152"/>
+      <path d="M85 70 Q100 100 95 130"/>
+    </g>
+  </g>
+  <circle cx="100" cy="100" r="74" fill="none" stroke="#A9DBFE" stroke-opacity="0.25" stroke-width="1.2"/>
+</svg>

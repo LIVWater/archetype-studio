@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark by default — LIVWater editorial */
+    --background: 215 90% 6%;   /* #010B1C */
+    --foreground: 0 0% 94%;     /* #F0F0F0 */
+    --border: 207 96% 83% / 0.10;
+    --input: 215 50% 22%;
+    --ring: 200 85% 51%;        /* accent */
+    --muted: 215 80% 9%;
+    --muted-foreground: 207 96% 83% / 0.55;
+    --radius: 1rem;
+  }
+
+  * {
+    border-color: rgba(169, 219, 254, 0.10);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: #010B1C;
+  }
+
+  body {
+    @apply bg-navy-900 text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+    color: #F0F0F0;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(26, 163, 232, 0.35);
+    color: #fff;
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply mx-auto w-full max-w-3xl px-6;
+  }
+  .container-mid {
+    @apply mx-auto w-full max-w-5xl px-6;
+  }
+  .container-wide {
+    @apply mx-auto w-full max-w-7xl px-6;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-medium uppercase text-accent-300;
+    letter-spacing: 0.22em;
+  }
+
+  .heading-hero {
+    font-family: var(--font-fraunces), Georgia, serif;
+    @apply text-[44px] font-light leading-[1.02] tracking-tightest md:text-[68px] lg:text-[84px];
+    font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+  }
+
+  .heading-section {
+    font-family: var(--font-fraunces), Georgia, serif;
+    @apply text-[34px] font-light leading-[1.05] tracking-tighter md:text-[52px];
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+  }
+
+  .heading-card {
+    font-family: var(--font-fraunces), Georgia, serif;
+    @apply text-[20px] font-normal leading-[1.2] tracking-tight md:text-[22px];
+    font-variation-settings: "opsz" 72, "SOFT" 50;
+  }
+
+  .heading-eyebrow {
+    @apply font-sans text-xs font-semibold uppercase text-accent-300;
+    letter-spacing: 0.22em;
+  }
+
+  .lede {
+    @apply font-sans text-[15px] leading-[1.65] text-white/65 md:text-[17px];
+    font-weight: 300;
+  }
+
+  .lede-light {
+    @apply font-sans text-[15px] leading-[1.65] text-white/65 md:text-[17px];
+    font-weight: 300;
+  }
+
+  .surface-dark {
+    @apply bg-navy-900 text-white;
+  }
+
+  .surface-darker {
+    @apply bg-navy-900 text-white;
+  }
+
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(169, 219, 254, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(169, 219, 254, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-xl;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 1px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .card-surface-dark {
+    @apply rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-xl;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 1px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .card-elevated {
+    @apply rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 30px 80px -30px rgba(26, 163, 232, 0.12);
+  }
+
+  .ring-focus {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900;
+  }
+
+  .glow-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  .glow-orb-accent {
+    background: radial-gradient(circle, rgba(26, 163, 232, 0.45), rgba(26, 163, 232, 0));
+  }
+  .glow-orb-soft {
+    background: radial-gradient(circle, rgba(169, 219, 254, 0.18), rgba(169, 219, 254, 0));
+  }
+  .glow-orb-brand {
+    background: radial-gradient(circle, rgba(19, 61, 117, 0.7), rgba(19, 61, 117, 0));
+  }
+
+  .divider-soft {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent;
+  }
+
+  .underline-accent {
+    background-image: linear-gradient(transparent 92%, rgba(26, 163, 232, 0.5) 92%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    scrollbar-width: none;
+  }
+  .grain-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 0;
+  }
+}

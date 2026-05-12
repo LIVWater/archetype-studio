@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" width="320" height="360">
+  <title>LIVWATER stacked lockup (placeholder — replace with official logo-stacked.png)</title>
+  <defs>
+    <clipPath id="circle-s"><circle cx="160" cy="125" r="92"/></clipPath>
+  </defs>
+  <g clip-path="url(#circle-s)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6">
+    <g stroke="#133D75" opacity="0.55">
+      <path d="M70 90 Q120 70 170 92 T270 96"/>
+      <path d="M66 112 Q120 92 178 118 T280 122"/>
+      <path d="M62 138 Q120 118 180 142 T280 148"/>
+      <path d="M68 162 Q124 144 184 166 T280 172"/>
+      <path d="M74 188 Q128 170 188 192 T280 196"/>
+    </g>
+    <g stroke="#1AA3E8">
+      <path d="M100 84 Q140 102 180 88"/>
+      <path d="M94 122 Q142 138 192 126"/>
+      <path d="M90 152 Q142 168 198 156"/>
+      <path d="M104 184 Q146 194 188 184"/>
+      <path d="M140 92 Q160 122 156 158"/>
+    </g>
+  </g>
+  <circle cx="160" cy="125" r="92" fill="none" stroke="#133D75" stroke-opacity="0.35" stroke-width="1.4"/>
+  <g fill="#133D75">
+    <text x="36" y="320" font-family="Montserrat, system-ui, sans-serif" font-weight="800" font-size="60" letter-spacing="-1.5">LIV</text>
+    <text x="170" y="320" font-family="Montserrat, system-ui, sans-serif" font-weight="500" font-style="italic" font-size="60" letter-spacing="-1">WATER</text>
+  </g>
+</svg>
