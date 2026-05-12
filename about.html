@@ -1,0 +1,3609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Archetype Studio</title>
+  <meta name="description" content="We build brands that lead. Archetype Studio is a premium brand development and marketing agency powered by deep insight and creative precision." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================
+       DESIGN TOKENS
+    ========================================= */
+    :root {
+      --deep-space: #070A17;
+      --midnight: #0C1025;
+      --surface-01: #0f1320;
+      --surface-02: #141828;
+      --surface-03: #1c2235;
+      --electric-blue: #00A8FF;
+      --neon-magenta: #E91E8C;
+      --cyan: #00E5D4;
+      --deep-violet: #6B00C8;
+      --solar-gold: #FFB800;
+      --signal-red: #FF2D55;
+      --white: #FFFFFF;
+      --off-white: #E8ECF4;
+      --grey-300: #8B90A7;
+      --grey-500: #4A5068;
+      --font-display: 'Syne', sans-serif;
+      --font-ui: 'Space Grotesk', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --nav-h: 80px;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    /* =========================================
+       RESET & BASE
+    ========================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--deep-space);
+      color: var(--off-white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* =========================================
+       GRAIN OVERLAY
+    ========================================= */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* =========================================
+       AURORA BACKGROUND
+    ========================================= */
+    .aurora {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .aurora__orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.12;
+      animation: drift 20s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    .aurora__orb--1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--deep-violet) 0%, transparent 70%);
+      top: -200px; left: -150px;
+      animation-delay: 0s; animation-duration: 22s;
+    }
+    .aurora__orb--2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+      top: 30%; right: -100px;
+      animation-delay: -8s; animation-duration: 18s;
+    }
+    .aurora__orb--3 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--neon-magenta) 0%, transparent 70%);
+      bottom: 10%; left: 30%;
+      animation-delay: -14s; animation-duration: 25s;
+    }
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.05); }
+      66% { transform: translate(-20px, 15px) scale(0.95); }
+      100% { transform: translate(15px, 25px) scale(1.02); }
+    }
+
+    /* =========================================
+       SCROLLING CANVAS PARTICLES
+    ========================================= */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    /* =========================================
+       LAYOUT WRAPPER
+    ========================================= */
+    .wrap { position: relative; z-index: 1; }
+
+    /* =========================================
+       NAVIGATION
+    ========================================= */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      /* Smooth transitions for ALL scroll-driven properties */
+      transition:
+        height      0.5s var(--ease-out-expo),
+        padding     0.5s var(--ease-out-expo),
+        background  0.5s ease,
+        box-shadow  0.5s ease,
+        border-color 0.5s ease;
+    }
+
+    /* ---- Scrolled state: shrink + glassmorphism gradient ---- */
+    .nav.scrolled {
+      height: 62px;
+      /* Black → dark neon gradient glassmorphism */
+      background: linear-gradient(
+        135deg,
+        rgba(5,  7, 20, 0.92) 0%,
+        rgba(10, 14, 38, 0.86) 52%,
+        rgba(107, 0, 200, 0.18) 100%
+      );
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      /* Neon-tinted bottom edge + subtle depth shadow */
+      border-bottom: 1px solid rgba(0, 168, 255, 0.12);
+      box-shadow:
+        0 1px 0   rgba(107, 0, 200, 0.20) inset,
+        0 12px 40px rgba(0, 0, 0, 0.45);
+      padding: 0 48px;
+    }
+
+    /* Logo */
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .nav__mark {
+      width: 36px;
+      height: auto;
+      transition: width 0.5s var(--ease-out-expo);
+    }
+    .nav.scrolled .nav__mark { width: 26px; }
+
+    .nav__wordmark {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: font-size 0.5s var(--ease-out-expo), letter-spacing 0.5s ease;
+    }
+    .nav.scrolled .nav__wordmark {
+      font-size: 13px;
+      letter-spacing: 0.10em;
+    }
+
+    /* Links */
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-left: auto;
+      list-style: none;
+    }
+    .nav__links a {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey-300);
+      transition: color 0.25s ease, font-size 0.5s var(--ease-out-expo);
+      position: relative;
+    }
+    .nav.scrolled .nav__links a { font-size: 12px; }
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--electric-blue);
+      transition: width 0.3s var(--ease-out-expo);
+    }
+    .nav__links a:hover { color: var(--white); }
+    .nav__links a:hover::after { width: 100%; }
+    .nav__links a.active { color: var(--white); }
+    .nav__links a.active::after { width: 100%; background: var(--neon-magenta); }
+
+    /* CTA button */
+    .nav__cta {
+      margin-left: 40px;
+      padding: 10px 24px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, var(--electric-blue), var(--deep-violet));
+      border: none;
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      cursor: pointer;
+      transition:
+        transform   1.5s var(--ease-out-expo),
+        box-shadow  1.5s var(--ease-out-expo),
+        padding     0.5s var(--ease-out-expo),
+        font-size   0.5s var(--ease-out-expo),
+        opacity     1.5s ease;
+    }
+    .nav.scrolled .nav__cta {
+      padding: 7px 18px;
+      font-size: 12px;
+    }
+    .nav__cta:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 10px 40px rgba(0, 168, 255, 0.45), 0 0 24px rgba(107, 0, 200, 0.3);
+      opacity: 1;
+    }
+    .nav__cta:active { transform: translateY(0) scale(0.98); }
+
+    /* =========================================
+       HERO
+    ========================================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        #0d0820 0%,
+        #090b1c 25%,
+        #070A17 55%,
+        #050811 100%
+      );
+      overflow: hidden;
+    }
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(5, 8, 17, 0.55) 0%,
+        transparent 45%,
+        rgba(5, 8, 17, 0.25) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+    #hero-bubbles {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px;
+      max-width: 900px;
+      padding-top: var(--nav-h);
+    }
+    .hero__content--highlight {
+      position: absolute;
+      pointer-events: none;
+      z-index: 5;
+      padding: 0 48px;
+      max-width: 900px;
+      padding-top: var(--nav-h);
+    }
+    .hero__content--highlight .hero__eyebrow {
+      color: var(--cyan) !important;
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+    .hero__content--highlight .hero__eyebrow::before { display: none !important; }
+    .hero__content--highlight .hero__title {
+      color: var(--electric-blue) !important;
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+    .hero__content--highlight .hero__title em {
+      color: var(--neon-magenta) !important;
+      -webkit-text-fill-color: var(--neon-magenta) !important;
+      font-style: italic;
+    }
+    .hero__content--highlight .hero__desc {
+      color: var(--cyan) !important;
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+    .hero__content--highlight .hero__actions { display: none; }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--electric-blue);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s var(--ease-out-expo) 0.3s forwards;
+    }
+    .hero__eyebrow::before { display: none; }
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw + 0.5rem, 7.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+    .hero__title .line {
+      display: block;
+      overflow: hidden;
+    }
+    .hero__title .line span {
+      display: block;
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    .hero__title .line:nth-child(1) span { animation: slideUp 0.9s var(--ease-out-expo) 0.5s forwards; }
+    .hero__title .line:nth-child(2) span { animation: slideUp 0.9s var(--ease-out-expo) 0.65s forwards; }
+    .hero__title .line:nth-child(3) span { animation: slideUp 0.9s var(--ease-out-expo) 0.8s forwards; }
+    /* Animated gradient on headline accent */
+    .hero__title em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--electric-blue), var(--neon-magenta), var(--electric-blue));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 6s linear infinite;
+    }
+    .hero__desc {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--grey-300);
+      max-width: 520px;
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s var(--ease-out-expo) 1s forwards;
+    }
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s var(--ease-out-expo) 1.15s forwards;
+      flex-wrap: wrap;
+    }
+    .hero__scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 48px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out-expo) 1.6s forwards;
+    }
+    .hero__scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--electric-blue));
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    .hero__scroll-text {
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-500);
+      writing-mode: vertical-rl;
+    }
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* =========================================
+       BUTTONS
+    ========================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 50px;
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      white-space: nowrap;
+    }
+    .btn:hover { transform: scale(1.03) translateY(-1.5px); }
+    .btn:active { transform: translateY(0) scale(0.98); }
+    /* Primary button — shimmer sweep on hover */
+    .btn--primary {
+      padding: 16px 36px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--electric-blue) 0%, var(--deep-violet) 100%);
+      color: var(--white);
+      border: none;
+    }
+    .btn--primary::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.14) 50%, transparent 100%);
+      transition: left 0.6s ease;
+      pointer-events: none;
+    }
+    .btn--primary:hover { box-shadow: 0 14px 50px rgba(0, 168, 255, 0.55), 0 0 32px rgba(0, 168, 255, 0.25); }
+    .btn--primary:hover::after { left: 100%; }
+    .btn--ghost {
+      padding: 15px 35px;
+      background: transparent;
+      color: var(--off-white);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .btn--ghost:hover {
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 14px 40px rgba(0, 168, 255, 0.2), 0 0 24px rgba(255, 255, 255, 0.08);
+    }
+    .btn__icon {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .btn:hover .btn__icon { transform: translateX(4px); }
+
+    /* =========================================
+       SECTION COMMONS
+    ========================================= */
+    section { position: relative; z-index: 1; }
+    .section-pad { padding: 120px 48px; }
+    .section-pad--lg { padding: 160px 48px; }
+    .container { max-width: 1280px; margin: 0 auto; }
+
+    .section-label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--electric-blue);
+      margin-bottom: 20px;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal--left { transform: translateX(-40px); }
+    .reveal--left.visible { transform: translateX(0); }
+    .reveal--right { transform: translateX(40px); }
+    .reveal--right.visible { transform: translateX(0); }
+    .reveal--scale { transform: scale(0.92); opacity: 0; }
+    .reveal--scale.visible { transform: scale(1); opacity: 1; }
+
+    /* Stagger children */
+    .stagger > * { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
+    .stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+    .stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
+    .stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.2s; }
+    .stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.3s; }
+    .stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.4s; }
+    .stagger.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.5s; }
+
+    /* =========================================
+       TICKER / MARQUEE
+    ========================================= */
+    .ticker {
+      background: var(--surface-01);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 20px 0;
+      overflow: hidden;
+      /* Edge fade for polished look */
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    }
+    .ticker__track {
+      display: flex;
+      gap: 0;
+      animation: ticker 72s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 36px;
+      padding: 0 32px;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-500);
+      flex-shrink: 0;
+    }
+    .ticker__item span { color: var(--neon-magenta); font-size: 18px; }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* =========================================
+       WHO WE ARE
+    ========================================= */
+    .about-intro {
+      background: var(--deep-space);
+    }
+    .about-intro__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-intro__img-wrap {
+      position: relative;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .orbital-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .about-intro__heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+    .about-intro__heading em {
+      font-style: normal;
+      color: var(--neon-magenta);
+    }
+    .about-intro__body {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--grey-300);
+      margin-bottom: 24px;
+    }
+    .about-intro__body strong { color: var(--off-white); font-weight: 500; }
+    .about-intro__values {
+      display: flex;
+      gap: 32px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+    .value-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--electric-blue);
+      transition: color 0.2s ease;
+    }
+    .value-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--electric-blue);
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .value-pill:hover { color: var(--cyan); }
+    .value-pill:hover::before { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+
+    /* =========================================
+       MANIFESTO
+    ========================================= */
+    .manifesto {
+      position: relative;
+      padding: 140px 48px;
+      overflow: hidden;
+    }
+    .manifesto__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/Philosophy.png');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.08);
+    }
+    .manifesto__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(7, 10, 23, 0.95) 0%,
+        rgba(12, 16, 37, 0.88) 40%,
+        rgba(107, 0, 200, 0.25) 70%,
+        rgba(7, 10, 23, 0.92) 100%
+      );
+    }
+    .manifesto__inner {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    /* Decorative oversized open-quote mark */
+    .manifesto__inner::before {
+      content: '\201C';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 16rem;
+      line-height: 1;
+      color: rgba(107, 0, 200, 0.07);
+      pointer-events: none;
+      user-select: none;
+      z-index: -1;
+    }
+    .manifesto__quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 40px;
+    }
+    /* Animated gradient on manifesto accent phrase */
+    .manifesto__quote em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--neon-magenta), var(--electric-blue), var(--neon-magenta));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 5s linear infinite;
+    }
+    .manifesto__line {
+      position: relative;
+      width: 320px;
+      max-width: 80%;
+      height: 3px;
+      background: rgba(255,255,255,0.06);
+      margin: 0 auto 40px;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .manifesto__line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--electric-blue) 30%,
+        var(--neon-magenta) 70%,
+        transparent 100%);
+      animation: lineScanner 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes lineScanner {
+      0%   { left: -60%; }
+      100% { left: 140%; }
+    }
+
+    /* Suppress section-label line in manifesto */
+    .section-label--no-line::before { display: none; }
+    .manifesto__sub {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--grey-300);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* =========================================
+       SERVICES BENTO
+    ========================================= */
+    .services {
+      background: var(--deep-space);
+    }
+    .services__heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .services__sub {
+      font-size: 1.05rem;
+      color: var(--grey-300);
+      max-width: 520px;
+      margin-bottom: 64px;
+    }
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: auto;
+      gap: 16px;
+    }
+    .bento__card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      background: var(--surface-02);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: border-color 0.3s ease, transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease;
+      cursor: default;
+    }
+    /* Top accent gradient line — scales in left-to-right on hover */
+    .bento__card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--electric-blue), var(--neon-magenta));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s var(--ease-out-expo);
+      z-index: 3;
+    }
+    .bento__card:hover::before { transform: scaleX(1); }
+    .bento__card:hover {
+      border-color: rgba(0, 168, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .bento__card--hero { grid-column: span 7; min-height: 480px; }
+    .bento__card--tall { grid-column: span 5; min-height: 480px; }
+    .bento__card--wide { grid-column: span 8; min-height: 300px; }
+    .bento__card--sm { grid-column: span 4; min-height: 300px; }
+    .bento__card--full { grid-column: span 12; min-height: 200px; }
+    .bento__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 2.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .bento__card:hover .bento__img { transform: scale(1.06); }
+    .bento__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(7,10,23,0.95) 0%, rgba(7,10,23,0.4) 50%, transparent 100%);
+    }
+    .bento__content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px;
+      z-index: 2;
+    }
+    .bento__tag {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    .bento__tag--blue    { background: rgba(0, 168, 255, 0.15); color: var(--electric-blue); border: 1px solid rgba(0,168,255,0.2); }
+    .bento__tag--magenta { background: rgba(233, 30, 140, 0.15); color: var(--neon-magenta); border: 1px solid rgba(233,30,140,0.2); }
+    .bento__tag--cyan    { background: rgba(0, 229, 212, 0.15); color: var(--cyan); border: 1px solid rgba(0,229,212,0.2); }
+    .bento__tag--gold    { background: rgba(255, 184, 0, 0.15); color: var(--solar-gold); border: 1px solid rgba(255,184,0,0.2); }
+    .bento__title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .bento__card--sm .bento__title { font-size: 1.25rem; }
+    .bento__desc {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--grey-300);
+      max-width: 420px;
+    }
+    .bento__arrow {
+      position: absolute;
+      top: 24px; right: 24px;
+      width: 48px; height: 48px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.45;
+      transform: translateY(4px);
+      transition: opacity 1.5s var(--ease-out-expo),
+                  transform 1.5s var(--ease-out-expo),
+                  box-shadow 1.5s var(--ease-out-expo),
+                  scale 1.5s var(--ease-out-expo),
+                  background 1.5s ease,
+                  border-color 1.5s ease;
+      color: var(--white);
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .bento__card:hover .bento__arrow {
+      opacity: 1;
+      transform: translateY(0) scale(1.12);
+      background: rgba(0, 168, 255, 0.18);
+      border-color: var(--electric-blue);
+      box-shadow: 0 0 20px rgba(0, 168, 255, 0.45), 0 0 8px rgba(0, 168, 255, 0.2);
+    }
+
+    /* No-image bento cards */
+    .bento__card--solid {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+    }
+    .bento__number {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1;
+      color: rgba(255,255,255,0.06);
+      margin-bottom: 20px;
+    }
+
+    /* =========================================
+       LOGO CAROUSEL
+    ========================================= */
+    .logos-carousel {
+      background: var(--surface-01);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 56px 0;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+    .logos-carousel__label {
+      text-align: center;
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--grey-500);
+      margin-bottom: 40px;
+    }
+    .logos-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: logoScroll 44s linear infinite;
+    }
+    .logos-track:hover { animation-play-state: paused; }
+    .logo-item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 52px;
+      opacity: 0.28;
+      transition: opacity 1.5s var(--ease-out-expo);
+      flex-shrink: 0;
+    }
+    .logo-item:hover { opacity: 0.8; }
+    .logo-item svg { height: 30px; width: auto; fill: white; }
+    @keyframes logoScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* keep old stat rules below for reference but unused */
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+    .stat {
+      text-align: center;
+      padding: 20px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    .stat:last-child { border-right: none; }
+    .stat:hover { background: rgba(0, 168, 255, 0.04); }
+    .stat__number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .stat__number span {
+      background: linear-gradient(90deg, var(--electric-blue), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat__label {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--grey-500);
+    }
+
+    /* =========================================
+       PHILOSOPHY / APPROACH
+    ========================================= */
+    .philosophy {
+      background: var(--deep-space);
+      overflow-x: clip;
+    }
+    .philosophy__header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 80px;
+    }
+    .philosophy__heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .philosophy__heading em {
+      font-style: normal;
+      color: var(--electric-blue);
+    }
+    .philosophy__intro {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--grey-300);
+      margin-bottom: 0;
+    }
+
+    /* === Philosophy wave canvas wrapper === */
+    .phil-cards-wrap {
+      position: relative;
+    }
+    #phil-wave-canvas {
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* === 4 Floating Neon Icon Cards === */
+    .phil-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .phil-card {
+      position: relative;
+      z-index: 1;
+      background: rgba(10, 14, 32, 0.78);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 20px;
+      padding: 44px 28px 36px;
+      text-align: center;
+      overflow: hidden;
+      transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .phil-card:hover {
+      background: rgba(16, 22, 48, 0.88);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    /* Neon top-edge glow line */
+    .phil-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      opacity: 0.7;
+    }
+    .phil-card--blue::before    { background: linear-gradient(90deg, transparent, var(--electric-blue), transparent); }
+    .phil-card--magenta::before { background: linear-gradient(90deg, transparent, var(--neon-magenta), transparent); }
+    .phil-card--cyan::before    { background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+    .phil-card--gold::before    { background: linear-gradient(90deg, transparent, var(--solar-gold), transparent); }
+    /* Inner ambient colour wash */
+    .phil-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      filter: blur(52px);
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .phil-card--blue::after    { background: var(--electric-blue); }
+    .phil-card--magenta::after { background: var(--neon-magenta); }
+    .phil-card--cyan::after    { background: var(--cyan); }
+    .phil-card--gold::after    { background: var(--solar-gold); }
+    /* Icon circle */
+    .phil-card__icon {
+      position: relative;
+      z-index: 1;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      border: 1px solid currentColor;
+      border-opacity: 0.4;
+    }
+    .phil-card__icon svg { width: 34px; height: 34px; }
+    .phil-card--blue    .phil-card__icon { color: var(--electric-blue); background: rgba(0,168,255,0.08);   box-shadow: 0 0 30px rgba(0,168,255,0.28),   inset 0 0 18px rgba(0,168,255,0.07); }
+    .phil-card--magenta .phil-card__icon { color: var(--neon-magenta);  background: rgba(233,30,140,0.08);  box-shadow: 0 0 30px rgba(233,30,140,0.28),  inset 0 0 18px rgba(233,30,140,0.07); }
+    .phil-card--cyan    .phil-card__icon { color: var(--cyan);          background: rgba(0,229,212,0.08);   box-shadow: 0 0 30px rgba(0,229,212,0.28),   inset 0 0 18px rgba(0,229,212,0.07); }
+    .phil-card--gold    .phil-card__icon { color: var(--solar-gold);    background: rgba(255,184,0,0.08);   box-shadow: 0 0 30px rgba(255,184,0,0.28),   inset 0 0 18px rgba(255,184,0,0.07); }
+    .phil-card__title {
+      position: relative; z-index: 1;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .phil-card__body {
+      position: relative; z-index: 1;
+      font-size: 0.875rem;
+      line-height: 1.75;
+      color: var(--grey-300);
+    }
+    /* Floating animations — staggered */
+    .phil-card--blue    { animation: floatA 5.2s ease-in-out infinite; }
+    .phil-card--magenta { animation: floatB 5.8s ease-in-out infinite 0.6s; }
+    .phil-card--cyan    { animation: floatC 4.9s ease-in-out infinite 1.1s; }
+    .phil-card--gold    { animation: floatD 5.5s ease-in-out infinite 0.3s; }
+    @keyframes floatA { 0%,100% { transform: translateY(0);    } 50% { transform: translateY(-12px); } }
+    @keyframes floatB { 0%,100% { transform: translateY(-5px); } 50% { transform: translateY(7px);   } }
+    @keyframes floatC { 0%,100% { transform: translateY(-3px); } 50% { transform: translateY(9px);   } }
+    @keyframes floatD { 0%,100% { transform: translateY(0);    } 50% { transform: translateY(-10px); } }
+    .phil-card:hover { animation-play-state: paused; }
+
+    /* =========================================
+       PROCESS
+    ========================================= */
+    .process {
+      background: var(--surface-01);
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .process__heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .process__sub {
+      font-size: 1.05rem;
+      color: var(--grey-300);
+      max-width: 520px;
+      margin-bottom: 80px;
+    }
+
+    /* ── Step timeline grid ── */
+    .process-timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    /* Horizontal connecting line through node centers (top: 27px = half of 54px node) */
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      top: 27px;
+      left: calc(12.5% - 6px);
+      right: calc(12.5% - 6px);
+      height: 1px;
+      background: linear-gradient(90deg,
+        var(--electric-blue)  0%,
+        var(--neon-magenta)  33%,
+        var(--cyan)          66%,
+        var(--solar-gold)   100%);
+      opacity: 0.40;
+      z-index: 0;
+    }
+
+    /* ── Individual step ── */
+    .pstep {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Numbered node circle */
+    .pstep__node {
+      position: relative;
+      z-index: 1;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      background: rgba(10, 14, 38, 0.94);
+      backdrop-filter: blur(14px);
+      flex-shrink: 0;
+      transition: transform 0.45s var(--ease-out-expo), box-shadow 0.45s ease;
+    }
+    .pstep--1 .pstep__node { color: var(--electric-blue); border: 1px solid rgba(0,168,255,0.45);  box-shadow: 0 0 20px rgba(0,168,255,0.18); }
+    .pstep--2 .pstep__node { color: var(--neon-magenta);  border: 1px solid rgba(233,30,140,0.45); box-shadow: 0 0 20px rgba(233,30,140,0.18); }
+    .pstep--3 .pstep__node { color: var(--cyan);          border: 1px solid rgba(0,229,212,0.45);  box-shadow: 0 0 20px rgba(0,229,212,0.18); }
+    .pstep--4 .pstep__node { color: var(--solar-gold);    border: 1px solid rgba(255,184,0,0.45);  box-shadow: 0 0 20px rgba(255,184,0,0.18); }
+    .pstep:hover .pstep__node { transform: scale(1.10); }
+    .pstep--1:hover .pstep__node { box-shadow: 0 0 32px rgba(0,168,255,0.55); }
+    .pstep--2:hover .pstep__node { box-shadow: 0 0 32px rgba(233,30,140,0.55); }
+    .pstep--3:hover .pstep__node { box-shadow: 0 0 32px rgba(0,229,212,0.55); }
+    .pstep--4:hover .pstep__node { box-shadow: 0 0 32px rgba(255,184,0,0.55); }
+
+    /* Vertical stem from node down to card */
+    .pstep__stem {
+      width: 1px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+    .pstep--1 .pstep__stem { background: linear-gradient(to bottom, rgba(0,168,255,0.55),  rgba(0,168,255,0.04)); }
+    .pstep--2 .pstep__stem { background: linear-gradient(to bottom, rgba(233,30,140,0.55), rgba(233,30,140,0.04)); }
+    .pstep--3 .pstep__stem { background: linear-gradient(to bottom, rgba(0,229,212,0.55),  rgba(0,229,212,0.04)); }
+    .pstep--4 .pstep__stem { background: linear-gradient(to bottom, rgba(255,184,0,0.55),  rgba(255,184,0,0.04)); }
+
+    /* Glassmorphism card */
+    .pstep__card {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255,255,255,0.036);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border-radius: 20px;
+      padding: 30px 26px 26px;
+      transition: background 0.35s ease, border-color 0.35s ease,
+                  transform 0.45s var(--ease-out-expo), box-shadow 0.45s ease;
+    }
+    .pstep--1 .pstep__card { border: 1px solid rgba(0,168,255,0.13); }
+    .pstep--2 .pstep__card { border: 1px solid rgba(233,30,140,0.13); }
+    .pstep--3 .pstep__card { border: 1px solid rgba(0,229,212,0.13); }
+    .pstep--4 .pstep__card { border: 1px solid rgba(255,184,0,0.13); }
+
+    /* Neon top-edge accent */
+    .pstep__card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+    }
+    .pstep--1 .pstep__card::before { background: linear-gradient(90deg, transparent, rgba(0,168,255,0.75),  transparent); }
+    .pstep--2 .pstep__card::before { background: linear-gradient(90deg, transparent, rgba(233,30,140,0.75), transparent); }
+    .pstep--3 .pstep__card::before { background: linear-gradient(90deg, transparent, rgba(0,229,212,0.75),  transparent); }
+    .pstep--4 .pstep__card::before { background: linear-gradient(90deg, transparent, rgba(255,184,0,0.75),  transparent); }
+
+    /* Inner ambient wash */
+    .pstep__card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 160px; height: 120px;
+      border-radius: 50%;
+      filter: blur(48px);
+      opacity: 0.07;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .pstep--1 .pstep__card::after { background: var(--electric-blue); }
+    .pstep--2 .pstep__card::after { background: var(--neon-magenta); }
+    .pstep--3 .pstep__card::after { background: var(--cyan); }
+    .pstep--4 .pstep__card::after { background: var(--solar-gold); }
+
+    .pstep:hover .pstep__card {
+      background: rgba(255,255,255,0.058);
+      transform: translateY(-6px);
+    }
+    .pstep--1:hover .pstep__card { border-color: rgba(0,168,255,0.28);  box-shadow: 0 20px 56px rgba(0,168,255,0.10); }
+    .pstep--2:hover .pstep__card { border-color: rgba(233,30,140,0.28); box-shadow: 0 20px 56px rgba(233,30,140,0.10); }
+    .pstep--3:hover .pstep__card { border-color: rgba(0,229,212,0.28);  box-shadow: 0 20px 56px rgba(0,229,212,0.10); }
+    .pstep--4:hover .pstep__card { border-color: rgba(255,184,0,0.28);  box-shadow: 0 20px 56px rgba(255,184,0,0.10); }
+
+    /* Card content */
+    .pstep__title {
+      position: relative; z-index: 1;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .pstep__body {
+      position: relative; z-index: 1;
+      font-size: 0.875rem;
+      line-height: 1.8;
+      color: var(--grey-300);
+      flex: 1;
+      margin-bottom: 26px;
+    }
+
+    /* Per-step CTA — 50px radius as requested */
+    .pstep__btn {
+      position: relative; z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      text-decoration: none;
+      align-self: flex-start;
+      transition: background 0.28s var(--ease-out-expo),
+                  box-shadow  0.28s var(--ease-out-expo),
+                  transform   0.28s var(--ease-out-expo);
+    }
+    .pstep--1 .pstep__btn { color: var(--electric-blue); border: 1px solid rgba(0,168,255,0.35);  background: rgba(0,168,255,0.06); }
+    .pstep--2 .pstep__btn { color: var(--neon-magenta);  border: 1px solid rgba(233,30,140,0.35); background: rgba(233,30,140,0.06); }
+    .pstep--3 .pstep__btn { color: var(--cyan);          border: 1px solid rgba(0,229,212,0.35);  background: rgba(0,229,212,0.06); }
+    .pstep--4 .pstep__btn { color: var(--solar-gold);    border: 1px solid rgba(255,184,0,0.35);  background: rgba(255,184,0,0.06); }
+    .pstep--1 .pstep__btn:hover { background: rgba(0,168,255,0.16);  box-shadow: 0 0 28px rgba(0,168,255,0.32);  transform: translateY(-2px) scale(1.04); }
+    .pstep--2 .pstep__btn:hover { background: rgba(233,30,140,0.16); box-shadow: 0 0 28px rgba(233,30,140,0.32); transform: translateY(-2px) scale(1.04); }
+    .pstep--3 .pstep__btn:hover { background: rgba(0,229,212,0.16);  box-shadow: 0 0 28px rgba(0,229,212,0.32);  transform: translateY(-2px) scale(1.04); }
+    .pstep--4 .pstep__btn:hover { background: rgba(255,184,0,0.16);  box-shadow: 0 0 28px rgba(255,184,0,0.32);  transform: translateY(-2px) scale(1.04); }
+    .pstep__btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    /* =========================================
+       WORK TEASER
+    ========================================= */
+    .work-teaser {
+      background: var(--deep-space);
+      overflow-x: clip;
+    }
+    .work-teaser__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    .work-teaser__heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .work-teaser__heading em {
+      font-style: normal;
+      color: var(--neon-magenta);
+    }
+    .work-teaser__body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--grey-300);
+      margin-bottom: 36px;
+    }
+    /* ===  Work dot constellation  === */
+    .work-dots-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #work-dots-canvas {
+      width: 100%;
+      max-width: 440px;
+      height: 270px;
+      display: block;
+    }
+
+    /* ===  Portfolio endless scroll  === */
+    .portfolio-scroll {
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      transform: translateX(-50%);
+      overflow: hidden;
+      padding: 44px 0 12px;
+      mask-image: linear-gradient(to right,
+        transparent 0%, black 6%, black 94%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right,
+        transparent 0%, black 6%, black 94%, transparent 100%);
+    }
+    .portfolio-track {
+      display: flex;
+      width: max-content;
+      animation: portfolioScroll 52s linear infinite;
+    }
+    .portfolio-scroll { cursor: grab; }
+    .portfolio-scroll.is-dragging { cursor: grabbing; }
+    .portfolio-scroll.is-dragging .flip-card { pointer-events: none; }
+    :root { --portfolio-scroll-dist: calc(-6 * 300px); }
+    @keyframes portfolioScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(var(--portfolio-scroll-dist)); }
+    }
+
+    /* === Flip card === */
+    .flip-card {
+      flex-shrink: 0;
+      width: 280px;
+      height: 370px;
+      margin-right: 20px;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      border-radius: 16px;
+      transition: transform 0.72s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+    .flip-front,
+    .flip-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .flip-front { background: var(--surface-02); }
+    .flip-front__img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.55s var(--ease-out-expo);
+    }
+    .flip-card:hover .flip-front__img { transform: scale(1.05); }
+    .flip-front__label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 20px 22px;
+      background: linear-gradient(to top, rgba(7,10,23,0.95) 0%, transparent 100%);
+    }
+    .flip-front__category {
+      font-family: var(--font-ui);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .flip-front__name {
+      font-family: var(--font-display);
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--white); line-height: 1.3;
+    }
+    .flip-back {
+      transform: rotateY(180deg);
+      background: rgba(10, 14, 32, 0.97);
+      backdrop-filter: blur(28px) saturate(150%);
+      -webkit-backdrop-filter: blur(28px) saturate(150%);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px 24px;
+    }
+    /* colour top-edge accent */
+    .flip-back::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 12%; right: 12%;
+      height: 1px; opacity: 0.85;
+    }
+    .flip-card--blue    .flip-back::before { background: linear-gradient(90deg, transparent, var(--electric-blue), transparent); }
+    .flip-card--magenta .flip-back::before { background: linear-gradient(90deg, transparent, var(--neon-magenta),  transparent); }
+    .flip-card--cyan    .flip-back::before { background: linear-gradient(90deg, transparent, var(--cyan),           transparent); }
+    .flip-card--gold    .flip-back::before { background: linear-gradient(90deg, transparent, var(--solar-gold),     transparent); }
+    /* ambient wash */
+    .flip-back::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 180px; height: 160px;
+      border-radius: 50%; filter: blur(52px);
+      opacity: 0.10; pointer-events: none;
+    }
+    .flip-card--blue    .flip-back::after { background: var(--electric-blue); }
+    .flip-card--magenta .flip-back::after { background: var(--neon-magenta); }
+    .flip-card--cyan    .flip-back::after { background: var(--cyan); }
+    .flip-card--gold    .flip-back::after { background: var(--solar-gold); }
+    .flip-back__category {
+      position: relative; z-index: 1;
+      font-family: var(--font-ui);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .flip-card--blue    .flip-back__category { color: var(--electric-blue); }
+    .flip-card--magenta .flip-back__category { color: var(--neon-magenta); }
+    .flip-card--cyan    .flip-back__category { color: var(--cyan); }
+    .flip-card--gold    .flip-back__category { color: var(--solar-gold); }
+    .flip-back__title {
+      position: relative; z-index: 1;
+      font-family: var(--font-display);
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--white); line-height: 1.3;
+      letter-spacing: -0.01em; margin-bottom: 10px;
+    }
+    .flip-back__desc {
+      position: relative; z-index: 1;
+      font-size: 0.8rem; line-height: 1.75;
+      color: var(--grey-300); margin-bottom: 22px;
+    }
+    .flip-back__btn {
+      position: relative; z-index: 1;
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; border-radius: 50px;
+      font-family: var(--font-ui); font-size: 11px;
+      font-weight: 600; letter-spacing: 0.10em;
+      text-transform: uppercase; text-decoration: none;
+      align-self: flex-start;
+      transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .flip-card--blue    .flip-back__btn { color: var(--electric-blue); border: 1px solid rgba(0,168,255,0.38);   background: rgba(0,168,255,0.07); }
+    .flip-card--magenta .flip-back__btn { color: var(--neon-magenta);  border: 1px solid rgba(233,30,140,0.38);  background: rgba(233,30,140,0.07); }
+    .flip-card--cyan    .flip-back__btn { color: var(--cyan);          border: 1px solid rgba(0,229,212,0.38);   background: rgba(0,229,212,0.07); }
+    .flip-card--gold    .flip-back__btn { color: var(--solar-gold);    border: 1px solid rgba(255,184,0,0.38);   background: rgba(255,184,0,0.07); }
+    .flip-card--blue    .flip-back__btn:hover { background: rgba(0,168,255,0.18);   box-shadow: 0 0 22px rgba(0,168,255,0.35);  transform: translateY(-2px); }
+    .flip-card--magenta .flip-back__btn:hover { background: rgba(233,30,140,0.18);  box-shadow: 0 0 22px rgba(233,30,140,0.35); transform: translateY(-2px); }
+    .flip-card--cyan    .flip-back__btn:hover { background: rgba(0,229,212,0.18);   box-shadow: 0 0 22px rgba(0,229,212,0.35);  transform: translateY(-2px); }
+    .flip-card--gold    .flip-back__btn:hover { background: rgba(255,184,0,0.18);   box-shadow: 0 0 22px rgba(255,184,0,0.35);  transform: translateY(-2px); }
+    .flip-back__btn svg { width: 12px; height: 12px; }
+
+    /* =========================================
+       CTA SECTION
+    ========================================= */
+    .cta-section {
+      position: relative;
+      overflow: hidden;
+      padding: 160px 48px;
+      text-align: center;
+    }
+
+    /* Smooth fade in from section above */
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 140px;
+      background: linear-gradient(to bottom, var(--deep-space) 0%, transparent 100%);
+      z-index: 3;
+      pointer-events: none;
+    }
+    /* Smooth fade out into footer */
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to top, var(--midnight) 0%, transparent 100%);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .cta-section__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/images/Services.png');
+      background-size: cover;
+      background-position: center;
+      /* Deepen the photo so it reads as texture, not subject */
+      filter: brightness(0.45) saturate(0.65);
+    }
+
+    /* Three-layer overlay stacked on one pseudo-element */
+    .cta-section__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        /* Layer 1 — vignette: edges darker, centre breathing room */
+        radial-gradient(
+          ellipse 110% 90% at 50% 50%,
+          transparent 20%,
+          rgba(7, 10, 23, 0.62) 100%
+        ),
+        /* Layer 2 — brand colour wash: violet top-left, magenta bottom-right */
+        linear-gradient(
+          135deg,
+          rgba(107, 0, 200, 0.18) 0%,
+          transparent 45%,
+          rgba(233, 30, 140, 0.12) 100%
+        ),
+        /* Layer 3 — solid dark base ensuring legibility */
+        rgba(7, 10, 23, 0.70);
+    }
+
+    .cta-section__inner {
+      position: relative;
+      z-index: 4;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .cta-section__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--neon-magenta);
+      margin-bottom: 24px;
+    }
+    .cta-section__heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .cta-section__heading em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--electric-blue), var(--neon-magenta), var(--electric-blue));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 5s linear infinite;
+    }
+    .cta-section__sub {
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: var(--off-white);
+      opacity: 0.72;
+      margin-bottom: 48px;
+    }
+    .cta-section__actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+    .footer {
+      background: var(--midnight);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      padding: 60px 48px 40px;
+    }
+    /* Gradient accent on footer top edge */
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 168, 255, 0.3), rgba(233, 30, 140, 0.3), transparent);
+    }
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+    .footer__brand {
+      max-width: 300px;
+    }
+    .footer__logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .footer__tagline {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--grey-500);
+    }
+    .footer__nav h4 {
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-500);
+      margin-bottom: 16px;
+    }
+    .footer__nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer__nav a {
+      font-size: 0.9rem;
+      color: var(--grey-300);
+      transition: color 0.2s ease;
+    }
+    .footer__nav a:hover { color: var(--white); }
+    .footer__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer__legal {
+      font-size: 0.8rem;
+      color: var(--grey-500);
+    }
+    .footer__socials {
+      display: flex;
+      gap: 20px;
+    }
+    .footer__social {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--grey-300);
+      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    .footer__social:hover {
+      border-color: var(--electric-blue);
+      color: var(--electric-blue);
+      transform: translateY(-2px);
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+    @media (max-width: 1024px) {
+      .nav { padding: 0 32px; }
+      .section-pad, .section-pad--lg { padding: 80px 32px; }
+      .about-intro__inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-intro__img-wrap { aspect-ratio: 16/9; }
+      .phil-cards { grid-template-columns: repeat(2, 1fr); }
+      .bento__card--hero { grid-column: span 12; min-height: 360px; }
+      .bento__card--tall { grid-column: span 12; min-height: 300px; }
+      .bento__card--wide { grid-column: span 12; }
+      .bento__card--sm { grid-column: span 6; }
+      .stats__grid { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.07); }
+      .stat:last-child { border-bottom: none; }
+      .process-timeline { grid-template-columns: repeat(2, 1fr); }
+      .process-timeline::before { display: none; }
+      .work-teaser__inner { grid-template-columns: 1fr; }
+      #work-dots-canvas { height: 200px; }
+    }
+    @media (max-width: 768px) {
+      :root { --nav-h: 68px; }
+      .nav { padding: 0 20px; }
+      .nav__links, .nav__cta { display: none; }
+      .section-pad, .section-pad--lg { padding: 64px 20px; }
+      .hero__content { padding: 0 20px; padding-top: var(--nav-h); }
+      .hero__scroll { left: 20px; }
+      .bento__card--sm { grid-column: span 12; }
+      .stats__grid { grid-template-columns: repeat(2, 1fr); }
+      .process-timeline { grid-template-columns: 1fr; }
+      .phil-cards { grid-template-columns: 1fr; }
+      .flip-card { width: 240px; height: 320px; margin-right: 16px; }
+      :root { --portfolio-scroll-dist: calc(-6 * 256px); }
+      .footer { padding: 40px 20px 32px; }
+      .footer__inner { flex-direction: column; }
+      .manifesto__inner::before { font-size: 8rem; top: -40px; }
+    }
+    /* =========================================
+       HEADING FONTS — Helvetica
+    ========================================= */
+    .hero__title {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 800;
+    }
+    .about-intro__heading,
+    .manifesto__quote,
+    .services__heading,
+    .philosophy__heading,
+    .process__heading,
+    .work-teaser__heading {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 300;
+    }
+    /* Preserve em accent colour inside light headings */
+    .about-intro__heading em,
+    .work-teaser__heading em { font-weight: 300; }
+
+    /* ===== Site-wide mobile nav toggle (canonical) ===== */
+    .nav__toggle{display:none;background:transparent;border:none;cursor:pointer;width:36px;height:36px;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0;margin-left:16px;}
+    .nav__toggle span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s;}
+    .nav.is-open .nav__toggle span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav.is-open .nav__toggle span:nth-child(2){opacity:0;}
+    .nav.is-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    @media(max-width:768px){
+      .nav__toggle{display:flex!important;}
+      .nav .nav__links{display:flex!important;position:fixed;top:68px;left:0;right:0;flex-direction:column;gap:0;padding:16px 20px;margin:0;background:linear-gradient(180deg,rgba(7,10,23,0.98),rgba(12,16,37,0.98));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);transform:translateY(-12px);opacity:0;pointer-events:none;transition:transform 0.32s cubic-bezier(0.16,1,0.3,1),opacity 0.25s ease;z-index:999;}
+      .nav.is-open .nav__links{transform:translateY(0);opacity:1;pointer-events:auto;}
+      .nav .nav__links li{width:100%;list-style:none;}
+      .nav .nav__links a{display:block;padding:14px 4px;font-size:14px;}
+      .nav .nav__links a::after{display:none;}
+      .nav .nav__cta{display:none!important;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Aurora Background -->
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora__orb aurora__orb--1"></div>
+    <div class="aurora__orb aurora__orb--2"></div>
+    <div class="aurora__orb aurora__orb--3"></div>
+  </div>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- =========================================
+       NAV
+  ========================================= -->
+  <nav class="nav" id="site-nav" role="navigation" aria-label="Main navigation">
+    <a class="nav__logo" href="index.html" aria-label="Archetype Studio home">
+      <svg class="nav__mark" viewBox="150 80 520 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill="#ffffff" d="M 420.789062 92.867188 L 279.285156 337.953125 C 282.851562 337.953125 286.414062 337.835938 289.972656 337.605469 C 293.53125 337.371094 297.078125 337.019531 300.613281 336.554688 C 304.148438 336.089844 307.664062 335.511719 311.164062 334.8125 C 314.660156 334.117188 318.132812 333.308594 321.574219 332.386719 C 325.019531 331.464844 328.429688 330.429688 331.808594 329.28125 C 335.183594 328.136719 338.519531 326.882812 341.8125 325.515625 C 345.109375 324.152344 348.355469 322.679688 351.554688 321.105469 C 354.75 319.527344 357.894531 317.847656 360.984375 316.0625 C 364.070312 314.28125 367.097656 312.398438 370.0625 310.417969 C 373.027344 308.4375 375.925781 306.359375 378.753906 304.191406 C 381.582031 302.019531 384.339844 299.757812 387.019531 297.40625 C 389.699219 295.054688 392.300781 292.621094 394.824219 290.097656 C 397.34375 287.578125 399.78125 284.976562 402.132812 282.296875 C 404.484375 279.613281 406.746094 276.859375 408.914062 274.03125 C 411.085938 271.203125 413.164062 268.304688 415.144531 265.339844 C 417.125 262.375 419.007812 259.347656 420.789062 256.261719 C 422.574219 253.171875 424.253906 250.027344 425.832031 246.832031 C 427.410156 243.632812 428.878906 240.386719 430.242188 237.089844 C 431.609375 233.796875 432.863281 230.460938 434.011719 227.085938 C 435.15625 223.707031 436.191406 220.296875 437.113281 216.851562 C 438.039062 213.40625 438.847656 209.9375 439.542969 206.441406 C 440.238281 202.941406 440.820312 199.425781 441.285156 195.890625 C 441.75 192.355469 442.097656 188.808594 442.332031 185.25 C 442.566406 181.691406 442.683594 178.128906 442.683594 174.5625 C 442.683594 170.996094 442.566406 167.433594 442.332031 163.875 C 442.097656 160.316406 441.75 156.769531 441.285156 153.234375 C 440.820312 149.699219 440.238281 146.183594 439.542969 142.6875 C 438.847656 139.1875 438.039062 135.71875 437.113281 132.273438 C 436.191406 128.828125 435.15625 125.417969 434.011719 122.042969 C 432.863281 118.664062 431.609375 115.328125 430.242188 112.035156 C 428.878906 108.738281 427.410156 105.492188 425.832031 102.296875 C 424.253906 99.097656 422.574219 95.953125 420.789062 92.867188 Z"/>
+        <path fill="#ffffff" d="M 515.125 419.667969 L 562.292969 501.367188 L 656.628906 501.367188 L 609.457031 419.667969 L 515.125 256.261719 L 420.789062 419.667969 Z"/>
+        <path fill="#ffffff" d="M 373.621094 501.347656 L 420.789062 419.667969 L 326.457031 419.667969 C 322.890625 419.667969 319.328125 419.785156 315.769531 420.015625 C 312.214844 420.25 308.667969 420.597656 305.128906 421.0625 C 301.59375 421.527344 298.078125 422.109375 294.582031 422.804688 C 291.085938 423.5 287.613281 424.308594 284.167969 425.230469 C 280.726562 426.152344 277.3125 427.1875 273.9375 428.332031 C 270.5625 429.480469 267.226562 430.734375 263.929688 432.097656 C 260.636719 433.464844 257.390625 434.933594 254.191406 436.511719 C 250.992188 438.085938 247.851562 439.765625 244.761719 441.550781 C 241.671875 443.332031 238.648438 445.214844 235.683594 447.195312 C 232.71875 449.175781 229.820312 451.25 226.992188 453.421875 C 224.160156 455.59375 221.40625 457.851562 218.726562 460.203125 C 216.042969 462.554688 213.441406 464.992188 210.921875 467.511719 C 208.398438 470.03125 205.964844 472.632812 203.613281 475.316406 C 201.261719 477.996094 199 480.75 196.828125 483.578125 C 194.65625 486.40625 192.582031 489.304688 190.601562 492.269531 C 188.617188 495.234375 186.738281 498.261719 184.953125 501.347656 Z"/>
+      </svg>
+      <span class="nav__wordmark">Archetype Studio</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="portfolio.html">Work</a></li>
+      <li><a href="shop.html">Shop</a></li>
+    </ul>
+    <a href="shop.html#what-we-do" class="nav__cta btn">Start a Project</a>
+    <button class="nav__toggle" id="site-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- =========================================
+       WRAP
+  ========================================= -->
+  <div class="wrap">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="about" aria-label="About Archetype Studio">
+      <div class="hero__bg">
+        <canvas id="hero-bubbles" aria-hidden="true"></canvas>
+      </div>
+      <div class="hero__content container">
+        <p class="hero__eyebrow">About Us</p>
+        <h1 class="hero__title">
+          <span class="line"><span>We Build</span></span>
+          <span class="line"><span>Brands That <em>Lead.</em></span></span>
+        </h1>
+        <p class="hero__desc">
+          We partner with businesses ready to own their category — bringing sharp strategy, distinctive identity, and campaigns built to compound over time.
+        </p>
+        <div class="hero__actions">
+          <a href="portfolio.html" class="btn btn--primary">
+            Explore Our Work
+            <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+          <a href="mailto:lip_niemann@icloud.com?subject=Let%27s%20start%20a%20conversation%20%E2%80%94%20Archetype%20Studio&body=Hi%20Archetype%20Studio%2C%0A%0AI%20came%20across%20your%20site%20and%20I%27d%20love%20to%20start%20a%20conversation%20about%20my%20brand.%20Here%27s%20a%20bit%20about%20me%20to%20get%20us%20started%3A%0A%0A%E2%80%94%20Business%20%2F%20brand%3A%0A%E2%80%94%20What%20I%27m%20trying%20to%20build%20or%20solve%3A%0A%E2%80%94%20Where%20I%20am%20right%20now%3A%0A%E2%80%94%20Ideal%20timeline%3A%0A%0AWhen%20would%20suit%20you%20for%20a%20chat%3F%0A%0AThanks" class="btn btn--ghost">Start a Conversation</a>
+        </div>
+      </div>
+      <div class="hero__scroll" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+        <span class="hero__scroll-text">Scroll</span>
+      </div>
+    </section>
+
+    <!-- ===== TICKER ===== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span class="ticker__item">Brand Strategy <span>✦</span></span>
+        <span class="ticker__item">Visual Identity <span>✦</span></span>
+        <span class="ticker__item">Content Creation <span>✦</span></span>
+        <span class="ticker__item">Digital Marketing <span>✦</span></span>
+        <span class="ticker__item">Creative Direction <span>✦</span></span>
+        <span class="ticker__item">Campaign Development <span>✦</span></span>
+        <span class="ticker__item">Insight-Led Growth <span>✦</span></span>
+        <span class="ticker__item">Marketing with Purpose <span>✦</span></span>
+        <!-- Duplicate for seamless loop -->
+        <span class="ticker__item">Brand Strategy <span>✦</span></span>
+        <span class="ticker__item">Visual Identity <span>✦</span></span>
+        <span class="ticker__item">Content Creation <span>✦</span></span>
+        <span class="ticker__item">Digital Marketing <span>✦</span></span>
+        <span class="ticker__item">Creative Direction <span>✦</span></span>
+        <span class="ticker__item">Campaign Development <span>✦</span></span>
+        <span class="ticker__item">Insight-Led Growth <span>✦</span></span>
+        <span class="ticker__item">Marketing with Purpose <span>✦</span></span>
+      </div>
+    </div>
+
+    <!-- ===== WHO WE ARE ===== -->
+    <section class="about-intro section-pad" id="who-we-are">
+      <div class="container">
+        <div class="about-intro__inner">
+          <div class="about-intro__img-wrap reveal reveal--left">
+            <canvas id="orbital-canvas" class="orbital-canvas" aria-hidden="true"></canvas>
+          </div>
+
+          <div class="reveal reveal--right">
+            <p class="section-label">Who We Are</p>
+            <h2 class="about-intro__heading">
+              Strategy first.<br/>
+              <em>Creativity always.</em>
+            </h2>
+            <p class="about-intro__body">
+              We built Archetype Studio on one belief: <strong>great brands are never accidents.</strong> They're the product of sharp thinking, deliberate craft, and a team that refuses to compromise.
+            </p>
+            <p class="about-intro__body">
+              One integrated team across strategy, identity, content, and digital — no handoffs, no dilution, no excuses.
+            </p>
+            <div class="about-intro__values stagger">
+              <span class="value-pill">Insight-Led</span>
+              <span class="value-pill">Brand-First</span>
+              <span class="value-pill">Results-Driven</span>
+              <span class="value-pill">Fully Integrated</span>
+            </div>
+            <a href="shop.html" class="btn btn--primary" style="margin-top: 40px;">
+              Work With Us
+              <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MANIFESTO ===== -->
+    <section class="manifesto" aria-label="Our manifesto">
+      <div class="manifesto__bg"></div>
+      <div class="manifesto__inner reveal">
+        <p class="section-label section-label--no-line" style="justify-content: center; margin-bottom: 32px;">Our Belief</p>
+        <blockquote class="manifesto__quote">
+          "Brands that <em>know who they are</em> never have to shout to be heard."
+        </blockquote>
+        <div class="manifesto__line"></div>
+        <p class="manifesto__sub">
+          We don't build brands for trends. We build them for longevity — identities so clear, so purposeful, that they become the benchmark others measure themselves against.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES BENTO ===== -->
+    <section class="services section-pad" id="services">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-label">What We Do</p>
+          <h2 class="services__heading">Built for brands<br/>that mean business.</h2>
+          <p class="services__sub">
+            Strategy. Identity. Content. Activation. Four disciplines, one integrated team, one standard of work.
+          </p>
+        </div>
+
+        <div class="bento">
+          <div class="bento__card bento__card--hero reveal">
+            <img class="bento__img" src="assets/images/2.png" alt="Brand strategy and positioning" loading="lazy" />
+            <div class="bento__overlay"></div>
+            <div class="bento__arrow" aria-hidden="true">→</div>
+            <div class="bento__content">
+              <span class="bento__tag bento__tag--blue">Brand Strategy</span>
+              <h3 class="bento__title">Positioning that<br/>defines categories.</h3>
+              <p class="bento__desc">From market positioning to brand architecture — we build strategic foundations that give every creative decision purpose and direction.</p>
+            </div>
+          </div>
+
+          <div class="bento__card bento__card--tall reveal">
+            <img class="bento__img" src="assets/images/20.png" alt="Creative direction and visual identity" loading="lazy" />
+            <div class="bento__overlay"></div>
+            <div class="bento__arrow" aria-hidden="true">→</div>
+            <div class="bento__content">
+              <span class="bento__tag bento__tag--magenta">Creative Direction</span>
+              <h3 class="bento__title">Visual language that owns the room.</h3>
+              <p class="bento__desc">Identity systems, art direction, and visual language built to signal exactly who you are — and why it matters.</p>
+            </div>
+          </div>
+
+          <div class="bento__card bento__card--wide reveal">
+            <img class="bento__img" src="assets/images/21.png" alt="Content creation and production" loading="lazy" />
+            <div class="bento__overlay"></div>
+            <div class="bento__arrow" aria-hidden="true">→</div>
+            <div class="bento__content">
+              <span class="bento__tag bento__tag--cyan">Content Creation</span>
+              <h3 class="bento__title">Content crafted to convert.</h3>
+              <p class="bento__desc">Photography, film, copy, and digital assets — produced to brand standard, optimised for platform, and engineered for audience response.</p>
+            </div>
+          </div>
+
+          <div class="bento__card bento__card--sm reveal">
+            <img class="bento__img" src="assets/images/22.png" alt="Digital marketing and growth" loading="lazy" />
+            <div class="bento__overlay"></div>
+            <div class="bento__arrow" aria-hidden="true">→</div>
+            <div class="bento__content">
+              <span class="bento__tag bento__tag--gold">Digital Marketing</span>
+              <h3 class="bento__title">Growth with purpose.</h3>
+              <p class="bento__desc">Campaigns and channels, unified by strategy and tracked to outcomes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CLIENT LOGOS CAROUSEL ===== -->
+    <div class="logos-carousel" aria-label="Our clients">
+      <p class="logos-carousel__label">Trusted by brands that mean business</p>
+      <div class="logos-track" aria-hidden="true">
+
+        <!-- Set 1 -->
+        <span class="logo-item">
+          <svg viewBox="0 0 120 32" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="10,28 18,6 26,28 23,28 18,14 13,28" /><rect x="13.5" y="20" width="9" height="2"/>
+            <text x="34" y="24" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="700" font-size="16" letter-spacing="2">APEX</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 130 32" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="24" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="300" font-size="20" letter-spacing="5">NORVA</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 160 32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="16" r="9" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="12" cy="16" r="4"/>
+            <text x="30" y="23" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="600" font-size="15" letter-spacing="3">STRATOS</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 110 32" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="25" font-family="Georgia,serif" font-weight="400" font-size="22" letter-spacing="1">Lumis</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 140 32" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="8" width="16" height="16" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
+            <rect x="4" y="12" width="8" height="8" rx="1"/>
+            <text x="26" y="24" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="700" font-size="15" letter-spacing="2">MERIDIAN</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 100 32" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="25" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="200" font-size="24" letter-spacing="4">KOVE</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 160 32" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="16" x2="12" y2="4" stroke="white" stroke-width="1.5"/>
+            <line x1="12" y1="4" x2="24" y2="16" stroke="white" stroke-width="1.5"/>
+            <line x1="0" y1="16" x2="12" y2="28" stroke="white" stroke-width="1.5"/>
+            <line x1="12" y1="28" x2="24" y2="16" stroke="white" stroke-width="1.5"/>
+            <text x="34" y="23" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="500" font-size="15" letter-spacing="2">CRESTLINE</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 120 32" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="25" font-family="Georgia,serif" font-style="italic" font-size="22" letter-spacing="1">Novura</text>
+          </svg>
+        </span>
+
+        <!-- Set 2 — duplicate for seamless loop -->
+        <span class="logo-item">
+          <svg viewBox="0 0 120 32" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="10,28 18,6 26,28 23,28 18,14 13,28" /><rect x="13.5" y="20" width="9" height="2"/>
+            <text x="34" y="24" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="700" font-size="16" letter-spacing="2">APEX</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 130 32" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="24" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="300" font-size="20" letter-spacing="5">NORVA</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 160 32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="16" r="9" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="12" cy="16" r="4"/>
+            <text x="30" y="23" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="600" font-size="15" letter-spacing="3">STRATOS</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 110 32" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="25" font-family="Georgia,serif" font-weight="400" font-size="22" letter-spacing="1">Lumis</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 140 32" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="8" width="16" height="16" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
+            <rect x="4" y="12" width="8" height="8" rx="1"/>
+            <text x="26" y="24" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="700" font-size="15" letter-spacing="2">MERIDIAN</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 100 32" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="25" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="200" font-size="24" letter-spacing="4">KOVE</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 160 32" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="16" x2="12" y2="4" stroke="white" stroke-width="1.5"/>
+            <line x1="12" y1="4" x2="24" y2="16" stroke="white" stroke-width="1.5"/>
+            <line x1="0" y1="16" x2="12" y2="28" stroke="white" stroke-width="1.5"/>
+            <line x1="12" y1="28" x2="24" y2="16" stroke="white" stroke-width="1.5"/>
+            <text x="34" y="23" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="500" font-size="15" letter-spacing="2">CRESTLINE</text>
+          </svg>
+        </span>
+        <span class="logo-item">
+          <svg viewBox="0 0 120 32" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="25" font-family="Georgia,serif" font-style="italic" font-size="22" letter-spacing="1">Novura</text>
+          </svg>
+        </span>
+
+      </div>
+    </div>
+
+    <!-- ===== PHILOSOPHY ===== -->
+    <section class="philosophy section-pad" id="philosophy">
+      <div class="container">
+
+        <!-- Centred header -->
+        <div class="philosophy__header reveal">
+          <p class="section-label" style="justify-content: center;">Our Philosophy</p>
+          <h2 class="philosophy__heading">
+            How we think.<br/>
+            <em>How we work.</em>
+          </h2>
+          <p class="philosophy__intro">
+            Every great brand engagement starts with a single question: what does this brand need to be true about? Everything else — the design, the messaging, the campaigns — flows from there.
+          </p>
+        </div>
+
+        <!-- Cards + flowing wave canvas -->
+        <div class="phil-cards-wrap">
+          <canvas id="phil-wave-canvas" aria-hidden="true"></canvas>
+
+        <!-- 4 floating neon icon cards -->
+        <div class="phil-cards stagger">
+
+          <!-- 01 Insight -->
+          <div class="phil-card phil-card--blue reveal">
+            <div class="phil-card__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 24c0 0 8-16 20-16s20 16 20 16-8 16-20 16S4 24 4 24z"/>
+                <circle cx="24" cy="24" r="6"/>
+                <circle cx="24" cy="24" r="2" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <h3 class="phil-card__title">Insight Before Execution</h3>
+            <p class="phil-card__body">We understand deeply before we create. Market context, audience psychology, and competitive truth inform every decision.</p>
+          </div>
+
+          <!-- 02 Precision -->
+          <div class="phil-card phil-card--magenta reveal">
+            <div class="phil-card__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="24,3 45,24 24,45 3,24"/>
+                <circle cx="24" cy="24" r="5"/>
+                <line x1="24" y1="3"  x2="24" y2="14"/>
+                <line x1="24" y1="34" x2="24" y2="45"/>
+                <line x1="3"  y1="24" x2="14" y2="24"/>
+                <line x1="34" y1="24" x2="45" y2="24"/>
+              </svg>
+            </div>
+            <h3 class="phil-card__title">Precision, Not Volume</h3>
+            <p class="phil-card__body">We create the exact work required to move the needle — crafted to the highest standard, not the fastest turnaround.</p>
+          </div>
+
+          <!-- 03 Partnership -->
+          <div class="phil-card phil-card--cyan reveal">
+            <div class="phil-card__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="16" cy="24" r="11"/>
+                <circle cx="32" cy="24" r="11"/>
+                <path d="M21.5 17.5 Q24 22 24 24 Q24 26 21.5 30.5" stroke-opacity="0.5"/>
+                <path d="M26.5 17.5 Q24 22 24 24 Q24 26 26.5 30.5" stroke-opacity="0.5"/>
+              </svg>
+            </div>
+            <h3 class="phil-card__title">Partnership Over Transaction</h3>
+            <p class="phil-card__body">We operate as an extension of your business, embedded in your world — not a vendor at arm's length.</p>
+          </div>
+
+          <!-- 04 Accountability -->
+          <div class="phil-card phil-card--gold reveal">
+            <div class="phil-card__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="4,38 14,24 22,30 34,12 44,16"/>
+                <polyline points="34,12 44,12 44,22"/>
+                <line x1="4" y1="44" x2="44" y2="44"/>
+              </svg>
+            </div>
+            <h3 class="phil-card__title">Accountability to Outcomes</h3>
+            <p class="phil-card__body">Every engagement is anchored to clear commercial objectives and measured against the results that actually matter.</p>
+          </div>
+
+        </div><!-- /.phil-cards -->
+        </div><!-- /.phil-cards-wrap -->
+      </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="process section-pad" id="process">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-label">How We Work</p>
+          <h2 class="process__heading">From brief to brand<br/>in four clear steps.</h2>
+          <p class="process__sub">
+            No handoffs. No ambiguity. A methodology built around momentum — from the first conversation to market.
+          </p>
+        </div>
+        <div class="process-timeline stagger">
+
+          <!-- Step 01 — Discover -->
+          <div class="pstep pstep--1">
+            <div class="pstep__node">01</div>
+            <div class="pstep__stem"></div>
+            <div class="pstep__card">
+              <h3 class="pstep__title">Discover</h3>
+              <p class="pstep__body">We immerse in your business, audience, and competitive landscape. Auditing what exists, mapping what's possible, and defining what success looks like.</p>
+              <a href="/process/discover" class="pstep__btn">
+                Explore Phase
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Step 02 — Define -->
+          <div class="pstep pstep--2">
+            <div class="pstep__node">02</div>
+            <div class="pstep__stem"></div>
+            <div class="pstep__card">
+              <h3 class="pstep__title">Define</h3>
+              <p class="pstep__body">From insight, we develop strategy. Brand positioning, messaging architecture, and a creative platform that gives every execution a clear and defensible direction.</p>
+              <a href="/process/define" class="pstep__btn">
+                Explore Phase
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Step 03 — Create -->
+          <div class="pstep pstep--3">
+            <div class="pstep__node">03</div>
+            <div class="pstep__stem"></div>
+            <div class="pstep__card">
+              <h3 class="pstep__title">Create</h3>
+              <p class="pstep__body">Where strategy becomes brand. Identity, content, campaigns, and digital assets — all built to the highest craft standard and aligned to your objectives.</p>
+              <a href="/process/create" class="pstep__btn">
+                Explore Phase
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Step 04 — Activate -->
+          <div class="pstep pstep--4">
+            <div class="pstep__node">04</div>
+            <div class="pstep__stem"></div>
+            <div class="pstep__card">
+              <h3 class="pstep__title">Activate</h3>
+              <p class="pstep__body">We deploy, track, and optimise. Launching your brand into market with precision — and measuring performance against the outcomes that actually matter.</p>
+              <a href="/process/activate" class="pstep__btn">
+                Explore Phase
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WORK TEASER ===== -->
+    <section class="work-teaser section-pad" id="work">
+      <div class="container">
+        <div class="work-teaser__inner">
+          <div class="reveal reveal--left">
+            <p class="section-label">Our Work</p>
+            <h2 class="work-teaser__heading">
+              Brands we've<br/><em>brought to life.</em>
+            </h2>
+            <p class="work-teaser__body">
+              From challenger startups to category leaders — across 18 industries. The work is varied. The standard is not.
+            </p>
+            <a href="portfolio.html" class="btn btn--primary">
+              View Full Portfolio
+              <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+          <div class="reveal reveal--right work-dots-wrap">
+            <canvas id="work-dots-canvas" aria-label="Portfolio project network" role="img"></canvas>
+          </div>
+        </div>
+
+      </div><!-- /.container -->
+
+      <!-- ── Endless flip-card gallery (full-bleed) ── -->
+      <div class="portfolio-scroll">
+        <div class="portfolio-track" id="portfolio-track">
+
+          <!-- ── Set A ── -->
+          <div class="flip-card flip-card--blue" data-project="0">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/Portfolio.png" alt="Consumer Tech Rebrand" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--electric-blue)">Brand Identity</p>
+                  <h4 class="flip-front__name">Consumer Tech Rebrand</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Brand Identity</p>
+                <h4 class="flip-back__title">Consumer Tech Rebrand</h4>
+                <p class="flip-back__desc">Full identity overhaul for a category-defining consumer electronics brand entering a saturated market.</p>
+                <a href="/work/consumer-tech" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card--magenta" data-project="1">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/1.png" alt="Retail Launch Strategy" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--neon-magenta)">Campaign Development</p>
+                  <h4 class="flip-front__name">Retail Launch Strategy</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Campaign Development</p>
+                <h4 class="flip-back__title">Retail Launch Strategy</h4>
+                <p class="flip-back__desc">Go-to-market campaign driving 40% above target footfall in the first quarter post-launch.</p>
+                <a href="/work/retail-launch" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card--cyan" data-project="2">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/Introduction.png" alt="Growth Campaign" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--cyan)">Digital Marketing</p>
+                  <h4 class="flip-front__name">Growth Campaign</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Digital Marketing</p>
+                <h4 class="flip-back__title">Growth Campaign</h4>
+                <p class="flip-back__desc">Data-led digital acquisition scaling a SaaS brand from seed funding to Series A in 14 months.</p>
+                <a href="/work/growth-campaign" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card--gold" data-project="0">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/Portfolio.png" alt="Financial Services Identity" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--solar-gold)">Brand Strategy</p>
+                  <h4 class="flip-front__name">Financial Services Identity</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Brand Strategy</p>
+                <h4 class="flip-back__title">Financial Services Identity</h4>
+                <p class="flip-back__desc">A credibility-first brand system for a challenger asset manager entering a trust-driven sector.</p>
+                <a href="/work/financial-services" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card--blue" data-project="1">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/1.png" alt="Hospitality Rebrand" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--electric-blue)">Brand Identity</p>
+                  <h4 class="flip-front__name">Hospitality Rebrand</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Brand Identity</p>
+                <h4 class="flip-back__title">Hospitality Rebrand</h4>
+                <p class="flip-back__desc">Repositioning a boutique hotel group from budget accommodation to design-led destination stays.</p>
+                <a href="/work/hospitality" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card--magenta" data-project="2">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/Introduction.png" alt="Tech Startup Launch" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--neon-magenta)">Brand + Digital</p>
+                  <h4 class="flip-front__name">Tech Startup Launch</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Brand + Digital</p>
+                <h4 class="flip-back__title">Tech Startup Launch</h4>
+                <p class="flip-back__desc">Zero-to-one brand build and digital launch for a B2B SaaS platform entering a competitive vertical.</p>
+                <a href="/work/tech-startup" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Set B (identical duplicate for seamless loop) ── -->
+          <div class="flip-card flip-card--blue" data-project="0">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/Portfolio.png" alt="Consumer Tech Rebrand" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--electric-blue)">Brand Identity</p>
+                  <h4 class="flip-front__name">Consumer Tech Rebrand</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Brand Identity</p>
+                <h4 class="flip-back__title">Consumer Tech Rebrand</h4>
+                <p class="flip-back__desc">Full identity overhaul for a category-defining consumer electronics brand entering a saturated market.</p>
+                <a href="/work/consumer-tech" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card--magenta" data-project="1">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/1.png" alt="Retail Launch Strategy" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--neon-magenta)">Campaign Development</p>
+                  <h4 class="flip-front__name">Retail Launch Strategy</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Campaign Development</p>
+                <h4 class="flip-back__title">Retail Launch Strategy</h4>
+                <p class="flip-back__desc">Go-to-market campaign driving 40% above target footfall in the first quarter post-launch.</p>
+                <a href="/work/retail-launch" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card--cyan" data-project="2">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/Introduction.png" alt="Growth Campaign" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--cyan)">Digital Marketing</p>
+                  <h4 class="flip-front__name">Growth Campaign</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Digital Marketing</p>
+                <h4 class="flip-back__title">Growth Campaign</h4>
+                <p class="flip-back__desc">Data-led digital acquisition scaling a SaaS brand from seed funding to Series A in 14 months.</p>
+                <a href="/work/growth-campaign" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card--gold" data-project="0">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/Portfolio.png" alt="Financial Services Identity" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--solar-gold)">Brand Strategy</p>
+                  <h4 class="flip-front__name">Financial Services Identity</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Brand Strategy</p>
+                <h4 class="flip-back__title">Financial Services Identity</h4>
+                <p class="flip-back__desc">A credibility-first brand system for a challenger asset manager entering a trust-driven sector.</p>
+                <a href="/work/financial-services" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card--blue" data-project="1">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/1.png" alt="Hospitality Rebrand" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--electric-blue)">Brand Identity</p>
+                  <h4 class="flip-front__name">Hospitality Rebrand</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Brand Identity</p>
+                <h4 class="flip-back__title">Hospitality Rebrand</h4>
+                <p class="flip-back__desc">Repositioning a boutique hotel group from budget accommodation to design-led destination stays.</p>
+                <a href="/work/hospitality" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card--magenta" data-project="2">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img class="flip-front__img" src="assets/images/Introduction.png" alt="Tech Startup Launch" loading="lazy" />
+                <div class="flip-front__label">
+                  <p class="flip-front__category" style="color:var(--neon-magenta)">Brand + Digital</p>
+                  <h4 class="flip-front__name">Tech Startup Launch</h4>
+                </div>
+              </div>
+              <div class="flip-back">
+                <p class="flip-back__category">Brand + Digital</p>
+                <h4 class="flip-back__title">Tech Startup Launch</h4>
+                <p class="flip-back__desc">Zero-to-one brand build and digital launch for a B2B SaaS platform entering a competitive vertical.</p>
+                <a href="/work/tech-startup" class="flip-back__btn">View Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.portfolio-track -->
+      </div><!-- /.portfolio-scroll -->
+
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section" id="contact" aria-label="Start a project">
+      <div class="cta-section__bg"></div>
+      <div class="cta-section__inner reveal">
+        <p class="cta-section__eyebrow">
+          Ready When You Are
+        </p>
+        <h2 class="cta-section__heading">
+          Let's build something<br/><em>worth remembering.</em>
+        </h2>
+        <p class="cta-section__sub">
+          If you're ready to build something that holds, we want to be in the room.
+        </p>
+        <div class="cta-section__actions">
+          <a href="shop.html#what-we-do" class="btn btn--primary">
+            Start a Project
+            <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+          <a href="portfolio.html" class="btn btn--ghost">See Our Work</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" aria-label="Footer">
+      <div class="container">
+        <div class="footer__inner">
+          <div class="footer__brand">
+            <div class="footer__logo">
+              <svg width="32" viewBox="150 80 520 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill="#ffffff" d="M 420.789062 92.867188 L 279.285156 337.953125 C 282.851562 337.953125 286.414062 337.835938 289.972656 337.605469 C 293.53125 337.371094 297.078125 337.019531 300.613281 336.554688 C 304.148438 336.089844 307.664062 335.511719 311.164062 334.8125 C 314.660156 334.117188 318.132812 333.308594 321.574219 332.386719 C 325.019531 331.464844 328.429688 330.429688 331.808594 329.28125 C 335.183594 328.136719 338.519531 326.882812 341.8125 325.515625 C 345.109375 324.152344 348.355469 322.679688 351.554688 321.105469 C 354.75 319.527344 357.894531 317.847656 360.984375 316.0625 C 364.070312 314.28125 367.097656 312.398438 370.0625 310.417969 C 373.027344 308.4375 375.925781 306.359375 378.753906 304.191406 C 381.582031 302.019531 384.339844 299.757812 387.019531 297.40625 C 389.699219 295.054688 392.300781 292.621094 394.824219 290.097656 C 397.34375 287.578125 399.78125 284.976562 402.132812 282.296875 C 404.484375 279.613281 406.746094 276.859375 408.914062 274.03125 C 411.085938 271.203125 413.164062 268.304688 415.144531 265.339844 C 417.125 262.375 419.007812 259.347656 420.789062 256.261719 C 422.574219 253.171875 424.253906 250.027344 425.832031 246.832031 C 427.410156 243.632812 428.878906 240.386719 430.242188 237.089844 C 431.609375 233.796875 432.863281 230.460938 434.011719 227.085938 C 435.15625 223.707031 436.191406 220.296875 437.113281 216.851562 C 438.039062 213.40625 438.847656 209.9375 439.542969 206.441406 C 440.238281 202.941406 440.820312 199.425781 441.285156 195.890625 C 441.75 192.355469 442.097656 188.808594 442.332031 185.25 C 442.566406 181.691406 442.683594 178.128906 442.683594 174.5625 C 442.683594 170.996094 442.566406 167.433594 442.332031 163.875 C 442.097656 160.316406 441.75 156.769531 441.285156 153.234375 C 440.820312 149.699219 440.238281 146.183594 439.542969 142.6875 C 438.847656 139.1875 438.039062 135.71875 437.113281 132.273438 C 436.191406 128.828125 435.15625 125.417969 434.011719 122.042969 C 432.863281 118.664062 431.609375 115.328125 430.242188 112.035156 C 428.878906 108.738281 427.410156 105.492188 425.832031 102.296875 C 424.253906 99.097656 422.574219 95.953125 420.789062 92.867188 Z"/>
+                <path fill="#ffffff" d="M 515.125 419.667969 L 562.292969 501.367188 L 656.628906 501.367188 L 609.457031 419.667969 L 515.125 256.261719 L 420.789062 419.667969 Z"/>
+                <path fill="#ffffff" d="M 373.621094 501.347656 L 420.789062 419.667969 L 326.457031 419.667969 C 322.890625 419.667969 319.328125 419.785156 315.769531 420.015625 C 312.214844 420.25 308.667969 420.597656 305.128906 421.0625 C 301.59375 421.527344 298.078125 422.109375 294.582031 422.804688 C 291.085938 423.5 287.613281 424.308594 284.167969 425.230469 C 280.726562 426.152344 277.3125 427.1875 273.9375 428.332031 C 270.5625 429.480469 267.226562 430.734375 263.929688 432.097656 C 260.636719 433.464844 257.390625 434.933594 254.191406 436.511719 C 250.992188 438.085938 247.851562 439.765625 244.761719 441.550781 C 241.671875 443.332031 238.648438 445.214844 235.683594 447.195312 C 232.71875 449.175781 229.820312 451.25 226.992188 453.421875 C 224.160156 455.59375 221.40625 457.851562 218.726562 460.203125 C 216.042969 462.554688 213.441406 464.992188 210.921875 467.511719 C 208.398438 470.03125 205.964844 472.632812 203.613281 475.316406 C 201.261719 477.996094 199 480.75 196.828125 483.578125 C 194.65625 486.40625 192.582031 489.304688 190.601562 492.269531 C 188.617188 495.234375 186.738281 498.261719 184.953125 501.347656 Z"/>
+              </svg>
+              <span style="font-family: var(--font-display); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Archetype Studio</span>
+            </div>
+            <p class="footer__tagline">Marketing with Purpose.<br/>Powered by Insight.</p>
+          </div>
+          <nav class="footer__nav" aria-label="Footer navigation - Company">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="portfolio.html">Work</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+          <nav class="footer__nav" aria-label="Footer navigation - Services">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="shop.html">Brand Strategy</a></li>
+              <li><a href="shop.html">Visual Identity</a></li>
+              <li><a href="shop.html">Content Creation</a></li>
+              <li><a href="shop.html">Digital Marketing</a></li>
+            </ul>
+          </nav>
+          <nav class="footer__nav" aria-label="Footer navigation - Connect">
+            <h4>Connect</h4>
+            <ul>
+              <li><a href="mailto:lip_niemann@icloud.com">hello@archetypestudio.com</a></li>
+              <li><a href="https://instagram.com/archetypestudio" rel="noopener">Instagram</a></li>
+              <li><a href="https://linkedin.com/company/archetypestudio" rel="noopener">LinkedIn</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="footer__bottom">
+          <p class="footer__legal">© 2026 Archetype Studio. All rights reserved.</p>
+          <div class="footer__socials" aria-label="Social media links">
+            <a class="footer__social" href="https://instagram.com" rel="noopener" aria-label="Instagram">IG</a>
+            <a class="footer__social" href="https://linkedin.com" rel="noopener" aria-label="LinkedIn">LI</a>
+            <a class="footer__social" href="https://twitter.com" rel="noopener" aria-label="Twitter/X">X</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /wrap -->
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================= -->
+  <script>
+    /* --- NAV SCROLL STATE + MOBILE TOGGLE --- */
+    const nav = document.getElementById('site-nav');
+    (function(){
+      if (!nav) return;
+      var t = document.getElementById('site-nav-toggle');
+      function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 40); }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      if (t) {
+        t.addEventListener('click', function(){
+          var open = nav.classList.toggle('is-open');
+          t.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        nav.querySelectorAll('.nav__links a').forEach(function(a){
+          a.addEventListener('click', function(){
+            nav.classList.remove('is-open');
+            t.setAttribute('aria-expanded','false');
+          });
+        });
+      }
+    })();
+
+    /* --- CIRCULAR NODE FORMATION + MOUSE TRACK + TEXT COLOUR REVEAL --- */
+    (function() {
+      const canvas = document.getElementById('hero-bubbles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const heroSection = canvas.closest('.hero');
+
+      let W, H, nodes = [], initiated = false;
+
+      const NODE_COUNT    = 60;
+      const CIRCLE_R      = 145;
+      const LINK_DIST     = 115;
+      const HUB_CHANCE    = 0.12;
+      const RING_FRACTION = 0.60;
+      const PULSE_CHANCE  = 0.010;
+
+      const COLORS = [
+        { r:0,   g:168, b:255, weight:5 },
+        { r:0,   g:229, b:212, weight:3 },
+        { r:107, g:0,   b:200, weight:1 },
+        { r:233, g:30,  b:140, weight:1 },
+      ];
+      const POOL = COLORS.flatMap(c => Array(c.weight).fill(c));
+
+      let cx = 0, cy = 0;
+      let tx = 0, ty = 0;
+      let mx = 0, my = 0;
+
+      function rnd(a, b) { return a + Math.random() * (b - a); }
+      function pick()    { return POOL[Math.floor(Math.random() * POOL.length)]; }
+
+      function resize() {
+        W = canvas.width  = heroSection ? heroSection.offsetWidth  : window.innerWidth;
+        H = canvas.height = heroSection ? heroSection.offsetHeight : window.innerHeight;
+        if (!initiated) { cx = W / 2; cy = H / 2; tx = W / 2; ty = H / 2; mx = W / 2; my = H / 2; }
+      }
+
+      heroSection.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        mx = e.clientX - rect.left;
+        my = e.clientY - rect.top;
+      }, { passive: true });
+      heroSection.addEventListener('mouseleave', () => {
+        mx = W / 2;
+        my = H / 2;
+      }, { passive: true });
+
+      const pulses = [];
+      function spawnPulse(node) {
+        pulses.push({ x: node.x, y: node.y, r: node.r + 2, color: node.color, alpha: 0.50 });
+      }
+      function updatePulses() {
+        for (let i = pulses.length - 1; i >= 0; i--) {
+          pulses[i].r += 0.6; pulses[i].alpha -= 0.006;
+          if (pulses[i].alpha <= 0) pulses.splice(i, 1);
+        }
+      }
+      function drawPulses() {
+        pulses.forEach(p => {
+          const { r, g, b } = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(${r},${g},${b},${p.alpha.toFixed(3)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        });
+      }
+
+      class Node {
+        constructor(i, total) {
+          this.isRing = i < total * RING_FRACTION;
+          this.isHub  = Math.random() < HUB_CHANCE;
+          this.r      = this.isHub ? rnd(3.5, 5.5) : rnd(1.5, 3);
+          this.color  = pick();
+          this.phase      = rnd(0, Math.PI * 2);
+          this.phaseSpeed = rnd(0.008, 0.022);
+          this.baseAlpha  = this.isHub ? rnd(0.7, 1.0) : rnd(0.40, 0.80);
+          if (this.isRing) {
+            this.orbitR     = CIRCLE_R * rnd(0.88, 1.12);
+            this.angle      = rnd(0, Math.PI * 2);
+            this.orbitSpeed = (Math.random() < 0.5 ? 1 : -1) * rnd(0.0003, 0.0008);
+            this.driftAmp   = rnd(6, 18);
+            this.driftFreq  = rnd(0.004, 0.014);
+          } else {
+            const ir = rnd(15, CIRCLE_R * 0.70) * Math.sqrt(Math.random() + 0.1);
+            this.orbitR     = ir;
+            this.angle      = rnd(0, Math.PI * 2);
+            this.orbitSpeed = (Math.random() < 0.5 ? 1 : -1) * rnd(0.0002, 0.0006);
+            this.driftAmp   = rnd(3, 12);
+            this.driftFreq  = rnd(0.006, 0.018);
+          }
+          this.driftPhase = rnd(0, Math.PI * 2);
+          this.x = 0; this.y = 0;
+        }
+        update(centerX, centerY) {
+          this.angle      += this.orbitSpeed;
+          this.phase      += this.phaseSpeed;
+          this.driftPhase += this.driftFreq;
+          const r = this.orbitR + this.driftAmp * Math.sin(this.driftPhase);
+          this.x = centerX + Math.cos(this.angle) * r;
+          this.y = centerY + Math.sin(this.angle) * r;
+          if (this.isHub && Math.random() < PULSE_CHANCE) spawnPulse(this);
+        }
+        draw() {
+          const { r, g, b } = this.color;
+          const a = this.baseAlpha * (0.75 + 0.25 * Math.sin(this.phase));
+          const glowR = this.r * 5;
+          const grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowR);
+          grd.addColorStop(0, `rgba(${r},${g},${b},${(a * 0.28).toFixed(3)})`);
+          grd.addColorStop(1, `rgba(${r},${g},${b},0)`);
+          ctx.beginPath(); ctx.arc(this.x, this.y, glowR, 0, Math.PI * 2);
+          ctx.fillStyle = grd; ctx.fill();
+          ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r},${g},${b},${a.toFixed(3)})`; ctx.fill();
+          if (this.isHub) {
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.r * 0.38, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255,255,255,${(a * 0.85).toFixed(3)})`; ctx.fill();
+          }
+        }
+      }
+
+      function drawRing(t) {
+        ctx.save();
+        ctx.setLineDash([4, 9]);
+        ctx.lineDashOffset = -t * 0.012;
+        ctx.beginPath();
+        ctx.arc(cx, cy, CIRCLE_R, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(0, 168, 255, 0.09)';
+        ctx.lineWidth = 0.9;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawLinks() {
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const a = nodes[i], b = nodes[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > LINK_DIST) continue;
+            const t = 1 - dist / LINK_DIST;
+            const lineA = Math.pow(t, 1.6) * 0.22;
+            const { r: r1, g: g1, b: b1 } = a.color;
+            const { r: r2, g: g2, b: b2 } = b.color;
+            const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+            grad.addColorStop(0, `rgba(${r1},${g1},${b1},${lineA.toFixed(3)})`);
+            grad.addColorStop(1, `rgba(${r2},${g2},${b2},${lineA.toFixed(3)})`);
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = grad; ctx.lineWidth = t * 0.9; ctx.stroke();
+          }
+        }
+      }
+
+      let highlightClone = null;
+      function initHighlightClone() {
+        const original = heroSection.querySelector('.hero__content:not(.hero__content--highlight)');
+        if (!original) return;
+        highlightClone = original.cloneNode(true);
+        highlightClone.classList.add('hero__content--highlight');
+        highlightClone.setAttribute('aria-hidden', 'true');
+        [highlightClone, ...highlightClone.querySelectorAll('*')].forEach(el => {
+          el.style.cssText += ';animation:none!important;transition:none!important;opacity:1!important;transform:none!important;';
+        });
+        heroSection.appendChild(highlightClone);
+        syncClonePosition(original);
+      }
+      function syncClonePosition(original) {
+        if (!highlightClone || !original) return;
+        const heroRect = heroSection.getBoundingClientRect();
+        const origRect = original.getBoundingClientRect();
+        highlightClone.style.top    = (origRect.top  - heroRect.top)  + 'px';
+        highlightClone.style.left   = (origRect.left - heroRect.left) + 'px';
+        highlightClone.style.width  = origRect.width + 'px';
+      }
+      function updateHighlightClip() {
+        if (!highlightClone) return;
+        const canvasRect = canvas.getBoundingClientRect();
+        const cloneRect  = highlightClone.getBoundingClientRect();
+        const clipX = (canvasRect.left + cx) - cloneRect.left;
+        const clipY = (canvasRect.top  + cy) - cloneRect.top;
+        const cp = `circle(${CIRCLE_R + 22}px at ${Math.round(clipX)}px ${Math.round(clipY)}px)`;
+        highlightClone.style.clipPath = cp;
+        highlightClone.style.webkitClipPath = cp;
+      }
+
+      function init() {
+        resize();
+        nodes = Array.from({ length: NODE_COUNT }, (_, i) => new Node(i, NODE_COUNT));
+        initiated = true;
+        setTimeout(initHighlightClone, 800);
+      }
+
+      let frameCount = 0;
+      function loop() {
+        frameCount++;
+        tx += (mx - tx) * 0.14;
+        ty += (my - ty) * 0.14;
+        cx += (tx - cx) * 0.20;
+        cy += (ty - cy) * 0.20;
+        ctx.clearRect(0, 0, W, H);
+        drawRing(frameCount);
+        drawLinks();
+        updatePulses();
+        drawPulses();
+        nodes.forEach(n => { n.update(cx, cy); n.draw(); });
+        updateHighlightClip();
+        requestAnimationFrame(loop);
+      }
+
+      window.addEventListener('resize', () => {
+        resize();
+        const original = heroSection.querySelector('.hero__content:not(.hero__content--highlight)');
+        syncClonePosition(original);
+      }, { passive: true });
+
+      init();
+      loop();
+    })();
+
+    /* --- INTERSECTION OBSERVER: SCROLL REVEALS --- */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal, .stagger').forEach(el => revealObs.observe(el));
+
+    /* --- COUNT-UP ANIMATION --- */
+    const countObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          const duration = 1800;
+          const start = performance.now();
+          const animate = (now) => {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target);
+            if (progress < 1) requestAnimationFrame(animate);
+            else el.textContent = target;
+          };
+          requestAnimationFrame(animate);
+          countObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.count-up').forEach(el => countObs.observe(el));
+
+    /* --- MANIFESTO PARALLAX --- */
+    const manifestoBg = document.querySelector('.manifesto__bg');
+    if (manifestoBg) {
+      window.addEventListener('scroll', () => {
+        const rect = manifestoBg.parentElement.getBoundingClientRect();
+        const visible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (visible) {
+          const rate = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+          manifestoBg.style.transform = `scale(1.08) translateY(${(rate - 0.5) * -40}px)`;
+        }
+      }, { passive: true });
+    }
+
+    /* --- CTA BG PARALLAX --- */
+    const ctaBg = document.querySelector('.cta-section__bg');
+    if (ctaBg) {
+      window.addEventListener('scroll', () => {
+        const rect = ctaBg.parentElement.getBoundingClientRect();
+        const visible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (visible) {
+          const rate = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+          ctaBg.style.transform = `scale(1.05) translateY(${(rate - 0.5) * -50}px)`;
+        }
+      }, { passive: true });
+    }
+
+    /* --- PARTICLE CANVAS --- */
+    (function() {
+      const canvas = document.getElementById('particle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W, H, particles = [];
+      const COLORS = ['#00A8FF', '#E91E8C', '#6B00C8', '#00E5D4'];
+      const N = 55;
+      function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+      class Particle {
+        constructor() { this.reset(); }
+        reset() {
+          this.x = Math.random() * W; this.y = Math.random() * H;
+          this.r = Math.random() * 1.5 + 0.3;
+          this.vx = (Math.random() - 0.5) * 0.3; this.vy = (Math.random() - 0.5) * 0.3;
+          this.alpha = Math.random() * 0.5 + 0.1;
+          this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+          this.pulse = Math.random() * Math.PI * 2;
+          this.pulseSpeed = 0.01 + Math.random() * 0.015;
+        }
+        update() {
+          this.x += this.vx; this.y += this.vy; this.pulse += this.pulseSpeed;
+          if (this.x < -10 || this.x > W + 10 || this.y < -10 || this.y > H + 10) this.reset();
+        }
+        draw() {
+          const a = this.alpha * (0.6 + 0.4 * Math.sin(this.pulse));
+          ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          ctx.globalAlpha = a; ctx.fillStyle = this.color; ctx.fill(); ctx.globalAlpha = 1;
+        }
+      }
+      function init() { resize(); for (let i = 0; i < N; i++) particles.push(new Particle()); }
+      function loop() {
+        ctx.clearRect(0, 0, W, H);
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+              ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.globalAlpha = (1 - dist / 120) * 0.06; ctx.strokeStyle = '#00A8FF'; ctx.lineWidth = 0.5; ctx.stroke(); ctx.globalAlpha = 1;
+            }
+          }
+        }
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(loop);
+      }
+      window.addEventListener('resize', resize, { passive: true });
+      init(); loop();
+    })();
+
+    /* --- ORBITAL GRAPHIC (Who We Are section) --- */
+    (function () {
+      const canvas = document.getElementById('orbital-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W, H, frame = 0;
+
+      // SVG logo paths — viewBox "150 80 520 440"
+      const P1 = new Path2D('M 420.789062 92.867188 L 279.285156 337.953125 C 282.851562 337.953125 286.414062 337.835938 289.972656 337.605469 C 293.53125 337.371094 297.078125 337.019531 300.613281 336.554688 C 304.148438 336.089844 307.664062 335.511719 311.164062 334.8125 C 314.660156 334.117188 318.132812 333.308594 321.574219 332.386719 C 325.019531 331.464844 328.429688 330.429688 331.808594 329.28125 C 335.183594 328.136719 338.519531 326.882812 341.8125 325.515625 C 345.109375 324.152344 348.355469 322.679688 351.554688 321.105469 C 354.75 319.527344 357.894531 317.847656 360.984375 316.0625 C 364.070312 314.28125 367.097656 312.398438 370.0625 310.417969 C 373.027344 308.4375 375.925781 306.359375 378.753906 304.191406 C 381.582031 302.019531 384.339844 299.757812 387.019531 297.40625 C 389.699219 295.054688 392.300781 292.621094 394.824219 290.097656 C 397.34375 287.578125 399.78125 284.976562 402.132812 282.296875 C 404.484375 279.613281 406.746094 276.859375 408.914062 274.03125 C 411.085938 271.203125 413.164062 268.304688 415.144531 265.339844 C 417.125 262.375 419.007812 259.347656 420.789062 256.261719 C 422.574219 253.171875 424.253906 250.027344 425.832031 246.832031 C 427.410156 243.632812 428.878906 240.386719 430.242188 237.089844 C 431.609375 233.796875 432.863281 230.460938 434.011719 227.085938 C 435.15625 223.707031 436.191406 220.296875 437.113281 216.851562 C 438.039062 213.40625 438.847656 209.9375 439.542969 206.441406 C 440.238281 202.941406 440.820312 199.425781 441.285156 195.890625 C 441.75 192.355469 442.097656 188.808594 442.332031 185.25 C 442.566406 181.691406 442.683594 178.128906 442.683594 174.5625 C 442.683594 170.996094 442.566406 167.433594 442.332031 163.875 C 442.097656 160.316406 441.75 156.769531 441.285156 153.234375 C 440.820312 149.699219 440.238281 146.183594 439.542969 142.6875 C 438.847656 139.1875 438.039062 135.71875 437.113281 132.273438 C 436.191406 128.828125 435.15625 125.417969 434.011719 122.042969 C 432.863281 118.664062 431.609375 115.328125 430.242188 112.035156 C 428.878906 108.738281 427.410156 105.492188 425.832031 102.296875 C 424.253906 99.097656 422.574219 95.953125 420.789062 92.867188 Z');
+      const P2 = new Path2D('M 515.125 419.667969 L 562.292969 501.367188 L 656.628906 501.367188 L 609.457031 419.667969 L 515.125 256.261719 L 420.789062 419.667969 Z');
+      const P3 = new Path2D('M 373.621094 501.347656 L 420.789062 419.667969 L 326.457031 419.667969 C 322.890625 419.667969 319.328125 419.785156 315.769531 420.015625 C 312.214844 420.25 308.667969 420.597656 305.128906 421.0625 C 301.59375 421.527344 298.078125 422.109375 294.582031 422.804688 C 291.085938 423.5 287.613281 424.308594 284.167969 425.230469 C 280.726562 426.152344 277.3125 427.1875 273.9375 428.332031 C 270.5625 429.480469 267.226562 430.734375 263.929688 432.097656 C 260.636719 433.464844 257.390625 434.933594 254.191406 436.511719 C 250.992188 438.085938 247.851562 439.765625 244.761719 441.550781 C 241.671875 443.332031 238.648438 445.214844 235.683594 447.195312 C 232.71875 449.175781 229.820312 451.25 226.992188 453.421875 C 224.160156 455.59375 221.40625 457.851562 218.726562 460.203125 C 216.042969 462.554688 213.441406 464.992188 210.921875 467.511719 C 208.398438 470.03125 205.964844 472.632812 203.613281 475.316406 C 201.261719 477.996094 199 480.75 196.828125 483.578125 C 194.65625 486.40625 192.582031 489.304688 190.601562 492.269531 C 188.617188 495.234375 186.738281 498.261719 184.953125 501.347656 Z');
+
+      // Logo viewBox: x=150 y=80 w=520 h=440 → center=(410, 300)
+      const VB_CX = 410, VB_CY = 300, VB_HALF = 260;
+
+      // Orbital dots
+      const DOTS = [
+        { ring: 'outer', a: 0.5,  speed:  0.0045, col: '#E91E8C', size: 7  },
+        { ring: 'outer', a: 3.6,  speed: -0.0028, col: '#00E5D4', size: 6  },
+        { ring: 'inner', a: 1.3,  speed:  0.006,  col: '#00A8FF', size: 8  },
+        { ring: 'inner', a: 4.4,  speed: -0.004,  col: '#E91E8C', size: 5  },
+      ];
+
+      function resize() {
+        const wrap = canvas.parentElement;
+        W = canvas.width  = wrap.offsetWidth;
+        H = canvas.height = wrap.offsetHeight;
+      }
+
+      function drawLogo(cx, cy, logoR) {
+        const scale = (logoR * 1.1) / VB_HALF;
+        ctx.save();
+        ctx.translate(cx - VB_CX * scale, cy - VB_CY * scale);
+        ctx.scale(scale, scale);
+        ctx.fillStyle = 'rgba(255,255,255,0.92)';
+        ctx.fill(P1);
+        ctx.fill(P2);
+        ctx.fill(P3);
+        ctx.restore();
+      }
+
+      function drawDotGlow(x, y, size, col) {
+        const g = ctx.createRadialGradient(x, y, 0, x, y, size * 5);
+        g.addColorStop(0,   col + 'bb');
+        g.addColorStop(0.4, col + '44');
+        g.addColorStop(1,   'transparent');
+        ctx.beginPath();
+        ctx.arc(x, y, size * 5, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+      }
+
+      function draw() {
+        frame++;
+        ctx.clearRect(0, 0, W, H);
+
+        const cx = W / 2, cy = H / 2;
+        const outerR  = Math.min(W, H) * 0.42;
+        const innerR  = outerR * 0.60;
+        const centerR = outerR * 0.26;
+
+        // Soft ambient glow behind graphic
+        const ambGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, outerR * 1.1);
+        ambGlow.addColorStop(0,   'rgba(107,0,200,0.08)');
+        ambGlow.addColorStop(0.6, 'rgba(0,168,255,0.04)');
+        ambGlow.addColorStop(1,   'transparent');
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR * 1.1, 0, Math.PI * 2);
+        ctx.fillStyle = ambGlow;
+        ctx.fill();
+
+        // Outer ring — slowly rotating dash offset
+        ctx.save();
+        ctx.setLineDash([5, 10]);
+        ctx.lineDashOffset = -frame * 0.25;
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(0,168,255,0.22)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.restore();
+
+        // Inner ring — solid
+        ctx.beginPath();
+        ctx.arc(cx, cy, innerR, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(0,168,255,0.30)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Center circle — dark violet fill + violet border
+        const cg = ctx.createRadialGradient(cx, cy - centerR * 0.2, 0, cx, cy, centerR);
+        cg.addColorStop(0, '#241048');
+        cg.addColorStop(1, '#0d0528');
+        ctx.beginPath();
+        ctx.arc(cx, cy, centerR, 0, Math.PI * 2);
+        ctx.fillStyle = cg;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(cx, cy, centerR, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(107,0,200,0.55)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Logo mark
+        drawLogo(cx, cy, centerR * 0.68);
+
+        // Orbital dots
+        DOTS.forEach(dot => {
+          dot.a += dot.speed;
+          const r = dot.ring === 'outer' ? outerR : innerR;
+          const x = cx + r * Math.cos(dot.a);
+          const y = cy + r * Math.sin(dot.a);
+          drawDotGlow(x, y, dot.size, dot.col);
+          ctx.beginPath();
+          ctx.arc(x, y, dot.size, 0, Math.PI * 2);
+          ctx.fillStyle = dot.col;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+      draw();
+    })();
+
+    /* --- PHILOSOPHY WAVE CANVAS --- */
+    (function () {
+      const canvas = document.getElementById('phil-wave-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W, H, t = 0;
+
+      // Brand colors: blue → magenta → cyan → gold → blue (seamless)
+      const C0 = '#00A8FF', C1 = '#E91E8C', C2 = '#00E5D4', C3 = '#FFB800';
+
+      // 3 slow nodes drifting along the wave — initialized in resize()
+      const NODES = [
+        { pos: 0, speed: 0.22, col: C0, r: 2.8 },
+        { pos: 0, speed: 0.15, col: C2, r: 2.2 },
+        { pos: 0, speed: 0.10, col: C1, r: 2.5 },
+      ];
+
+      function resize() {
+        W = canvas.width  = canvas.offsetWidth || canvas.parentElement.offsetWidth;
+        H = canvas.height = 100;
+        // Spread nodes evenly across the new width
+        NODES[0].pos = W * 0.05;
+        NODES[1].pos = W * 0.40;
+        NODES[2].pos = W * 0.72;
+      }
+
+      // Wave Y at any X — 2 full cycles so it crests at card 1 & 3, troughs at 2 & 4
+      function waveY(x) {
+        const mid  = H / 2 + Math.sin(t * 0.32) * 4; // gentle slow sway
+        const amp  = 26;                               // deep enough to clearly enter cards
+        const freq = (Math.PI * 4) / W;               // 2 full cycles across width
+        return mid + amp * Math.sin(x * freq - t * 0.85);
+      }
+
+      function draw() {
+        t += 0.007; // slow, calm movement
+        ctx.clearRect(0, 0, W, H);
+
+        // Flowing colour gradient — phase shifts slowly left-to-right, loops seamlessly
+        const gradW = W * 2;
+        const phase = (t * 38) % gradW;
+        const grad  = ctx.createLinearGradient(-phase, 0, gradW - phase, 0);
+        grad.addColorStop(0,    C0);
+        grad.addColorStop(0.25, C1);
+        grad.addColorStop(0.50, C2);
+        grad.addColorStop(0.75, C3);
+        grad.addColorStop(1,    C0);
+
+        // Trace full wave path
+        function tracePath() {
+          ctx.beginPath();
+          for (let x = 0; x <= W; x++) {
+            const y = waveY(x);
+            x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          }
+        }
+
+        // Layer 1 — very soft wide glow
+        tracePath();
+        ctx.strokeStyle = grad;
+        ctx.lineWidth   = 8;
+        ctx.globalAlpha = 0.08;
+        ctx.stroke();
+
+        // Layer 2 — clean thin core
+        tracePath();
+        ctx.lineWidth   = 1.2;
+        ctx.globalAlpha = 0.55;
+        ctx.stroke();
+
+        // Nodes — slow-moving dots riding the wave
+        ctx.globalAlpha = 1;
+        NODES.forEach(node => {
+          node.pos = (node.pos + node.speed) % W;
+          const nx = node.pos;
+          const ny = waveY(nx);
+
+          // Soft radial halo around the dot
+          const halo = ctx.createRadialGradient(nx, ny, 0, nx, ny, node.r * 6);
+          halo.addColorStop(0,   node.col + '66');
+          halo.addColorStop(1,   'transparent');
+          ctx.beginPath();
+          ctx.arc(nx, ny, node.r * 6, 0, Math.PI * 2);
+          ctx.fillStyle = halo;
+          ctx.fill();
+
+          // Bright dot core
+          ctx.beginPath();
+          ctx.arc(nx, ny, node.r, 0, Math.PI * 2);
+          ctx.fillStyle = node.col;
+          ctx.globalAlpha = 0.9;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+      draw();
+    })();
+
+    /* --- WORK PORTFOLIO DOT NETWORK --- */
+    (function () {
+      const canvas = document.getElementById('work-dots-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W, H, t = 0, activeProject = -1;
+      const DPR = window.devicePixelRatio || 1;
+
+      // Project node definitions (ratios of canvas size)
+      const PROJECT_DEFS = [
+        { rx: 0.17, ry: 0.60, col: '#00A8FF', label: 'Brand' },
+        { rx: 0.52, ry: 0.24, col: '#E91E8C', label: 'Campaigns' },
+        { rx: 0.85, ry: 0.65, col: '#00E5D4', label: 'Digital' },
+      ];
+
+      // Fixed ambient node ratios (stable across resizes)
+      const AMBIENT_RATIOS = [
+        [0.04, 0.10], [0.10, 0.44], [0.26, 0.06], [0.33, 0.82],
+        [0.44, 0.52], [0.56, 0.90], [0.63, 0.12], [0.67, 0.40],
+        [0.74, 0.84], [0.79, 0.22], [0.89, 0.10], [0.94, 0.46],
+        [0.38, 0.34], [0.61, 0.64], [0.20, 0.75],
+      ];
+
+      let projectNodes = [], ambientNodes = [];
+
+      function hexRgba(hex, a) {
+        const r = parseInt(hex.slice(1,3),16),
+              g = parseInt(hex.slice(3,5),16),
+              b = parseInt(hex.slice(5,7),16);
+        return `rgba(${r},${g},${b},${a})`;
+      }
+
+      function dist2(a, b) {
+        const dx = a.x - b.x, dy = a.y - b.y;
+        return dx*dx + dy*dy;
+      }
+
+      function resize() {
+        W = canvas.offsetWidth || 440;
+        H = canvas.offsetHeight || 270;
+        canvas.width  = W * DPR;
+        canvas.height = H * DPR;
+        ctx.scale(DPR, DPR);
+
+        projectNodes = PROJECT_DEFS.map((p, i) => ({
+          x: p.rx * W, y: p.ry * H,
+          col: p.col, label: p.label, id: i, r: 5,
+        }));
+
+        // Re-seed ambient nodes preserving velocity
+        ambientNodes = AMBIENT_RATIOS.map(([rx, ry], i) => ({
+          x: rx * W, y: ry * H,
+          vx: (ambientNodes[i]?.vx ?? (Math.random()-0.5)*0.20),
+          vy: (ambientNodes[i]?.vy ?? (Math.random()-0.5)*0.20),
+          r: 1.4 + (i % 3) * 0.6,
+        }));
+      }
+
+      function draw() {
+        t += 0.009;
+        ctx.clearRect(0, 0, W, H);
+
+        const all = [...ambientNodes, ...projectNodes];
+        const CONN_DIST2 = (Math.min(W,H) * 0.38) ** 2;
+
+        // Drift ambient nodes
+        ambientNodes.forEach(n => {
+          n.x += n.vx; n.y += n.vy;
+          if (n.x < 0 || n.x > W) n.vx *= -1;
+          if (n.y < 0 || n.y > H) n.vy *= -1;
+        });
+
+        // Draw connections
+        for (let i = 0; i < all.length; i++) {
+          for (let j = i + 1; j < all.length; j++) {
+            const d2 = dist2(all[i], all[j]);
+            if (d2 > CONN_DIST2) continue;
+            const d = Math.sqrt(d2);
+            const connDist = Math.sqrt(CONN_DIST2);
+            const baseAlpha = (1 - d / connDist) * 0.22;
+            ctx.beginPath();
+            ctx.moveTo(all[i].x, all[i].y);
+            ctx.lineTo(all[j].x, all[j].y);
+            ctx.strokeStyle = `rgba(255,255,255,${baseAlpha})`;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+
+        // Active project — bright radiating connections
+        if (activeProject >= 0) {
+          const pn = projectNodes[activeProject];
+          all.forEach(n => {
+            if (n === pn) return;
+            const d = Math.sqrt(dist2(pn, n));
+            const reach = Math.sqrt(CONN_DIST2) * 1.4;
+            if (d > reach) return;
+            const alpha = (1 - d / reach) * 0.75;
+            ctx.beginPath();
+            ctx.moveTo(pn.x, pn.y);
+            ctx.lineTo(n.x, n.y);
+            ctx.strokeStyle = hexRgba(pn.col, alpha);
+            ctx.lineWidth = 1.0;
+            ctx.stroke();
+          });
+        }
+
+        // Draw ambient dots
+        ambientNodes.forEach(n => {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+          ctx.fillStyle = 'rgba(255,255,255,0.30)';
+          ctx.fill();
+        });
+
+        // Draw project nodes
+        projectNodes.forEach(pn => {
+          const isActive = pn.id === activeProject;
+          const pulse = Math.sin(t * 2.4 + pn.id * 2.0) * 0.5 + 0.5;
+          const intensity = isActive ? 1 : pulse * 0.55 + 0.2;
+
+          // Outer glow halo
+          const haloR = pn.r * (isActive ? 6 : 4);
+          const halo = ctx.createRadialGradient(pn.x, pn.y, 0, pn.x, pn.y, haloR);
+          halo.addColorStop(0, hexRgba(pn.col, intensity * 0.45));
+          halo.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(pn.x, pn.y, haloR, 0, Math.PI*2);
+          ctx.fillStyle = halo;
+          ctx.fill();
+
+          // Pulse ring 1
+          const ring1R = pn.r + 6 + pulse * 5;
+          ctx.beginPath();
+          ctx.arc(pn.x, pn.y, ring1R, 0, Math.PI*2);
+          ctx.strokeStyle = hexRgba(pn.col, isActive ? 0.5 : pulse * 0.3);
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          // Pulse ring 2 (active only)
+          if (isActive) {
+            const ring2R = pn.r + 14 + pulse * 9;
+            ctx.beginPath();
+            ctx.arc(pn.x, pn.y, ring2R, 0, Math.PI*2);
+            ctx.strokeStyle = hexRgba(pn.col, 0.22);
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+
+          // Core dot
+          ctx.beginPath();
+          ctx.arc(pn.x, pn.y, pn.r, 0, Math.PI*2);
+          ctx.fillStyle = pn.col;
+          ctx.globalAlpha = 0.82 + intensity * 0.18;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+
+          // Label
+          ctx.font = `500 10px 'Space Grotesk', sans-serif`;
+          ctx.fillStyle = `rgba(255,255,255,${isActive ? 0.9 : 0.45})`;
+          ctx.textAlign = 'center';
+          ctx.fillText(pn.label, pn.x, pn.y + pn.r + 16);
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      // Dot ↔ card interaction
+      document.querySelectorAll('.flip-card[data-project]').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          activeProject = parseInt(card.dataset.project, 10);
+        });
+        card.addEventListener('mouseleave', () => {
+          activeProject = -1;
+        });
+      });
+
+      draw();
+    })();
+
+    /* --- PORTFOLIO GALLERY — DRAG TO SCROLL --- */
+    (function () {
+      const scroll = document.querySelector('.portfolio-scroll');
+      const track  = document.getElementById('portfolio-track');
+      if (!scroll || !track) return;
+
+      // Hand control to JS — disable CSS animation
+      track.style.animation  = 'none';
+      track.style.willChange = 'transform';
+
+      const AUTO_SPEED = 0.28; // px per frame at 60 fps (~17 px/s)
+
+      let SET_W  = 0;
+      let offset = 0;
+      let velocity = 0;
+
+      let isDragging   = false;
+      let wasDragged   = false;
+      let dragStartX   = 0;
+      let dragStartOff = 0;
+      let lastX        = 0;
+      let lastTime     = 0;
+
+      let autoPaused  = false;
+      let resumeTimer = null;
+
+      /* ── helpers ─────────────────────────────────── */
+      function updateSetW() {
+        // track holds 2 identical sets; half = one set width
+        SET_W = track.scrollWidth / 2;
+      }
+
+      function wrap(x) {
+        if (!SET_W) return x;
+        let n = x % SET_W;
+        if (n > 0) n -= SET_W;   // keep range (−SET_W, 0]
+        return n;
+      }
+
+      function applyOffset(x) {
+        offset = wrap(x);
+        track.style.transform = `translateX(${offset}px)`;
+      }
+
+      function pauseAuto(ms) {
+        autoPaused = true;
+        clearTimeout(resumeTimer);
+        if (ms > 0) resumeTimer = setTimeout(() => { autoPaused = false; }, ms);
+      }
+
+      /* ── rAF loop ────────────────────────────────── */
+      let prevTs;
+      (function tick(ts) {
+        if (prevTs === undefined) prevTs = ts;
+        const dt = Math.min(ts - prevTs, 50);
+        prevTs = ts;
+
+        if (!isDragging) {
+          if (!autoPaused) {
+            // Steady auto-scroll
+            applyOffset(offset - AUTO_SPEED * (dt / 16.67));
+            velocity = 0;
+          } else if (Math.abs(velocity) > 0.3) {
+            // Momentum coast
+            velocity *= Math.pow(0.91, dt / 16.67);
+            applyOffset(offset + velocity * (dt / 16.67));
+          }
+        }
+        requestAnimationFrame(tick);
+      })(performance.now());
+
+      // Wait for layout before measuring
+      requestAnimationFrame(() => { updateSetW(); applyOffset(0); });
+      window.addEventListener('resize', updateSetW, { passive: true });
+
+      /* ── drag handlers ───────────────────────────── */
+      function onStart(clientX) {
+        isDragging   = true;
+        wasDragged   = false;
+        dragStartX   = clientX;
+        dragStartOff = offset;
+        lastX        = clientX;
+        lastTime     = performance.now();
+        velocity     = 0;
+        clearTimeout(resumeTimer);
+        autoPaused = true;
+        scroll.classList.add('is-dragging');
+      }
+
+      function onMove(clientX) {
+        if (!isDragging) return;
+        const dx = clientX - dragStartX;
+
+        if (!wasDragged && Math.abs(dx) > 6) {
+          wasDragged = true;
+          // Freeze flip transitions while dragging
+          track.querySelectorAll('.flip-inner').forEach(el => {
+            el.style.transition = 'none';
+          });
+        }
+
+        if (wasDragged) {
+          applyOffset(dragStartOff + dx);
+          const now = performance.now();
+          const dt  = now - lastTime;
+          if (dt > 0) velocity = (clientX - lastX) / dt * 16.67;
+          lastX    = clientX;
+          lastTime = now;
+        }
+      }
+
+      function onEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        scroll.classList.remove('is-dragging');
+
+        // Restore flip transitions
+        track.querySelectorAll('.flip-inner').forEach(el => {
+          el.style.transition = '';
+        });
+
+        // Resume auto-scroll: sooner on tap, later on drag (let momentum coast)
+        pauseAuto(wasDragged ? 2000 : 400);
+        wasDragged = false;
+      }
+
+      /* ── mouse ───────────────────────────────────── */
+      scroll.addEventListener('mousedown', e => {
+        if (e.button !== 0) return;
+        onStart(e.clientX);
+      });
+      window.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        if (wasDragged) e.preventDefault();
+        onMove(e.clientX);
+      }, { passive: false });
+      window.addEventListener('mouseup', onEnd);
+      // Prevent link activation on drag-click
+      scroll.addEventListener('click', e => {
+        if (wasDragged) e.preventDefault();
+      }, true);
+
+      /* ── touch ───────────────────────────────────── */
+      scroll.addEventListener('touchstart', e => {
+        onStart(e.touches[0].clientX);
+      }, { passive: true });
+      scroll.addEventListener('touchmove', e => {
+        if (isDragging && wasDragged) e.preventDefault();
+        onMove(e.touches[0].clientX);
+      }, { passive: false });
+      scroll.addEventListener('touchend', onEnd, { passive: true });
+    })();
+
+    /* --- SMOOTH ACTIVE NAV --- */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav__links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+      navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === `#${current}`); });
+    }, { passive: true });
+
+    /* --- CURSOR GLOW (desktop only) — rAF lerp for direct-but-smooth tracking --- */
+    if (window.matchMedia('(pointer: fine)').matches) {
+      const glow = document.createElement('div');
+      glow.style.cssText = `
+        position: fixed; width: 380px; height: 380px;
+        border-radius: 50%; pointer-events: none; z-index: 0; will-change: transform;
+        background: radial-gradient(circle, rgba(0,168,255,0.08) 0%, transparent 70%);
+        top: 0; left: 0; transform: translate(-50%, -50%);
+      `;
+      document.body.appendChild(glow);
+      let gx = window.innerWidth / 2, gy = window.innerHeight / 2;
+      let gmx = gx, gmy = gy;
+      window.addEventListener('mousemove', e => { gmx = e.clientX; gmy = e.clientY; }, { passive: true });
+      (function glowLoop() {
+        gx += (gmx - gx) * 0.18;
+        gy += (gmy - gy) * 0.18;
+        glow.style.transform = `translate(${Math.round(gx - 190)}px, ${Math.round(gy - 190)}px)`;
+        requestAnimationFrame(glowLoop);
+      })();
+    }
+
+    /* --- HERO TITLE PARALLAX ON SCROLL --- */
+    const heroContent = document.querySelector('.hero__content');
+    window.addEventListener('scroll', () => {
+      if (!heroContent) return;
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroContent.style.transform = `translateY(${y * 0.12}px)`;
+        heroContent.style.opacity = 1 - y / (window.innerHeight * 0.7);
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>
