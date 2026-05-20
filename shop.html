@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services — Archetype Studio</title>
+  <title>Services &amp; Packages — Archetype Studio</title>
   <meta name="description" content="Strategic brand development, identity design, content creation, and digital marketing. Choose your engagement and build a brand that leads." />
 
   <!-- Fonts -->
@@ -177,6 +177,12 @@
       transition: font-size 0.5s var(--ease-out-expo), letter-spacing 0.5s ease;
     }
     .nav.scrolled .nav__wordmark { font-size: 13px; letter-spacing: 0.10em; }
+    @media (max-width: 1024px) {
+      .nav__mark { width: 26px; }
+      .nav.scrolled .nav__mark { width: 22px; }
+      .nav__wordmark { font-size: 12px; letter-spacing: 0.10em; }
+      .nav.scrolled .nav__wordmark { font-size: 11px; }
+    }
     .nav__links {
       display: flex; align-items: center; gap: 40px;
       margin-left: auto; list-style: none;
@@ -297,6 +303,8 @@
       padding: 0 48px;
       padding-top: var(--nav-h);
       width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
     }
     .hero__eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
@@ -308,12 +316,12 @@
     }
     .hero__title {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: clamp(3rem, 7vw + 0.5rem, 7.5rem);
-      font-weight: 800; line-height: 0.95;
+      font-size: clamp(2.6rem, 6.4vw + 0.4rem, 6.8rem);
+      font-weight: 800; line-height: 1.02;
       letter-spacing: -0.03em; color: var(--white);
-      margin-bottom: 32px; overflow: hidden;
+      margin-bottom: 32px; overflow: visible;
     }
-    .hero__title .line { display: block; overflow: hidden; }
+    .hero__title .line { display: block; overflow: hidden; padding-bottom: 0.18em; margin-bottom: -0.06em; }
     .hero__title .line span { display: block; opacity: 0; transform: translateY(100%); }
     .hero__title .line:nth-child(1) span { animation: slideUp 0.9s var(--ease-out-expo) 0.5s forwards; }
     .hero__title .line:nth-child(2) span { animation: slideUp 0.9s var(--ease-out-expo) 0.65s forwards; }
@@ -1678,13 +1686,13 @@
         <canvas id="hero-bubbles" aria-hidden="true"></canvas>
       </div>
       <div class="hero__content container">
-        <p class="hero__eyebrow">Our Shop</p>
+        <p class="hero__eyebrow">Services &amp; Packages</p>
         <h1 class="hero__title">
-          <span class="line"><span>The Brand</span></span>
-          <span class="line"><span>That Builds <em>Brands.</em></span></span>
+          <span class="line"><span>Engagements scoped</span></span>
+          <span class="line"><span>to <em>outcomes.</em></span></span>
         </h1>
         <p class="hero__desc">
-          Strategy. Identity. Content. Digital. Choose the engagement that fits where you are — and where you want to go.
+          Brand. Business Architecture. Marketing. AI &amp; Automation. Choose a productised package or build from individual services — every engagement scoped around a specific commercial objective.
         </p>
         <div class="hero__actions">
           <a href="shop.html#what-we-do" class="btn btn--primary">
@@ -2381,7 +2389,7 @@
           Let's make something<br/><em>worth remembering.</em>
         </h2>
         <p class="cta-section__sub">
-          One conversation is all it takes. Tell us about your brand and we'll tell you what's possible.
+          One conversation. Tell us about the brand, the business, and where it needs to go — we'll come back with the right mix of brand, architecture, marketing, and AI to get you there.
         </p>
         <div class="cta-section__actions">
           <a href="shop.html#what-we-do" class="btn btn--primary">
@@ -2406,7 +2414,7 @@
               </svg>
               <span style="font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Archetype Studio</span>
             </div>
-            <p class="footer__tagline">Marketing with Purpose.<br/>Powered by Insight.</p>
+            <p class="footer__tagline">Build the brand. Architect the business.<br/>Automate the growth.</p>
           </div>
           <nav class="footer__nav" aria-label="Footer navigation - Company">
             <h4>Company</h4>

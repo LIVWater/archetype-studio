@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Archetype Studio — Brand. Marketing. Architecture.</title>
+<title>Archetype Studio — Strategy, Brand, and Technology, Built to Work as One.</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 
@@ -43,6 +43,7 @@ body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-
 .nav__cta:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 10px 40px rgba(0,168,255,0.45),0 0 24px rgba(107,0,200,0.3);}
 .nav__cta:active{transform:translateY(0) scale(0.98);}
 @media(max-width:960px){.nav{padding:0 24px;}}
+@media(max-width:1024px){.nav__mark{width:26px;}.nav__wordmark{font-size:12px;letter-spacing:0.1em;}.nav.scrolled .nav__mark{width:22px;}.nav.scrolled .nav__wordmark{font-size:11px;}}
 
 /* HERO */
 @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}@keyframes heroMarkPulse{0%,100%{filter:drop-shadow(0 0 28px rgba(255,255,255,0.1)) drop-shadow(0 0 56px rgba(0,168,255,0.1));opacity:0.88;}50%{filter:drop-shadow(0 0 50px rgba(255,255,255,0.22)) drop-shadow(0 0 100px rgba(0,168,255,0.2));opacity:1;}}@keyframes glowBeam{0%{transform:translateX(-100%);opacity:0;}8%{opacity:1;}92%{opacity:1;}100%{transform:translateX(500%);opacity:0;}}.hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:28px;}.hero-mark{width:140px;height:auto;animation:heroMarkPulse 12s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(0,140,255,0.55)) drop-shadow(0 0 40px rgba(220,60,0,0.35)) drop-shadow(0 0 70px rgba(0,100,255,0.2));}.hero-divider-line{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--electric),var(--magenta),transparent);}.hero-title-block{text-align:center;}.hero-arrow-row{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:4px;}.hero-arrow{font-size:clamp(42px,5.5vw,80px);color:#BE1323;line-height:1;font-weight:400;}.hero-title-gradient{font-family:var(--font-d);font-size:clamp(66px,9.5vw,128px);font-weight:700;letter-spacing:0.01em;text-transform:none;background:linear-gradient(135deg,var(--electric) 0%,var(--cyan) 30%,#8B00FF 65%,var(--electric) 100%);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradientShift 22s ease-in-out infinite;line-height:0.95;}.hero-title-white{font-family:var(--font-d);font-size:clamp(66px,9.5vw,128px);font-weight:700;letter-spacing:0.01em;text-transform:none;color:#fff;line-height:0.88;}.hero-tagline-new{font-family:var(--font-b);font-weight:300;font-size:clamp(15px,1.6vw,19px);color:var(--text-secondary);max-width:560px;line-height:1.65;text-align:center;}.hero-tagline-new strong{color:var(--text-primary);font-weight:500;}.hero-services-row{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;text-transform:uppercase;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;font-family:var(--font-ui);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(240,242,255,0.4);}.hero-dot{color:var(--electric);opacity:0.5;}.hero-ctas-new{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:4px;}.hero-btn-primary{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:14px 36px;border-radius:100px;text-decoration:none;background:linear-gradient(135deg,var(--electric) 0%,var(--cyan) 40%,#8B00FF 100%);background-size:200% 200%;background-position:0% 50%;color:#fff;border:none;transition:background-position 0.45s ease,transform 0.45s ease,box-shadow 0.45s ease;display:inline-block;}.hero-btn-primary:hover{background-position:100% 50%;transform:scale(1.05);box-shadow:0 0 28px rgba(0,168,255,0.55),0 0 55px rgba(139,0,255,0.35);}.hero-btn-secondary{font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:14px 36px;border-radius:100px;text-decoration:none;background:linear-gradient(135deg,var(--electric) 0%,var(--cyan) 40%,#8B00FF 100%);background-size:200% 200%;background-position:100% 50%;color:#fff;border:none;transition:background-position 0.45s ease,transform 0.45s ease,box-shadow 0.45s ease;display:inline-block;box-shadow:0 0 22px rgba(139,0,255,0.35),0 0 44px rgba(0,168,255,0.2);}.hero-btn-secondary:hover{background-position:0% 50%;transform:scale(1.05);box-shadow:0 0 28px rgba(0,168,255,0.55),0 0 55px rgba(139,0,255,0.35);}.hero-scroll-new{position:absolute;bottom:52px;right:5vw;left:auto;transform:none;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:3;font-family:var(--font-ui);font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-muted);animation:scrollPulse 6s ease-in-out infinite;}.hero-scroll-line-new{width:1px;height:40px;background:linear-gradient(to bottom,rgba(0,168,255,0.7),transparent);}.hero-glow-beam{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,rgba(0,168,255,0.18) 30%,rgba(0,229,212,0.15) 60%,transparent 100%);overflow:hidden;z-index:2;}.hero-glow-beam::before{content:'';position:absolute;top:-4px;left:-25%;width:25%;height:10px;background:linear-gradient(90deg,transparent 0%,var(--electric) 30%,var(--cyan) 55%,var(--magenta) 80%,transparent 100%);filter:blur(4px);animation:glowBeam 30s ease-in-out infinite;}.hero-glow-beam::after{content:'';position:absolute;top:0;left:-25%;width:25%;height:2px;background:linear-gradient(90deg,transparent 0%,var(--electric) 30%,var(--cyan) 55%,var(--magenta) 80%,transparent 100%);animation:glowBeam 30s ease-in-out infinite;}#hero{position:relative;z-index:1;height:100vh;max-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 5vw 6rem;background:url('assets/images/Introduction.png') center center / cover no-repeat;background-color:#070A17;}#hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,10,23,0.80) 0%,rgba(7,10,23,0.65) 50%,rgba(7,10,23,0.85) 100%);z-index:0;pointer-events:none;}.hero-tag,.hero-headline,.hero-sub,.hero-body,.hero-ctas,.hero-scroll{position:relative;z-index:1;}
@@ -415,7 +416,7 @@ footer.footer .footer__social:hover{border-color:#00A8FF;color:#00A8FF;transform
 </nav>
 
 <!-- HERO -->
-<section id="hero"><div class="hero-content"><div class="hero-title-block"><div class="hero-arrow-row"><span class="hero-title-gradient">Archetype</span></div><div class="hero-title-white">Studios</div></div><div class="hero-divider-line"></div><p class="hero-tagline-new"><strong>Great brands aren't built on aesthetics.</strong><br>They're built on strategy and insight. We design brands that move people — and build the systems that turn that movement into business.</p><div class="hero-services-row"><span>Brand Development</span><span class="hero-dot">·</span><span>Marketing &amp; Sales</span><span class="hero-dot">·</span><span>Company Architecture</span></div><div class="hero-ctas-new"><a href="shop.html#what-we-do" class="hero-btn-primary">Start a Project</a></div></div><div class="hero-scroll-new"><span>Scroll</span><div class="hero-scroll-line-new"></div></div><div class="hero-glow-beam"></div></section>
+<section id="hero"><div class="hero-content"><div class="hero-title-block"><div class="hero-arrow-row"><span class="hero-title-gradient">Archetype</span></div><div class="hero-title-white">Studios</div></div><div class="hero-divider-line"></div><p class="hero-tagline-new"><strong>Build the brand. Architect the business. Automate the growth.</strong></p><div class="hero-services-row"><span>Brand</span><span class="hero-dot">·</span><span>Business Architecture</span><span class="hero-dot">·</span><span>Marketing</span><span class="hero-dot">·</span><span>AI &amp; Automation</span></div><div class="hero-ctas-new"><a href="shop.html#what-we-do" class="hero-btn-primary">Start a Project</a></div></div><div class="hero-scroll-new"><span>Scroll</span><div class="hero-scroll-line-new"></div></div><div class="hero-glow-beam"></div></section>
 
 <!-- ABOUT -->
 <section id="about">
@@ -423,9 +424,9 @@ footer.footer .footer__social:hover{border-color:#00A8FF;color:#00A8FF;transform
     <div class="about-grid">
       <div>
         <div class="section-label gsap-hidden">Who We Are</div>
-        <h2 class="section-headline gsap-hidden"><span style="background:linear-gradient(135deg,var(--electric) 0%,var(--cyan) 50%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Brand is the most powerful</span><br>asset a business can own.</h2>
-        <p class="section-body gsap-hidden">We work at the intersection of strategic design, marketing, and company architecture. We don't start with moodboards — we start with your audience. What drives their decisions, who they trust, and what they remember. That understanding is the foundation of everything we build.</p>
-        <blockquote class="about-quote gsap-hidden">"Every lasting brand starts with a deep understanding of your audience. We don't guess what works. We build from first principles — brand, market, and business architecture designed to compound over time."</blockquote>
+        <h2 class="section-headline gsap-hidden"><span style="background:linear-gradient(135deg,var(--electric) 0%,var(--cyan) 50%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">We design what your</span><br>business becomes.</h2>
+        <p class="section-body gsap-hidden">Archetype Studio is a full-spectrum creative and commercial studio — built for businesses that need more than a vendor. We work at the intersection of brand, business architecture, marketing, and artificial intelligence. Not as four separate services, but as one integrated system designed to build market presence, sharpen commercial structure, and generate sustainable growth.</p>
+        <blockquote class="about-quote gsap-hidden">"Brand without business model is decoration. Marketing without strategy is noise. Technology without creative direction is overhead. We build all four to work as one."</blockquote>
         
       </div>
       <div class="about-visual gsap-hidden">
@@ -472,20 +473,20 @@ footer.footer .footer__social:hover{border-color:#00A8FF;color:#00A8FF;transform
 <section id="services">
   <div class="section-inner">
     <div class="section-label gsap-hidden">What We Do</div>
-    <h2 class="section-headline gsap-hidden">Three disciplines.<br>One integrated approach.</h2>
-    <p class="section-body gsap-hidden">Brand. Market. Systems. Every service connects — because a great brand without the infrastructure to support it is just a logo.</p>
+    <h2 class="section-headline gsap-hidden">Four disciplines.<br>One integrated system.</h2>
+    <p class="section-body gsap-hidden">Most agencies solve one problem. We're structured differently — because a brand only performs when the business model, marketing engine, and operational systems are designed to move together.</p>
     <div class="services-grid">
 
       <div class="service-card card-brand gsap-hidden">
         <div class="svc-icon"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><polygon points="32,5 56,18.5 56,45.5 32,59 8,45.5 8,18.5" stroke="#00A8FF" stroke-width="2.5" stroke-linejoin="round"/><path d="M32 20 L22 44 M32 20 L42 44 M25.5 36 L38.5 36" stroke="#00A8FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="svc-title">Brand Development</div>
-        <p class="svc-desc">This is the core of everything we do. We build brands rooted in insight — how people think, feel, decide, and connect. Identity, positioning, voice, visual language. Built to be iconic. Built to last.</p>
+        <p class="svc-desc">We build brands with commercial intent. From positioning and identity through to messaging and market differentiation, every brand we develop is designed to earn attention, communicate value, and convert it into revenue. We don't produce aesthetics for their own sake — we engineer perception.</p>
         <ul class="svc-items">
           <li>Brand Strategy &amp; Positioning</li>
-          <li>Archetype Mapping &amp; Audience Profiling</li>
-          <li>Naming &amp; Brand Narrative</li>
-          <li>Visual Identity Systems (Logo, Typography, Colour)</li>
-          <li>Brand Voice &amp; Messaging Architecture</li>
+          <li>Identity, Naming &amp; Narrative</li>
+          <li>Visual Identity Systems</li>
+          <li>Voice &amp; Messaging Architecture</li>
+          <li>Market Differentiation</li>
           <li>Brand Guidelines &amp; Governance</li>
         </ul>
         <a href="shop.html#what-we-do" class="svc-view-btn">View Service &#8594;</a>
@@ -493,42 +494,43 @@ footer.footer .footer__social:hover{border-color:#00A8FF;color:#00A8FF;transform
 
       <div class="service-card card-digital gsap-hidden">
         <div class="svc-icon"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><circle cx="32" cy="32" r="23" stroke="#00E5D4" stroke-width="2.5"/><ellipse cx="32" cy="32" rx="11" ry="23" stroke="#00E5D4" stroke-width="2.5"/><line x1="9" y1="32" x2="55" y2="32" stroke="#00E5D4" stroke-width="2.5"/><path d="M12 21 Q32 25 52 21" stroke="#00E5D4" stroke-width="2"/><path d="M12 43 Q32 39 52 43" stroke="#00E5D4" stroke-width="2"/></svg></div>
-        <div class="svc-title">Marketing &amp; Sales</div>
-        <p class="svc-desc">Marketing without a brand strategy is noise. Sales without a system is exhausting. We design both to work together — so your business attracts, nurtures, and converts the right clients at scale.</p>
+        <div class="svc-title">Marketing — Full House</div>
+        <p class="svc-desc">From concept to conversion, we operate as a complete marketing partner. Website and app builds, social, paid media, email, campaigns, SEO, copywriting — the full spectrum, in-house. So strategy, execution, and performance stay connected. No briefing across five agencies. No version drift.</p>
         <ul class="svc-items">
-          <li>Go-to-Market Strategy</li>
-          <li>Campaign Development &amp; Execution</li>
-          <li>Content Strategy &amp; Production</li>
-          <li>Social Media Systems &amp; Management</li>
-          <li>Funnel Design &amp; Conversion Architecture</li>
-          <li>Sales Assets — Decks, Collateral, Proposals</li>
+          <li>Website &amp; App Design and Development</li>
+          <li>Social Media Strategy, Content &amp; Management</li>
+          <li>Paid Media, Email &amp; Campaigns</li>
+          <li>SEO &amp; Copywriting</li>
+          <li>Content Production &amp; Creative Direction</li>
+          <li>Funnel &amp; Conversion Architecture</li>
         </ul>
         <a href="shop.html#what-we-do" class="svc-view-btn">View Service &#8594;</a>
       </div>
 
       <div class="service-card card-content gsap-hidden">
         <div class="svc-icon"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M32 7 C22 16 19 28 19 38 L45 38 C45 28 42 16 32 7 Z" stroke="#00CCFF" stroke-width="2.5" stroke-linejoin="round"/><circle cx="32" cy="26" r="5.5" stroke="#00CCFF" stroke-width="2.5"/><path d="M19 38 L13 46 L21 46" stroke="#00CCFF" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M45 38 L51 46 L43 46" stroke="#00CCFF" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M26 46 C26 46 29 54 32 57 C35 54 38 46 38 46" stroke="#00CCFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="svc-title">Company Architecture</div>
-        <p class="svc-desc">A strong brand brings attention — but if the business behind it can't deliver consistently, the brand erodes. We design the integrated systems and structures that allow your business to scale without fracturing.</p>
+        <div class="svc-title">Business Architecture &amp; Development</div>
+        <p class="svc-desc">Before you scale, the structure needs to work. We help founders, operators, and growing businesses design the commercial frameworks that make growth manageable — business models, revenue structures, go-to-market strategy, partnership architecture, and organisational design. Strategy made operational.</p>
         <ul class="svc-items">
-          <li>Business Systems Design &amp; Integration</li>
-          <li>Operational Workflow Architecture</li>
-          <li>Digital Infrastructure &amp; Toolstack Strategy</li>
+          <li>Business Model &amp; Revenue Structure</li>
+          <li>Go-to-Market Strategy</li>
           <li>Partnership &amp; Network Architecture</li>
-          <li>Internal Brand Alignment</li>
+          <li>Organisational &amp; Operational Design</li>
+          <li>Commercial Frameworks for Scale</li>
+          <li>Internal Brand &amp; Systems Alignment</li>
         </ul>
         <a href="shop.html#what-we-do" class="svc-view-btn">View Service &#8594;</a>
       </div>
 
       <div class="service-card card-creative gsap-hidden">
         <div class="svc-icon"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M32 6 L36.5 27.5 L58 32 L36.5 36.5 L32 58 L27.5 36.5 L6 32 L27.5 27.5 Z" stroke="#4466FF" stroke-width="2.5" stroke-linejoin="round"/><circle cx="51" cy="14" r="3" stroke="#4466FF" stroke-width="2"/><circle cx="14" cy="51" r="2" stroke="#4466FF" stroke-width="1.5"/></svg></div>
-        <div class="svc-title">Creative &amp; Design</div>
-        <p class="svc-desc">Strategy means nothing without execution. We translate brand thinking into visuals that perform — from campaign creative to production-ready assets across every touchpoint.</p>
+        <div class="svc-title">AI &amp; Automation</div>
+        <p class="svc-desc">We embed intelligence into the businesses we work with. Workflow automation, AI-assisted content and customer engagement, process optimisation, and tool integration — applied practically to reduce friction, cut cost, and create operational leverage. Not AI as a gimmick. AI as infrastructure.</p>
         <ul class="svc-items">
-          <li>Graphic Design &amp; Marketing Collateral</li>
-          <li>Campaign Creative Direction</li>
-          <li>Packaging &amp; Product Design</li>
-          <li>Print &amp; Digital Asset Production</li>
+          <li>Workflow &amp; Process Automation</li>
+          <li>AI-Assisted Content &amp; Customer Engagement</li>
+          <li>Tool Integration &amp; System Orchestration</li>
+          <li>Process Optimisation &amp; Operational Leverage</li>
         </ul>
         <a href="shop.html#what-we-do" class="svc-view-btn">View Service &#8594;</a>
       </div>
@@ -541,8 +543,8 @@ footer.footer .footer__social:hover{border-color:#00A8FF;color:#00A8FF;transform
 <section id="packages">
   <div class="section-inner">
     <div class="section-label gsap-hidden">Investment</div>
-    <h2 class="section-headline gsap-hidden">Investment that<br>delivers returns.</h2>
-    <p class="section-body gsap-hidden">Every engagement is scoped around a specific objective — defined deliverables, measurable outcomes, no hidden fees. Choose a package or build from individual services. Frameworks, playbooks, and productised services built on the same thinking we apply to every client engagement.</p>
+    <h2 class="section-headline gsap-hidden">Engagements scoped<br>to outcomes.</h2>
+    <p class="section-body gsap-hidden">We're architects before we're executors. Every engagement is scoped around a specific commercial objective — defined deliverables, measurable outcomes, no hidden fees. Choose a productised package or build from individual services across brand, business architecture, marketing, and AI.</p>
     <div class="gsap-hidden" style="display:flex;justify-content:center;margin-top:2rem;">
       <a href="shop.html#what-we-do" class="btn-primary" target="_blank" rel="noopener">Shop Packages &rarr;</a>
     </div>
@@ -619,7 +621,7 @@ footer.footer .footer__social:hover{border-color:#00A8FF;color:#00A8FF;transform
       Let's build something<br/><em>worth remembering.</em>
     </h2>
     <p class="cta-section__sub">
-      One conversation is all it takes. Tell us about your brand, your goals, and where the business needs to go. We'll come back with a clear perspective on how we can help — and whether we're the right fit. First conversation is on us.
+      One conversation is all it takes. Tell us about the brand, the business, and where it needs to go. We'll come back with a clear perspective on how brand, architecture, marketing, and AI can work together to get you there — and whether we're the right fit. First conversation is on us.
     </p>
     <div class="cta-section__actions">
       <a href="shop.html#what-we-do" class="cta-btn cta-btn--primary">
@@ -644,7 +646,7 @@ footer.footer .footer__social:hover{border-color:#00A8FF;color:#00A8FF;transform
           </svg>
           <span class="footer__brand-name">Archetype Studio</span>
         </a>
-        <p class="footer__tagline">Brand. Marketing. Architecture.</p>
+        <p class="footer__tagline">Build the brand. Architect the business.<br>Automate the growth.</p>
       </div>
       <nav class="footer__nav" aria-label="Footer navigation - Company">
         <h4>Company</h4>

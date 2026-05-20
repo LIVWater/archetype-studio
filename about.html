@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — Archetype Studio</title>
+  <title>About — Archetype Studio | Strategy, Brand, Marketing, and AI as One System</title>
   <meta name="description" content="We build brands that lead. Archetype Studio is a premium brand development and marketing agency powered by deep insight and creative precision." />
 
   <!-- Fonts -->
@@ -181,6 +181,10 @@
       transition: width 0.5s var(--ease-out-expo);
     }
     .nav.scrolled .nav__mark { width: 26px; }
+    @media (max-width: 1024px) {
+      .nav__mark { width: 26px; }
+      .nav.scrolled .nav__mark { width: 22px; }
+    }
 
     .nav__wordmark {
       font-family: var(--font-display);
@@ -194,6 +198,10 @@
     .nav.scrolled .nav__wordmark {
       font-size: 13px;
       letter-spacing: 0.10em;
+    }
+    @media (max-width: 1024px) {
+      .nav__wordmark { font-size: 12px; letter-spacing: 0.10em; }
+      .nav.scrolled .nav__wordmark { font-size: 11px; }
     }
 
     /* Links */
@@ -308,7 +316,7 @@
       position: relative;
       z-index: 2;
       padding: 0 48px;
-      max-width: 900px;
+      max-width: 1180px;
       padding-top: var(--nav-h);
     }
     .hero__content--highlight {
@@ -362,17 +370,19 @@
     .hero__eyebrow::before { display: none; }
     .hero__title {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 7vw + 0.5rem, 7.5rem);
+      font-size: clamp(2.6rem, 6.4vw + 0.4rem, 6.8rem);
       font-weight: 800;
-      line-height: 0.95;
+      line-height: 1.02;
       letter-spacing: -0.03em;
       color: var(--white);
       margin-bottom: 32px;
-      overflow: hidden;
+      overflow: visible;
     }
     .hero__title .line {
       display: block;
       overflow: hidden;
+      padding-bottom: 0.18em;
+      margin-bottom: -0.06em;
     }
     .hero__title .line span {
       display: block;
@@ -1899,11 +1909,11 @@
       <div class="hero__content container">
         <p class="hero__eyebrow">About Us</p>
         <h1 class="hero__title">
-          <span class="line"><span>We Build</span></span>
-          <span class="line"><span>Brands That <em>Lead.</em></span></span>
+          <span class="line"><span>We Design What</span></span>
+          <span class="line"><span>Your Business <em>Becomes.</em></span></span>
         </h1>
         <p class="hero__desc">
-          We partner with businesses ready to own their category — bringing sharp strategy, distinctive identity, and campaigns built to compound over time.
+          A full-spectrum creative and commercial studio — built for businesses that need more than a vendor. Brand, business architecture, marketing, and AI, engineered as one integrated system.
         </p>
         <div class="hero__actions">
           <a href="portfolio.html" class="btn btn--primary">
@@ -1953,20 +1963,20 @@
           <div class="reveal reveal--right">
             <p class="section-label">Who We Are</p>
             <h2 class="about-intro__heading">
-              Strategy first.<br/>
-              <em>Creativity always.</em>
+              Architects first.<br/>
+              <em>Executors always.</em>
             </h2>
             <p class="about-intro__body">
-              We built Archetype Studio on one belief: <strong>great brands are never accidents.</strong> They're the product of sharp thinking, deliberate craft, and a team that refuses to compromise.
+              Archetype Studio was built on one belief: <strong>a business performs better when its brand, commercial model, marketing engine, and operational systems are designed to work together from the start</strong> — not bolted together over time.
             </p>
             <p class="about-intro__body">
-              One integrated team across strategy, identity, content, and digital — no handoffs, no dilution, no excuses.
+              The market is saturated with specialists. What it lacks is integration. We think in systems, build for scale, and stay accountable to outcomes.
             </p>
             <div class="about-intro__values stagger">
-              <span class="value-pill">Insight-Led</span>
-              <span class="value-pill">Brand-First</span>
-              <span class="value-pill">Results-Driven</span>
-              <span class="value-pill">Fully Integrated</span>
+              <span class="value-pill">Integrated</span>
+              <span class="value-pill">Commercially-Minded</span>
+              <span class="value-pill">Systems-First</span>
+              <span class="value-pill">Outcome-Accountable</span>
             </div>
             <a href="shop.html" class="btn btn--primary" style="margin-top: 40px;">
               Work With Us
@@ -1983,11 +1993,11 @@
       <div class="manifesto__inner reveal">
         <p class="section-label section-label--no-line" style="justify-content: center; margin-bottom: 32px;">Our Belief</p>
         <blockquote class="manifesto__quote">
-          "Brands that <em>know who they are</em> never have to shout to be heard."
+          "Brand without business model is decoration. Marketing without strategy is noise. <em>We build all four to work as one.</em>"
         </blockquote>
         <div class="manifesto__line"></div>
         <p class="manifesto__sub">
-          We don't build brands for trends. We build them for longevity — identities so clear, so purposeful, that they become the benchmark others measure themselves against.
+          Strategy, brand, marketing, and technology — designed together from day one. Built to compound. Built to scale.
         </p>
       </div>
     </section>
@@ -1997,9 +2007,9 @@
       <div class="container">
         <div class="reveal">
           <p class="section-label">What We Do</p>
-          <h2 class="services__heading">Built for brands<br/>that mean business.</h2>
+          <h2 class="services__heading">Built for businesses<br/>that need more than a vendor.</h2>
           <p class="services__sub">
-            Strategy. Identity. Content. Activation. Four disciplines, one integrated team, one standard of work.
+            Brand. Business Architecture. Marketing. AI &amp; Automation. Four disciplines, one integrated team, one operating standard.
           </p>
         </div>
 
@@ -2009,9 +2019,9 @@
             <div class="bento__overlay"></div>
             <div class="bento__arrow" aria-hidden="true">→</div>
             <div class="bento__content">
-              <span class="bento__tag bento__tag--blue">Brand Strategy</span>
-              <h3 class="bento__title">Positioning that<br/>defines categories.</h3>
-              <p class="bento__desc">From market positioning to brand architecture — we build strategic foundations that give every creative decision purpose and direction.</p>
+              <span class="bento__tag bento__tag--blue">Brand Development</span>
+              <h3 class="bento__title">Brands engineered<br/>for commercial intent.</h3>
+              <p class="bento__desc">Positioning, identity, messaging, and differentiation — designed to earn attention, communicate value, and convert it into revenue. We don't produce aesthetics for their own sake; we engineer perception.</p>
             </div>
           </div>
 
@@ -2020,9 +2030,9 @@
             <div class="bento__overlay"></div>
             <div class="bento__arrow" aria-hidden="true">→</div>
             <div class="bento__content">
-              <span class="bento__tag bento__tag--magenta">Creative Direction</span>
-              <h3 class="bento__title">Visual language that owns the room.</h3>
-              <p class="bento__desc">Identity systems, art direction, and visual language built to signal exactly who you are — and why it matters.</p>
+              <span class="bento__tag bento__tag--magenta">Business Architecture</span>
+              <h3 class="bento__title">Structure made operational.</h3>
+              <p class="bento__desc">Business models, revenue structures, go-to-market, and organisational design. The commercial frameworks that make growth manageable — before you try to scale.</p>
             </div>
           </div>
 
@@ -2031,9 +2041,9 @@
             <div class="bento__overlay"></div>
             <div class="bento__arrow" aria-hidden="true">→</div>
             <div class="bento__content">
-              <span class="bento__tag bento__tag--cyan">Content Creation</span>
-              <h3 class="bento__title">Content crafted to convert.</h3>
-              <p class="bento__desc">Photography, film, copy, and digital assets — produced to brand standard, optimised for platform, and engineered for audience response.</p>
+              <span class="bento__tag bento__tag--cyan">Marketing — Full House</span>
+              <h3 class="bento__title">From concept to conversion, all in-house.</h3>
+              <p class="bento__desc">Website and app builds, social, paid, email, campaigns, SEO, content, and copy. The full marketing spectrum run from one room — so strategy, execution, and performance stay connected.</p>
             </div>
           </div>
 
@@ -2042,9 +2052,9 @@
             <div class="bento__overlay"></div>
             <div class="bento__arrow" aria-hidden="true">→</div>
             <div class="bento__content">
-              <span class="bento__tag bento__tag--gold">Digital Marketing</span>
-              <h3 class="bento__title">Growth with purpose.</h3>
-              <p class="bento__desc">Campaigns and channels, unified by strategy and tracked to outcomes.</p>
+              <span class="bento__tag bento__tag--gold">AI &amp; Automation</span>
+              <h3 class="bento__title">AI as infrastructure, not gimmick.</h3>
+              <p class="bento__desc">Workflow automation, AI-assisted engagement, and process optimisation — applied to reduce friction and create operational leverage.</p>
             </div>
           </div>
         </div>
@@ -2173,7 +2183,7 @@
             <em>How we work.</em>
           </h2>
           <p class="philosophy__intro">
-            Every great brand engagement starts with a single question: what does this brand need to be true about? Everything else — the design, the messaging, the campaigns — flows from there.
+            Every engagement starts with a single question: what does this business need to become? Brand, architecture, marketing, and technology all flow from the answer — designed together, not bolted on.
           </p>
         </div>
 
@@ -2604,7 +2614,7 @@
               </svg>
               <span style="font-family: var(--font-display); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Archetype Studio</span>
             </div>
-            <p class="footer__tagline">Marketing with Purpose.<br/>Powered by Insight.</p>
+            <p class="footer__tagline">Build the brand. Architect the business.<br/>Automate the growth.</p>
           </div>
           <nav class="footer__nav" aria-label="Footer navigation - Company">
             <h4>Company</h4>
