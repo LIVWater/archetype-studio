@@ -146,55 +146,24 @@
     /* =========================================
        NAVIGATION
     ========================================= */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--nav-h);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      padding: 0 48px;
-      transition: height 0.5s var(--ease-out-expo), padding 0.5s var(--ease-out-expo),
-        background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
-    }
-    .nav.scrolled {
-      height: 62px;
-      background: linear-gradient(135deg, rgba(5,7,20,0.92) 0%, rgba(10,14,38,0.86) 52%, rgba(107,0,200,0.18) 100%);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
-      border-bottom: 1px solid rgba(0,168,255,0.12);
-      box-shadow: 0 1px 0 rgba(107,0,200,0.20) inset, 0 12px 40px rgba(0,0,0,0.45);
-      padding: 0 48px;
-    }
-    .nav__logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-    .nav__mark { width: 36px; height: auto; transition: width 0.5s var(--ease-out-expo); }
-    .nav.scrolled .nav__mark { width: 26px; }
-    .nav__wordmark {
-      font-family: var(--font-display);
-      font-size: 15px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--white);
-      transition: font-size 0.5s var(--ease-out-expo), letter-spacing 0.5s ease;
-    }
-    .nav.scrolled .nav__wordmark { font-size: 13px; letter-spacing: 0.10em; }
+    .nav{position:fixed;top:0;left:0;right:0;height:92px;z-index:1000;display:flex;align-items:center;padding:0 56px;background:linear-gradient(135deg,rgba(3,4,15,0.45) 0%,rgba(8,10,30,0.38) 55%,rgba(80,0,155,0.05) 100%);backdrop-filter:blur(14px) saturate(130%);-webkit-backdrop-filter:blur(14px) saturate(130%);border-bottom:1px solid rgba(255,255,255,0.04);box-shadow:0 1px 0 rgba(255,255,255,0.03) inset,0 4px 18px rgba(0,0,0,0.18);transition:height 1.8s cubic-bezier(0.16,1,0.3,1),padding 1.8s cubic-bezier(0.16,1,0.3,1),background 1.8s ease,backdrop-filter 1.8s ease,box-shadow 1.8s ease,border-color 1.8s ease;}
+    .nav.scrolled{height:56px;padding:0 32px;background:linear-gradient(135deg,rgba(4,5,18,0.96) 0%,rgba(11,14,38,0.95) 45%,rgba(107,0,200,0.32) 100%);backdrop-filter:blur(36px) saturate(200%);-webkit-backdrop-filter:blur(36px) saturate(200%);border-bottom:1px solid rgba(0,168,255,0.22);box-shadow:0 1px 0 rgba(0,168,255,0.20) inset,0 18px 56px rgba(0,0,0,0.6),0 0 0 1px rgba(0,168,255,0.06);}.nav.scrolled .nav__mega{top:56px;}
+    .nav__logo{display:flex;align-items:center;gap:14px;flex-shrink:0;text-decoration:none;transition:gap 1.8s cubic-bezier(0.16,1,0.3,1);}
+    .nav.scrolled .nav__logo{gap:0;}
+    .nav__mark{width:42px;height:auto;transition:width 1.8s cubic-bezier(0.16,1,0.3,1),filter 1.8s ease;filter:drop-shadow(0 0 0 transparent);}
+    .nav.scrolled .nav__mark{width:26px;filter:drop-shadow(0 0 10px rgba(0,168,255,0.45));}
+    .nav__wordmark{font-family:var(--font-d,Helvetica,Arial,sans-serif);font-size:16px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#fff;white-space:nowrap;overflow:hidden;max-width:240px;opacity:1;transform:translateX(0);transition:max-width 1.8s cubic-bezier(0.16,1,0.3,1),opacity 1.3s ease,transform 1.8s cubic-bezier(0.16,1,0.3,1),letter-spacing 1.8s ease,font-size 1.8s ease,margin 1.8s cubic-bezier(0.16,1,0.3,1);}
+    .nav.scrolled .nav__wordmark{max-width:0;opacity:0;transform:translateX(-14px);letter-spacing:0;margin-left:-14px;}
     @media (max-width: 1024px) {
       .nav__mark { width: 26px; }
       .nav.scrolled .nav__mark { width: 22px; }
       .nav__wordmark { font-size: 12px; letter-spacing: 0.10em; }
       .nav.scrolled .nav__wordmark { font-size: 11px; }
     }
-    .nav__links {
-      display: flex; align-items: center; gap: 40px;
-      margin-left: auto; list-style: none;
-    }
-    .nav__links a {
-      font-family: var(--font-ui); font-size: 13px; font-weight: 500;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--grey-300);
-      transition: color 0.25s ease, font-size 0.5s var(--ease-out-expo);
-      position: relative;
-    }
-    .nav.scrolled .nav__links a { font-size: 12px; }
+    .nav__links{display:flex;align-items:center;align-self:stretch;gap:44px;margin-left:auto;list-style:none;transition:gap 1.8s cubic-bezier(0.16,1,0.3,1);}
+    .nav.scrolled .nav__links{gap:32px;}
+    .nav__links a{font-family:var(--font-ui);font-size:13px;font-weight:500;letter-spacing:0.10em;text-transform:uppercase;color:rgba(240,242,255,0.72);text-decoration:none;transition:color 1.8s ease,font-size 1.8s cubic-bezier(0.16,1,0.3,1),letter-spacing 1.8s ease;position:relative;}
+    .nav.scrolled .nav__links a{font-size:11px;letter-spacing:0.08em;color:rgba(240,242,255,0.88);}
     .nav__links a::after {
       content: ''; position: absolute; bottom: -4px; left: 0;
       width: 0; height: 1px; background: var(--electric-blue);
@@ -204,21 +173,130 @@
     .nav__links a:hover::after { width: 100%; }
     .nav__links a.active { color: var(--white); }
     .nav__links a.active::after { width: 100%; background: var(--neon-magenta); }
-    .nav__cta {
-      margin-left: 40px; padding: 10px 24px; border-radius: 25px;
-      background: linear-gradient(135deg, var(--electric-blue), var(--deep-violet));
-      border: none; font-family: var(--font-ui); font-size: 13px;
-      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--white); cursor: pointer;
-      transition: transform 1.5s var(--ease-out-expo), box-shadow 1.5s var(--ease-out-expo),
-        padding 0.5s var(--ease-out-expo), font-size 0.5s var(--ease-out-expo), opacity 1.5s ease;
+    /* ===== MEGA MENU ===== */
+    .nav__item--has-dropdown{position:static;align-self:stretch;display:flex;align-items:center;}
+    .nav__caret{display:inline-block;margin-left:6px;font-size:9px;opacity:0.6;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),opacity 0.3s ease;}
+    .nav__item--has-dropdown.is-mega-open .nav__caret{transform:rotate(180deg);opacity:1;}
+    .nav__links a.services-trigger{cursor:pointer;}
+    .nav__mega{position:fixed;top:92px;left:50%;transform:translateX(-50%) translateY(-12px);width:100vw;height:40vh;min-height:300px;background:linear-gradient(160deg,rgb(4,5,18) 0%,rgb(8,11,30) 55%,rgb(20,8,52) 100%);border-top:1px solid rgba(0,168,255,0.08);border-bottom:1px solid rgba(0,168,255,0.18);box-shadow:0 44px 100px rgba(0,0,0,0.75),0 0 0 1px rgba(0,168,255,0.05),inset 0 1px 0 rgba(255,255,255,0.03);opacity:0;pointer-events:none;transition:opacity 0.28s ease,transform 0.65s cubic-bezier(0.16,1,0.3,1);z-index:998;overflow:hidden;display:flex;align-items:center;}
+    .nav__mega::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(0,168,255,0.55) 30%,rgba(139,0,255,0.55) 65%,transparent 100%);pointer-events:none;}
+    .nav__item--has-dropdown.is-mega-open .nav__mega{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+    .nav__mega-inner{width:100%;height:100%;max-width:1400px;margin:0 auto;padding:0 56px;display:flex;flex-direction:column;justify-content:center;gap:22px;}
+    .nav__mega-label{font-family:var(--font-ui,sans-serif);font-size:10px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:rgba(0,168,255,0.6);display:flex;align-items:center;gap:14px;}
+    .nav__mega-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,168,255,0.3),transparent);}
+    .nav__mega-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+    .mega-card{position:relative;display:flex;flex-direction:column;gap:10px;padding:24px 24px 20px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02);text-decoration:none;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(18px);transition:opacity 0.5s ease,transform 0.5s cubic-bezier(0.16,1,0.3,1),border-color 0.4s ease,background 0.4s ease,box-shadow 0.4s ease;}
+    .nav__item--has-dropdown.is-mega-open .mega-card{opacity:1;transform:translateY(0);}
+    .nav__item--has-dropdown.is-mega-open .mega-card:nth-child(1){transition-delay:0.08s;}
+    .nav__item--has-dropdown.is-mega-open .mega-card:nth-child(2){transition-delay:0.15s;}
+    .nav__item--has-dropdown.is-mega-open .mega-card:nth-child(3){transition-delay:0.22s;}
+    .nav__item--has-dropdown.is-mega-open .mega-card:nth-child(4){transition-delay:0.29s;}
+    .mega-card::before{content:'';position:absolute;inset:0;border-radius:12px;background:radial-gradient(ellipse 90% 70% at 10% 0%,color-mix(in srgb,var(--mc,#00A8FF) 22%,transparent),transparent 70%);opacity:0;transition:opacity 0.4s ease;pointer-events:none;}
+    .mega-card::after{content:'';position:absolute;inset:-1px;border-radius:13px;background:linear-gradient(135deg,var(--mc,#00A8FF),color-mix(in srgb,var(--mc,#00A8FF) 35%,transparent) 55%,transparent 85%);-webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:0;transition:opacity 0.4s ease;pointer-events:none;}
+    .mega-card--brand{--mc:#00A8FF;}
+    .mega-card--business{--mc:#FF0080;}
+    .mega-card--marketing{--mc:#00E5D4;}
+    .mega-card--ai{--mc:#8B5CF6;}
+    .mega-card:hover{background:rgba(255,255,255,0.045);border-color:color-mix(in srgb,var(--mc,#00A8FF) 28%,rgba(255,255,255,0.08));transform:translateY(-5px)!important;box-shadow:0 20px 44px rgba(0,0,0,0.45),0 0 44px color-mix(in srgb,var(--mc,#00A8FF) 14%,transparent);}
+    .mega-card:hover::before{opacity:1;}
+    .mega-card:hover::after{opacity:0.75;}
+    .mega-card__num{font-family:var(--font-ui,sans-serif);font-size:10px;font-weight:700;letter-spacing:0.18em;color:var(--mc,#00A8FF);opacity:0.65;transition:opacity 0.3s ease;}
+    .mega-card:hover .mega-card__num{opacity:1;}
+    .mega-card__title{font-family:var(--font-d,'Helvetica Neue',sans-serif);font-size:15px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.01em;margin:0;}
+    .mega-card__desc{font-family:var(--font-b,sans-serif);font-size:12px;line-height:1.6;color:rgba(200,208,255,0.55);flex:1;margin:0;}
+    .mega-card__arrow{font-size:16px;color:var(--mc,#00A8FF);opacity:0;transform:translateX(-8px);transition:opacity 0.3s ease,transform 0.35s cubic-bezier(0.16,1,0.3,1);align-self:flex-start;margin-top:auto;}
+    .mega-card:hover .mega-card__arrow{opacity:1;transform:translateX(0);}
+    .mega-footer-link{font-family:var(--font-ui,sans-serif);font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(240,242,255,0.38);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.3s ease,gap 0.35s cubic-bezier(0.16,1,0.3,1);width:fit-content;}
+    .mega-footer-link:hover{color:rgba(0,168,255,0.9);gap:16px;}
+    .nav__mega-backdrop{position:fixed;inset:0;z-index:997;background:rgba(3,4,15,0.55);opacity:0;pointer-events:none;transition:opacity 0.35s ease;}
+    .nav__mega-backdrop.is-active{opacity:1;pointer-events:auto;}
+    /* hide old dropdown on desktop, show mega */
+    .nav__dropdown{display:none;}
+    @media(max-width:768px){
     }
-    .nav.scrolled .nav__cta { padding: 7px 18px; font-size: 12px; }
-    .nav__cta:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 10px 40px rgba(0,168,255,0.45), 0 0 24px rgba(107,0,200,0.3);
+    @media(max-width:860px){
+      .nav__mega{display:none!important;}
+      .nav__dropdown{display:block;position:static;opacity:1;pointer-events:auto;transform:none;background:transparent;border:none;box-shadow:none;padding:0 0 8px 16px;min-width:0;backdrop-filter:none;-webkit-backdrop-filter:none;list-style:none;}
+      .nav__dropdown li{list-style:none;}
+      .nav__dropdown a{display:block;padding:10px 4px;font-family:var(--font-ui,sans-serif);font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:0;}
+      .nav__dropdown a::after{display:none;}
+      .nav__dropdown a:hover,.nav__dropdown a.active{color:#fff;}
+      .nav__caret{display:none;}
+      .nav__item--has-dropdown::after{display:none;}
     }
-    .nav__cta:active { transform: translateY(0) scale(0.98); }
+    .nav__cta{--bc1:var(--electric-blue,#00A8FF);--bc2:var(--cyan,#00E5D4);--bc3:#8B00FF;margin-left:40px;padding:10px 24px;border-radius:25px;
+  border:1px solid color-mix(in srgb,var(--bc2) 28%,rgba(255,255,255,0.08));
+  background:linear-gradient(180deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 48%,rgba(0,0,0,0.18) 100%),linear-gradient(135deg,var(--bc1) 0%,var(--bc2) 45%,var(--bc3) 100%);
+  background-size:100% 100%,220% 220%;background-position:center,0% 50%;
+  font-family:var(--font-ui);font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;cursor:pointer;text-decoration:none;display:inline-block;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),inset 0 -1px 0 rgba(0,0,0,0.18),0 4px 14px rgba(0,0,0,0.28),0 0 16px color-mix(in srgb,var(--bc1) 18%,transparent);
+  transition:background-position 0.85s cubic-bezier(0.16,1,0.3,1),transform 0.55s cubic-bezier(0.16,1,0.3,1),box-shadow 0.55s ease,border-color 0.55s ease,padding 1.8s ease,font-size 1.8s ease;}
+.nav.scrolled .nav__cta{padding:7px 18px;font-size:12px;}
+.nav__cta:hover{background-position:center,100% 50%;transform:translateY(-2px) scale(1.025);border-color:color-mix(in srgb,var(--bc2) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.30),inset 0 -1px 0 rgba(0,0,0,0.22),0 10px 28px rgba(0,0,0,0.4),0 0 26px color-mix(in srgb,var(--bc1) 48%,transparent),0 0 60px color-mix(in srgb,var(--bc3) 32%,transparent);}
+
+    /* =========================================
+       SHOP ⇄ SOLUTIONS TOGGLE
+    ========================================= */
+    .solshop-toggle{display:inline-flex;align-items:center;gap:0;padding:5px;border-radius:50px;background:rgba(7,10,23,0.55);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.04),0 8px 32px rgba(0,0,0,0.3);}
+    .solshop-toggle__link{position:relative;padding:10px 24px;border-radius:50px;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(240,242,255,0.6);text-decoration:none;transition:color 0.4s ease,background 0.4s ease,box-shadow 0.4s ease;cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;}
+    .solshop-toggle__link:hover{color:#fff;}
+    .solshop-toggle__link.is-active{background:linear-gradient(135deg,var(--electric-blue) 0%,#8B00FF 100%);color:#fff;box-shadow:0 4px 16px rgba(0,168,255,0.35),inset 0 1px 0 rgba(255,255,255,0.2);}
+    .solshop-toggle__link svg{width:13px;height:13px;opacity:0.7;}
+    .solshop-toggle__link.is-active svg{opacity:1;}
+
+    /* Reset native button styles for toggle */
+    button.solshop-toggle__link{background:transparent;border:none;font:inherit;-webkit-appearance:none;appearance:none;}
+    button.solshop-toggle__link.is-active{background:linear-gradient(135deg,var(--electric-blue) 0%,#8B00FF 100%);}
+
+    /* =========================================
+       ENTERPRISE PACKAGES — 4 disciplines × 3 tiers
+    ========================================= */
+    .enterprise-packages-wrap{margin:48px 0 80px;padding:48px 0;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
+    .enterprise-heading{font-family:var(--font-display);font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:700;color:var(--white);letter-spacing:-0.02em;text-align:center;margin-bottom:14px;}
+    .enterprise-sub{font-size:0.95rem;color:var(--grey-300);text-align:center;max-width:60ch;margin:0 auto 36px;line-height:1.65;}
+
+    .disc-filter{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:0 auto 40px;padding:6px;border-radius:60px;background:rgba(7,10,23,0.55);border:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.04),0 8px 32px rgba(0,0,0,0.3);max-width:fit-content;}
+    .disc-tab{position:relative;padding:13px 22px;border-radius:50px;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(240,242,255,0.55);background:transparent;border:none;cursor:pointer;-webkit-appearance:none;appearance:none;transition:color 0.3s ease,background 0.4s ease,box-shadow 0.4s ease;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;--tc:var(--electric-blue);}
+    .disc-tab[data-disc="brand"]{--tc:var(--electric-blue);}
+    .disc-tab[data-disc="business"]{--tc:var(--neon-magenta);}
+    .disc-tab[data-disc="marketing"]{--tc:var(--cyan);}
+    .disc-tab[data-disc="ai"]{--tc:#8B5CF6;}
+    .disc-tab:hover{color:#fff;}
+    .disc-tab.is-active{color:#fff;background:linear-gradient(135deg,var(--tc) 0%,color-mix(in srgb,var(--tc) 60%,#8B00FF) 100%);box-shadow:0 4px 18px color-mix(in srgb,var(--tc) 40%,transparent),inset 0 1px 0 rgba(255,255,255,0.22);}
+    .disc-tab__num{font-size:9px;opacity:0.6;letter-spacing:0.18em;}
+    .disc-tab.is-active .disc-tab__num{opacity:1;}
+    @media(max-width:760px){.disc-filter{flex-direction:column;border-radius:18px;max-width:none;width:100%;}.disc-tab{justify-content:flex-start;}}
+
+    .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1180px;margin:0 auto;align-items:stretch;animation:tierFade 0.5s var(--ease-out-expo);}
+    @keyframes tierFade{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+    @media(max-width:980px){.tier-grid{grid-template-columns:1fr;}}
+
+    .tier-card{position:relative;display:flex;flex-direction:column;padding:36px 28px 28px;background:linear-gradient(180deg,rgba(255,255,255,0.025) 0%,rgba(255,255,255,0.005) 100%);border:1.5px solid rgba(255,255,255,0.06);border-radius:20px;overflow:hidden;transition:transform 0.5s var(--ease-out-expo),border-color 0.5s ease,box-shadow 0.5s ease;--tc:var(--electric-blue);}
+    .tier-card::before{content:'';position:absolute;inset:0;border-radius:20px;background:radial-gradient(ellipse 130% 100% at 50% 0%,color-mix(in srgb,var(--tc) 24%,transparent) 0%,color-mix(in srgb,var(--tc) 8%,transparent) 38%,transparent 75%);opacity:0;transition:opacity 0.5s ease;pointer-events:none;z-index:0;}
+    .tier-card:hover::before{opacity:1;}
+    .tier-card:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--tc) 26%,rgba(255,255,255,0.08));box-shadow:0 24px 60px rgba(0,0,0,0.5),0 0 80px color-mix(in srgb,var(--tc) 14%,transparent);}
+    .tier-card--featured{border-color:color-mix(in srgb,var(--tc) 48%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--tc) 11%,transparent) 0%,rgba(255,255,255,0.008) 100%);box-shadow:0 0 30px color-mix(in srgb,var(--tc) 20%,transparent);transform:translateY(-6px);}
+    .tier-card--featured:hover{transform:translateY(-10px);}
+    .tier-card__badge{position:absolute;top:18px;right:18px;font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#fff;padding:6px 13px;border-radius:100px;background:linear-gradient(135deg,var(--tc),color-mix(in srgb,var(--tc) 55%,#fff));box-shadow:0 0 18px color-mix(in srgb,var(--tc) 50%,transparent);z-index:3;}
+    .tier-card__head{position:relative;z-index:2;margin-bottom:22px;}
+    .tier-card__tier{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--tc);margin-bottom:10px;}
+    .tier-card__title{font-family:var(--font-display);font-size:1.35rem;font-weight:800;color:var(--white);letter-spacing:-0.018em;line-height:1.15;margin-bottom:8px;}
+    .tier-card__sub{font-family:var(--font-display);font-size:0.88rem;font-weight:400;color:rgba(220,225,255,0.62);line-height:1.5;}
+    .tier-card__price-block{position:relative;z-index:2;padding:18px 0;border-top:1px solid color-mix(in srgb,var(--tc) 14%,rgba(255,255,255,0.04));border-bottom:1px solid color-mix(in srgb,var(--tc) 14%,rgba(255,255,255,0.04));margin-bottom:20px;}
+    .tier-card__price-amount{font-family:var(--font-display);font-size:2.2rem;font-weight:800;line-height:1;letter-spacing:-0.02em;background:linear-gradient(135deg,var(--tc) 0%,color-mix(in srgb,var(--tc) 55%,#fff) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .tier-card__price-meta{font-family:var(--font-ui);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(220,225,255,0.5);margin-top:6px;font-weight:600;}
+    .tier-card__inc{position:relative;z-index:2;list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;flex:1;padding:0;}
+    .tier-card__inc li{font-family:var(--font-ui);font-size:0.82rem;line-height:1.5;color:rgba(220,225,255,0.85);display:flex;align-items:flex-start;gap:10px;list-style:none;}
+    .tier-card__inc li::before{content:'';width:16px;height:16px;border-radius:50%;background:color-mix(in srgb,var(--tc) 18%,transparent);border:1px solid color-mix(in srgb,var(--tc) 45%,transparent);flex-shrink:0;margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.8 6.5L9 1' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;}
+    .tier-card__add{position:relative;z-index:2;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:50px;font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#fff;background:linear-gradient(180deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 48%,rgba(0,0,0,0.18) 100%),linear-gradient(135deg,var(--tc) 0%,color-mix(in srgb,var(--tc) 55%,#8B00FF) 100%);border:1px solid color-mix(in srgb,var(--tc) 30%,rgba(255,255,255,0.08));cursor:pointer;-webkit-appearance:none;appearance:none;transition:transform 0.4s var(--ease-out-expo),box-shadow 0.4s ease;box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),0 6px 22px color-mix(in srgb,var(--tc) 28%,transparent);}
+    .tier-card__add:hover{transform:translateY(-2px) scale(1.02);box-shadow:inset 0 1px 0 rgba(255,255,255,0.30),0 12px 36px color-mix(in srgb,var(--tc) 48%,transparent);}
+    .tier-card__add.added{background:linear-gradient(135deg,#00C950 0%,#00A540 100%);}
+    .tier-card__add svg{width:14px;height:14px;}
+
+    /* View switcher — hides/shows on-page databases */
+    .view{display:none;animation:viewFade 0.5s cubic-bezier(0.16,1,0.3,1);}
+    .view.is-active{display:block;}
+    @keyframes viewFade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
     /* =========================================
        BUTTONS
@@ -292,12 +370,24 @@
       background: linear-gradient(to top, #0d0820 0%, #090b1c 25%, #070A17 55%, #050811 100%);
       overflow: hidden;
     }
+    .hero__bg-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      filter: saturate(1.12) contrast(1.06) brightness(0.62);
+    }
+    @media (prefers-reduced-motion: reduce) { .hero__bg-video { display: none; } }
     .hero__bg::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(5,8,17,0.55) 0%, transparent 45%, rgba(5,8,17,0.25) 100%);
-      pointer-events: none; z-index: 1;
+      background:
+        radial-gradient(ellipse 70% 55% at 18% 22%, rgba(107,0,200,0.45) 0%, transparent 65%),
+        radial-gradient(ellipse 65% 50% at 82% 28%, rgba(0,168,255,0.38) 0%, transparent 68%),
+        radial-gradient(ellipse 60% 50% at 50% 95%, rgba(233,30,140,0.28) 0%, transparent 65%),
+        linear-gradient(to top, rgba(5,8,17,0.80) 0%, rgba(5,8,17,0.30) 45%, rgba(5,8,17,0.45) 100%);
+      pointer-events: none; z-index: 2;
     }
-    #hero-bubbles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    #hero-bubbles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
     .hero__content {
       position: relative; z-index: 2;
       padding: 0 48px;
@@ -449,11 +539,12 @@
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300;
       line-height: 1.05; letter-spacing: -0.02em; color: var(--white);
+      max-width: 860px;
       margin-bottom: 16px;
     }
     .services-section__sub {
       font-size: 1.05rem; color: var(--grey-300);
-      max-width: 520px; margin-bottom: 48px;
+      max-width: 860px; margin-bottom: 48px;
     }
 
     /* Shop grid — 3 columns, same card design as pkg-card */
@@ -476,19 +567,32 @@
         transform 0.45s var(--ease-out-expo), box-shadow 0.45s ease,
         opacity 0.4s ease;
     }
+    /* Per-card colour token */
+    .shop-card[data-category="brand"]     { --cc: rgba(0,168,255,0.26);   --cc-mid: rgba(0,168,255,0.10);   --cc-rim: rgba(0,168,255,0.35); }
+    .shop-card[data-category="marketing"] { --cc: rgba(233,30,140,0.26);  --cc-mid: rgba(233,30,140,0.10);  --cc-rim: rgba(233,30,140,0.35); }
+    .shop-card[data-category="sales"]     { --cc: rgba(255,184,0,0.26);   --cc-mid: rgba(255,184,0,0.10);   --cc-rim: rgba(255,184,0,0.35); }
+
     .shop-card:hover {
-      background: rgba(255,255,255,0.058);
-      transform: translateY(-8px);
+      background: rgba(5, 7, 20, 0.94);
+      transform: translateY(-12px) scale(1.015);
     }
+    .shop-card[data-category="brand"]:hover     { box-shadow: 0 32px 72px rgba(0,0,0,0.60), 0 0 56px rgba(0,168,255,0.22),   inset 0 1px 0 rgba(0,168,255,0.75); border-color: var(--cc-rim); }
+    .shop-card[data-category="marketing"]:hover { box-shadow: 0 32px 72px rgba(0,0,0,0.60), 0 0 56px rgba(233,30,140,0.22), inset 0 1px 0 rgba(233,30,140,0.75); border-color: var(--cc-rim); }
+    .shop-card[data-category="sales"]:hover     { box-shadow: 0 32px 72px rgba(0,0,0,0.60), 0 0 56px rgba(255,184,0,0.22),   inset 0 1px 0 rgba(255,184,0,0.75);   border-color: var(--cc-rim); }
+    .shop-card:hover::after { opacity: 0.30; transform: translateX(-50%) scale(1.8); }
     .shop-card.hidden { display: none; }
 
-    /* Per-category top edge glow */
+    /* Full-card gradient overlay via ::before */
     .shop-card::before {
-      content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+      content: ''; position: absolute; inset: 0; border-radius: 20px;
+      pointer-events: none; z-index: 0;
+      opacity: 0;
+      transition: opacity 0.42s cubic-bezier(0.4,0,0.2,1);
     }
-    .shop-card[data-category="brand"]::before     { background: linear-gradient(90deg, transparent, var(--electric-blue), transparent); }
-    .shop-card[data-category="marketing"]::before { background: linear-gradient(90deg, transparent, var(--neon-magenta), transparent); }
-    .shop-card[data-category="sales"]::before     { background: linear-gradient(90deg, transparent, var(--solar-gold), transparent); }
+    .shop-card[data-category="brand"]::before     { background: linear-gradient(135deg, rgba(0,168,255,0.28) 0%, rgba(0,168,255,0.10) 42%, transparent 68%); }
+    .shop-card[data-category="marketing"]::before { background: linear-gradient(135deg, rgba(233,30,140,0.28) 0%, rgba(233,30,140,0.10) 42%, transparent 68%); }
+    .shop-card[data-category="sales"]::before     { background: linear-gradient(135deg, rgba(255,184,0,0.28)   0%, rgba(255,184,0,0.10)   42%, transparent 68%); }
+    .shop-card:hover::before { opacity: 1; }
 
     /* Inner ambient colour wash */
     .shop-card::after {
@@ -666,7 +770,7 @@
       border-left: 1px solid rgba(255,255,255,0.07);
       z-index: 2000; display: flex; flex-direction: column;
       transform: translateX(100%);
-      transition: transform 0.5s var(--ease-out-expo);
+      transition: transform 1.8s var(--ease-out-expo);
       box-shadow: -20px 0 60px rgba(0,0,0,0.5);
     }
     .cart-drawer.open { transform: translateX(0); }
@@ -776,6 +880,7 @@
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 0.88;
+      text-align: center;
       margin-bottom: 32px;
       background: linear-gradient(
         110deg,
@@ -1237,230 +1342,6 @@
     /* =========================================
        AI CHAT SECTION
     ========================================= */
-    .aichat {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--deep-space);
-      position: relative; overflow: hidden;
-    }
-
-    /* Animated bg — breathes with orb */
-    .aichat::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 55% 50% at 50% 50%, rgba(0,168,255,0.07) 0%, transparent 65%),
-        radial-gradient(ellipse 80% 70% at 50% 50%, rgba(107,0,200,0.05) 0%, transparent 75%);
-      pointer-events: none;
-      animation: aichat-bg-pulse 8s ease-in-out infinite alternate;
-    }
-    @keyframes aichat-bg-pulse {
-      0%   { opacity: 0.7; transform: scale(1); }
-      100% { opacity: 1;   transform: scale(1.08); }
-    }
-
-    .aichat__inner {
-      display: flex; flex-direction: column;
-      align-items: center; text-align: center;
-      width: 100%; max-width: 660px;
-      padding: 80px 24px;
-      position: relative; z-index: 1;
-    }
-
-    /* Orb row — full-width centering container */
-    .aichat__orb-row {
-      display: flex; align-items: center;
-      justify-content: center; gap: 14px;
-      width: 100%; margin-bottom: 0;
-    }
-
-    /* Orb wrap — transitions from large to mini */
-    .aichat__orb-wrap {
-      position: relative; cursor: pointer;
-      width: 300px; height: 300px;
-      margin-bottom: 36px;
-      flex-shrink: 0;
-      transition: width 0.65s var(--ease-out-expo),
-                  height 0.65s var(--ease-out-expo),
-                  margin-bottom 0.5s var(--ease-out-expo),
-                  transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  filter 0.45s ease;
-      transform-origin: center;
-    }
-    .aichat__orb-wrap:hover {
-      transform: scale(1.06);
-      filter: drop-shadow(0 0 32px rgba(0,168,255,0.35)) drop-shadow(0 0 64px rgba(107,0,200,0.2));
-    }
-    .aichat__orb-wrap:active { transform: scale(0.97); transition-duration: 0.15s; }
-    .aichat__orb-wrap canvas { width: 100% !important; height: 100% !important; display: block; }
-
-    /* Hover halo ring */
-    .aichat__orb-halo {
-      position: absolute; inset: -18px; border-radius: 50%;
-      background: transparent;
-      border: 1.5px solid rgba(0,168,255,0);
-      box-shadow: 0 0 0 0 rgba(0,168,255,0), inset 0 0 0 0 rgba(107,0,200,0);
-      transition: border-color 0.45s ease, box-shadow 0.45s ease, inset 0.45s ease;
-      pointer-events: none;
-      animation: orb-halo-spin 12s linear infinite;
-    }
-    @keyframes orb-halo-spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-    .aichat__orb-wrap:hover .aichat__orb-halo {
-      border-color: rgba(0,168,255,0.28);
-      box-shadow:
-        0 0 28px rgba(0,168,255,0.18),
-        0 0 60px rgba(107,0,200,0.12),
-        inset 0 0 24px rgba(0,168,255,0.08);
-    }
-
-    .aichat.activated .aichat__orb-wrap {
-      width: 52px; height: 52px; margin-bottom: 0;
-    }
-    .aichat.activated .aichat__orb-wrap:hover { transform: scale(1.12); }
-
-    /* Orb header row (appears after activation) */
-    .aichat__header {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 16px; opacity: 0;
-      transition: opacity 0.4s ease 0.3s;
-      pointer-events: none;
-    }
-    .aichat.activated .aichat__header { opacity: 1; pointer-events: all; }
-    .aichat__agent-name {
-      font-family: var(--font-display); font-size: 0.95rem; font-weight: 700;
-      color: var(--white); letter-spacing: -0.01em; text-align: left;
-    }
-    .aichat__status {
-      display: flex; align-items: center; gap: 5px;
-      font-family: var(--font-ui); font-size: 10px; color: var(--cyan);
-      letter-spacing: 0.06em; text-transform: uppercase;
-    }
-    .aichat__status::before {
-      content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: var(--cyan);
-      animation: status-pulse 2s ease infinite;
-    }
-    @keyframes status-pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,229,212,0.5); }
-      50% { opacity: 0.8; box-shadow: 0 0 0 5px rgba(0,229,212,0); }
-    }
-
-    /* Idle prompt text */
-    .aichat__prompt {
-      margin-bottom: 32px;
-      transition: opacity 0.4s ease, transform 0.4s var(--ease-out-expo);
-    }
-    .aichat.activated .aichat__prompt { opacity: 0; pointer-events: none; transform: translateY(-8px); }
-    .aichat__heading {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 300;
-      letter-spacing: -0.03em; line-height: 1; color: var(--white);
-      margin-bottom: 12px;
-    }
-    .aichat__sub {
-      font-size: 0.95rem; color: var(--grey-300); line-height: 1.6;
-    }
-    .aichat__hint {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-top: 14px;
-      font-family: var(--font-ui); font-size: 10px; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--grey-500);
-      animation: hint-pulse 2.4s ease infinite;
-    }
-    @keyframes hint-pulse {
-      0%, 100% { opacity: 0.5; } 50% { opacity: 1; }
-    }
-    .aichat__hint svg { width: 14px; height: 14px; }
-
-    /* Messages area */
-    .aichat__messages {
-      width: 100%; max-height: 340px;
-      overflow-y: auto; scroll-behavior: smooth;
-      display: flex; flex-direction: column; gap: 12px;
-      padding: 0 4px 8px;
-      opacity: 0; max-height: 0; overflow: hidden;
-      transition: opacity 0.4s ease 0.2s, max-height 0.5s var(--ease-out-expo) 0.1s;
-    }
-    .aichat.activated .aichat__messages {
-      opacity: 1; max-height: 340px; overflow-y: auto;
-    }
-    .aichat__messages::-webkit-scrollbar { width: 4px; }
-    .aichat__messages::-webkit-scrollbar-track { background: transparent; }
-    .aichat__messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 2px; }
-
-    /* Message bubbles */
-    .ai-msg {
-      max-width: 82%; padding: 12px 16px;
-      border-radius: 14px; font-size: 0.9rem; line-height: 1.65;
-      animation: msg-in 0.35s var(--ease-out-expo);
-    }
-    @keyframes msg-in {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .ai-msg--user {
-      align-self: flex-end;
-      background: linear-gradient(135deg, var(--electric-blue), var(--deep-violet));
-      color: var(--white); border-bottom-right-radius: 4px;
-      text-align: left;
-    }
-    .ai-msg--ai {
-      align-self: flex-start;
-      background: var(--surface-02);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--off-white); border-bottom-left-radius: 4px;
-      text-align: left;
-    }
-
-    /* Typing indicator */
-    .ai-msg--typing { padding: 14px 18px; }
-    .typing-dots { display: flex; gap: 5px; align-items: center; }
-    .typing-dots span {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--grey-500);
-      animation: dot-bounce 1.3s ease infinite;
-    }
-    .typing-dots span:nth-child(2) { animation-delay: 0.18s; }
-    .typing-dots span:nth-child(3) { animation-delay: 0.36s; }
-    @keyframes dot-bounce {
-      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-      40% { transform: translateY(-5px); opacity: 1; }
-    }
-
-    /* Input row — always visible */
-    .aichat__input-row {
-      width: 100%; display: flex; align-items: center; gap: 10px;
-      margin-top: 24px;
-    }
-    .aichat__input {
-      flex: 1; background: var(--surface-02);
-      border: 1px solid rgba(255,255,255,0.1); border-radius: 50px;
-      padding: 15px 24px;
-      font-family: var(--font-body); font-size: 0.95rem; color: var(--white);
-      outline: none;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .aichat__input::placeholder { color: var(--grey-500); }
-    .aichat__input:focus {
-      border-color: rgba(0,168,255,0.45);
-      box-shadow: 0 0 0 3px rgba(0,168,255,0.08), 0 8px 32px rgba(0,168,255,0.08);
-    }
-    .aichat__send {
-      width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
-      background: linear-gradient(135deg, var(--electric-blue), var(--deep-violet));
-      border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--white);
-      box-shadow: 0 4px 20px rgba(0,168,255,0.3);
-      transition: transform 0.2s var(--ease-out-expo), box-shadow 0.2s ease;
-    }
-    .aichat__send:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(0,168,255,0.5); }
-    .aichat__send svg { width: 18px; height: 18px; }
-
     /* =========================================
        CTA SECTION
     ========================================= */
@@ -1497,9 +1378,9 @@
       letter-spacing: 0.2em; text-transform: uppercase; color: var(--neon-magenta); margin-bottom: 24px;
     }
     .cta-section__heading {
-      font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 5rem);
-      font-weight: 800; line-height: 1.0; letter-spacing: -0.03em;
-      color: var(--white); margin-bottom: 24px;
+      font-family: var(--font-display); font-size: clamp(1.8rem, 3.6vw, 3.4rem);
+      font-weight: 800; line-height: 1.05; letter-spacing: -0.025em;
+      color: var(--white); margin-bottom: 22px;
     }
     .cta-section__heading em {
       font-style: normal;
@@ -1516,7 +1397,7 @@
     ========================================= */
     .footer {
       background: var(--midnight); border-top: 1px solid rgba(255,255,255,0.05);
-      position: relative; padding: 60px 48px 40px;
+      position: relative; z-index: 1; padding: 60px 48px 40px;
     }
     .footer::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
@@ -1601,14 +1482,21 @@
     .nav.is-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
     @media(max-width:768px){
       .nav__toggle{display:flex!important;margin-left:auto;}
-      .nav .nav__links{display:flex!important;position:fixed;top:68px;left:0;right:0;flex-direction:column;gap:0;padding:16px 20px;margin:0;background:linear-gradient(180deg,rgba(7,10,23,0.98),rgba(12,16,37,0.98));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);transform:translateY(-12px);opacity:0;pointer-events:none;transition:transform 0.32s cubic-bezier(0.16,1,0.3,1),opacity 0.25s ease;z-index:999;list-style:none;}
+      .nav .nav__links{display:flex!important;position:fixed;top:68px;left:0;right:0;flex-direction:column;gap:0;padding:16px 20px;margin:0;background:linear-gradient(180deg,rgb(7,10,23),rgb(12,16,37));min-height:calc(100vh - 68px);overflow-y:auto;border-bottom:1px solid rgba(255,255,255,0.06);transform:translateY(-12px);opacity:0;pointer-events:none;transition:transform 0.32s cubic-bezier(0.16,1,0.3,1),opacity 0.25s ease;z-index:999;list-style:none;}
       .nav.is-open .nav__links{transform:translateY(0);opacity:1;pointer-events:auto;}
       .nav .nav__links li{width:100%;list-style:none;}
       .nav .nav__links a{display:block;padding:14px 4px;font-size:14px;}
       .nav .nav__links a::after{display:none;}
       .nav .nav__cta{display:none!important;}
     }
-  </style>
+  
+  
+    /* Shop dropdown — 2-card variant */
+    .nav__mega--small{height:auto !important;min-height:0 !important;padding:32px 0;}
+    .nav__mega-grid--two{grid-template-columns:repeat(2,1fr) !important;max-width:880px;margin:0 auto;}
+    .mega-card--solutions{--mc:#00A8FF;}
+    .mega-card--individual{--mc:#FFB800;}
+</style>
 </head>
 <body>
 
@@ -1633,12 +1521,79 @@
       <span class="nav__wordmark">Archetype Studio</span>
     </a>
     <ul class="nav__links">
-      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="portfolio.html">Work</a></li>
-      <li><a href="shop.html" class="active">Shop</a></li>
+      <li class="nav__item--has-dropdown">
+        <a href="services.html">Services<span class="nav__caret">▾</span></a>
+        <div class="nav__mega" aria-hidden="true">
+          <div class="nav__mega-inner">
+            <div class="nav__mega-label">Our Services</div>
+            <div class="nav__mega-grid">
+              <a href="services-brand.html" class="mega-card mega-card--brand">
+                <div class="mega-card__num">01</div>
+                <h3 class="mega-card__title">Brand Development</h3>
+                <p class="mega-card__desc">Identity systems, visual language, and brand positioning built to stand apart.</p>
+                <span class="mega-card__arrow">→</span>
+              </a>
+              <a href="services-business.html" class="mega-card mega-card--business">
+                <div class="mega-card__num">02</div>
+                <h3 class="mega-card__title">Business Architecture</h3>
+                <p class="mega-card__desc">Structure, systems, and strategy engineered for scale and operational clarity.</p>
+                <span class="mega-card__arrow">→</span>
+              </a>
+              <a href="services-marketing.html" class="mega-card mega-card--marketing">
+                <div class="mega-card__num">03</div>
+                <h3 class="mega-card__title">Marketing Studio</h3>
+                <p class="mega-card__desc">End-to-end campaigns, content, and demand generation that compounds over time.</p>
+                <span class="mega-card__arrow">→</span>
+              </a>
+              <a href="services-ai.html" class="mega-card mega-card--ai">
+                <div class="mega-card__num">04</div>
+                <h3 class="mega-card__title">AI &amp; Automation</h3>
+                <p class="mega-card__desc">Intelligent systems that eliminate friction and unlock exponential leverage.</p>
+                <span class="mega-card__arrow">→</span>
+              </a>
+            </div>
+            <a href="services.html" class="mega-footer-link">View all services <span>→</span></a>
+          </div>
+        </div>
+        <ul class="nav__dropdown">
+          <li><a href="services-brand.html">Brand Development</a></li>
+          <li><a href="services-business.html">Business Architecture</a></li>
+          <li><a href="services-marketing.html">Marketing Studio</a></li>
+          <li><a href="services-ai.html">AI &amp; Automation</a></li>
+        </ul>
+      </li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li class="nav__item--has-dropdown nav__item--shop">
+  <a href="shop.html" class="active">Shop<span class="nav__caret">▾</span></a>
+  <div class="nav__mega nav__mega--small" aria-hidden="true">
+    <div class="nav__mega-inner">
+      <div class="nav__mega-label">Browse the Shop</div>
+      <div class="nav__mega-grid nav__mega-grid--two">
+        <a href="solutions.html" class="mega-card mega-card--solutions">
+          <div class="mega-card__num">01</div>
+          <h3 class="mega-card__title">Packaged Solutions</h3>
+          <p class="mega-card__desc">Four service disciplines, three tiers each — or build your own tailored scope.</p>
+          <span class="mega-card__arrow">→</span>
+        </a>
+        <a href="shop.html#value-add" class="mega-card mega-card--individual">
+          <div class="mega-card__num">02</div>
+          <h3 class="mega-card__title">Individual Products</h3>
+          <p class="mega-card__desc">Individual deliverables, priced per unit and ready to order.</p>
+          <span class="mega-card__arrow">→</span>
+        </a>
+      </div>
+      <a href="shop.html" class="mega-footer-link">View everything <span>→</span></a>
+    </div>
+  </div>
+  <ul class="nav__dropdown">
+    <li><a href="solutions.html">Packaged Solutions</a></li>
+    <li><a href="shop.html#value-add">Individual Products</a></li>
+  </ul>
+</li>
+    <li><a href="contact.html">Contact</a></li>
     </ul>
-    <a href="shop.html#what-we-do" class="nav__cta btn">Start a Project</a>
+    <a href="contact.html" class="nav__cta">Start a Project</a>
     <button class="nav__toggle" id="site-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -1683,6 +1638,9 @@
     <!-- ===== HERO ===== -->
     <section class="hero" id="services" aria-label="Services — Archetype Studio">
       <div class="hero__bg">
+        <video class="hero__bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+          <source src="assets/videos/arch-background-v3.mp4" type="video/mp4" />
+        </video>
         <canvas id="hero-bubbles" aria-hidden="true"></canvas>
       </div>
       <div class="hero__content container">
@@ -1694,12 +1652,15 @@
         <p class="hero__desc">
           Brand. Business Architecture. Marketing. AI &amp; Automation. Choose a productised package or build from individual services — every engagement scoped around a specific commercial objective.
         </p>
-        <div class="hero__actions">
-          <a href="shop.html#what-we-do" class="btn btn--primary">
-            View Packages
-            <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          </a>
-          <a href="mailto:lip_niemann@icloud.com?subject=Discovery%20call%20%E2%80%94%20Archetype%20Studio&body=Hi%20Archetype%20Studio%2C%0A%0AI%27d%20like%20to%20book%20a%20discovery%20call.%20Here%27s%20a%20quick%20snapshot%20so%20you%20can%20prep%3A%0A%0A%E2%80%94%20Business%20%2F%20brand%3A%0A%E2%80%94%20What%20I%27m%20trying%20to%20solve%3A%0A%E2%80%94%20Stage%20I%27m%20at%20%28idea%20%2F%20building%20%2F%20scaling%29%3A%0A%E2%80%94%20Budget%20I%27m%20working%20with%3A%0A%E2%80%94%20Timeline%3A%0A%0AA%20few%20time%20slots%20that%20work%20for%20me%3A%0A%E2%80%94%20%0A%E2%80%94%20%0A%0AThanks" class="btn btn--ghost">Book a Discovery Call</a>
+        <div class="solshop-toggle" role="tablist" aria-label="Browse mode" id="view-toggle">
+          <button type="button" class="solshop-toggle__link is-active" role="tab" aria-selected="true" data-view="shop">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Shop
+          </button>
+          <button type="button" class="solshop-toggle__link" role="tab" aria-selected="false" data-view="packages">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            Packaged Solutions
+          </button>
         </div>
       </div>
       <div class="hero__scroll" aria-hidden="true">
@@ -1731,11 +1692,40 @@
     </div>
 
     <!-- ===== SHOP / SERVICE PACKAGES ===== -->
+    <!-- ====================================================
+         VIEW SWITCHER — Shop ⇄ Packaged Solutions (no nav)
+    ==================================================== -->
+    <div class="view view--packages" id="view-packages">
+
     <section class="services-section section-pad" id="what-we-do">
       <div class="container">
         <div class="reveal">
-          <p class="shop-display-title">Find your<br/>solution.</p>
-          <h4 class="services-section__heading">Browse. Select.<br/>Build your brand.</h4>
+          <p class="shop-display-title">All<br/>Packages.</p>
+
+          <!-- ===== ENTERPRISE PACKAGES (4 disciplines × 3 tiers) ===== -->
+          <div class="enterprise-packages-wrap">
+            <h3 class="enterprise-heading">Enterprise Solutions</h3>
+            <p class="enterprise-sub">Four service disciplines, three tiers each. Pick a discipline, choose the tier that fits the stage, add it to cart.</p>
+
+            <div class="disc-filter" role="tablist" aria-label="Service disciplines">
+              <button type="button" class="disc-tab is-active" data-disc="brand" role="tab" aria-selected="true">
+                <span class="disc-tab__num">01</span> Brand Development
+              </button>
+              <button type="button" class="disc-tab" data-disc="business" role="tab" aria-selected="false">
+                <span class="disc-tab__num">02</span> Business Architecture
+              </button>
+              <button type="button" class="disc-tab" data-disc="marketing" role="tab" aria-selected="false">
+                <span class="disc-tab__num">03</span> Marketing
+              </button>
+              <button type="button" class="disc-tab" data-disc="ai" role="tab" aria-selected="false">
+                <span class="disc-tab__num">04</span> AI &amp; Automation
+              </button>
+            </div>
+
+            <div class="tier-grid" id="tier-grid" aria-live="polite"></div>
+          </div>
+
+          <h4 class="services-section__heading">Departmental Solutions</h4>
           <p class="services-section__sub">
             Packaged solutions across Brand, Marketing, and Sales. Add what you need — we'll scope the rest.
           </p>
@@ -1758,13 +1748,13 @@
           <!-- ── BRAND ── -->
 
           <div class="shop-card reveal" data-category="brand"
-               data-name="Brand Foundation" data-price="$4,500" data-priceraw="4500">
+               data-name="Brand Foundation" data-price="R82,000" data-priceraw="82000">
             <span class="shop-badge">Brand</span>
             <h3 class="shop-name">Brand Foundation</h3>
             <p class="shop-tagline">Rapid positioning clarity for brands that need direction fast — without skipping the rigour.</p>
             <div class="shop-price">
               <span class="shop-price__from">From</span>
-              <span class="shop-price__amount">$4,500</span>
+              <span class="shop-price__amount">R82,000</span>
             </div>
             <p class="shop-timeline">2–3 week delivery · Fixed scope</p>
             <div class="shop-divider"></div>
@@ -1775,21 +1765,21 @@
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Target Audience Profiles (×2)</li>
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Strategic Recommendations Deck</li>
             </ul>
-            <button class="shop-atc" data-name="Brand Foundation" data-price="$4,500" data-priceraw="4500" data-category="brand">
+            <button class="shop-atc" data-name="Brand Foundation" data-price="R82,000" data-priceraw="82000" data-category="brand">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
           </div>
 
           <div class="shop-card shop-card--popular reveal" data-category="brand"
-               data-name="Full Brand Identity System" data-price="$9,500" data-priceraw="9500">
+               data-name="Full Brand Identity System" data-price="R175,000" data-priceraw="175000">
             <span class="shop-popular-label">Most Requested</span>
             <span class="shop-badge">Brand</span>
             <h3 class="shop-name">Full Brand Identity System</h3>
             <p class="shop-tagline">A complete, scalable visual identity — every element designed to work across every application.</p>
             <div class="shop-price">
               <span class="shop-price__from">From</span>
-              <span class="shop-price__amount">$9,500</span>
+              <span class="shop-price__amount">R175,000</span>
             </div>
             <p class="shop-timeline">5–6 week delivery · Fixed scope</p>
             <div class="shop-divider"></div>
@@ -1800,20 +1790,20 @@
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Brand Applications (Stationery, Social, Signage)</li>
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Extended Brand Guidelines (Digital + Print)</li>
             </ul>
-            <button class="shop-atc" data-name="Full Brand Identity System" data-price="$9,500" data-priceraw="9500" data-category="brand">
+            <button class="shop-atc" data-name="Full Brand Identity System" data-price="R175,000" data-priceraw="175000" data-category="brand">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
           </div>
 
           <div class="shop-card reveal" data-category="brand"
-               data-name="Brand Architecture" data-price="$14,000" data-priceraw="14000">
+               data-name="Brand Architecture" data-price="R255,000" data-priceraw="255000">
             <span class="shop-badge">Brand</span>
             <h3 class="shop-name">Brand Architecture</h3>
             <p class="shop-tagline">For complex businesses managing multiple products, sub-brands, or markets. Structure that scales.</p>
             <div class="shop-price">
               <span class="shop-price__from">From</span>
-              <span class="shop-price__amount">$14,000</span>
+              <span class="shop-price__amount">R255,000</span>
             </div>
             <p class="shop-timeline">6–8 week delivery · Tailored scope</p>
             <div class="shop-divider"></div>
@@ -1824,7 +1814,7 @@
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Messaging Framework Per Entity</li>
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Go-to-Market Sequencing Plan</li>
             </ul>
-            <button class="shop-atc" data-name="Brand Architecture" data-price="$14,000" data-priceraw="14000" data-category="brand">
+            <button class="shop-atc" data-name="Brand Architecture" data-price="R255,000" data-priceraw="255000" data-category="brand">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -1833,13 +1823,13 @@
           <!-- ── MARKETING ── -->
 
           <div class="shop-card reveal" data-category="marketing"
-               data-name="Campaign Creative Suite" data-price="$4,500" data-priceraw="4500">
+               data-name="Campaign Creative Suite" data-price="R82,000" data-priceraw="82000">
             <span class="shop-badge">Marketing</span>
             <h3 class="shop-name">Campaign Creative Suite</h3>
             <p class="shop-tagline">A full creative package for a single campaign — concept through to execution-ready assets across every channel.</p>
             <div class="shop-price">
               <span class="shop-price__from">From</span>
-              <span class="shop-price__amount">$4,500</span>
+              <span class="shop-price__amount">R82,000</span>
             </div>
             <p class="shop-timeline">3 week delivery · Per campaign</p>
             <div class="shop-divider"></div>
@@ -1850,21 +1840,21 @@
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Social & Email Assets</li>
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Campaign Copy Suite</li>
             </ul>
-            <button class="shop-atc" data-name="Campaign Creative Suite" data-price="$4,500" data-priceraw="4500" data-category="marketing">
+            <button class="shop-atc" data-name="Campaign Creative Suite" data-price="R82,000" data-priceraw="82000" data-category="marketing">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
           </div>
 
           <div class="shop-card shop-card--popular reveal" data-category="marketing"
-               data-name="Growth Marketing Retainer" data-price="$4,500" data-priceraw="4500">
+               data-name="Growth Marketing Retainer" data-price="R82,000" data-priceraw="82000">
             <span class="shop-popular-label">Most Requested</span>
             <span class="shop-badge">Marketing</span>
             <h3 class="shop-name">Growth Marketing Retainer</h3>
             <p class="shop-tagline">Paid media, content, and email working together — ongoing, optimised, and accountable to results.</p>
             <div class="shop-price">
               <span class="shop-price__from">From</span>
-              <span class="shop-price__amount">$4,500</span>
+              <span class="shop-price__amount">R82,000</span>
               <span class="shop-price__unit">/ month</span>
             </div>
             <p class="shop-timeline">Monthly retainer · 3-month minimum</p>
@@ -1876,20 +1866,20 @@
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Monthly Performance Report</li>
               <li class="shop-feature"><span class="shop-feature__check">✓</span>A/B Testing & Optimisation</li>
             </ul>
-            <button class="shop-atc" data-name="Growth Marketing Retainer" data-price="$4,500/mo" data-priceraw="4500" data-category="marketing">
+            <button class="shop-atc" data-name="Growth Marketing Retainer" data-price="R82,000/mo" data-priceraw="82000" data-category="marketing">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
           </div>
 
           <div class="shop-card reveal" data-category="marketing"
-               data-name="Performance Scale" data-price="$7,500" data-priceraw="7500">
+               data-name="Performance Scale" data-price="R135,000" data-priceraw="135000">
             <span class="shop-badge">Marketing</span>
             <h3 class="shop-name">Performance Scale</h3>
             <p class="shop-tagline">Full-channel performance marketing for brands ready to scale. Multi-platform, data-driven, outcome-focused.</p>
             <div class="shop-price">
               <span class="shop-price__from">From</span>
-              <span class="shop-price__amount">$7,500</span>
+              <span class="shop-price__amount">R135,000</span>
               <span class="shop-price__unit">/ month</span>
             </div>
             <p class="shop-timeline">Monthly retainer · 6-month minimum</p>
@@ -1901,7 +1891,7 @@
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Weekly Performance Reviews</li>
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Quarterly Strategy & Budget Review</li>
             </ul>
-            <button class="shop-atc" data-name="Performance Scale" data-price="$7,500/mo" data-priceraw="7500" data-category="marketing">
+            <button class="shop-atc" data-name="Performance Scale" data-price="R135,000/mo" data-priceraw="135000" data-category="marketing">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -1910,13 +1900,13 @@
           <!-- ── SALES ── -->
 
           <div class="shop-card reveal" data-category="sales"
-               data-name="Sales Collateral Pack" data-price="$3,800" data-priceraw="3800">
+               data-name="Sales Collateral Pack" data-price="R68,000" data-priceraw="68000">
             <span class="shop-badge">Sales</span>
             <h3 class="shop-name">Sales Collateral Pack</h3>
             <p class="shop-tagline">Branded sales assets that give your team what they need to open doors and close deals with confidence.</p>
             <div class="shop-price">
               <span class="shop-price__from">From</span>
-              <span class="shop-price__amount">$3,800</span>
+              <span class="shop-price__amount">R68,000</span>
             </div>
             <p class="shop-timeline">2–3 week delivery · Fixed scope</p>
             <div class="shop-divider"></div>
@@ -1927,21 +1917,21 @@
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Email Signature Suite</li>
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Sales Deck Copywriting</li>
             </ul>
-            <button class="shop-atc" data-name="Sales Collateral Pack" data-price="$3,800" data-priceraw="3800" data-category="sales">
+            <button class="shop-atc" data-name="Sales Collateral Pack" data-price="R68,000" data-priceraw="68000" data-category="sales">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
           </div>
 
           <div class="shop-card shop-card--popular reveal" data-category="sales"
-               data-name="Sales Enablement System" data-price="$6,500" data-priceraw="6500">
+               data-name="Sales Enablement System" data-price="R118,000" data-priceraw="118000">
             <span class="shop-popular-label">Most Requested</span>
             <span class="shop-badge">Sales</span>
             <h3 class="shop-name">Sales Enablement System</h3>
             <p class="shop-tagline">A complete sales toolkit — assets, messaging, and frameworks that make every rep more effective from day one.</p>
             <div class="shop-price">
               <span class="shop-price__from">From</span>
-              <span class="shop-price__amount">$6,500</span>
+              <span class="shop-price__amount">R118,000</span>
             </div>
             <p class="shop-timeline">4–5 week delivery · Fixed scope</p>
             <div class="shop-divider"></div>
@@ -1953,20 +1943,20 @@
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Outreach Sequence Copy</li>
               <li class="shop-feature"><span class="shop-feature__check">✓</span>Sales One-Pagers per Audience Segment</li>
             </ul>
-            <button class="shop-atc" data-name="Sales Enablement System" data-price="$6,500" data-priceraw="6500" data-category="sales">
+            <button class="shop-atc" data-name="Sales Enablement System" data-price="R118,000" data-priceraw="118000" data-category="sales">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
           </div>
 
           <div class="shop-card reveal" data-category="sales"
-               data-name="Lead Generation Engine" data-price="$5,500" data-priceraw="5500">
+               data-name="Lead Generation Engine" data-price="R100,000" data-priceraw="100000">
             <span class="shop-badge">Sales</span>
             <h3 class="shop-name">Lead Generation Engine</h3>
             <p class="shop-tagline">Build the pipeline-filling infrastructure — landing pages, lead magnets, and outbound sequences that convert.</p>
             <div class="shop-price">
               <span class="shop-price__from">From</span>
-              <span class="shop-price__amount">$5,500</span>
+              <span class="shop-price__amount">R100,000</span>
             </div>
             <p class="shop-timeline">4 week delivery · Fixed scope</p>
             <div class="shop-divider"></div>
@@ -1977,7 +1967,7 @@
               <li class="shop-feature"><span class="shop-feature__check">✓</span>LinkedIn Outreach Playbook</li>
               <li class="shop-feature"><span class="shop-feature__check">✓</span>CRM Setup & Workflow Mapping</li>
             </ul>
-            <button class="shop-atc" data-name="Lead Generation Engine" data-price="$5,500" data-priceraw="5500" data-category="sales">
+            <button class="shop-atc" data-name="Lead Generation Engine" data-price="R100,000" data-priceraw="100000" data-category="sales">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -1987,11 +1977,13 @@
       </div>
     </section>
 
+    </div><!-- /.view--packages -->
+
     <!-- ===== VALUE ADD ===== -->
+    <div class="view view--shop is-active" id="view-shop">
     <section class="valueadd section-pad" id="value-add">
       <div class="container">
         <div class="reveal">
-          <p class="section-label">Value Add</p>
           <h2 class="valueadd__heading">Add exactly<br/>what you need.</h2>
           <p class="valueadd__sub">
             Individual assets and services — order single items to bolt onto any package, or commission them standalone. Priced per unit, no minimum.
@@ -2013,11 +2005,11 @@
           <div class="va-card reveal" data-vacategory="design">
             <div class="va-card__header">
               <span class="va-badge va-badge--design">Design</span>
-              <span class="va-unit-price">$150</span>
+              <span class="va-unit-price">R2,700</span>
             </div>
             <h4 class="va-name">Social Post Design</h4>
             <p class="va-desc">Single branded social post, formatted and exported for your chosen platform.</p>
-            <button class="va-atc shop-atc" data-name="Social Post Design" data-price="$150" data-priceraw="150" data-category="design">
+            <button class="va-atc shop-atc" data-name="Social Post Design" data-price="R2,700" data-priceraw="2700" data-category="design">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2026,11 +2018,11 @@
           <div class="va-card reveal" data-vacategory="design">
             <div class="va-card__header">
               <span class="va-badge va-badge--design">Design</span>
-              <span class="va-unit-price">$280</span>
+              <span class="va-unit-price">R5,000</span>
             </div>
             <h4 class="va-name">Business Card Design</h4>
             <p class="va-desc">Both sides designed, on-brand, print-ready files (PDF, AI) included in handover.</p>
-            <button class="va-atc shop-atc" data-name="Business Card Design" data-price="$280" data-priceraw="280" data-category="design">
+            <button class="va-atc shop-atc" data-name="Business Card Design" data-price="R5,000" data-priceraw="5000" data-category="design">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2039,11 +2031,11 @@
           <div class="va-card reveal" data-vacategory="design">
             <div class="va-card__header">
               <span class="va-badge va-badge--design">Design</span>
-              <span class="va-unit-price">$480</span>
+              <span class="va-unit-price">R8,500</span>
             </div>
             <h4 class="va-name">Banner Ad Set</h4>
             <p class="va-desc">Full digital ad set for one campaign across 6 standard IAB sizes, export-ready.</p>
-            <button class="va-atc shop-atc" data-name="Banner Ad Set" data-price="$480" data-priceraw="480" data-category="design">
+            <button class="va-atc shop-atc" data-name="Banner Ad Set" data-price="R8,500" data-priceraw="8500" data-category="design">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2052,11 +2044,11 @@
           <div class="va-card reveal" data-vacategory="design">
             <div class="va-card__header">
               <span class="va-badge va-badge--design">Design</span>
-              <span class="va-unit-price">$550</span>
+              <span class="va-unit-price">R10,000</span>
             </div>
             <h4 class="va-name">Logo Variation / Lockup</h4>
             <p class="va-desc">An additional logo lockup or variant built within your existing visual system.</p>
-            <button class="va-atc shop-atc" data-name="Logo Variation / Lockup" data-price="$550" data-priceraw="550" data-category="design">
+            <button class="va-atc shop-atc" data-name="Logo Variation / Lockup" data-price="R10,000" data-priceraw="10000" data-category="design">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2065,11 +2057,11 @@
           <div class="va-card reveal" data-vacategory="design">
             <div class="va-card__header">
               <span class="va-badge va-badge--design">Design</span>
-              <span class="va-unit-price">$620</span>
+              <span class="va-unit-price">R11,200</span>
             </div>
             <h4 class="va-name">Infographic</h4>
             <p class="va-desc">Data or process visualised in your brand language — print and digital formats included.</p>
-            <button class="va-atc shop-atc" data-name="Infographic" data-price="$620" data-priceraw="620" data-category="design">
+            <button class="va-atc shop-atc" data-name="Infographic" data-price="R11,200" data-priceraw="11200" data-category="design">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2078,11 +2070,11 @@
           <div class="va-card reveal" data-vacategory="design">
             <div class="va-card__header">
               <span class="va-badge va-badge--design">Design</span>
-              <span class="va-unit-price">$850</span>
+              <span class="va-unit-price">R15,500</span>
             </div>
             <h4 class="va-name">Presentation Template</h4>
             <p class="va-desc">On-brand slide deck master (up to 20 slide layouts) in PowerPoint and Keynote.</p>
-            <button class="va-atc shop-atc" data-name="Presentation Template" data-price="$850" data-priceraw="850" data-category="design">
+            <button class="va-atc shop-atc" data-name="Presentation Template" data-price="R15,500" data-priceraw="15500" data-category="design">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2093,11 +2085,11 @@
           <div class="va-card reveal" data-vacategory="content">
             <div class="va-card__header">
               <span class="va-badge va-badge--content">Content</span>
-              <span class="va-unit-price">$290</span>
+              <span class="va-unit-price">R5,200</span>
             </div>
             <h4 class="va-name">Social Caption Pack ×10</h4>
             <p class="va-desc">Ten on-brand captions written and formatted for your chosen platform and audience.</p>
-            <button class="va-atc shop-atc" data-name="Social Caption Pack ×10" data-price="$290" data-priceraw="290" data-category="content">
+            <button class="va-atc shop-atc" data-name="Social Caption Pack ×10" data-price="R5,200" data-priceraw="5200" data-category="content">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2106,11 +2098,11 @@
           <div class="va-card reveal" data-vacategory="content">
             <div class="va-card__header">
               <span class="va-badge va-badge--content">Content</span>
-              <span class="va-unit-price">$340</span>
+              <span class="va-unit-price">R6,200</span>
             </div>
             <h4 class="va-name">Ad Copy Set</h4>
             <p class="va-desc">Three variations each of headline, body, and CTA — tested across Meta and Google formats.</p>
-            <button class="va-atc shop-atc" data-name="Ad Copy Set" data-price="$340" data-priceraw="340" data-category="content">
+            <button class="va-atc shop-atc" data-name="Ad Copy Set" data-price="R6,200" data-priceraw="6200" data-category="content">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2119,11 +2111,11 @@
           <div class="va-card reveal" data-vacategory="content">
             <div class="va-card__header">
               <span class="va-badge va-badge--content">Content</span>
-              <span class="va-unit-price">$380</span>
+              <span class="va-unit-price">R6,900</span>
             </div>
             <h4 class="va-name">Blog Post</h4>
             <p class="va-desc">800–1,200 word SEO-optimised, brand-voiced long-form article, research and internal linking included.</p>
-            <button class="va-atc shop-atc" data-name="Blog Post" data-price="$380" data-priceraw="380" data-category="content">
+            <button class="va-atc shop-atc" data-name="Blog Post" data-price="R6,900" data-priceraw="6900" data-category="content">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2132,11 +2124,11 @@
           <div class="va-card reveal" data-vacategory="content">
             <div class="va-card__header">
               <span class="va-badge va-badge--content">Content</span>
-              <span class="va-unit-price">$420</span>
+              <span class="va-unit-price">R7,600</span>
             </div>
             <h4 class="va-name">Email Newsletter</h4>
             <p class="va-desc">Full campaign email — subject line, preview text, structured copy, and CTA written to your brand tone.</p>
-            <button class="va-atc shop-atc" data-name="Email Newsletter" data-price="$420" data-priceraw="420" data-category="content">
+            <button class="va-atc shop-atc" data-name="Email Newsletter" data-price="R7,600" data-priceraw="7600" data-category="content">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2145,11 +2137,11 @@
           <div class="va-card reveal" data-vacategory="content">
             <div class="va-card__header">
               <span class="va-badge va-badge--content">Content</span>
-              <span class="va-unit-price">$680</span>
+              <span class="va-unit-price">R12,200</span>
             </div>
             <h4 class="va-name">Landing Page Copy</h4>
             <p class="va-desc">Conversion-focused copy for a single landing page — hero, benefits, social proof, and CTA sections.</p>
-            <button class="va-atc shop-atc" data-name="Landing Page Copy" data-price="$680" data-priceraw="680" data-category="content">
+            <button class="va-atc shop-atc" data-name="Landing Page Copy" data-price="R12,200" data-priceraw="12200" data-category="content">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2160,11 +2152,11 @@
           <div class="va-card reveal" data-vacategory="video">
             <div class="va-card__header">
               <span class="va-badge va-badge--video">Video</span>
-              <span class="va-unit-price">$380</span>
+              <span class="va-unit-price">R6,900</span>
             </div>
             <h4 class="va-name">Motion Graphic (10s)</h4>
             <p class="va-desc">Looping branded motion asset, delivered in MP4 and GIF — built for stories and paid media.</p>
-            <button class="va-atc shop-atc" data-name="Motion Graphic (10s)" data-price="$380" data-priceraw="380" data-category="video">
+            <button class="va-atc shop-atc" data-name="Motion Graphic (10s)" data-price="R6,900" data-priceraw="6900" data-category="video">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2173,11 +2165,11 @@
           <div class="va-card reveal" data-vacategory="video">
             <div class="va-card__header">
               <span class="va-badge va-badge--video">Video</span>
-              <span class="va-unit-price">$520</span>
+              <span class="va-unit-price">R9,400</span>
             </div>
             <h4 class="va-name">Social Video Post (15s)</h4>
             <p class="va-desc">Single short-form video asset — scripted, produced, and exported for social platforms.</p>
-            <button class="va-atc shop-atc" data-name="Social Video Post (15s)" data-price="$520" data-priceraw="520" data-category="video">
+            <button class="va-atc shop-atc" data-name="Social Video Post (15s)" data-price="R9,400" data-priceraw="9400" data-category="video">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2186,11 +2178,11 @@
           <div class="va-card reveal" data-vacategory="video">
             <div class="va-card__header">
               <span class="va-badge va-badge--video">Video</span>
-              <span class="va-unit-price">$620</span>
+              <span class="va-unit-price">R11,200</span>
             </div>
             <h4 class="va-name">Animated Logo Reveal</h4>
             <p class="va-desc">Branded logo animation for use across intros, digital channels, and presentations.</p>
-            <button class="va-atc shop-atc" data-name="Animated Logo Reveal" data-price="$620" data-priceraw="620" data-category="video">
+            <button class="va-atc shop-atc" data-name="Animated Logo Reveal" data-price="R11,200" data-priceraw="11200" data-category="video">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2199,11 +2191,11 @@
           <div class="va-card reveal" data-vacategory="video">
             <div class="va-card__header">
               <span class="va-badge va-badge--video">Video</span>
-              <span class="va-unit-price">$780</span>
+              <span class="va-unit-price">R14,000</span>
             </div>
             <h4 class="va-name">Reels / Short-form (30s)</h4>
             <p class="va-desc">30-second produced reel — scripted, motion-designed, sound-treated, and formatted for all platforms.</p>
-            <button class="va-atc shop-atc" data-name="Reels / Short-form (30s)" data-price="$780" data-priceraw="780" data-category="video">
+            <button class="va-atc shop-atc" data-name="Reels / Short-form (30s)" data-price="R14,000" data-priceraw="14000" data-category="video">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2212,11 +2204,11 @@
           <div class="va-card reveal" data-vacategory="video">
             <div class="va-card__header">
               <span class="va-badge va-badge--video">Video</span>
-              <span class="va-unit-price">$1,250</span>
+              <span class="va-unit-price">R22,500</span>
             </div>
             <h4 class="va-name">Product Showcase (60s)</h4>
             <p class="va-desc">One-minute branded product or service video — concept, production, and edit included.</p>
-            <button class="va-atc shop-atc" data-name="Product Showcase (60s)" data-price="$1,250" data-priceraw="1250" data-category="video">
+            <button class="va-atc shop-atc" data-name="Product Showcase (60s)" data-price="R22,500" data-priceraw="22500" data-category="video">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2227,11 +2219,11 @@
           <div class="va-card reveal" data-vacategory="visual">
             <div class="va-card__header">
               <span class="va-badge va-badge--visual">Visual</span>
-              <span class="va-unit-price">$280</span>
+              <span class="va-unit-price">R5,000</span>
             </div>
             <h4 class="va-name">Brand Mockup / Render</h4>
             <p class="va-desc">Single photorealistic brand mockup or 3D render — ideal for pitch decks, portfolios, and social.</p>
-            <button class="va-atc shop-atc" data-name="Brand Mockup / Render" data-price="$280" data-priceraw="280" data-category="visual">
+            <button class="va-atc shop-atc" data-name="Brand Mockup / Render" data-price="R5,000" data-priceraw="5000" data-category="visual">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2240,11 +2232,11 @@
           <div class="va-card reveal" data-vacategory="visual">
             <div class="va-card__header">
               <span class="va-badge va-badge--visual">Visual</span>
-              <span class="va-unit-price">$420</span>
+              <span class="va-unit-price">R7,600</span>
             </div>
             <h4 class="va-name">Product Render</h4>
             <p class="va-desc">Studio-quality product render with brand backdrop — delivered in multiple colour/angle variants.</p>
-            <button class="va-atc shop-atc" data-name="Product Render" data-price="$420" data-priceraw="420" data-category="visual">
+            <button class="va-atc shop-atc" data-name="Product Render" data-price="R7,600" data-priceraw="7600" data-category="visual">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2253,11 +2245,11 @@
           <div class="va-card reveal" data-vacategory="visual">
             <div class="va-card__header">
               <span class="va-badge va-badge--visual">Visual</span>
-              <span class="va-unit-price">$520</span>
+              <span class="va-unit-price">R9,400</span>
             </div>
             <h4 class="va-name">Lifestyle Composite Image</h4>
             <p class="va-desc">Brand lifestyle image composed from sourced and custom elements — hero-ready, high-res.</p>
-            <button class="va-atc shop-atc" data-name="Lifestyle Composite Image" data-price="$520" data-priceraw="520" data-category="visual">
+            <button class="va-atc shop-atc" data-name="Lifestyle Composite Image" data-price="R9,400" data-priceraw="9400" data-category="visual">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2266,11 +2258,11 @@
           <div class="va-card reveal" data-vacategory="visual">
             <div class="va-card__header">
               <span class="va-badge va-badge--visual">Visual</span>
-              <span class="va-unit-price">$580</span>
+              <span class="va-unit-price">R10,500</span>
             </div>
             <h4 class="va-name">Photography Brief & Direction</h4>
             <p class="va-desc">Full creative brief, shot list, and art direction for a brand photography session — ready to hand to any photographer.</p>
-            <button class="va-atc shop-atc" data-name="Photography Brief & Direction" data-price="$580" data-priceraw="580" data-category="visual">
+            <button class="va-atc shop-atc" data-name="Photography Brief & Direction" data-price="R10,500" data-priceraw="10500" data-category="visual">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2281,11 +2273,11 @@
           <div class="va-card reveal" data-vacategory="digital">
             <div class="va-card__header">
               <span class="va-badge va-badge--digital">Digital</span>
-              <span class="va-unit-price">$260</span>
+              <span class="va-unit-price">R4,700</span>
             </div>
             <h4 class="va-name">LinkedIn Banner Set</h4>
             <p class="va-desc">Personal profile and company page banners designed to your brand specs — all sizes included.</p>
-            <button class="va-atc shop-atc" data-name="LinkedIn Banner Set" data-price="$260" data-priceraw="260" data-category="digital">
+            <button class="va-atc shop-atc" data-name="LinkedIn Banner Set" data-price="R4,700" data-priceraw="4700" data-category="digital">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2294,11 +2286,11 @@
           <div class="va-card reveal" data-vacategory="digital">
             <div class="va-card__header">
               <span class="va-badge va-badge--digital">Digital</span>
-              <span class="va-unit-price">$480</span>
+              <span class="va-unit-price">R8,500</span>
             </div>
             <h4 class="va-name">Social Profile Kit</h4>
             <p class="va-desc">Profile images, banners, and highlight covers, consistent across all platforms you operate on.</p>
-            <button class="va-atc shop-atc" data-name="Social Profile Kit" data-price="$480" data-priceraw="480" data-category="digital">
+            <button class="va-atc shop-atc" data-name="Social Profile Kit" data-price="R8,500" data-priceraw="8500" data-category="digital">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2307,11 +2299,11 @@
           <div class="va-card reveal" data-vacategory="digital">
             <div class="va-card__header">
               <span class="va-badge va-badge--digital">Digital</span>
-              <span class="va-unit-price">$580</span>
+              <span class="va-unit-price">R10,500</span>
             </div>
             <h4 class="va-name">Email Template (HTML)</h4>
             <p class="va-desc">Coded branded email template tested across major clients — includes editable modules for your team.</p>
-            <button class="va-atc shop-atc" data-name="Email Template (HTML)" data-price="$580" data-priceraw="580" data-category="digital">
+            <button class="va-atc shop-atc" data-name="Email Template (HTML)" data-price="R10,500" data-priceraw="10500" data-category="digital">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2320,11 +2312,11 @@
           <div class="va-card reveal" data-vacategory="digital">
             <div class="va-card__header">
               <span class="va-badge va-badge--digital">Digital</span>
-              <span class="va-unit-price">$640</span>
+              <span class="va-unit-price">R11,500</span>
             </div>
             <h4 class="va-name">Digital Ad Template Pack</h4>
             <p class="va-desc">Editable branded ad templates for Meta, Google, and LinkedIn — layered files, all placements.</p>
-            <button class="va-atc shop-atc" data-name="Digital Ad Template Pack" data-price="$640" data-priceraw="640" data-category="digital">
+            <button class="va-atc shop-atc" data-name="Digital Ad Template Pack" data-price="R11,500" data-priceraw="11500" data-category="digital">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
               Add to Cart
             </button>
@@ -2333,54 +2325,9 @@
         </div><!-- /.va-grid -->
       </div>
     </section>
+    </div><!-- /.view--shop -->
 
-    <!-- ===== AI CHAT ===== -->
-    <section class="aichat" id="faq">
-      <div class="aichat__inner">
-
-        <!-- Orb row — centered idle, becomes header row on activation -->
-        <div class="aichat__orb-row" id="ai-orb-row">
-          <div class="aichat__orb-wrap" id="ai-orb-wrap" title="Click to activate">
-            <div class="aichat__orb-halo"></div>
-            <canvas id="ai-orb" width="520" height="520"></canvas>
-          </div>
-          <div class="aichat__header" id="ai-header">
-            <div>
-              <p class="aichat__agent-name">Archetype AI</p>
-              <span class="aichat__status">Online</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Idle prompt -->
-        <div class="aichat__prompt" id="ai-prompt">
-          <h2 class="aichat__heading">Ask anything.</h2>
-          <p class="aichat__sub">About our services, packages, pricing, or how to get started.</p>
-          <p class="aichat__hint">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-            Click the orb or type below to begin
-          </p>
-        </div>
-
-        <!-- Messages -->
-        <div class="aichat__messages" id="ai-messages"></div>
-
-        <!-- Input — always visible -->
-        <div class="aichat__input-row">
-          <input type="text" class="aichat__input" id="ai-input"
-                 placeholder="Ask about our services, pricing, or packages…"
-                 autocomplete="off" />
-          <button class="aichat__send" id="ai-send" aria-label="Send message">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-            </svg>
-          </button>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ===== CTA ===== -->
+        <!-- ===== CTA ===== -->
     <section class="cta-section" id="contact" aria-label="Start a project">
       <div class="cta-section__bg"></div>
       <div class="cta-section__inner reveal">
@@ -2392,7 +2339,7 @@
           One conversation. Tell us about the brand, the business, and where it needs to go — we'll come back with the right mix of brand, architecture, marketing, and AI to get you there.
         </p>
         <div class="cta-section__actions">
-          <a href="shop.html#what-we-do" class="btn btn--primary">
+          <a href="contact.html" class="btn btn--primary">
             Start a Project
             <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
           </a>
@@ -2419,19 +2366,19 @@
           <nav class="footer__nav" aria-label="Footer navigation - Company">
             <h4>Company</h4>
             <ul>
-              <li><a href="index.html">Home</a></li>
               <li><a href="about.html">About</a></li>
-              <li><a href="portfolio.html">Work</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="shop.html">Shop</a></li>
+              <li><a href="contact.html">Contact</a></li>
             </ul>
           </nav>
           <nav class="footer__nav" aria-label="Footer navigation - Services">
             <h4>Services</h4>
             <ul>
-              <li><a href="shop.html">Brand Strategy</a></li>
-              <li><a href="shop.html">Visual Identity</a></li>
-              <li><a href="shop.html">Content Creation</a></li>
-              <li><a href="shop.html">Digital Marketing</a></li>
+              <li><a href="services-brand.html">Brand Development</a></li>
+              <li><a href="services-business.html">Business Architecture</a></li>
+              <li><a href="services-marketing.html">Marketing Studio</a></li>
+              <li><a href="services-ai.html">AI &amp; Automation</a></li>
             </ul>
           </nav>
           <nav class="footer__nav" aria-label="Footer navigation - Packages">
@@ -2459,27 +2406,50 @@
 
   <script>
     /* =========================================
-       NAV SCROLL BEHAVIOUR
+       NAV: SCROLL + MOBILE TOGGLE + MEGA MENU
     ========================================= */
-    const nav = document.getElementById('site-nav');
     (function(){
-      if (!nav) return;
+      var n = document.getElementById('site-nav');
+      if (!n) return;
       var t = document.getElementById('site-nav-toggle');
-      function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 40); }
+      function onScroll(){ n.classList.toggle('scrolled', window.scrollY > 40); }
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
       if (t) {
         t.addEventListener('click', function(){
-          var open = nav.classList.toggle('is-open');
+          var open = n.classList.toggle('is-open');
           t.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
-        nav.querySelectorAll('.nav__links a').forEach(function(a){
+        n.querySelectorAll('.nav__links > li > a, .nav__dropdown a').forEach(function(a){
           a.addEventListener('click', function(){
-            nav.classList.remove('is-open');
-            t.setAttribute('aria-expanded','false');
+            n.classList.remove('is-open');
+            if (t) t.setAttribute('aria-expanded','false');
           });
         });
       }
+      var items = n.querySelectorAll('.nav__item--has-dropdown');
+      if (!items.length) return;
+      var bd = document.createElement('div');
+      bd.className = 'nav__mega-backdrop';
+      document.body.appendChild(bd);
+      function isDesktop(){ return window.innerWidth > 860; }
+      var openItem = null, closeTimer = null;
+      function closeAll(){ items.forEach(function(it){ it.classList.remove('is-mega-open'); var t = it.querySelector(':scope > a'); var m = it.querySelector('.nav__mega'); if (t) t.setAttribute('aria-expanded','false'); if (m) m.setAttribute('aria-hidden','true'); }); bd.classList.remove('is-active'); openItem = null; }
+      function openOnly(it){ items.forEach(function(o){ if (o !== it) o.classList.remove('is-mega-open'); }); it.classList.add('is-mega-open'); bd.classList.add('is-active'); var t = it.querySelector(':scope > a'); var m = it.querySelector('.nav__mega'); if (t) t.setAttribute('aria-expanded','true'); if (m) m.setAttribute('aria-hidden','false'); openItem = it; }
+      items.forEach(function(item){
+        var trigger = item.querySelector(':scope > a');
+        var mega = item.querySelector('.nav__mega');
+        if (!trigger || !mega) return;
+        function scheduleClose(){ clearTimeout(closeTimer); closeTimer = setTimeout(closeAll, 750); }
+        function cancelClose(){ clearTimeout(closeTimer); closeTimer = null; }
+        item.addEventListener('mouseenter', function(){ if(isDesktop()){ cancelClose(); openOnly(item); } });
+        item.addEventListener('mouseleave', function(){ if(isDesktop()) scheduleClose(); });
+        mega.addEventListener('mouseenter', function(){ if(isDesktop()) cancelClose(); });
+        mega.addEventListener('mouseleave', function(){ if(isDesktop()) scheduleClose(); });
+        trigger.addEventListener('focus', function(){ if (isDesktop()) openOnly(item); });
+      });
+      bd.addEventListener('click', closeAll);
+      document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeAll(); });
     })();
 
     /* =========================================
@@ -2576,6 +2546,136 @@
     }
     buildSlider();
 
+    /* =========================================
+       ENTERPRISE PACKAGES — Tier Renderer
+    ========================================= */
+    (function(){
+      const DISCIPLINES = {
+        brand: {
+          name: 'Brand Development',
+          tagline: 'Identity systems that lead the market.',
+          tiers: [
+            { name: 'Starter', price: 'R75,000', priceRaw: 75000, items: ['Logo system & palette', 'Typography & mini guidelines', 'Brand essentials pack', '3-week delivery'] },
+            { name: 'Growth', price: 'R145,000', priceRaw: 145000, featured: true, items: ['Positioning & messaging strategy', 'Full identity system', 'Brand guidelines doc', 'Launch asset pack', '5–6 week delivery'] },
+            { name: 'Scale', price: 'R255,000+', priceRaw: 255000, items: ['Full brand system & sub-brands', 'Verbal identity & tone of voice', 'Rollout assets & templates', 'Brand training session', '8–10 week delivery'] }
+          ]
+        },
+        business: {
+          name: 'Business Architecture',
+          tagline: 'Structure, model, and the engine room.',
+          tiers: [
+            { name: 'Starter', price: 'R95,000', priceRaw: 95000, items: ['Business model canvas', 'Operations audit', 'Go-to-market brief', '3-week sprint'] },
+            { name: 'Growth', price: 'R185,000', priceRaw: 185000, featured: true, items: ['Business model & revenue ops', 'GTM & org design', 'Process & tooling map', 'Implementation roadmap', '6–8 week delivery'] },
+            { name: 'Scale', price: 'R320,000+', priceRaw: 320000, items: ['Full business re-architecture', 'Multi-phase rollout', 'Leadership & ops coaching', 'Quarterly business reviews', '3–4 month engagement'] }
+          ]
+        },
+        marketing: {
+          name: 'Marketing Studio',
+          tagline: 'End-to-end demand & growth, accountable.',
+          tiers: [
+            { name: 'Starter', price: 'R45,000/mo', priceRaw: 45000, items: ['Content engine + basic paid', 'Monthly reporting', 'Lifecycle email setup', 'Rolling retainer'] },
+            { name: 'Growth', price: 'R85,000/mo', priceRaw: 85000, featured: true, items: ['Full-house marketing ops', 'Paid, content & lifecycle', 'SEO + conversion optimisation', 'Weekly working sessions', '3-month minimum'] },
+            { name: 'Scale', price: 'R145,000/mo', priceRaw: 145000, items: ['Multi-channel performance ops', 'Weekly strategy reviews', 'Dedicated team + Slack', 'Custom reporting dashboard', '6-month minimum'] }
+          ]
+        },
+        ai: {
+          name: 'AI & Automation',
+          tagline: 'Leverage built into how the business runs.',
+          tiers: [
+            { name: 'Starter', price: 'R55,000', priceRaw: 55000, items: ['Workflow audit', '2 automations + tool setup', 'Team training session', 'Documentation handover'] },
+            { name: 'Growth', price: 'R125,000', priceRaw: 125000, featured: true, items: ['Custom AI agents', '5–7 connected automations', 'Internal tooling & docs', 'Performance tuning', '5–7 week build'] },
+            { name: 'Scale', price: 'R235,000+', priceRaw: 235000, items: ['Full AI ops layer', 'Custom builds & integrations', 'Ongoing optimisation retainer', 'Quarterly model upgrades', '8–10 week build'] }
+          ]
+        }
+      };
+      const COLOR = { brand: '#00A8FF', business: '#E91E8C', marketing: '#00E5D4', ai: '#8B5CF6' };
+      const grid = document.getElementById('tier-grid');
+      if (!grid) return;
+      function esc(s){return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+      function render(disc){
+        const d = DISCIPLINES[disc];
+        const color = COLOR[disc];
+        grid.innerHTML = d.tiers.map(t => `
+          <div class="tier-card ${t.featured ? 'tier-card--featured' : ''}" style="--tc:${color}">
+            ${t.featured ? '<span class="tier-card__badge">Most Popular</span>' : ''}
+            <div class="tier-card__head">
+              <div class="tier-card__tier">${esc(t.name)}</div>
+              <div class="tier-card__title">${esc(d.name)}</div>
+              <div class="tier-card__sub">${esc(d.tagline)}</div>
+            </div>
+            <div class="tier-card__price-block">
+              <div class="tier-card__price-amount">${esc(t.price)}</div>
+              <div class="tier-card__price-meta">${t.featured ? 'Most chosen tier' : 'Starting from'}</div>
+            </div>
+            <ul class="tier-card__inc">
+              ${t.items.map(it => `<li>${esc(it)}</li>`).join('')}
+            </ul>
+            <button type="button" class="tier-card__add shop-atc" data-name="${esc(d.name)} — ${esc(t.name)}" data-price="${esc(t.price)}" data-priceraw="${t.priceRaw}" data-category="${disc === 'business' ? 'brand' : (disc === 'ai' ? 'sales' : disc)}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              Add to Cart
+            </button>
+          </div>
+        `).join('');
+      }
+      document.querySelectorAll('.disc-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.disc-tab').forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected','false'); });
+          tab.classList.add('is-active');
+          tab.setAttribute('aria-selected','true');
+          render(tab.dataset.disc);
+        });
+      });
+      render('brand');
+    })();
+
+    /* =========================================
+       VIEW SWITCHER — Shop ⇄ Packaged Solutions
+    ========================================= */
+    (function(){
+      const viewPackages = document.getElementById('view-packages');
+      const viewShop     = document.getElementById('view-shop');
+      const heroTitle    = document.querySelector('.hero__title');
+      const heroDesc     = document.querySelector('.hero__desc');
+      const heroEyebrow  = document.querySelector('.hero__eyebrow');
+      if (!viewPackages || !viewShop) return;
+
+      const COPY = {
+        shop: {
+          eyebrow: 'Individual Products',
+          title: '<span class="line"><span>Single deliverables,</span></span><span class="line"><span><em>by the piece.</em></span></span>',
+          desc:  'Individual deliverables — priced per unit, no minimum. Filter by discipline, add to cart, request a proposal.'
+        },
+        packages: {
+          eyebrow: 'Packaged Solutions',
+          title: '<span class="line"><span>Engagements scoped</span></span><span class="line"><span>to <em>outcomes.</em></span></span>',
+          desc:  'Brand. Business Architecture. Marketing. AI &amp; Automation. Choose a productised package — every engagement scoped around a specific commercial objective.'
+        }
+      };
+
+      function setView(name){
+        const isShop = name === 'shop';
+        viewShop.classList.toggle('is-active', isShop);
+        viewPackages.classList.toggle('is-active', !isShop);
+        document.querySelectorAll('#view-toggle .solshop-toggle__link').forEach(b => {
+          const on = b.dataset.view === name;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        if (heroEyebrow) heroEyebrow.textContent = COPY[name].eyebrow;
+        if (heroTitle) heroTitle.innerHTML = COPY[name].title;
+        if (heroDesc) heroDesc.innerHTML = COPY[name].desc;
+        try { history.replaceState(null, '', '#' + name); } catch(e) {}
+      }
+
+      document.querySelectorAll('#view-toggle .solshop-toggle__link').forEach(btn => {
+        btn.addEventListener('click', () => setView(btn.dataset.view));
+      });
+
+      // Initial view from URL hash (default: shop)
+      const initial = (location.hash === '#packages') ? 'packages' : 'shop';
+      setView(initial);
+    })();
+
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('active'));
@@ -2638,7 +2738,18 @@
       digital:   '#A855F7',
     };
 
+    /* ===== UNIFIED CART — shared with services pages via localStorage 'archetype_cart_v1' ===== */
+    const CART_KEY = 'archetype_cart_v1';
     let cart = [];
+    try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch (e) { cart = []; }
+    function persistCart() { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} }
+    // Cross-tab / cross-page sync
+    window.addEventListener('storage', function(e){
+      if (e.key === CART_KEY) {
+        try { cart = JSON.parse(e.newValue || '[]'); } catch (err) { cart = []; }
+        renderCart();
+      }
+    });
 
     const cartCountEl  = document.getElementById('cart-count');
     const cartItemsEl  = document.getElementById('cart-items');
@@ -2654,6 +2765,26 @@
     document.getElementById('cart-close').addEventListener('click', closeCart);
     cartOverlay.addEventListener('click', closeCart);
 
+    // Adapter — handles items from shop OR services pages (different schemas)
+    function getItemPriceRaw(item) {
+      if (typeof item.priceRaw === 'number') return item.priceRaw;
+      const n = Number(item.price);
+      return isNaN(n) ? 0 : n;
+    }
+    function getItemPriceLabel(item) {
+      if (typeof item.price === 'string') return item.price;
+      const n = getItemPriceRaw(item);
+      return n > 0 ? 'R' + n.toLocaleString('en-ZA') : '—';
+    }
+    function getItemCategory(item) {
+      return item.category || (item.section ? item.section.toLowerCase() : '') || 'service';
+    }
+    function getItemLabel(item) {
+      return item.category
+        ? item.category.charAt(0).toUpperCase() + item.category.slice(1)
+        : (item.section || (item.type === 'package' ? 'Package' : 'Service'));
+    }
+
     function renderCart() {
       // Count badge — sum all quantities
       const count = cart.reduce((s, i) => s + (i.qty || 1), 0);
@@ -2664,30 +2795,33 @@
       cartEmptyEl.classList.toggle('visible', cart.length === 0);
 
       // Total — price × qty per item
-      const rawTotal = cart.reduce((s, item) => s + item.priceRaw * (item.qty || 1), 0);
-      cartTotalEl.textContent = rawTotal > 0 ? `From $${rawTotal.toLocaleString()}` : '—';
+      const rawTotal = cart.reduce((s, item) => s + getItemPriceRaw(item) * (item.qty || 1), 0);
+      cartTotalEl.textContent = rawTotal > 0 ? `From R${rawTotal.toLocaleString('en-ZA')}` : '—';
 
       // Remove old items (keep empty placeholder)
       cartItemsEl.querySelectorAll('.cart-item').forEach(el => el.remove());
 
       cart.forEach((item, idx) => {
-        const colour = CATEGORY_COLOURS[item.category] || '#fff';
+        const cat    = getItemCategory(item);
+        const colour = CATEGORY_COLOURS[cat] || '#00A8FF';
         const qty    = item.qty || 1;
+        const label  = getItemLabel(item);
+        const priceStr = getItemPriceLabel(item);
         const el = document.createElement('div');
         el.className = 'cart-item';
         el.innerHTML = `
           <span class="cart-item__dot" style="background:${colour}"></span>
           <div class="cart-item__info">
-            <div class="cart-item__name">${item.name}</div>
-            <div class="cart-item__cat">${item.category.charAt(0).toUpperCase()+item.category.slice(1)}</div>
-            <div class="cart-item__price" style="color:${colour}">${item.price}${qty > 1 ? ` <span style="opacity:.6">× ${qty}</span>` : ''}</div>
+            <div class="cart-item__name">${item.name || ''}</div>
+            <div class="cart-item__cat">${label}</div>
+            <div class="cart-item__price" style="color:${colour}">${priceStr}${qty > 1 ? ` <span style="opacity:.6">× ${qty}</span>` : ''}</div>
             <div class="cart-item__qty-row">
               <button class="cart-item__qty-btn" data-qtyidx="${idx}" data-qtyaction="minus">−</button>
               <span class="cart-item__qty-num">${qty}</span>
               <button class="cart-item__qty-btn" data-qtyidx="${idx}" data-qtyaction="plus">+</button>
             </div>
           </div>
-          <button class="cart-item__remove" data-idx="${idx}" aria-label="Remove ${item.name}">✕</button>
+          <button class="cart-item__remove" data-idx="${idx}" aria-label="Remove ${item.name || ''}">✕</button>
         `;
         cartItemsEl.appendChild(el);
       });
@@ -2702,6 +2836,7 @@
             cart[i].qty = (cart[i].qty || 1) - 1;
             if (cart[i].qty < 1) { cart.splice(i, 1); }
           }
+          persistCart();
           renderCart();
         });
       });
@@ -2711,6 +2846,7 @@
         btn.addEventListener('click', () => {
           const i = parseInt(btn.dataset.idx);
           cart.splice(i, 1);
+          persistCart();
           renderCart();
         });
       });
@@ -2756,10 +2892,15 @@
       const qtyEl = btn.closest('.va-card')?.querySelector('.va-qty__val');
       const qty   = qtyEl ? (parseInt(qtyEl.textContent) || 1) : 1;
 
-      // If item already in cart, increment quantity
-      const existing = cart.find(i => i.name === name);
+      // Build a unified item that works for both shop's render AND the services-page schema
+      const id = ('shop-' + (category || 'item') + '-' + name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      const section = (category || '').charAt(0).toUpperCase() + (category || '').slice(1);
+
+      // If item already in cart, increment quantity (match by id first, then by legacy name fallback)
+      const existing = cart.find(i => i.id === id) || cart.find(i => i.name === name);
       if (existing) {
         existing.qty = (existing.qty || 1) + qty;
+        persistCart();
         renderCart();
         cartCountEl.classList.add('bump');
         setTimeout(() => cartCountEl.classList.remove('bump'), 400);
@@ -2767,7 +2908,18 @@
         return;
       }
 
-      cart.push({ name, price, priceRaw, category, qty });
+      cart.push({
+        id,
+        name,
+        price: priceRaw,          // numeric, services-page compatible
+        priceRaw,                 // legacy field for shop's render
+        priceStr: price,          // original string e.g. "R75,000"
+        category,                 // shop's own field
+        section,                  // services-page compatible
+        type: 'product',
+        qty
+      });
+      persistCart();
       renderCart();
 
       // Button feedback
@@ -2792,498 +2944,6 @@
     // Init
     renderCart();
 
-    /* =========================================
-       AI CHAT — ORB CANVAS ANIMATION
-    ========================================= */
-    (function() {
-      const canvas  = document.getElementById('ai-orb');
-      const orbWrap = document.getElementById('ai-orb-wrap');
-      if (!canvas || !orbWrap) return;
-      const ctx = canvas.getContext('2d');
-
-      const SIZE = 520;
-      canvas.width = canvas.height = SIZE;
-      const CX = SIZE / 2, CY = SIZE / 2;
-
-      /* ── Mouse / interaction state ── */
-      let mx = 0, my = 0, mouseOver = false, isHovered = false;
-      let targetMX = 0, targetMY = 0; // smoothed
-      orbWrap.addEventListener('mousemove', e => {
-        const r = orbWrap.getBoundingClientRect();
-        targetMX = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
-        targetMY = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
-        mouseOver = true; isHovered = true;
-      });
-      orbWrap.addEventListener('mouseleave', () => {
-        mouseOver = false; isHovered = false; targetMX = 0; targetMY = 0;
-      });
-
-      /* ── Breathing ── */
-      let breathVal = 1, breathDir = 0.0015;
-
-      /* ── Orbital rings ── */
-      const rings = [
-        { radius: 152, tilt: 0.38,  speed: 0.0025, phase: 0,   c: 'rgba(0,168,255,',  w: 1.5, op: 0.55 },
-        { radius: 110, tilt: -0.55, speed: 0.0038, phase: 2.1,  c: 'rgba(107,0,200,',  w: 1.2, op: 0.48 },
-        { radius: 182, tilt: 0.18,  speed: 0.0016, phase: 4.5,  c: 'rgba(233,30,140,', w: 1.0, op: 0.38 },
-        { radius: 130, tilt: 1.1,   speed: 0.0020, phase: 1.3,  c: 'rgba(0,229,212,',  w: 0.8, op: 0.28 },
-      ];
-      const dots = rings.map(r => ({ angle: r.phase, trail: [] }));
-
-      /* ── Floating particles (more, with connection data) ── */
-      const PCOLS = ['rgba(0,168,255,','rgba(107,0,200,','rgba(233,30,140,','rgba(0,229,212,','rgba(255,184,0,'];
-      const parts = Array.from({ length: 36 }, () => ({
-        x: (Math.random() - 0.5) * 340,
-        y: (Math.random() - 0.5) * 340,
-        r: Math.random() * 2.4 + 0.5,
-        vx: (Math.random() - 0.5) * 0.28,
-        vy: (Math.random() - 0.5) * 0.28,
-        c: PCOLS[Math.floor(Math.random() * PCOLS.length)],
-        a: Math.random() * 0.55 + 0.18,
-        twinkle: Math.random() * Math.PI * 2,
-        twinkleSpeed: 0.03 + Math.random() * 0.04,
-      }));
-
-      /* ── Pulse rings (multi-burst) ── */
-      let pulseRings = [];
-      function triggerPulse() {
-        const bursts = [
-          { delay: 0,   c: '0,168,255',  a: 0.9, r: 82 },
-          { delay: 100, c: '107,0,200',  a: 0.7, r: 82 },
-          { delay: 200, c: '233,30,140', a: 0.5, r: 82 },
-        ];
-        bursts.forEach(b => setTimeout(() => pulseRings.push({ r: b.r, a: b.a, c: b.c }), b.delay));
-      }
-
-      /* ── Nebula cloud layers ── */
-      const nebLayers = [
-        { angle: 0,    speed: 0.004,  r: 62, cr: '233,30,140', a: 0.10 },
-        { angle: 2.1,  speed: -0.003, r: 55, cr: '0,168,255',  a: 0.12 },
-        { angle: 4.8,  speed: 0.0025, r: 68, cr: '107,0,200',  a: 0.09 },
-      ];
-
-      let t = 0;
-      let activated = false;
-
-      orbWrap.addEventListener('click', () => { triggerPulse(); activateChat(); });
-
-      /* ── Clip helper ── */
-      function clipCore(r) {
-        ctx.beginPath();
-        ctx.arc(CX, CY, r, 0, Math.PI * 2);
-        ctx.clip();
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, SIZE, SIZE);
-        t++;
-
-        // Smooth mouse lerp
-        mx += (targetMX - mx) * 0.06;
-        my += (targetMY - my) * 0.06;
-
-        // Breathing
-        breathVal += breathDir;
-        if (breathVal > 1.055 || breathVal < 0.945) breathDir *= -1;
-
-        const speedMult = isHovered ? 1.9 : 1;
-        const tiltX = mx * 0.20;
-        const tiltY = my * 0.20;
-
-        const coreR = 86 * breathVal;
-
-        /* ── 1. Multi-burst pulse rings ── */
-        pulseRings = pulseRings.filter(pr => pr.a > 0);
-        pulseRings.forEach(pr => {
-          pr.r += 3.5;
-          pr.a  = Math.max(0, pr.a - 0.016);
-          ctx.beginPath();
-          ctx.arc(CX, CY, pr.r, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(${pr.c},${pr.a * 0.9})`;
-          ctx.lineWidth   = 2;
-          ctx.stroke();
-          // Second thinner ring
-          ctx.beginPath();
-          ctx.arc(CX, CY, pr.r * 1.06, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(${pr.c},${pr.a * 0.3})`;
-          ctx.lineWidth   = 0.8;
-          ctx.stroke();
-        });
-
-        /* ── 2. Outer atmospheric halos ── */
-        [
-          { r: 195, a: 0.06, c: '0,168,255'  },
-          { r: 168, a: 0.08, c: '107,0,200'  },
-          { r: 140, a: 0.10, c: '0,168,255'  },
-          { r: 118, a: isHovered ? 0.26 : 0.16, c: '107,0,200' },
-          { r: 100, a: isHovered ? 0.18 : 0.12, c: '233,30,140' },
-        ].forEach(h => {
-          const g = ctx.createRadialGradient(CX, CY, h.r * 0.3, CX, CY, h.r);
-          g.addColorStop(0, `rgba(${h.c},${h.a})`);
-          g.addColorStop(1, `rgba(${h.c},0)`);
-          ctx.beginPath();
-          ctx.arc(CX, CY, h.r, 0, Math.PI * 2);
-          ctx.fillStyle = g;
-          ctx.fill();
-        });
-
-        /* ── 3. Particle neural connections ── */
-        for (let i = 0; i < parts.length; i++) {
-          for (let j = i + 1; j < parts.length; j++) {
-            const dx = parts[i].x - parts[j].x;
-            const dy = parts[i].y - parts[j].y;
-            const d  = Math.sqrt(dx * dx + dy * dy);
-            if (d < 72) {
-              const alpha = 0.14 * (1 - d / 72);
-              ctx.beginPath();
-              ctx.moveTo(CX + parts[i].x, CY + parts[i].y);
-              ctx.lineTo(CX + parts[j].x, CY + parts[j].y);
-              ctx.strokeStyle = `rgba(0,168,255,${alpha})`;
-              ctx.lineWidth   = 0.6;
-              ctx.stroke();
-            }
-          }
-        }
-
-        /* ── 4. Core sphere ── */
-        // Base deep fill
-        const baseGrad = ctx.createRadialGradient(CX, CY, 0, CX, CY, coreR);
-        baseGrad.addColorStop(0.0, 'rgba(10,6,60,0.98)');
-        baseGrad.addColorStop(0.5, 'rgba(6,2,40,0.95)');
-        baseGrad.addColorStop(1.0, 'rgba(2,0,20,0.90)');
-        ctx.beginPath();
-        ctx.arc(CX, CY, coreR, 0, Math.PI * 2);
-        ctx.fillStyle = baseGrad;
-        ctx.fill();
-
-        // Nebula clouds inside core (clipped)
-        ctx.save();
-        clipCore(coreR - 1);
-        nebLayers.forEach(neb => {
-          neb.angle += neb.speed * speedMult;
-          const nx = CX + Math.cos(neb.angle) * (neb.r * 0.45 + tiltX * 20);
-          const ny = CY + Math.sin(neb.angle) * (neb.r * 0.3  + tiltY * 20);
-          const ng = ctx.createRadialGradient(nx, ny, 0, nx, ny, neb.r);
-          ng.addColorStop(0, `rgba(${neb.cr},${neb.a})`);
-          ng.addColorStop(1, `rgba(${neb.cr},0)`);
-          ctx.beginPath();
-          ctx.arc(nx, ny, neb.r, 0, Math.PI * 2);
-          ctx.fillStyle = ng;
-          ctx.fill();
-        });
-        ctx.restore();
-
-        // Core rim light (chromatic fringe)
-        ctx.save();
-        clipCore(coreR + 1);
-        const rimGrad = ctx.createRadialGradient(CX, CY, coreR * 0.7, CX, CY, coreR + 1);
-        rimGrad.addColorStop(0,   'rgba(0,168,255,0)');
-        rimGrad.addColorStop(0.7, 'rgba(0,168,255,0)');
-        rimGrad.addColorStop(0.88,'rgba(0,168,255,0.22)');
-        rimGrad.addColorStop(0.96,'rgba(107,0,200,0.35)');
-        rimGrad.addColorStop(1.0, 'rgba(233,30,140,0.18)');
-        ctx.beginPath();
-        ctx.arc(CX, CY, coreR + 1, 0, Math.PI * 2);
-        ctx.fillStyle = rimGrad;
-        ctx.fill();
-        ctx.restore();
-
-        // Primary light sweep
-        const lightX = CX - 30 + tiltX * 34;
-        const lightY = CY - 30 + tiltY * 34;
-        const lightGrad = ctx.createRadialGradient(lightX, lightY, 4, CX, CY, coreR);
-        lightGrad.addColorStop(0.0, 'rgba(80,160,255,0.70)');
-        lightGrad.addColorStop(0.3, 'rgba(20,100,220,0.40)');
-        lightGrad.addColorStop(0.7, 'rgba(0,50,120,0.10)');
-        lightGrad.addColorStop(1.0, 'rgba(0,0,0,0)');
-        ctx.save(); clipCore(coreR);
-        ctx.beginPath(); ctx.arc(CX, CY, coreR, 0, Math.PI * 2);
-        ctx.fillStyle = lightGrad; ctx.fill();
-        ctx.restore();
-
-        // Specular highlight
-        const sX = CX - 32 + tiltX * 28;
-        const sY = CY - 32 + tiltY * 28;
-        const specGrad = ctx.createRadialGradient(sX, sY, 1, sX + 8, sY + 8, 40);
-        specGrad.addColorStop(0,   'rgba(255,255,255,0.62)');
-        specGrad.addColorStop(0.35,'rgba(255,255,255,0.12)');
-        specGrad.addColorStop(1,   'rgba(255,255,255,0)');
-        ctx.save(); clipCore(coreR);
-        ctx.beginPath(); ctx.arc(CX, CY, coreR, 0, Math.PI * 2);
-        ctx.fillStyle = specGrad; ctx.fill();
-        ctx.restore();
-
-        /* ── 5. Orbital rings + trailing dots ── */
-        rings.forEach((ring, ri) => {
-          const tA  = ring.tilt + tiltX * 0.28;
-          const tAY = tiltY * 0.18;
-          const cos2 = Math.cos(0.88 + tAY);
-
-          ctx.save();
-          ctx.translate(CX, CY);
-          ctx.rotate(tA);
-          ctx.scale(1, cos2);
-          // Glowing ring stroke
-          ctx.beginPath();
-          ctx.arc(0, 0, ring.radius, 0, Math.PI * 2);
-          ctx.strokeStyle = ring.c + ring.op + ')';
-          ctx.lineWidth   = ring.w;
-          ctx.shadowBlur  = isHovered ? 12 : 4;
-          ctx.shadowColor = ring.c + '0.6)';
-          ctx.stroke();
-          ctx.shadowBlur  = 0;
-          ctx.restore();
-
-          // Orbiting dot with trail
-          const dot = dots[ri];
-          dot.angle += ring.speed * speedMult;
-          const dx  = Math.cos(dot.angle) * ring.radius;
-          const dy  = Math.sin(dot.angle) * ring.radius * cos2;
-          const px  = CX + dx * Math.cos(tA) - dy * Math.sin(tA);
-          const py  = CY + dx * Math.sin(tA) + dy * Math.cos(tA);
-
-          dot.trail.push({ x: px, y: py });
-          if (dot.trail.length > 18) dot.trail.shift();
-          dot.trail.forEach((pt, i) => {
-            const frac = i / dot.trail.length;
-            ctx.beginPath();
-            ctx.arc(pt.x, pt.y, 3.5 * frac, 0, Math.PI * 2);
-            ctx.fillStyle = ring.c + (frac * 0.55) + ')';
-            ctx.fill();
-          });
-
-          ctx.beginPath();
-          ctx.arc(px, py, 5, 0, Math.PI * 2);
-          ctx.fillStyle   = ring.c + '1)';
-          ctx.shadowBlur  = 18;
-          ctx.shadowColor = ring.c + '1)';
-          ctx.fill();
-          ctx.shadowBlur  = 0;
-        });
-
-        /* ── 6. Floating particles (twinkle + gentle drift to cursor) ── */
-        parts.forEach(p => {
-          if (isHovered) {
-            p.vx += (mx * 0.3 - p.x) * 0.0004;
-            p.vy += (my * 0.3 - p.y) * 0.0004;
-          }
-          p.x += p.vx; p.y += p.vy;
-          // Soft boundary
-          const dist = Math.sqrt(p.x * p.x + p.y * p.y);
-          if (dist > 215) { p.vx -= p.x * 0.003; p.vy -= p.y * 0.003; }
-          p.vx *= 0.998; p.vy *= 0.998; // damping
-
-          p.twinkle += p.twinkleSpeed;
-          const twink = 0.65 + 0.35 * Math.sin(p.twinkle);
-          const fade  = Math.max(0, 1 - dist / 200) * 0.9;
-          const alpha = p.a * twink * fade;
-
-          ctx.beginPath();
-          ctx.arc(CX + p.x, CY + p.y, p.r * twink, 0, Math.PI * 2);
-          ctx.fillStyle = p.c + alpha + ')';
-          ctx.fill();
-        });
-
-        /* ── 7. Animated energy equator ring ── */
-        const eqPhase = t * 0.018;
-        ctx.save();
-        ctx.translate(CX, CY);
-        ctx.rotate(tiltX * 0.5);
-        ctx.scale(1, 0.22 + Math.abs(tiltY) * 0.12);
-        ctx.beginPath();
-        ctx.arc(0, 0, coreR + 3, 0, Math.PI * 2);
-        const eqAlpha = (0.25 + 0.15 * Math.sin(eqPhase)) * breathVal;
-        ctx.strokeStyle = `rgba(0,229,212,${eqAlpha})`;
-        ctx.lineWidth   = 1.8;
-        ctx.shadowBlur  = 10;
-        ctx.shadowColor = 'rgba(0,229,212,0.6)';
-        ctx.stroke();
-        ctx.shadowBlur  = 0;
-        ctx.restore();
-
-        /* ── 8. Pulsing outer energy shell ── */
-        const shellPulse = 0.5 + 0.5 * Math.sin(t * 0.032);
-        ctx.beginPath();
-        ctx.arc(CX, CY, coreR + 7 + shellPulse * 5, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(0,168,255,${0.12 * shellPulse})`;
-        ctx.lineWidth   = 1.5;
-        ctx.stroke();
-
-        requestAnimationFrame(draw);
-      }
-
-      draw();
-    })();
-
-    /* =========================================
-       AI CHAT — KNOWLEDGE BASE & ENGINE
-    ========================================= */
-    (function() {
-      const chatSection  = document.getElementById('faq');
-      const messagesEl   = document.getElementById('ai-messages');
-      const inputEl      = document.getElementById('ai-input');
-      const sendBtn      = document.getElementById('ai-send');
-      if (!chatSection || !messagesEl || !inputEl || !sendBtn) return;
-
-      let isActivated = false;
-
-      // --- Knowledge base ---
-      const KB = [
-        // Packages / services overview
-        { keys: ['package', 'packages', 'services', 'offer', 'what do you do', 'what you do', 'overview'],
-          reply: `We offer three service categories — **Brand**, **Marketing**, and **Sales**.\n\n- **Brand** packages cover brand identity, positioning, and visual language — from starter foundations to full rebrands.\n- **Marketing** packages deliver content strategy, growth marketing retainers, and full-channel performance campaigns.\n- **Sales** packages produce sales collateral, enablement systems, and lead generation infrastructure.\n\nYou can browse all nine packages above, or filter by category. Want to know more about any specific one?` },
-
-        // Brand packages
-        { keys: ['brand foundation', 'brand starter', 'brand identity', 'brand package', 'identity package'],
-          reply: `Our **Brand Foundation** package starts from $4,200 and delivers your core visual identity — logo system, colour palette, typography, and a brand guidelines document. It's the starting point for any new brand or rebrand.\n\nFor more depth, our **Brand Positioning & Identity** package ($7,500+) adds messaging strategy, tone of voice, and competitor positioning. Our full **Brand System** package ($12,500+) covers everything end-to-end.` },
-
-        // Marketing packages
-        { keys: ['marketing', 'marketing package', 'content marketing', 'growth marketing', 'performance marketing', 'retainer'],
-          reply: `Our three **Marketing** packages are:\n\n- **Content Marketing Engine** — $2,800/mo. Monthly content production including blog posts, social content, email campaigns, and analytics.\n- **Growth Marketing Retainer** — $4,500/mo. Strategy, paid media management, SEO, and conversion optimisation. 3-month minimum.\n- **Performance Scale** — $7,500/mo. Full-channel performance marketing across Meta, Google, and LinkedIn with full content production and weekly reviews. 6-month minimum.` },
-
-        // Sales packages
-        { keys: ['sales', 'sales package', 'sales collateral', 'pitch deck', 'sales enablement', 'lead generation'],
-          reply: `Our three **Sales** packages:\n\n- **Sales Collateral Pack** — from $3,800. Pitch deck, capability statement, proposal template, and email signatures. 2–3 week delivery.\n- **Sales Enablement System** — from $6,500. Our most-requested sales package — messaging framework, pitch deck, objection playbook, case study templates, and outreach copy. 4–5 weeks.\n- **Lead Generation Engine** — from $5,500. Lead magnet, landing page, outbound email sequence, LinkedIn playbook, and CRM setup. 4-week delivery.` },
-
-        // Value add / à la carte
-        { keys: ['value add', 'add-on', 'add on', 'individual', 'single', 'unit', 'à la carte', 'a la carte', 'extra', 'standalone'],
-          reply: `Our **Value Add** catalogue lets you order individual assets without committing to a full package — or bolt items onto any package.\n\nWe offer 24+ items across five categories:\n- **Design** — social posts, business cards, banner ad sets, infographics, logo lockups, presentation templates\n- **Content** — caption packs, ad copy, blog posts, email newsletters, landing page copy\n- **Video** — motion graphics, social video posts, brand story videos, product demos\n- **Visual** — brand photography (art direction), 3D product renders, icon libraries\n- **Digital** — landing page design, email template design, Google My Business setup\n\nEvery item is priced per unit with no minimum order. You can select quantities and add directly to your cart above.` },
-
-        // Pricing
-        { keys: ['price', 'pricing', 'cost', 'how much', 'rates', 'affordable', 'budget'],
-          reply: `Pricing varies by package:\n\n**Brand** — from $4,200 (Foundation) to $12,500+ (full Brand System)\n**Marketing** — from $2,800/mo (Content) to $7,500/mo (Performance Scale)\n**Sales** — from $3,800 (Collateral Pack) to $6,500 (Enablement System)\n**Value Add** — from $150 per unit (social post) to $1,800+ (brand photography, brand story video)\n\nAll prices shown are starting from figures — final scope is confirmed during onboarding. Want a recommendation based on your goals?` },
-
-        // Timeline / turnaround
-        { keys: ['timeline', 'turnaround', 'how long', 'delivery', 'when', 'time', 'deadline'],
-          reply: `Delivery timelines by package:\n\n- **Brand Foundation** — 3–4 weeks\n- **Brand Positioning & Identity** — 5–6 weeks\n- **Full Brand System** — 8–10 weeks\n- **Sales Collateral Pack** — 2–3 weeks\n- **Sales Enablement System** — 4–5 weeks\n- **Lead Generation Engine** — 4 weeks\n- **Marketing retainers** — ongoing, monthly cadence\n- **Value Add items** — typically 3–7 business days per item\n\nRush delivery is available on select items — ask us during onboarding.` },
-
-        // Process / how it works
-        { keys: ['process', 'how does it work', 'how do you work', 'what happens', 'onboarding', 'start', 'getting started', 'get started', 'next step'],
-          reply: `Here's how we typically work:\n\n1. **Add to Cart** — select your packages or Value Add items and request a proposal.\n2. **Discovery call** — we scope your brief, confirm deliverables, and align on goals (usually 30–45 min).\n3. **Onboarding** — you complete a brand questionnaire and share any existing assets.\n4. **Production** — we execute in sprints with milestone check-ins.\n5. **Handover** — all files delivered in your formats with a handover document.\n\nRetainer clients get a monthly strategy session, reporting, and a dedicated Slack channel.` },
-
-        // Payment / terms
-        { keys: ['payment', 'deposit', 'invoice', 'pay', 'billing', 'terms'],
-          reply: `We typically work on a **50% deposit / 50% on completion** basis for fixed-scope projects. Monthly retainers are invoiced at the start of each month.\n\nWe accept bank transfer and major cards. Payment plans can be discussed for larger scopes. All pricing is in AUD unless otherwise agreed.` },
-
-        // Revisions / changes
-        { keys: ['revision', 'revisions', 'changes', 'edits', 'amend', 'feedback'],
-          reply: `All fixed-scope packages include **two rounds of revisions** at each milestone. Additional revision rounds can be added at an agreed rate.\n\nWe work iteratively — you'll see work-in-progress at key stages so nothing should feel like a surprise at delivery. Retainer clients have ongoing amendment rights within monthly scope.` },
-
-        // Who is Archetype Studio
-        { keys: ['archetype', 'who are you', 'about you', 'about archetype', 'your agency', 'studio', 'team'],
-          reply: `**Archetype Studio** is a strategic brand and marketing agency. We work with founders, growth-stage companies, and established businesses who need commercially sharp creative — brand, marketing, and sales assets that actually move the needle.\n\nWe're not generalist — we're structured around the three things every commercial brand needs: a strong identity, consistent marketing, and a sales infrastructure that converts.` },
-
-        // Design / visual
-        { keys: ['design', 'designer', 'visual', 'logo', 'colour', 'typography', 'fonts', 'aesthetic'],
-          reply: `Design is at the core of everything we produce. Whether it's a logo system, brand guideline document, pitch deck, or individual social asset — every output is produced to a premium commercial standard.\n\nFor standalone design assets, browse our **Value Add → Design** catalogue. For full visual identity work, the **Brand Foundation** or **Brand Positioning & Identity** packages are the right starting point.` },
-
-        // Contact
-        { keys: ['contact', 'reach you', 'talk', 'call', 'email', 'speak', 'enquire', 'inquiry', 'enquiry'],
-          reply: `The fastest way to reach us is via the **"Start a Project"** button at the top of the page, or add items to your cart and request a proposal.\n\nYou can also email us directly at **info@archetypestudio.com.au**. We typically respond within one business day.` },
-
-        // Cart / ordering
-        { keys: ['cart', 'order', 'add to cart', 'checkout', 'purchase', 'buy', 'how to order'],
-          reply: `Ordering is simple:\n\n1. Browse packages or Value Add items above.\n2. Click **"Add to Cart"** — your cart appears in the top-right corner.\n3. When ready, open your cart and select **"Request Proposal"** to submit your selection.\n4. We'll be in touch within one business day to confirm scope and next steps.\n\nFor Value Add items you can adjust quantity before adding — the stepper sits just above the Add to Cart button.` },
-
-        // Default / fallback
-        { keys: [],
-          reply: `Good question. For anything we haven't covered here, the best next step is to reach out directly — either via the cart (add what looks right and request a proposal), or email us at **info@archetypestudio.com.au**.\n\nWe're happy to help scope the right solution for your brief.` },
-      ];
-
-      function getReply(text) {
-        const lower = text.toLowerCase();
-        for (const entry of KB) {
-          if (entry.keys.length === 0) continue;
-          if (entry.keys.some(k => lower.includes(k))) return entry.reply;
-        }
-        return KB[KB.length - 1].reply;
-      }
-
-      // --- Message rendering ---
-      function formatMsg(text) {
-        // Bold via **text**
-        return text
-          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-          .replace(/\n/g, '<br/>');
-      }
-
-      function appendMsg(role, text) {
-        const div = document.createElement('div');
-        div.className = `ai-msg ai-msg--${role}`;
-        div.innerHTML = formatMsg(text);
-        messagesEl.appendChild(div);
-        // Animate in
-        requestAnimationFrame(() => div.classList.add('msg-in'));
-        messagesEl.scrollTo({ top: messagesEl.scrollHeight, behavior: 'smooth' });
-        return div;
-      }
-
-      // Typing indicator
-      function showTyping() {
-        const div = document.createElement('div');
-        div.className = 'ai-msg ai-msg--ai ai-typing';
-        div.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span>';
-        messagesEl.appendChild(div);
-        requestAnimationFrame(() => div.classList.add('msg-in'));
-        messagesEl.scrollTo({ top: messagesEl.scrollHeight, behavior: 'smooth' });
-        return div;
-      }
-
-      // --- Activation ---
-      function activateChat(firstMsg) {
-        if (!isActivated) {
-          isActivated = true;
-          chatSection.classList.add('activated');
-          // Small greeting after a beat
-          if (!firstMsg) {
-            setTimeout(() => {
-              appendMsg('ai', `Hi 👋 I'm **Archetype AI** — I can answer questions about our services, packages, pricing, and how to get started. What would you like to know?`);
-            }, 480);
-          }
-        }
-      }
-
-      // --- Send flow ---
-      function sendMessage() {
-        const text = inputEl.value.trim();
-        if (!text) return;
-        inputEl.value = '';
-
-        // Activate on first message
-        if (!isActivated) {
-          activateChat(true);
-          setTimeout(() => {
-            appendMsg('user', text);
-            respond(text);
-          }, 550);
-          return;
-        }
-
-        appendMsg('user', text);
-        respond(text);
-      }
-
-      function respond(text) {
-        const typing = showTyping();
-        const delay  = 900 + Math.random() * 600;
-        setTimeout(() => {
-          typing.remove();
-          appendMsg('ai', getReply(text));
-        }, delay);
-      }
-
-      // --- Input events ---
-      sendBtn.addEventListener('click', sendMessage);
-      inputEl.addEventListener('keydown', e => {
-        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-      });
-
-      // Focus input activates chat
-      inputEl.addEventListener('focus', () => {
-        if (!isActivated) activateChat();
-      }, { once: true });
-
-    })();
   </script>
 
   <!-- ===== THANK-YOU POPUP ===== -->
@@ -3414,72 +3074,6 @@
       }, true);
     })();
 
-    /* ===== "Ask anything" chat send — auto-deliver via Formsubmit + popup =====
-       Posts directly to lip_niemann@icloud.com via formsubmit.co (no backend).
-       NOTE: the FIRST submission triggers a one-time confirmation email to the
-       inbox — click the activate link once and all subsequent messages flow
-       through silently. Falls back to mailto if the network request fails.
-    ============================================================================ */
-    (function(){
-      const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/lip_niemann@icloud.com';
-
-      const inputEl = document.getElementById('ai-input');
-      const sendBtn = document.getElementById('ai-send');
-      if (!inputEl || !sendBtn) return;
-      // Detach the original chat listeners by cloning the nodes.
-      const newSend = sendBtn.cloneNode(true);
-      sendBtn.parentNode.replaceChild(newSend, sendBtn);
-      const newInput = inputEl.cloneNode(true);
-      inputEl.parentNode.replaceChild(newInput, inputEl);
-
-      function safeAppend(role, text) {
-        try { if (typeof appendMsg === 'function') appendMsg(role, text); } catch(_) {}
-      }
-
-      async function fire() {
-        const text = newInput.value.trim();
-        if (!text) return;
-        newInput.value = '';
-        newSend.disabled = true;
-
-        safeAppend('user', text);
-        safeAppend('ai', "Sending your message to the team…");
-
-        try {
-          const res = await fetch(FORMSUBMIT_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({
-              _subject: 'New message from Archetype Studio website',
-              _template: 'box',
-              _captcha: 'false',
-              source: 'Ask Anything chat — shop.html',
-              page: location.href,
-              sent_at: new Date().toISOString(),
-              message: text
-            })
-          });
-          const ok = res.ok;
-          if (!ok) throw new Error('Formsubmit returned ' + res.status);
-          safeAppend('ai', "Got it — your message is on its way. We'll be in touch shortly.");
-          window.showThanks("Your message has been sent. We'll be in touch shortly.");
-        } catch (err) {
-          // Fallback: open user's mail client with the message pre-filled.
-          safeAppend('ai', "We couldn't auto-send right now — opening your email instead.");
-          const sub = encodeURIComponent('Question from Archetype Studio website');
-          const body = encodeURIComponent("Hi Archetype Studio,\n\n" + text + "\n\nThanks");
-          window.location.href = `mailto:lip_niemann@icloud.com?subject=${sub}&body=${body}`;
-          window.showThanks("We've drafted an email with your message — just hit send.");
-        } finally {
-          newSend.disabled = false;
-        }
-      }
-
-      newSend.addEventListener('click', fire);
-      newInput.addEventListener('keydown', function(e){
-        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); fire(); }
-      });
-    })();
   </script>
 
 </body>

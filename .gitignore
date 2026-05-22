@@ -31,3 +31,11 @@ build/
 .env
 .env.*
 !.env.example
+
+# Large client video files — exceed GitHub's 100MB limit, use cloud storage
+assets/clients/LIVWater/Videos/
+assets/clients/LIVWater/Videos /
+assets/clients/LIVWater/*.mov
+assets/clients/LIVWater/*.avi
+# Grounza brand video (4.7MB is fine but exclude the pattern if others are added)
+# Website background videos in assets/videos/ are small (<25MB) and ARE tracked

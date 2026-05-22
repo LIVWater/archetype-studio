@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brand Development — Archetype Studio</title>
+<meta name="description" content="Brand development with commercial intent. Positioning, identity, messaging, and governance — engineered to turn vision into market reality." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS + RESET
+   ============================================================ */
+:root{
+  --bg-deep:#070A17;--bg-mid:#0C1025;--bg-card:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.07);--electric:#00A8FF;--magenta:#E91E8C;
+  --cyan:#00E5D4;--violet:#6B00C8;--gold:#FFB800;
+  --text-primary:#F0F2FF;--text-secondary:rgba(240,242,255,0.58);--text-muted:rgba(240,242,255,0.3);
+  --font-d:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-ui:'Space Grotesk',sans-serif;
+  --font-b:'Montserrat',sans-serif;
+  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+  --accent:var(--electric);--accent-2:var(--cyan);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-b);overflow-x:hidden;line-height:1.6;}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+
+/* @property registration for animated conic gradient */
+@property --puzzle-angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+@property --orb-h{syntax:'<angle>';initial-value:0deg;inherits:false;}
+
+@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scrollPulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(40px,-30px) scale(1.08);}}
+@keyframes puzzleRotate{to{--puzzle-angle:360deg;}}
+@keyframes pinPulse{0%,100%{box-shadow:0 0 8px var(--pc,var(--electric)),0 0 16px color-mix(in srgb,var(--pc,var(--electric)) 50%,transparent);}50%{box-shadow:0 0 14px var(--pc,var(--electric)),0 0 28px color-mix(in srgb,var(--pc,var(--electric)) 70%,transparent),0 0 44px color-mix(in srgb,var(--pc,var(--electric)) 30%,transparent);}}
+@keyframes ringSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes ringSpinReverse{from{transform:rotate(0deg);}to{transform:rotate(-360deg);}}
+@keyframes float1{0%,100%{transform:translate(0,0);}50%{transform:translate(20px,-30px);}}
+@keyframes float2{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,20px);}}
+@keyframes float3{0%,100%{transform:translate(0,0);}50%{transform:translate(15px,25px);}}
+@keyframes auroraShift{0%,100%{transform:translate(0,0) scale(1);opacity:0.55;}33%{transform:translate(-3%,2%) scale(1.06);opacity:0.7;}66%{transform:translate(2%,-2%) scale(0.97);opacity:0.6;}}
+@keyframes shimmer{0%{background-position:-200% 50%;}100%{background-position:200% 50%;}}
+
+/* ============================================================
+   NAV (shared system)
+   ============================================================ */
+.nav{position:fixed;top:0;left:0;right:0;height:92px;z-index:1000;display:flex;align-items:center;padding:0 56px;background:linear-gradient(135deg,rgba(3,4,15,0.45) 0%,rgba(8,10,30,0.38) 55%,rgba(80,0,155,0.05) 100%);backdrop-filter:blur(14px) saturate(130%);-webkit-backdrop-filter:blur(14px) saturate(130%);border-bottom:1px solid rgba(255,255,255,0.04);box-shadow:0 1px 0 rgba(255,255,255,0.03) inset,0 4px 18px rgba(0,0,0,0.18);transition:height 1.8s var(--ease-out-expo),padding 1.8s var(--ease-out-expo),background 1.8s ease,backdrop-filter 1.8s ease,box-shadow 1.8s ease,border-color 1.8s ease;}
+.nav.scrolled{height:56px;padding:0 32px;background:linear-gradient(135deg,rgba(4,5,18,0.96) 0%,rgba(11,14,38,0.95) 45%,rgba(107,0,200,0.32) 100%);backdrop-filter:blur(36px) saturate(200%);-webkit-backdrop-filter:blur(36px) saturate(200%);border-bottom:1px solid rgba(0,168,255,0.22);box-shadow:0 1px 0 rgba(0,168,255,0.20) inset,0 18px 56px rgba(0,0,0,0.6),0 0 0 1px rgba(0,168,255,0.06);}
+.nav.scrolled .nav__mega{top:56px;}
+.nav__logo{display:flex;align-items:center;gap:14px;flex-shrink:0;text-decoration:none;transition:gap 1.8s var(--ease-out-expo);}
+.nav.scrolled .nav__logo{gap:0;}
+.nav__mark{width:42px;height:auto;transition:width 1.8s var(--ease-out-expo),filter 1.8s ease;filter:drop-shadow(0 0 0 transparent);}
+.nav.scrolled .nav__mark{width:26px;filter:drop-shadow(0 0 10px rgba(0,168,255,0.45));}
+.nav__wordmark{font-family:var(--font-d);font-size:16px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#fff;white-space:nowrap;overflow:hidden;max-width:240px;opacity:1;transform:translateX(0);transition:max-width 1.8s var(--ease-out-expo),opacity 1.3s ease,transform 1.8s var(--ease-out-expo),letter-spacing 1.8s ease,font-size 1.8s ease,margin 1.8s var(--ease-out-expo);}
+.nav.scrolled .nav__wordmark{max-width:0;opacity:0;transform:translateX(-14px);letter-spacing:0;margin-left:-14px;}
+.nav__links{display:flex;align-items:center;align-self:stretch;gap:44px;margin-left:auto;list-style:none;transition:gap 1.8s var(--ease-out-expo);}
+.nav.scrolled .nav__links{gap:32px;}
+.nav__links a{font-family:var(--font-ui);font-size:13px;font-weight:500;letter-spacing:0.10em;text-transform:uppercase;color:rgba(240,242,255,0.72);text-decoration:none;transition:color 1.8s ease,font-size 1.8s var(--ease-out-expo),letter-spacing 1.8s ease;position:relative;}
+.nav.scrolled .nav__links a{font-size:11px;letter-spacing:0.08em;color:rgba(240,242,255,0.88);}
+.nav__links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--electric);transition:width 0.3s var(--ease-out-expo);}
+.nav__links a:hover{color:#fff;}.nav__links a:hover::after{width:100%;}
+.nav__links a.active{color:#fff;}.nav__links a.active::after{width:100%;background:var(--magenta);}
+.nav__item--has-dropdown{position:static;align-self:stretch;display:flex;align-items:center;}
+.nav__caret{display:inline-block;margin-left:6px;font-size:9px;opacity:0.6;transition:transform 0.4s var(--ease-out-expo),opacity 0.3s ease;}
+.nav__item--has-dropdown.is-mega-open .nav__caret{transform:rotate(180deg);opacity:1;}
+.nav__mega{position:fixed;top:92px;left:50%;transform:translateX(-50%) translateY(-12px);width:100vw;height:40vh;min-height:300px;background:linear-gradient(160deg,rgb(4,5,18) 0%,rgb(8,11,30) 55%,rgb(20,8,52) 100%);border-top:1px solid rgba(0,168,255,0.08);border-bottom:1px solid rgba(0,168,255,0.18);box-shadow:0 44px 100px rgba(0,0,0,0.75),0 0 0 1px rgba(0,168,255,0.05),inset 0 1px 0 rgba(255,255,255,0.03);opacity:0;pointer-events:none;transition:opacity 0.28s ease,transform 0.65s var(--ease-out-expo);z-index:998;overflow:hidden;display:flex;align-items:center;}
+.nav__mega::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(0,168,255,0.55) 30%,rgba(139,0,255,0.55) 65%,transparent 100%);pointer-events:none;}
+.nav__item--has-dropdown.is-mega-open .nav__mega{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+.nav__mega-inner{width:100%;height:100%;max-width:1400px;margin:0 auto;padding:0 56px;display:flex;flex-direction:column;justify-content:center;gap:22px;}
+.nav__mega-label{font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:rgba(0,168,255,0.6);display:flex;align-items:center;gap:14px;}
+.nav__mega-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,168,255,0.3),transparent);}
+.nav__mega-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.mega-card{position:relative;display:flex;flex-direction:column;gap:10px;padding:24px 24px 20px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02);text-decoration:none;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(18px);transition:opacity 0.5s ease,transform 0.5s var(--ease-out-expo),border-color 0.4s ease,background 0.4s ease,box-shadow 0.4s ease;}
+.nav__item--has-dropdown.is-mega-open .mega-card{opacity:1;transform:translateY(0);}
+.nav__item--has-dropdown.is-mega-open .mega-card:nth-child(1){transition-delay:0.08s;}
+.nav__item--has-dropdown.is-mega-open .mega-card:nth-child(2){transition-delay:0.15s;}
+.nav__item--has-dropdown.is-mega-open .mega-card:nth-child(3){transition-delay:0.22s;}
+.nav__item--has-dropdown.is-mega-open .mega-card:nth-child(4){transition-delay:0.29s;}
+.mega-card::before{content:'';position:absolute;inset:0;border-radius:12px;background:radial-gradient(ellipse 90% 70% at 10% 0%,color-mix(in srgb,var(--mc,#00A8FF) 22%,transparent),transparent 70%);opacity:0;transition:opacity 0.4s ease;pointer-events:none;}
+.mega-card::after{content:'';position:absolute;inset:-1px;border-radius:13px;background:linear-gradient(135deg,var(--mc,#00A8FF),color-mix(in srgb,var(--mc,#00A8FF) 35%,transparent) 55%,transparent 85%);-webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:0;transition:opacity 0.4s ease;pointer-events:none;}
+.mega-card--brand{--mc:#00A8FF;}.mega-card--business{--mc:#FF0080;}.mega-card--marketing{--mc:#00E5D4;}.mega-card--ai{--mc:#8B5CF6;}
+.mega-card--solutions{--mc:#00A8FF;}.mega-card--individual{--mc:#FFB800;}
+.mega-card:hover{background:rgba(255,255,255,0.045);border-color:color-mix(in srgb,var(--mc,#00A8FF) 28%,rgba(255,255,255,0.08));transform:translateY(-5px)!important;box-shadow:0 20px 44px rgba(0,0,0,0.45),0 0 44px color-mix(in srgb,var(--mc,#00A8FF) 14%,transparent);}
+.mega-card:hover::before{opacity:1;}.mega-card:hover::after{opacity:0.75;}
+.mega-card__num{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.18em;color:var(--mc,#00A8FF);opacity:0.65;transition:opacity 0.3s ease;}
+.mega-card:hover .mega-card__num{opacity:1;}
+.mega-card__title{font-family:var(--font-d);font-size:15px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.01em;margin:0;}
+.mega-card__desc{font-family:var(--font-b);font-size:12px;line-height:1.6;color:rgba(200,208,255,0.55);flex:1;margin:0;}
+.mega-card__arrow{font-size:16px;color:var(--mc,#00A8FF);opacity:0;transform:translateX(-8px);transition:opacity 0.3s ease,transform 0.35s var(--ease-out-expo);align-self:flex-start;margin-top:auto;}
+.mega-card:hover .mega-card__arrow{opacity:1;transform:translateX(0);}
+.mega-footer-link{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(240,242,255,0.38);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.3s ease,gap 0.35s var(--ease-out-expo);width:fit-content;}
+.mega-footer-link:hover{color:rgba(0,168,255,0.9);gap:16px;}
+.nav__mega-backdrop{position:fixed;inset:0;z-index:997;background:rgba(3,4,15,0.55);opacity:0;pointer-events:none;transition:opacity 0.35s ease;}
+.nav__mega-backdrop.is-active{opacity:1;pointer-events:auto;}
+.nav__dropdown{display:none;}
+.nav__mega--small{height:auto !important;min-height:0 !important;padding:32px 0;}
+.nav__mega-grid--two{grid-template-columns:repeat(2,1fr) !important;max-width:880px;margin:0 auto;}
+.nav__cta{--bc1:var(--electric);--bc2:var(--cyan);--bc3:#8B00FF;margin-left:44px;padding:13px 28px;border-radius:100px;border:1px solid color-mix(in srgb,var(--bc2) 28%,rgba(255,255,255,0.08));background:linear-gradient(180deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 48%,rgba(0,0,0,0.18) 100%),linear-gradient(135deg,var(--bc1) 0%,var(--bc2) 45%,var(--bc3) 100%);background-size:100% 100%,220% 220%;background-position:center,0% 50%;font-family:var(--font-ui);font-size:13px;font-weight:600;letter-spacing:0.10em;text-transform:uppercase;color:#fff;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),inset 0 -1px 0 rgba(0,0,0,0.18),0 4px 14px rgba(0,0,0,0.28),0 0 16px color-mix(in srgb,var(--bc1) 18%,transparent);transition:background-position 0.85s var(--ease-out-expo),transform 0.55s var(--ease-out-expo),box-shadow 0.55s ease,border-color 0.55s ease,padding 1.8s var(--ease-out-expo),font-size 1.8s var(--ease-out-expo),margin 1.8s var(--ease-out-expo);}
+.nav.scrolled .nav__cta{padding:7px 18px;font-size:11px;margin-left:32px;letter-spacing:0.08em;}
+.nav__cta:hover{background-position:center,100% 50%;transform:translateY(-2px) scale(1.025);border-color:color-mix(in srgb,var(--bc2) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.30),inset 0 -1px 0 rgba(0,0,0,0.22),0 10px 28px rgba(0,0,0,0.4),0 0 26px color-mix(in srgb,var(--bc1) 48%,transparent),0 0 60px color-mix(in srgb,var(--bc3) 32%,transparent);}
+.nav__toggle{display:none;background:transparent;border:none;cursor:pointer;width:36px;height:36px;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0;margin-left:16px;}
+.nav__toggle span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s;}
+.nav.is-open .nav__toggle span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav.is-open .nav__toggle span:nth-child(2){opacity:0;}
+.nav.is-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+/* ===== UNIVERSAL NAV CART BUTTON ===== */
+.nav__cart{position:relative;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);color:#fff;cursor:pointer;margin-left:14px;transition:border-color 0.3s ease,color 0.3s ease,background 0.3s ease,width 1.8s var(--ease-out-expo),height 1.8s var(--ease-out-expo),margin 1.8s var(--ease-out-expo);}
+.nav__cart:hover{border-color:rgba(0,168,255,0.55);color:#00A8FF;background:rgba(0,168,255,0.08);}
+.nav__cart svg{width:18px;height:18px;transition:width 1.8s var(--ease-out-expo),height 1.8s var(--ease-out-expo);}
+.nav.scrolled .nav__cart{width:36px;height:36px;margin-left:10px;}
+.nav.scrolled .nav__cart svg{width:16px;height:16px;}
+.nav__cart .cart-fab__count{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:#E91E8C;color:#fff;font-family:var(--font-ui);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(233,30,140,0.55);pointer-events:none;}
+.nav__cart .cart-fab__count.is-empty{display:none;}
+.nav__cart.is-pulse{animation:cartPulse 0.6s var(--ease-out-expo);}
+@media(max-width:960px){.nav{padding:0 24px;}}
+@media(max-width:768px){
+  .nav__toggle{display:flex!important;}
+  .nav__cart{margin-left:auto;}
+  .nav__links{display:flex!important;position:fixed;top:68px;left:0;right:0;flex-direction:column;gap:0;padding:16px 20px;margin:0;background:linear-gradient(180deg,rgb(7,10,23),rgb(12,16,37));min-height:calc(100vh - 68px);overflow-y:auto;border-bottom:1px solid rgba(255,255,255,0.06);transform:translateY(-12px);opacity:0;pointer-events:none;transition:transform 0.32s var(--ease-out-expo),opacity 0.25s ease;z-index:999;}
+  .nav.is-open .nav__links{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .nav__links li{width:100%;list-style:none;}
+  .nav__links a{display:block;padding:14px 4px;font-size:14px;}
+  .nav__links a::after{display:none;}
+  .nav__cta{display:none;}
+  .nav{height:68px;padding:0 24px;}
+}
+@media(max-width:860px){
+  .nav__mega{display:none!important;}
+  .nav__dropdown{display:block;position:static;opacity:1;pointer-events:auto;transform:none;background:transparent;border:none;box-shadow:none;padding:0 0 8px 16px;min-width:0;backdrop-filter:none;-webkit-backdrop-filter:none;list-style:none;}
+  .nav__dropdown li{list-style:none;}
+  .nav__dropdown a{display:block;padding:10px 4px;font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:0;}
+  .nav__dropdown a::after{display:none;}
+  .nav__dropdown a:hover,.nav__dropdown a.active{color:#fff;}
+  .nav__caret{display:none;}
+  .nav__item--has-dropdown::after{display:none;}
+}
+
+/* ============================================================
+   BUTTONS (shared)
+   ============================================================ */
+.btn-primary,.btn-ghost{
+  --bc1:var(--electric);--bc2:var(--cyan);--bc3:#8B00FF;
+  position:relative;display:inline-block;cursor:pointer;text-decoration:none;
+  font-family:var(--font-ui),'Space Grotesk',sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  color:#fff;padding:14px 36px;border-radius:100px;
+  border:1px solid color-mix(in srgb,var(--bc2) 28%,rgba(255,255,255,0.08));
+  background:linear-gradient(180deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 48%,rgba(0,0,0,0.18) 100%),linear-gradient(135deg,var(--bc1) 0%,var(--bc2) 45%,var(--bc3) 100%);
+  background-size:100% 100%,220% 220%;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),inset 0 -1px 0 rgba(0,0,0,0.18),0 4px 14px rgba(0,0,0,0.28),0 0 16px color-mix(in srgb,var(--bc1) 18%,transparent),0 0 32px color-mix(in srgb,var(--bc3) 10%,transparent);
+  transition:background-position 0.85s var(--ease-out-expo),box-shadow 0.55s var(--ease-out-expo),border-color 0.55s ease,transform 0.55s var(--ease-out-expo);
+}
+.btn-primary{background-position:center,0% 50%;}
+.btn-ghost{background-position:center,100% 50%;font-weight:700;}
+.btn-primary:hover,.btn-ghost:hover{transform:translateY(-2px) scale(1.025);border-color:color-mix(in srgb,var(--bc2) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.30),inset 0 -1px 0 rgba(0,0,0,0.22),0 10px 28px rgba(0,0,0,0.4),0 0 26px color-mix(in srgb,var(--bc1) 48%,transparent),0 0 60px color-mix(in srgb,var(--bc3) 32%,transparent),0 0 0 1px color-mix(in srgb,var(--bc1) 28%,transparent);}
+.btn-primary:hover{background-position:center,100% 50%;}
+.btn-ghost:hover{background-position:center,0% 50%;}
+.btn-primary:active,.btn-ghost:active{transform:translateY(-1px) scale(1.0);transition-duration:0.15s;}
+
+/* ============================================================
+   BRAND HERO (fixed, video-backed, scroll fade)
+   ============================================================ */
+.brand-hero{position:fixed;top:0;left:0;right:0;z-index:0;height:100vh;min-height:100vh;display:flex;align-items:center;padding:140px 5vw 120px;overflow:hidden;background:#04060F;isolation:isolate;--hf:0;}
+.brand-hero + section.brand-first{margin-top:100vh;}
+.brand-hero .brand-hero__inner{opacity:calc(1 - var(--hf,0));transform:translateY(calc(var(--hf,0) * -30px));transition:opacity 0.15s linear,transform 0.15s linear;will-change:opacity,transform;}
+.brand-hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;filter:saturate(0.92) contrast(1.04) brightness(0.82);}
+.brand-hero__veil{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(4,6,15,0.78) 0%,rgba(4,6,15,0.55) 35%,rgba(4,6,15,0.75) 70%,rgba(4,6,15,0.96) 100%),radial-gradient(ellipse 70% 55% at 20% 30%,rgba(0,168,255,0.22) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 82% 75%,rgba(139,0,255,0.18) 0%,transparent 62%);pointer-events:none;}
+.brand-hero__grid{position:absolute;inset:0;z-index:1;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,0.05) 1px,transparent 0);background-size:42px 42px;mask-image:radial-gradient(ellipse 70% 50% at 50% 50%,#000 30%,transparent 80%);pointer-events:none;}
+.brand-hero__orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:0.45;z-index:0;pointer-events:none;}
+.brand-hero__orb.o1{width:520px;height:520px;background:radial-gradient(circle,rgba(0,168,255,0.6),transparent 70%);top:-140px;left:-110px;animation:float1 18s ease-in-out infinite;}
+.brand-hero__orb.o2{width:460px;height:460px;background:radial-gradient(circle,rgba(139,0,255,0.5),transparent 70%);bottom:-120px;right:-90px;animation:float2 22s ease-in-out infinite;}
+.brand-hero__orb.o3{width:360px;height:360px;background:radial-gradient(circle,rgba(0,229,212,0.35),transparent 70%);top:30%;right:18%;animation:float3 26s ease-in-out infinite;animation-delay:-7s;}
+.brand-hero__inner{position:relative;z-index:2;max-width:1180px;margin:0 auto;width:100%;text-align:center;}
+.brand-hero__eyebrow{display:inline-block;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--electric);margin-bottom:38px;opacity:0;animation:heroFadeUp 0.9s 0.15s var(--ease-out-expo) both;}
+.brand-hero__title{font-family:var(--font-d);font-size:clamp(2.8rem,7vw,6.4rem);font-weight:800;line-height:0.98;letter-spacing:-0.025em;color:#fff;margin-bottom:32px;}
+.brand-hero__title .l1{display:block;opacity:0;animation:heroFadeUp 1s 0.35s var(--ease-out-expo) both;}
+.brand-hero__title .l2{display:block;background:linear-gradient(135deg,var(--electric) 0%,var(--cyan) 30%,#8B00FF 65%,var(--electric) 100%);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:heroFadeUp 1s 0.55s var(--ease-out-expo) both,gradientShift 22s ease-in-out infinite;opacity:0;}
+.brand-hero__title .l2.in{opacity:1;}
+.brand-hero__lead{font-family:var(--font-b);font-size:clamp(1rem,1.4vw,1.2rem);line-height:1.75;color:rgba(240,242,255,0.78);max-width:62ch;margin:0 auto 44px;opacity:0;animation:heroFadeUp 1s 0.75s var(--ease-out-expo) both;}
+.brand-hero__ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;animation:heroFadeUp 1s 0.95s var(--ease-out-expo) both;}
+.brand-hero__scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:3;font-family:var(--font-ui);font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(240,242,255,0.45);opacity:calc(1 - var(--hf,0));animation:scrollPulse 4s ease-in-out infinite;}
+.brand-hero__scroll-line{width:1px;height:42px;background:linear-gradient(to bottom,rgba(0,168,255,0.7),transparent);}
+
+/* ============================================================
+   SECTION SCAFFOLD
+   ============================================================ */
+section.svc-section{position:relative;padding:120px 5vw;background:var(--bg-deep);z-index:1;}
+.svc-inner{max-width:1280px;margin:0 auto;}
+.svc-label{display:inline-block;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:var(--electric);margin-bottom:22px;}
+.svc-heading{font-family:var(--font-d);font-size:clamp(2rem,4vw,3.4rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;color:#fff;margin-bottom:24px;max-width:22ch;}
+.svc-heading em{font-style:normal;background:linear-gradient(135deg,var(--electric) 0%,var(--cyan) 50%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.svc-sub{font-size:1.05rem;color:var(--text-secondary);max-width:64ch;line-height:1.75;}
+.gsap-hidden{opacity:0;transform:translateY(28px);transition:opacity 0.9s var(--ease-out-expo),transform 0.9s var(--ease-out-expo);}
+.gsap-hidden.in{opacity:1;transform:translateY(0);}
+
+/* ============================================================
+   MANIFESTO — aurora + animated quote
+   ============================================================ */
+.brand-manifesto{position:relative;min-height:92vh;display:flex;align-items:center;justify-content:center;padding:140px 6vw;overflow:hidden;background:#04060F;isolation:isolate;z-index:1;}
+.brand-manifesto::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 22% 30%,rgba(0,168,255,0.32) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 82% 75%,rgba(233,30,140,0.28) 0%,transparent 62%),radial-gradient(ellipse 50% 45% at 50% 50%,rgba(0,229,212,0.18) 0%,transparent 60%);filter:blur(40px);z-index:-2;animation:auroraShift 24s ease-in-out infinite;}
+.brand-manifesto::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,0.05) 1px,transparent 0);background-size:48px 48px;mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000 30%,transparent 80%);z-index:-1;pointer-events:none;}
+.manifesto__inner{max-width:1100px;text-align:center;position:relative;z-index:1;}
+.manifesto__eyebrow{display:inline-block;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.30em;text-transform:uppercase;color:rgba(240,242,255,0.6);margin-bottom:48px;}
+.manifesto__mark{font-family:var(--font-d);font-size:clamp(4rem,8vw,7rem);line-height:0.7;margin-bottom:18px;background:linear-gradient(135deg,var(--electric) 0%,var(--cyan) 50%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;}
+.manifesto__text{font-family:var(--font-d);font-weight:300;font-size:clamp(1.6rem,3.2vw,2.8rem);line-height:1.32;letter-spacing:-0.01em;max-width:920px;margin:0 auto;color:#fff;}
+.manifesto__text .frag{display:block;margin-bottom:0.5rem;opacity:0;transform:translateY(18px);filter:blur(4px);transition:opacity 1s var(--ease-out-expo),transform 1s var(--ease-out-expo),filter 1s var(--ease-out-expo);}
+.manifesto__text .frag.f1{color:rgba(255,255,255,0.95);}
+.manifesto__text .frag.f2{color:rgba(240,242,255,0.85);}
+.manifesto__text .frag.f3{color:rgba(240,242,255,0.78);}
+.manifesto__text .frag.f4{margin-top:1.2rem;font-weight:500;color:#fff;}
+.manifesto__text .frag.in{opacity:1;transform:translateY(0);filter:blur(0);}
+.manifesto__text .frag.f1.in{transition-delay:0.1s;}
+.manifesto__text .frag.f2.in{transition-delay:0.5s;}
+.manifesto__text .frag.f3.in{transition-delay:0.9s;}
+.manifesto__text .frag.f4.in{transition-delay:1.35s;}
+.manifesto__text em{font-style:normal;background:linear-gradient(135deg,var(--cyan),var(--electric));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;}
+.manifesto__attribution{margin-top:56px;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:rgba(240,242,255,0.5);}
+.manifesto__attribution::before{content:'— ';color:var(--magenta);}
+.manifesto__orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:0.55;z-index:-1;}
+.manifesto__orb.o1{width:520px;height:520px;background:radial-gradient(circle,rgba(0,168,255,0.55),transparent 70%);top:-160px;left:-120px;animation:float1 18s ease-in-out infinite;}
+.manifesto__orb.o2{width:460px;height:460px;background:radial-gradient(circle,rgba(233,30,140,0.45),transparent 70%);bottom:-140px;right:-100px;animation:float2 22s ease-in-out infinite;}
+.manifesto__orb.o3{width:360px;height:360px;background:radial-gradient(circle,rgba(0,229,212,0.35),transparent 70%);top:30%;right:18%;animation:float3 26s ease-in-out infinite;animation-delay:-7s;}
+@media(max-width:768px){.brand-manifesto{min-height:auto;padding:100px 6vw;}.manifesto__attribution{margin-top:40px;}}
+
+/* ============================================================
+   OVERVIEW (philosophy + inline stats row)
+   ============================================================ */
+.brand-overview{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-mid) 100%);}
+.brand-overview__copy{max-width:70ch;}
+.brand-overview__body p{color:var(--text-secondary);font-size:1.1rem;line-height:1.85;}
+.brand-overview__body p+p{margin-top:1.25rem;}
+.brand-overview__stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:64px;}
+.brand-stat{position:relative;padding:32px 28px;background:linear-gradient(180deg,rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.01) 100%);border:1px solid var(--border);border-radius:16px;transition:border-color 0.4s ease,transform 0.4s var(--ease-out-expo),box-shadow 0.4s ease;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:140px;}
+.brand-stat::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--electric),var(--cyan),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.8s var(--ease-out-expo);}
+.brand-stat:hover{border-color:rgba(0,168,255,0.25);transform:translateY(-4px);box-shadow:0 18px 44px rgba(0,0,0,0.4),0 0 32px rgba(0,168,255,0.1);}
+.brand-stat:hover::before{transform:scaleX(1);}
+.brand-stat__n{font-family:var(--font-d);font-size:2.6rem;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--electric),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;letter-spacing:-0.02em;}
+.brand-stat__t{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-secondary);}
+@media(max-width:900px){.brand-overview__stats{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.brand-overview__stats{grid-template-columns:1fr;}}
+
+/* ============================================================
+   PUZZLE GRID — Six Pieces (SVG-based interlocking puzzle pieces)
+   ============================================================ */
+.brand-pieces{background:var(--bg-deep);}
+.brand-pieces__head{margin-bottom:64px;text-align:center;max-width:760px;margin-left:auto;margin-right:auto;}
+.brand-pieces__head .svc-heading{margin-left:auto;margin-right:auto;}
+.brand-pieces__head .svc-sub{margin-left:auto;margin-right:auto;}
+.puzzle-wrap{display:flex;justify-content:center;align-items:center;width:100%;}
+.puzzle-grid{
+  display:grid;
+  grid-template-columns:400px 400px 400px;
+  grid-template-rows:320px 320px;
+  gap:0;
+  position:relative;
+}
+.puzzle-card{
+  position:relative;
+  justify-self:start;
+  align-self:start;
+  cursor:pointer;
+  transition:transform 0.55s var(--ease-out-expo),filter 0.55s ease;
+  filter:drop-shadow(0 4px 16px rgba(0,0,0,0.35)) drop-shadow(0 0 0 transparent);
+}
+.puzzle-card:hover{
+  transform:translate(-2px,-6px);
+  z-index:20 !important;
+  filter:drop-shadow(0 18px 44px rgba(0,0,0,0.55)) drop-shadow(0 0 36px color-mix(in srgb,var(--pa) 45%,transparent)) drop-shadow(0 0 80px color-mix(in srgb,var(--pa) 20%,transparent));
+}
+.puzzle-card__shape{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:visible;
+}
+.puzzle-card__shape path{
+  transition:stroke-width 0.5s ease;
+}
+.puzzle-card:hover .puzzle-card__shape path{
+  stroke-width:3.5;
+}
+.puzzle-card__content{
+  position:relative;
+  z-index:2;
+  width:400px;
+  height:320px;
+  padding:42px 40px 36px;
+  display:flex;
+  flex-direction:column;
+  pointer-events:auto;
+  overflow:hidden;
+}
+/* Ambient corner glow */
+.puzzle-card__content::before{
+  content:'';
+  position:absolute;
+  top:-20px;
+  right:-20px;
+  width:140px;
+  height:140px;
+  background:radial-gradient(circle at top right,color-mix(in srgb,var(--pa) 18%,transparent) 0%,transparent 70%);
+  pointer-events:none;
+  opacity:0.55;
+  transition:opacity 0.6s ease,transform 0.7s var(--ease-out-expo);
+  z-index:-1;
+}
+.puzzle-card:hover .puzzle-card__content::before{
+  opacity:1;
+  transform:scale(1.4) translate(-8px,8px);
+}
+/* Hover sweep — a soft diagonal highlight that slides across */
+.puzzle-card__content::after{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-60%;
+  width:50%;
+  height:100%;
+  background:linear-gradient(115deg,transparent 30%,color-mix(in srgb,var(--pa) 8%,transparent) 48%,color-mix(in srgb,#fff 5%,transparent) 52%,transparent 70%);
+  pointer-events:none;
+  transition:left 1.1s var(--ease-out-expo);
+  z-index:-1;
+}
+.puzzle-card:hover .puzzle-card__content::after{left:160%;}
+/* Card sizes — each card extends beyond its grid cell where it has a tab */
+.pp-1{width:422px;height:342px;z-index:6;--pa:#00A8FF;}
+.pp-2{width:422px;height:342px;z-index:5;--pa:#00E5D4;}
+.pp-3{width:400px;height:342px;z-index:4;--pa:#E91E8C;}
+.pp-4{width:422px;height:320px;z-index:4;--pa:#8B5CF6;}
+.pp-5{width:422px;height:320px;z-index:3;--pa:#FFB800;}
+.pp-6{width:400px;height:320px;z-index:2;--pa:#00CCFF;}
+
+/* Bottom-row cards have a top blank — push content below it */
+.pp-4 .puzzle-card__content,
+.pp-5 .puzzle-card__content,
+.pp-6 .puzzle-card__content{padding-top:50px;}
+
+.puzzle-card__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;position:relative;}
+.puzzle-card__num{
+  font-family:var(--font-d);
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:0.32em;
+  color:var(--pa);
+  opacity:0.92;
+  position:relative;
+  padding-bottom:10px;
+}
+.puzzle-card__num::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:28px;
+  height:1px;
+  background:linear-gradient(90deg,var(--pa) 0%,transparent 100%);
+  transition:width 0.6s var(--ease-out-expo);
+}
+.puzzle-card:hover .puzzle-card__num::after{width:72px;}
+.puzzle-card__icon{
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--pa) 28%,transparent) 0%,transparent 70%),
+    linear-gradient(135deg,color-mix(in srgb,var(--pa) 16%,transparent),color-mix(in srgb,var(--pa) 4%,transparent));
+  border:1px solid color-mix(in srgb,var(--pa) 38%,rgba(255,255,255,0.06));
+  color:var(--pa);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 4px 12px rgba(0,0,0,0.3);
+  transition:transform 0.55s var(--ease-out-expo),background 0.5s ease,box-shadow 0.5s ease,border-color 0.5s ease;
+}
+.puzzle-card__icon svg{width:22px;height:22px;}
+.puzzle-card:hover .puzzle-card__icon{
+  transform:scale(1.1) rotate(-4deg);
+  background:
+    radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--pa) 48%,transparent) 0%,transparent 70%),
+    linear-gradient(135deg,color-mix(in srgb,var(--pa) 32%,transparent),color-mix(in srgb,var(--pa) 10%,transparent));
+  border-color:color-mix(in srgb,var(--pa) 65%,transparent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.14),0 6px 18px rgba(0,0,0,0.4),0 0 28px color-mix(in srgb,var(--pa) 50%,transparent);
+}
+.puzzle-card__title{
+  font-family:var(--font-d);
+  font-size:1.4rem;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:-0.02em;
+  line-height:1.14;
+  margin-bottom:16px;
+  position:relative;
+}
+.puzzle-card__desc{
+  font-family:var(--font-b);
+  font-size:0.92rem;
+  font-weight:400;
+  line-height:1.72;
+  color:rgba(220,225,255,0.76);
+  flex:1;
+  position:relative;
+}
+/* Premium bottom accent line */
+.puzzle-card__title + .puzzle-card__desc::before{
+  content:'';
+  position:absolute;
+  bottom:-18px;
+  left:0;
+  width:32px;
+  height:1px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--pa) 80%,transparent) 0%,transparent 100%);
+  opacity:0.5;
+  transition:width 0.6s var(--ease-out-expo),opacity 0.6s ease;
+}
+.puzzle-card:hover .puzzle-card__title + .puzzle-card__desc::before{
+  width:80px;
+  opacity:1;
+}
+
+/* Responsive — stack on smaller screens, drop the SVG puzzle shape, use rectangles */
+@media(max-width:1280px){
+  .puzzle-grid{
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+    gap:14px;
+    width:100%;
+    max-width:640px;
+  }
+  .puzzle-card{
+    width:100% !important;
+    height:auto !important;
+    min-height:240px;
+    background:linear-gradient(180deg,rgba(10,14,28,0.92) 0%,rgba(7,10,23,0.96) 100%);
+    border:2px solid color-mix(in srgb,var(--pa) 35%,rgba(255,255,255,0.08));
+    border-radius:14px;
+  }
+  .puzzle-card__shape{display:none;}
+  .puzzle-card__content{
+    width:100%;
+    height:auto;
+    padding:36px 32px !important;
+  }
+}
+@media(min-width:901px) and (max-width:1280px){
+  .puzzle-grid{
+    grid-template-columns:1fr 1fr;
+    max-width:880px;
+  }
+}
+
+/* ============================================================
+   PROCESS — animated step graphic with traveling pulse
+   ============================================================ */
+.brand-process{background:linear-gradient(180deg,var(--bg-mid) 0%,var(--bg-deep) 100%);overflow:hidden;}
+.brand-process .svc-inner > .gsap-hidden:first-child{text-align:center;margin-bottom:80px;}
+.brand-process .svc-heading{margin-left:auto;margin-right:auto;}
+.brand-process .svc-sub{margin-left:auto;margin-right:auto;}
+.build-flow{position:relative;padding-top:0;}
+
+/* Animated horizontal track between nodes — passes through node centers */
+.build-track{
+  position:absolute;
+  top:43px;
+  left:12.5%;
+  right:12.5%;
+  height:2px;
+  pointer-events:none;
+  z-index:0;
+  transform-origin:left center;
+}
+.build-track__line{
+  position:absolute;
+  inset:0;
+  border-radius:2px;
+  background:linear-gradient(90deg,
+    color-mix(in srgb,#00A8FF 35%,transparent) 0%,
+    color-mix(in srgb,#00E5D4 35%,transparent) 33%,
+    color-mix(in srgb,#8B5CF6 35%,transparent) 66%,
+    color-mix(in srgb,#E91E8C 35%,transparent) 100%);
+  box-shadow:0 0 12px color-mix(in srgb,#00A8FF 25%,transparent);
+  overflow:hidden;
+}
+.build-track__line::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb,#00A8FF 90%,transparent) 30%,
+    color-mix(in srgb,#00E5D4 90%,transparent) 45%,
+    color-mix(in srgb,#8B5CF6 90%,transparent) 55%,
+    color-mix(in srgb,#E91E8C 90%,transparent) 70%,
+    transparent 100%);
+  background-size:300% 100%;
+  animation:trackShimmer 9s linear infinite;
+}
+@keyframes trackShimmer{0%{background-position:200% 0%;}100%{background-position:-100% 0%;}}
+
+/* Traveling pulse — glowing dot that moves left to right */
+.build-track__pulse{
+  position:absolute;
+  top:50%;
+  left:0;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff 0%,#00E5D4 35%,#00A8FF 70%,transparent 100%);
+  box-shadow:
+    0 0 14px #00E5D4,
+    0 0 28px #00A8FF,
+    0 0 56px rgba(0,168,255,0.5),
+    0 0 96px rgba(139,0,255,0.3);
+  transform:translate(-50%,-50%);
+  animation:trackTravel 6s cubic-bezier(0.45,0,0.55,1) 1.65s infinite;
+  z-index:1;
+}
+@keyframes trackTravel{
+  0%{left:0%;opacity:0;transform:translate(-50%,-50%) scale(0.3);}
+  8%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  92%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  100%{left:100%;opacity:0;transform:translate(-50%,-50%) scale(0.3);}
+}
+
+/* Steps grid */
+.build-steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  position:relative;
+  z-index:1;
+}
+.build-step{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:0 12px;
+}
+
+/* Circular numbered node — solid, sits on the track */
+.build-step__node{
+  position:relative;
+  width:88px;
+  height:88px;
+  margin-bottom:32px;
+  z-index:2;
+}
+.build-step__node-inner{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  /* Fully opaque radial gradient — accent tint at top-left, deep dark elsewhere */
+  background:
+    radial-gradient(circle at 30% 25%,
+      color-mix(in srgb,var(--sa) 38%,#0c1226) 0%,
+      color-mix(in srgb,var(--sa) 8%,#0c1226) 50%,
+      #06091a 100%);
+  border:2px solid color-mix(in srgb,var(--sa) 65%,transparent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:
+    0 0 28px color-mix(in srgb,var(--sa) 35%,transparent),
+    0 8px 24px rgba(0,0,0,0.5),
+    inset 0 2px 4px rgba(255,255,255,0.14),
+    inset 0 -4px 12px rgba(0,0,0,0.6);
+  transition:transform 0.55s var(--ease-out-expo),box-shadow 0.55s ease,border-color 0.55s ease;
+}
+.build-step__num{
+  font-family:var(--font-d);
+  font-size:1.55rem;
+  font-weight:800;
+  letter-spacing:-0.025em;
+  background:linear-gradient(135deg,#fff 0%,var(--sa) 95%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:0 0 18px color-mix(in srgb,var(--sa) 50%,transparent);
+}
+/* Thin static outline ring, just outside the solid node */
+.build-step__ring{
+  position:absolute;
+  inset:-7px;
+  border-radius:50%;
+  border:1px dashed color-mix(in srgb,var(--sa) 32%,transparent);
+  animation:ringRotate 26s linear infinite;
+  opacity:0.55;
+  pointer-events:none;
+}
+@keyframes ringRotate{to{transform:rotate(360deg);}}
+
+.build-step:hover .build-step__node-inner{
+  transform:scale(1.07);
+  border-color:color-mix(in srgb,var(--sa) 90%,transparent);
+  box-shadow:
+    0 0 44px color-mix(in srgb,var(--sa) 60%,transparent),
+    0 0 88px color-mix(in srgb,var(--sa) 28%,transparent),
+    0 8px 30px rgba(0,0,0,0.55),
+    inset 0 2px 4px rgba(255,255,255,0.18),
+    inset 0 -4px 12px rgba(0,0,0,0.55);
+}
+.build-step:hover .build-step__ring{opacity:1;animation-duration:14s;}
+
+/* ===== ENTRANCE — slide in from left, step by step ===== */
+.build-step.gsap-hidden{
+  opacity:0;
+  transform:translateX(-72px);
+}
+.build-step.gsap-hidden.in{
+  opacity:1;
+  transform:translateX(0);
+}
+.bs-1.gsap-hidden{transition-delay:0s;}
+.bs-2.gsap-hidden{transition-delay:0.18s;}
+.bs-3.gsap-hidden{transition-delay:0.36s;}
+.bs-4.gsap-hidden{transition-delay:0.54s;}
+
+/* Track draws in from left, behind the nodes */
+.build-track.gsap-hidden{
+  opacity:1;
+  transform:scaleX(0);
+  transition:transform 1.5s var(--ease-out-expo);
+}
+.build-track.gsap-hidden.in{
+  transform:scaleX(1);
+  transition-delay:0.35s;
+}
+
+
+/* Step content */
+.build-step__meta{
+  font-family:var(--font-ui);
+  font-size:0.66rem;
+  font-weight:700;
+  letter-spacing:0.30em;
+  text-transform:uppercase;
+  color:var(--sa);
+  margin-bottom:10px;
+  opacity:0.85;
+}
+.build-step__title{
+  font-family:var(--font-d);
+  font-size:1.35rem;
+  font-weight:800;
+  letter-spacing:-0.018em;
+  color:#fff;
+  margin-bottom:14px;
+}
+.build-step__desc{
+  font-family:var(--font-b);
+  font-size:0.9rem;
+  line-height:1.7;
+  color:var(--text-secondary);
+  max-width:26ch;
+  margin:0 auto;
+}
+
+/* Per-phase accent colors */
+.bs-1{--sa:#00A8FF;}
+.bs-2{--sa:#00E5D4;}
+.bs-3{--sa:#8B5CF6;}
+.bs-4{--sa:#E91E8C;}
+
+@media(max-width:900px){
+  .build-track{display:none;}
+  .build-steps{grid-template-columns:1fr;gap:48px;}
+  .build-step{padding:0;}
+}
+@media(min-width:901px) and (max-width:1100px){
+  .build-step__desc{font-size:0.85rem;}
+}
+
+/* ============================================================
+   OUTCOMES
+   ============================================================ */
+.brand-outcomes{background:var(--bg-deep);}
+.brand-outcomes .svc-inner > .gsap-hidden:first-child{text-align:center;margin-bottom:80px;max-width:760px;margin-left:auto;margin-right:auto;}
+.brand-outcomes .svc-heading{margin-left:auto;margin-right:auto;}
+.brand-outcomes .svc-sub{margin-left:auto;margin-right:auto;}
+
+.outcomes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;}
+.outcome-item{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  position:relative;
+  --oc:var(--electric);
+  padding:8px 0;
+}
+.oc-1{--oc:#00A8FF;}
+.oc-2{--oc:#00E5D4;}
+.oc-3{--oc:#8B5CF6;}
+.oc-4{--oc:#E91E8C;}
+
+/* Large animated icon */
+.outcome-icon{
+  width:96px;
+  height:96px;
+  margin-bottom:34px;
+  color:var(--oc);
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.outcome-icon::before{
+  /* Soft accent glow behind icon */
+  content:'';
+  position:absolute;
+  inset:-12px;
+  background:radial-gradient(circle,color-mix(in srgb,var(--oc) 22%,transparent) 0%,transparent 65%);
+  z-index:-1;
+  opacity:0.65;
+  transition:opacity 0.7s ease,transform 0.8s var(--ease-out-expo);
+}
+.outcome-item:hover .outcome-icon::before{
+  opacity:1;
+  transform:scale(1.25);
+}
+.outcome-icon svg{
+  width:100%;
+  height:100%;
+  display:block;
+  filter:drop-shadow(0 0 10px color-mix(in srgb,var(--oc) 30%,transparent));
+}
+
+/* Decorative accent line below icon — grows on hover */
+.outcome-icon::after{
+  content:'';
+  position:absolute;
+  bottom:-18px;
+  left:0;
+  width:32px;
+  height:1px;
+  background:linear-gradient(90deg,var(--oc) 0%,transparent 100%);
+  opacity:0.7;
+  transition:width 0.6s var(--ease-out-expo),opacity 0.5s ease;
+}
+.outcome-item:hover .outcome-icon::after{
+  width:64px;
+  opacity:1;
+}
+
+.outcome-title{
+  font-family:var(--font-d);
+  font-size:1.4rem;
+  font-weight:800;
+  letter-spacing:-0.02em;
+  color:#fff;
+  margin:0 0 14px;
+  line-height:1.18;
+}
+.outcome-desc{
+  font-family:var(--font-b);
+  font-size:0.95rem;
+  font-weight:400;
+  line-height:1.72;
+  color:var(--text-secondary);
+}
+
+/* ===== ICON ANIMATIONS ===== */
+@keyframes ocSpin{to{transform:rotate(360deg);}}
+@keyframes ocPulseFade{0%,100%{opacity:0.35;}50%{opacity:1;}}
+@keyframes ocBarWave{0%,100%{transform:scaleY(1);}50%{transform:scaleY(0.62);}}
+@keyframes ocStarBeat{0%,100%{transform:scale(1) rotate(0);}50%{transform:scale(1.08) rotate(6deg);}}
+@keyframes ocSparkle{0%,100%{opacity:0;transform:scale(0.3);}50%{opacity:1;transform:scale(1);}}
+@keyframes ocFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-2px);}}
+
+/* Clock hands */
+.oc-icon__hand-fast{transform-origin:40px 40px;animation:ocSpin 8s linear infinite;}
+.oc-icon__hand-slow{transform-origin:40px 40px;animation:ocSpin 60s linear infinite;}
+.oc-icon__ring-dash{transform-origin:40px 40px;animation:ocSpin 22s linear infinite;}
+
+/* Bars rising in sequence */
+.oc-icon__bar{transform-origin:bottom center;transform-box:fill-box;animation:ocBarWave 2.6s ease-in-out infinite;}
+.oc-icon__bar.b1{animation-delay:0s;}
+.oc-icon__bar.b2{animation-delay:0.15s;}
+.oc-icon__bar.b3{animation-delay:0.3s;}
+.oc-icon__bar.b4{animation-delay:0.45s;}
+.oc-icon__trend{stroke-dasharray:90;stroke-dashoffset:90;animation:ocTrendDraw 4s ease-in-out infinite;}
+@keyframes ocTrendDraw{0%{stroke-dashoffset:90;}40%,60%{stroke-dashoffset:0;}100%{stroke-dashoffset:-90;}}
+
+/* Grid cells — diagonal wave */
+.oc-icon__cell{animation:ocPulseFade 2.4s ease-in-out infinite;}
+.oc-icon__cell.g1{animation-delay:0s;}
+.oc-icon__cell.g2{animation-delay:0.1s;}
+.oc-icon__cell.g3{animation-delay:0.2s;}
+.oc-icon__cell.g4{animation-delay:0.1s;}
+.oc-icon__cell.g5{animation-delay:0.2s;}
+.oc-icon__cell.g6{animation-delay:0.3s;}
+.oc-icon__cell.g7{animation-delay:0.2s;}
+.oc-icon__cell.g8{animation-delay:0.3s;}
+.oc-icon__cell.g9{animation-delay:0.4s;}
+
+/* Shield star + sparkles */
+.oc-icon__star{transform-origin:40px 40px;animation:ocStarBeat 3.2s ease-in-out infinite;}
+.oc-icon__shield{animation:ocFloat 4s ease-in-out infinite;}
+.oc-icon__sparkle{transform-origin:center;transform-box:fill-box;animation:ocSparkle 2.4s ease-in-out infinite;}
+.oc-icon__sparkle.sp1{animation-delay:0s;}
+.oc-icon__sparkle.sp2{animation-delay:0.8s;}
+.oc-icon__sparkle.sp3{animation-delay:1.5s;}
+
+/* Hover speed boost — icons animate more energetically */
+.outcome-item:hover .oc-icon__hand-fast{animation-duration:3s;}
+.outcome-item:hover .oc-icon__bar{animation-duration:1.4s;}
+.outcome-item:hover .oc-icon__cell{animation-duration:1.4s;}
+.outcome-item:hover .oc-icon__star{animation-duration:1.8s;}
+
+@media(max-width:1100px){.outcomes-grid{grid-template-columns:repeat(2,1fr);gap:56px;}}
+@media(max-width:560px){.outcomes-grid{grid-template-columns:1fr;}}
+
+/* ============================================================
+   WORK SHOWCASE — Brand in the Wild
+   ============================================================ */
+.brand-works{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-mid) 100%);}
+.works__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:56px;}
+.work-card{position:relative;border-radius:16px;overflow:hidden;background:#0A0E1C;border:1px solid var(--border);text-decoration:none;color:inherit;cursor:pointer;transition:transform 0.55s var(--ease-out-expo),border-color 0.45s ease,box-shadow 0.45s ease;--wa:var(--electric);}
+.work-card.w1{grid-column:span 7;aspect-ratio:16/10;--wa:var(--electric);}
+.work-card.w2{grid-column:span 5;aspect-ratio:1/1;--wa:var(--cyan);}
+.work-card.w3{grid-column:span 5;aspect-ratio:1/1;--wa:var(--magenta);}
+.work-card.w4{grid-column:span 7;aspect-ratio:16/10;--wa:#8B5CF6;}
+.work-card__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 2.4s cubic-bezier(0.25,0.46,0.45,0.94),filter 0.6s ease;filter:saturate(0.88) contrast(1.04) brightness(0.92);}
+.work-card:hover .work-card__img{transform:scale(1.06);filter:saturate(1) contrast(1.06) brightness(1);}
+.work-card__overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,10,23,0.10) 0%,rgba(7,10,23,0.45) 50%,rgba(7,10,23,0.96) 100%),linear-gradient(135deg,color-mix(in srgb,var(--wa) 14%,transparent) 0%,transparent 60%);transition:background 0.5s ease;}
+.work-card__topline{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--wa),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.7s var(--ease-out-expo);z-index:3;}
+.work-card:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--wa) 38%,var(--border));box-shadow:0 28px 70px rgba(0,0,0,0.55),0 0 0 1px color-mix(in srgb,var(--wa) 22%,transparent);}
+.work-card:hover .work-card__topline{transform:scaleX(1);}
+.work-card__tag{position:absolute;top:22px;left:22px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#fff;padding:7px 14px;background:color-mix(in srgb,var(--wa) 18%,rgba(7,10,23,0.55));border:1px solid color-mix(in srgb,var(--wa) 35%,transparent);border-radius:100px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:2;}
+.work-card__tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--wa);box-shadow:0 0 8px var(--wa);}
+.work-card__content{position:absolute;left:28px;right:28px;bottom:26px;z-index:2;}
+.work-card__title{font-family:var(--font-d);font-size:clamp(1.4rem,2vw,1.9rem);font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:8px;}
+.work-card__sub{font-family:var(--font-b);font-size:0.88rem;color:rgba(220,225,255,0.72);line-height:1.5;max-width:38ch;}
+.work-card__arrow{position:absolute;top:22px;right:22px;width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;opacity:0.5;transition:opacity 0.5s ease,transform 0.5s var(--ease-out-expo),background 0.5s ease,border-color 0.5s ease;z-index:3;}
+.work-card:hover .work-card__arrow{opacity:1;transform:scale(1.08) translateX(2px);background:color-mix(in srgb,var(--wa) 26%,transparent);border-color:var(--wa);}
+@media(max-width:900px){.work-card.w1,.work-card.w2,.work-card.w3,.work-card.w4{grid-column:span 12;}}
+
+/* ============================================================
+   PRICING + CART (kept from existing system)
+   ============================================================ */
+.svc-pricing{background:linear-gradient(180deg,var(--bg-mid) 0%,var(--bg-deep) 100%);}
+.prc-tabs{position:relative;display:inline-flex;gap:6px;margin:48px 0 40px;padding:6px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:100px;--thumb-x:0px;--thumb-y:0px;--thumb-w:0px;--thumb-h:0px;}
+.prc-tabs::before{content:'';position:absolute;top:0;left:0;width:var(--thumb-w);height:var(--thumb-h);transform:translate(var(--thumb-x),var(--thumb-y));background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 24%,transparent),color-mix(in srgb,var(--accent-2) 24%,transparent));border-radius:100px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),0 0 18px color-mix(in srgb,var(--accent) 30%,transparent);transition:transform 0.55s cubic-bezier(0.83,0,0.17,1),width 0.55s cubic-bezier(0.83,0,0.17,1),height 0.55s cubic-bezier(0.83,0,0.17,1),opacity 0.3s ease;z-index:0;pointer-events:none;opacity:0;}
+.prc-tabs.is-ready::before{opacity:1;}
+.prc-tab{position:relative;z-index:1;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;padding:11px 22px;background:transparent;border:none;border-radius:100px;color:rgba(240,242,255,0.6);cursor:pointer;transition:color 0.45s ease;}
+.prc-tab.is-active{color:#fff;background:transparent;box-shadow:none;}
+.prc-tab:hover{color:#fff;}
+@media (prefers-reduced-motion:reduce){.prc-tabs::before{transition:none;}}
+.prc-panel{display:none;}
+.prc-panel.is-active{display:block;animation:prcFade 0.45s var(--ease-out-expo);}
+@keyframes prcFade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.prc-pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.prc-pkg{position:relative;display:flex;flex-direction:column;padding:38px 32px 32px;background:linear-gradient(180deg,rgba(255,255,255,0.035) 0%,rgba(255,255,255,0.01) 100%);border:2px solid var(--border);border-radius:18px;overflow:hidden;transition:transform 0.55s var(--ease-out-expo),border-color 0.55s ease,box-shadow 0.55s ease;}
+.prc-pkg::before{content:'';position:absolute;inset:0;border-radius:16px;background:radial-gradient(ellipse 120% 100% at 0% 0%,color-mix(in srgb,var(--accent) 26%,transparent) 0%,color-mix(in srgb,var(--accent) 10%,transparent) 40%,transparent 78%),linear-gradient(160deg,color-mix(in srgb,var(--accent) 12%,transparent) 0%,transparent 70%);opacity:0;transition:opacity 0.6s var(--ease-out-expo);pointer-events:none;}
+.prc-pkg:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--accent) 40%,transparent);box-shadow:0 24px 60px rgba(0,0,0,0.5),0 0 80px color-mix(in srgb,var(--accent) 14%,transparent);}
+.prc-pkg:hover::before{opacity:1;}
+.prc-pkg.is-featured{border-color:color-mix(in srgb,var(--accent) 40%,transparent);box-shadow:0 0 40px color-mix(in srgb,var(--accent) 16%,transparent);}
+.prc-pkg-badge{position:absolute;top:18px;right:18px;font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:0.20em;text-transform:uppercase;color:#fff;padding:6px 12px;border-radius:100px;background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 55%,#fff));box-shadow:0 0 18px color-mix(in srgb,var(--accent) 45%,transparent);}
+.prc-pkg-tier{position:relative;z-index:1;font-family:var(--font-d);font-size:0.72rem;font-weight:700;letter-spacing:0.24em;color:var(--accent);margin-bottom:14px;}
+.prc-pkg-name{position:relative;z-index:1;font-family:var(--font-d);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:8px;}
+.prc-pkg-tag{position:relative;z-index:1;font-family:var(--font-d);font-size:0.94rem;font-weight:400;color:var(--accent);opacity:0.92;margin-bottom:20px;line-height:1.4;}
+.prc-price{position:relative;z-index:1;display:flex;align-items:flex-end;gap:8px;margin-bottom:4px;}
+.prc-price-from{font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(220,225,255,0.55);padding-bottom:10px;}
+.prc-price-amount{font-family:var(--font-d);font-size:2.3rem;font-weight:800;line-height:1;letter-spacing:-0.02em;background:linear-gradient(135deg,var(--accent) 0%,color-mix(in srgb,var(--accent) 60%,#fff 40%) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.prc-frame{position:relative;z-index:1;font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(220,225,255,0.6);margin:8px 0 20px;}
+.prc-frame strong{color:#fff;font-weight:700;}
+.prc-pkg-desc{position:relative;z-index:1;font-size:0.88rem;line-height:1.65;color:rgba(220,225,255,0.7);margin-bottom:20px;padding-top:20px;border-top:1px solid color-mix(in srgb,var(--accent) 14%,rgba(255,255,255,0.04));}
+.prc-inc-label{position:relative;z-index:1;font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.prc-inc{position:relative;z-index:1;list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:26px;}
+.prc-inc li{font-family:var(--font-ui);font-size:0.82rem;color:rgba(220,225,255,0.82);display:flex;align-items:center;gap:9px;}
+.prc-inc li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px color-mix(in srgb,var(--accent) 60%,transparent);flex-shrink:0;}
+.prc-actions{position:relative;z-index:1;margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;}
+.prc-btn{flex:1 1 auto;min-width:120px;text-align:center;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:13px 20px;border-radius:100px;text-decoration:none;cursor:pointer;display:inline-block;transition:background-position 0.85s var(--ease-out-expo),box-shadow 0.55s var(--ease-out-expo),border-color 0.55s ease,transform 0.4s var(--ease-out-expo);border:1px solid color-mix(in srgb,var(--accent) 28%,rgba(255,255,255,0.08));color:#fff;}
+.prc-btn--primary{background:linear-gradient(180deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 48%,rgba(0,0,0,0.18) 100%),linear-gradient(135deg,var(--accent) 0%,color-mix(in srgb,var(--accent) 55%,#fff 0%) 50%,color-mix(in srgb,var(--accent) 78%,#000) 100%);background-size:100% 100%,220% 220%;background-position:center,0% 50%;box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),inset 0 -1px 0 rgba(0,0,0,0.18),0 4px 14px rgba(0,0,0,0.28),0 0 16px color-mix(in srgb,var(--accent) 22%,transparent);}
+.prc-btn--primary:hover{background-position:center,100% 50%;transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 65%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.30),0 10px 28px rgba(0,0,0,0.4),0 0 28px color-mix(in srgb,var(--accent) 55%,transparent);}
+.prc-btn--primary.is-added{background:linear-gradient(180deg,rgba(255,255,255,0.18) 0%,rgba(255,255,255,0) 48%,rgba(0,0,0,0.18) 100%),linear-gradient(135deg,#27d480,#1ea765);background-size:100% 100%,100% 100%;border-color:rgba(39,212,128,0.65);}
+.prc-btn--ghost{background:rgba(255,255,255,0.03);color:rgba(240,242,255,0.85);}
+.prc-btn--ghost:hover{border-color:color-mix(in srgb,var(--accent) 55%,transparent);color:#fff;background:color-mix(in srgb,var(--accent) 8%,rgba(255,255,255,0.03));}
+.prc-ind-intro{font-size:0.98rem;color:rgba(220,225,255,0.72);max-width:62ch;margin-bottom:36px;line-height:1.75;}
+.prc-ind-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.prc-ind{display:flex;flex-direction:column;padding:26px 28px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;transition:border-color 0.4s ease,transform 0.4s var(--ease-out-expo),background 0.4s ease;position:relative;overflow:hidden;}
+.prc-ind::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),color-mix(in srgb,var(--accent) 30%,transparent));transform:scaleY(0);transform-origin:top;transition:transform 0.5s var(--ease-out-expo);}
+.prc-ind:hover{border-color:color-mix(in srgb,var(--accent) 30%,transparent);transform:translateY(-2px);}
+.prc-ind:hover::before{transform:scaleY(1);}
+.prc-ind-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:8px;flex-wrap:wrap;}
+.prc-ind-name{font-family:var(--font-d);font-size:1.08rem;font-weight:700;color:#fff;letter-spacing:-0.01em;line-height:1.2;}
+.prc-ind-price{font-family:var(--font-d);font-size:1.02rem;font-weight:700;color:var(--accent);white-space:nowrap;}
+.prc-ind-desc{font-family:var(--font-b);font-size:0.86rem;color:rgba(220,225,255,0.66);line-height:1.65;margin-bottom:18px;}
+.prc-ind-btn{align-self:flex-start;background:transparent;border:1px solid color-mix(in srgb,var(--accent) 30%,rgba(255,255,255,0.08));color:var(--accent);font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;padding:10px 18px;border-radius:100px;cursor:pointer;transition:background 0.4s ease,border-color 0.4s ease,color 0.4s ease,transform 0.4s var(--ease-out-expo);}
+.prc-ind-btn:hover{background:color-mix(in srgb,var(--accent) 14%,transparent);border-color:var(--accent);color:#fff;transform:translateY(-1px);}
+.prc-ind-btn.is-added{background:rgba(39,212,128,0.16);border-color:rgba(39,212,128,0.65);color:#27d480;}
+@media(max-width:900px){.prc-pkgs{grid-template-columns:1fr;}.prc-ind-grid{grid-template-columns:1fr;}}
+
+/* ===== SHOP BRIDGE — anchors local pricing to the central Shop hub ===== */
+.prc-shop-bridge{margin:56px auto 0;max-width:780px;padding:24px 32px;border-radius:18px;background:linear-gradient(135deg,rgba(255,255,255,0.025),rgba(255,255,255,0.04));border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;text-align:left;}
+.prc-shop-bridge__copy{flex:1;min-width:240px;}
+.prc-shop-bridge__label{display:block;font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(240,242,255,0.55);margin-bottom:6px;}
+.prc-shop-bridge__title{font-family:var(--font-d,'Helvetica Neue',sans-serif);font-size:1.05rem;font-weight:700;color:#fff;letter-spacing:-0.01em;line-height:1.35;}
+.prc-shop-bridge__link{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#fff;text-decoration:none;padding:13px 22px;border-radius:100px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);transition:background 0.4s ease,border-color 0.4s ease,gap 0.4s var(--ease-out-expo),transform 0.4s var(--ease-out-expo);white-space:nowrap;}
+.prc-shop-bridge__link:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.30);gap:14px;transform:translateY(-2px);}
+
+/* ============================================================
+   FLOATING CART
+   ============================================================ */
+.cart-fab{position:fixed;bottom:32px;right:32px;width:60px;height:60px;border-radius:50%;border:1px solid color-mix(in srgb,var(--accent) 40%,rgba(255,255,255,0.1));background:linear-gradient(180deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 48%,rgba(0,0,0,0.2) 100%),linear-gradient(135deg,var(--accent) 0%,color-mix(in srgb,var(--accent) 55%,#000) 100%);display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;z-index:998;box-shadow:0 12px 36px rgba(0,0,0,0.45),inset 0 1px 0 rgba(255,255,255,0.22),0 0 24px color-mix(in srgb,var(--accent) 35%,transparent);transition:transform 0.4s var(--ease-out-expo),box-shadow 0.4s ease;}
+.cart-fab:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 18px 48px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.30),0 0 40px color-mix(in srgb,var(--accent) 55%,transparent);}
+.cart-fab svg{width:24px;height:24px;}
+.cart-fab__count{position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#fff;color:var(--accent);font-family:var(--font-ui);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.4);}
+.cart-fab__count.is-empty{display:none;}
+.cart-fab.is-pulse{animation:cartPulse 0.6s var(--ease-out-expo);}
+@keyframes cartPulse{0%{transform:scale(1);}30%{transform:scale(1.15);}100%{transform:scale(1);}}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:92vw;background:linear-gradient(180deg,#0A0E1C 0%,#070A17 100%);border-left:1px solid color-mix(in srgb,var(--accent) 18%,rgba(255,255,255,0.06));z-index:11000;transform:translateX(100%);transition:transform 0.55s var(--ease-out-expo);display:flex;flex-direction:column;box-shadow:-30px 0 80px rgba(0,0,0,0.5);}
+.cart-drawer.is-open{transform:translateX(0);}
+.cart-drawer__head{display:flex;align-items:center;justify-content:space-between;padding:26px 28px;border-bottom:1px solid var(--border);position:relative;}
+.cart-drawer__head::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.35;}
+.cart-drawer__title{font-family:var(--font-d);font-size:1.08rem;font-weight:700;color:#fff;letter-spacing:-0.01em;}
+.cart-drawer__title span{color:var(--accent);font-weight:800;}
+.cart-drawer__close{width:36px;height:36px;border:none;background:rgba(255,255,255,0.04);border-radius:50%;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.3s ease,transform 0.3s var(--ease-out-expo);}
+.cart-drawer__close:hover{background:color-mix(in srgb,var(--accent) 22%,rgba(255,255,255,0.04));transform:rotate(90deg);}
+.cart-drawer__body{flex:1;overflow-y:auto;padding:14px 22px;}
+.cart-empty{padding:60px 24px;text-align:center;}
+.cart-empty__icon{width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:rgba(255,255,255,0.03);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--accent);}
+.cart-empty__icon svg{width:28px;height:28px;}
+.cart-empty__t{font-family:var(--font-d);font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px;}
+.cart-empty__d{font-size:0.85rem;color:rgba(220,225,255,0.55);line-height:1.6;}
+.cart-item{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:18px 6px;border-bottom:1px solid var(--border);}
+.cart-item__info{flex:1;min-width:0;}
+.cart-item__name{font-family:var(--font-d);font-size:0.94rem;font-weight:700;color:#fff;letter-spacing:-0.01em;margin-bottom:4px;line-height:1.25;}
+.cart-item__type{font-family:var(--font-ui);font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);opacity:0.9;}
+.cart-item__price{font-family:var(--font-d);font-size:0.95rem;font-weight:700;color:#fff;white-space:nowrap;}
+.cart-item__qty{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.cart-item__qty button{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);background:transparent;color:#fff;cursor:pointer;font-size:12px;line-height:1;transition:background 0.3s ease,border-color 0.3s ease;}
+.cart-item__qty button:hover{background:color-mix(in srgb,var(--accent) 18%,transparent);border-color:var(--accent);}
+.cart-item__qty span{font-family:var(--font-ui);font-size:0.8rem;color:rgba(255,255,255,0.85);min-width:18px;text-align:center;}
+.cart-item__remove{font-family:var(--font-ui);font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;background:transparent;border:none;color:rgba(220,225,255,0.4);cursor:pointer;padding:0;margin-top:6px;transition:color 0.3s ease;}
+.cart-item__remove:hover{color:var(--magenta);}
+.cart-drawer__foot{padding:22px 26px 26px;border-top:1px solid var(--border);background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,0.3) 100%);}
+.cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;}
+.cart-total span{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(220,225,255,0.55);}
+.cart-total strong{font-family:var(--font-d);font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 55%,#fff));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cart-note{font-size:0.78rem;color:rgba(220,225,255,0.5);line-height:1.55;margin-bottom:16px;}
+.cart-checkout{display:block;width:100%;text-align:center;font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:15px 24px;border-radius:100px;text-decoration:none;color:#fff;border:1px solid color-mix(in srgb,var(--accent) 28%,rgba(255,255,255,0.08));background:linear-gradient(180deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 48%,rgba(0,0,0,0.18) 100%),linear-gradient(135deg,var(--accent) 0%,color-mix(in srgb,var(--accent) 55%,#fff 0%) 50%,color-mix(in srgb,var(--accent) 78%,#000) 100%);background-size:100% 100%,220% 220%;background-position:center,0% 50%;box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),0 4px 14px rgba(0,0,0,0.28),0 0 16px color-mix(in srgb,var(--accent) 22%,transparent);transition:background-position 0.85s var(--ease-out-expo),transform 0.55s var(--ease-out-expo),box-shadow 0.55s ease;}
+.cart-checkout:hover{background-position:center,100% 50%;transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.30),0 10px 28px rgba(0,0,0,0.4),0 0 28px color-mix(in srgb,var(--accent) 55%,transparent);}
+.cart-overlay{position:fixed;inset:0;background:rgba(4,6,15,0.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:10999;opacity:0;pointer-events:none;transition:opacity 0.45s ease;}
+.cart-overlay.is-open{opacity:1;pointer-events:auto;}
+@media(max-width:600px){.cart-fab{bottom:20px;right:20px;width:54px;height:54px;}}
+
+/* ============================================================
+   RELATED + CTA + FOOTER
+   ============================================================ */
+
+.svc-cta{position:relative;padding:140px 5vw;text-align:center;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(0,168,255,0.20) 0%,transparent 60%),var(--bg-deep);overflow:hidden;z-index:1;}
+.svc-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,168,255,0.45),rgba(233,30,140,0.45),transparent);}
+.svc-cta__inner{max-width:780px;margin:0 auto;position:relative;z-index:1;}
+.svc-cta__eyebrow{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--magenta);margin-bottom:26px;display:inline-block;}
+.svc-cta__h{font-family:var(--font-d);font-size:clamp(2.4rem,5vw,4.2rem);font-weight:800;line-height:1.0;letter-spacing:-0.02em;color:#fff;margin-bottom:24px;}
+.svc-cta__h em{font-style:normal;background:linear-gradient(135deg,var(--electric),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.svc-cta__sub{font-size:1.05rem;color:var(--text-secondary);max-width:56ch;margin:0 auto 40px;line-height:1.75;}
+.svc-cta__actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+.footer{background:#04060F;padding:80px 5vw 40px;border-top:1px solid rgba(255,255,255,0.05);position:relative;z-index:1;}
+.footer__inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:60px;}
+.footer__brand-row{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.footer__brand-row svg{width:32px;height:auto;}
+.footer__brand-name{font-family:var(--font-d);font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;}
+.footer__tagline{font-size:0.9rem;color:var(--text-secondary);line-height:1.7;max-width:34ch;}
+.footer__nav h4{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#fff;margin-bottom:22px;}
+.footer__nav ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.footer__nav a{font-size:0.88rem;color:var(--text-secondary);text-decoration:none;transition:color 0.2s ease;}
+.footer__nav a:hover{color:#fff;}
+.footer__bottom{max-width:1280px;margin:60px auto 0;padding-top:30px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;font-size:0.78rem;color:var(--text-muted);flex-wrap:wrap;gap:14px;}
+@media(max-width:900px){.footer__inner{grid-template-columns:1fr 1fr;gap:40px;}}
+@media(max-width:560px){.footer__inner{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="site-nav" role="navigation" aria-label="Main navigation">
+  <a class="nav__logo" href="index.html" aria-label="Archetype Studio home">
+    <svg class="nav__mark" viewBox="150 80 520 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="#ffffff" d="M 420.789062 92.867188 L 279.285156 337.953125 C 282.851562 337.953125 286.414062 337.835938 289.972656 337.605469 C 293.53125 337.371094 297.078125 337.019531 300.613281 336.554688 C 304.148438 336.089844 307.664062 335.511719 311.164062 334.8125 C 314.660156 334.117188 318.132812 333.308594 321.574219 332.386719 C 325.019531 331.464844 328.429688 330.429688 331.808594 329.28125 C 335.183594 328.136719 338.519531 326.882812 341.8125 325.515625 C 345.109375 324.152344 348.355469 322.679688 351.554688 321.105469 C 354.75 319.527344 357.894531 317.847656 360.984375 316.0625 C 364.070312 314.28125 367.097656 312.398438 370.0625 310.417969 C 373.027344 308.4375 375.925781 306.359375 378.753906 304.191406 C 381.582031 302.019531 384.339844 299.757812 387.019531 297.40625 C 389.699219 295.054688 392.300781 292.621094 394.824219 290.097656 C 397.34375 287.578125 399.78125 284.976562 402.132812 282.296875 C 404.484375 279.613281 406.746094 276.859375 408.914062 274.03125 C 411.085938 271.203125 413.164062 268.304688 415.144531 265.339844 C 417.125 262.375 419.007812 259.347656 420.789062 256.261719 C 422.574219 253.171875 424.253906 250.027344 425.832031 246.832031 C 427.410156 243.632812 428.878906 240.386719 430.242188 237.089844 C 431.609375 233.796875 432.863281 230.460938 434.011719 227.085938 C 435.15625 223.707031 436.191406 220.296875 437.113281 216.851562 C 438.039062 213.40625 438.847656 209.9375 439.542969 206.441406 C 440.238281 202.941406 440.820312 199.425781 441.285156 195.890625 C 441.75 192.355469 442.097656 188.808594 442.332031 185.25 C 442.566406 181.691406 442.683594 178.128906 442.683594 174.5625 C 442.683594 170.996094 442.566406 167.433594 442.332031 163.875 C 442.097656 160.316406 441.75 156.769531 441.285156 153.234375 C 440.820312 149.699219 440.238281 146.183594 439.542969 142.6875 C 438.847656 139.1875 438.039062 135.71875 437.113281 132.273438 C 436.191406 128.828125 435.15625 125.417969 434.011719 122.042969 C 432.863281 118.664062 431.609375 115.328125 430.242188 112.035156 C 428.878906 108.738281 427.410156 105.492188 425.832031 102.296875 C 424.253906 99.097656 422.574219 95.953125 420.789062 92.867188 Z"/>
+      <path fill="#ffffff" d="M 515.125 419.667969 L 562.292969 501.367188 L 656.628906 501.367188 L 609.457031 419.667969 L 515.125 256.261719 L 420.789062 419.667969 Z"/>
+      <path fill="#ffffff" d="M 373.621094 501.347656 L 420.789062 419.667969 L 326.457031 419.667969 C 322.890625 419.667969 319.328125 419.785156 315.769531 420.015625 C 312.214844 420.25 308.667969 420.597656 305.128906 421.0625 C 301.59375 421.527344 298.078125 422.109375 294.582031 422.804688 C 291.085938 423.5 287.613281 424.308594 284.167969 425.230469 C 280.726562 426.152344 277.3125 427.1875 273.9375 428.332031 C 270.5625 429.480469 267.226562 430.734375 263.929688 432.097656 C 260.636719 433.464844 257.390625 434.933594 254.191406 436.511719 C 250.992188 438.085938 247.851562 439.765625 244.761719 441.550781 C 241.671875 443.332031 238.648438 445.214844 235.683594 447.195312 C 232.71875 449.175781 229.820312 451.25 226.992188 453.421875 C 224.160156 455.59375 221.40625 457.851562 218.726562 460.203125 C 216.042969 462.554688 213.441406 464.992188 210.921875 467.511719 C 208.398438 470.03125 205.964844 472.632812 203.613281 475.316406 C 201.261719 477.996094 199 480.75 196.828125 483.578125 C 194.65625 486.40625 192.582031 489.304688 190.601562 492.269531 C 188.617188 495.234375 186.738281 498.261719 184.953125 501.347656 Z"/>
+    </svg>
+    <span class="nav__wordmark">Archetype Studio</span>
+  </a>
+  <ul class="nav__links">
+    <li><a href="about.html">About</a></li>
+    <li class="nav__item--has-dropdown">
+      <a href="services.html" class="active">Services<span class="nav__caret">▾</span></a>
+      <div class="nav__mega" aria-hidden="true">
+        <div class="nav__mega-inner">
+          <div class="nav__mega-label">Our Services</div>
+          <div class="nav__mega-grid">
+            <a href="services-brand.html" class="mega-card mega-card--brand"><div class="mega-card__num">01</div><h3 class="mega-card__title">Brand Development</h3><p class="mega-card__desc">Identity systems, visual language, and brand positioning built to stand apart.</p><span class="mega-card__arrow">→</span></a>
+            <a href="services-business.html" class="mega-card mega-card--business"><div class="mega-card__num">02</div><h3 class="mega-card__title">Business Architecture</h3><p class="mega-card__desc">Structure, systems, and strategy engineered for scale and operational clarity.</p><span class="mega-card__arrow">→</span></a>
+            <a href="services-marketing.html" class="mega-card mega-card--marketing"><div class="mega-card__num">03</div><h3 class="mega-card__title">Marketing Studio</h3><p class="mega-card__desc">End-to-end campaigns, content, and demand generation that compounds over time.</p><span class="mega-card__arrow">→</span></a>
+            <a href="services-ai.html" class="mega-card mega-card--ai"><div class="mega-card__num">04</div><h3 class="mega-card__title">AI &amp; Automation</h3><p class="mega-card__desc">Intelligent systems that eliminate friction and unlock exponential leverage.</p><span class="mega-card__arrow">→</span></a>
+          </div>
+          <a href="services.html" class="mega-footer-link">View all services <span>→</span></a>
+        </div>
+      </div>
+      <ul class="nav__dropdown">
+        <li><a href="services-brand.html" class="active">Brand Development</a></li>
+        <li><a href="services-business.html">Business Architecture</a></li>
+        <li><a href="services-marketing.html">Marketing Studio</a></li>
+        <li><a href="services-ai.html">AI &amp; Automation</a></li>
+      </ul>
+    </li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li class="nav__item--has-dropdown nav__item--shop">
+      <a href="shop.html">Shop<span class="nav__caret">▾</span></a>
+      <div class="nav__mega nav__mega--small" aria-hidden="true">
+        <div class="nav__mega-inner">
+          <div class="nav__mega-label">Browse the Shop</div>
+          <div class="nav__mega-grid nav__mega-grid--two">
+            <a href="solutions.html" class="mega-card mega-card--solutions"><div class="mega-card__num">01</div><h3 class="mega-card__title">Packaged Solutions</h3><p class="mega-card__desc">Four service disciplines, three tiers each — or build your own tailored scope.</p><span class="mega-card__arrow">→</span></a>
+            <a href="shop.html#value-add" class="mega-card mega-card--individual"><div class="mega-card__num">02</div><h3 class="mega-card__title">Individual Products</h3><p class="mega-card__desc">Individual deliverables, priced per unit and ready to order.</p><span class="mega-card__arrow">→</span></a>
+          </div>
+          <a href="shop.html" class="mega-footer-link">View everything <span>→</span></a>
+        </div>
+      </div>
+      <ul class="nav__dropdown">
+        <li><a href="solutions.html">Packaged Solutions</a></li>
+        <li><a href="shop.html#value-add">Individual Products</a></li>
+      </ul>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav__cta">Start a Project</a>
+  <button class="nav__cart" id="cartFab" aria-label="View cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+    <span class="cart-fab__count is-empty" id="cartCount">0</span>
+  </button>
+  <button class="nav__toggle" id="site-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===== BRAND HERO (fixed video, scroll fade) ===== -->
+<section class="brand-hero" id="brand-hero">
+  <img class="brand-hero__bg" src="assets/images/Services.png" alt="" aria-hidden="true" loading="eager" decoding="async"/>
+  <div class="brand-hero__veil" aria-hidden="true"></div>
+  <div class="brand-hero__grid" aria-hidden="true"></div>
+  <div class="brand-hero__orb o1" aria-hidden="true"></div>
+  <div class="brand-hero__orb o2" aria-hidden="true"></div>
+  <div class="brand-hero__orb o3" aria-hidden="true"></div>
+
+  <div class="brand-hero__inner">
+    <span class="brand-hero__eyebrow">01 Brand Development</span>
+    <h1 class="brand-hero__title">
+      <span class="l1">Dreams made</span>
+      <span class="l2">operational reality.</span>
+    </h1>
+    <p class="brand-hero__lead">Brand is the foundation everything else is built on. Before there's revenue, there's reputation. Before reputation, there's perception. We engineer the perception — positioning, identity, voice, governance — so your vision earns its place in the market and compounds from there.</p>
+    <div class="brand-hero__ctas">
+      <a href="#pieces" class="btn-primary">See the System</a>
+      <a href="#pricing" class="btn-ghost">View Packages</a>
+    </div>
+  </div>
+
+  <div class="brand-hero__scroll" aria-hidden="true">
+    <div class="brand-hero__scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ===== MANIFESTO ===== -->
+<section class="brand-manifesto brand-first">
+  <div class="manifesto__orb o1" aria-hidden="true"></div>
+  <div class="manifesto__orb o2" aria-hidden="true"></div>
+  <div class="manifesto__orb o3" aria-hidden="true"></div>
+  <div class="manifesto__inner">
+    <div class="manifesto__eyebrow">The Belief</div>
+    <div class="manifesto__mark">"</div>
+    <blockquote class="manifesto__text">
+      <span class="frag f1">A logo is not a brand.</span>
+      <span class="frag f2">A colour palette is not a brand.</span>
+      <span class="frag f3">A brand is the compounding asset that decides what your market believes you're worth —</span>
+      <span class="frag f4">and we build the kind that <em>earns its keep</em>.</span>
+    </blockquote>
+    <div class="manifesto__attribution">Archetype StudioBrand Development</div>
+  </div>
+</section>
+
+<!-- ===== OVERVIEW + STATS ===== -->
+<section class="svc-section brand-overview">
+  <div class="svc-inner">
+    <div class="brand-overview__copy gsap-hidden">
+      <div class="svc-label">The Foundation</div>
+      <h2 class="svc-heading">Perception is the most <em>leveraged asset</em> a business has.</h2>
+      <div class="brand-overview__body">
+        <p>We treat brand as commercial infrastructure. Every decision — name, narrative, system, voice — is engineered against a specific outcome: differentiated positioning, qualified demand, pricing power, and trust at scale.</p>
+      </div>
+    </div>
+    <div class="brand-overview__stats gsap-hidden">
+      <div class="brand-stat"><div class="brand-stat__n">4 to 14</div><div class="brand-stat__t">Week Build Cycle</div></div>
+      <div class="brand-stat"><div class="brand-stat__n">100%</div><div class="brand-stat__t">In House Studio</div></div>
+      <div class="brand-stat"><div class="brand-stat__n">01</div><div class="brand-stat__t">Integrated Team</div></div>
+      <div class="brand-stat"><div class="brand-stat__n">∞</div><div class="brand-stat__t">Asset Compound</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SIX PIECES — PUZZLE GRID ===== -->
+<section class="svc-section brand-pieces" id="pieces">
+  <div class="svc-inner">
+    <div class="brand-pieces__head gsap-hidden">
+      <div class="svc-label">The System</div>
+      <h2 class="svc-heading">Six pieces that make a brand <em>commercially complete</em>.</h2>
+      <p class="svc-sub">Not a moodboard. A working system — positioning, narrative, identity, voice, differentiation, governance. Each piece is engineered to slot into the next. Together, they form the infrastructure your business runs perception on.</p>
+    </div>
+
+    <div class="puzzle-wrap">
+    <div class="puzzle-grid" id="puzzleGrid">
+
+      <!-- 01 STRATEGY · TL · tabs R+B -->
+      <article class="puzzle-card pp-1" tabindex="0">
+        <svg class="puzzle-card__shape" viewBox="0 0 422 342" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="pp-grad-1" x1="0" y1="0" x2="422" y2="342" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#00A8FF"/>
+              <stop offset="0.5" stop-color="#00E5D4"/>
+              <stop offset="1" stop-color="#8B00FF"/>
+              <animateTransform attributeName="gradientTransform" type="rotate" from="0 211 171" to="360 211 171" dur="9s" repeatCount="indefinite"/>
+            </linearGradient>
+          </defs>
+          <path d="M 0 0 L 400 0 L 400 120 C 422 120, 422 200, 400 200 L 400 320 L 240 320 C 240 342, 160 342, 160 320 L 0 320 Z"
+                fill="rgba(8,11,28,0.96)" stroke="url(#pp-grad-1)" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="puzzle-card__content">
+          <div class="puzzle-card__head">
+            <span class="puzzle-card__num">01 STRATEGY</span>
+            <div class="puzzle-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></div>
+          </div>
+          <h3 class="puzzle-card__title">Strategy &amp; Positioning</h3>
+          <p class="puzzle-card__desc">Market analysis, audience segmentation, and a sharp positioning statement that defines exactly where you sit and why anyone should care.</p>
+        </div>
+      </article>
+
+      <!-- 02 IDENTITY · TM · blank L, tabs R+B -->
+      <article class="puzzle-card pp-2" tabindex="0">
+        <svg class="puzzle-card__shape" viewBox="0 0 422 342" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="pp-grad-2" x1="0" y1="0" x2="422" y2="342" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#00E5D4"/>
+              <stop offset="0.5" stop-color="#00A8FF"/>
+              <stop offset="1" stop-color="#E91E8C"/>
+              <animateTransform attributeName="gradientTransform" type="rotate" from="60 211 171" to="420 211 171" dur="9s" repeatCount="indefinite"/>
+            </linearGradient>
+          </defs>
+          <path d="M 0 0 L 400 0 L 400 120 C 422 120, 422 200, 400 200 L 400 320 L 240 320 C 240 342, 160 342, 160 320 L 0 320 L 0 200 C 22 200, 22 120, 0 120 L 0 0 Z"
+                fill="rgba(8,11,28,0.96)" stroke="url(#pp-grad-2)" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="puzzle-card__content">
+          <div class="puzzle-card__head">
+            <span class="puzzle-card__num">02 IDENTITY</span>
+            <div class="puzzle-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12c0-4.4 3.6-8 8-8s8 3.6 8 8"/><path d="M7 12c0-2.8 2.2-5 5-5s5 2.2 5 5"/><path d="M10 12c0-1.1.9-2 2-2s2 .9 2 2"/><circle cx="12" cy="18" r="1.4" fill="currentColor"/></svg></div>
+          </div>
+          <h3 class="puzzle-card__title">Naming &amp; Narrative</h3>
+          <p class="puzzle-card__desc">A name with intent, a story with structure, and a verbal world that gives the brand somewhere to live in the customer's mind.</p>
+        </div>
+      </article>
+
+      <!-- 03 VISUAL · TR · blank L, tab B -->
+      <article class="puzzle-card pp-3" tabindex="0">
+        <svg class="puzzle-card__shape" viewBox="0 0 400 342" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="pp-grad-3" x1="0" y1="0" x2="400" y2="342" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#E91E8C"/>
+              <stop offset="0.5" stop-color="#8B00FF"/>
+              <stop offset="1" stop-color="#00A8FF"/>
+              <animateTransform attributeName="gradientTransform" type="rotate" from="120 200 171" to="480 200 171" dur="9s" repeatCount="indefinite"/>
+            </linearGradient>
+          </defs>
+          <path d="M 0 0 L 400 0 L 400 320 L 240 320 C 240 342, 160 342, 160 320 L 0 320 L 0 200 C 22 200, 22 120, 0 120 L 0 0 Z"
+                fill="rgba(8,11,28,0.96)" stroke="url(#pp-grad-3)" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="puzzle-card__content">
+          <div class="puzzle-card__head">
+            <span class="puzzle-card__num">03 VISUAL</span>
+            <div class="puzzle-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="3.5"/><rect x="3" y="14" width="7" height="7" rx="3.5"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+          </div>
+          <h3 class="puzzle-card__title">Visual Identity System</h3>
+          <p class="puzzle-card__desc">Logo system, typography, colour, motion, and imagery rules. Designed to scale across digital, print, and product without breaking.</p>
+        </div>
+      </article>
+
+      <!-- 04 VOICE · BL · blank T, tab R -->
+      <article class="puzzle-card pp-4" tabindex="0">
+        <svg class="puzzle-card__shape" viewBox="0 0 422 320" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="pp-grad-4" x1="0" y1="0" x2="422" y2="320" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#8B5CF6"/>
+              <stop offset="0.5" stop-color="#00A8FF"/>
+              <stop offset="1" stop-color="#00E5D4"/>
+              <animateTransform attributeName="gradientTransform" type="rotate" from="180 211 160" to="540 211 160" dur="9s" repeatCount="indefinite"/>
+            </linearGradient>
+          </defs>
+          <path d="M 0 0 L 160 0 C 160 22, 240 22, 240 0 L 400 0 L 400 120 C 422 120, 422 200, 400 200 L 400 320 L 0 320 Z"
+                fill="rgba(8,11,28,0.96)" stroke="url(#pp-grad-4)" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="puzzle-card__content">
+          <div class="puzzle-card__head">
+            <span class="puzzle-card__num">04 VOICE</span>
+            <div class="puzzle-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 11v2"/></svg></div>
+          </div>
+          <h3 class="puzzle-card__title">Voice &amp; Messaging</h3>
+          <p class="puzzle-card__desc">Tone framework, message hierarchy, and copy patterns so every channel sounds like one brand. Not five freelancers.</p>
+        </div>
+      </article>
+
+      <!-- 05 DIFFERENTIATION · BM · blank T, blank L, tab R -->
+      <article class="puzzle-card pp-5" tabindex="0">
+        <svg class="puzzle-card__shape" viewBox="0 0 422 320" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="pp-grad-5" x1="0" y1="0" x2="422" y2="320" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#FFB800"/>
+              <stop offset="0.5" stop-color="#E91E8C"/>
+              <stop offset="1" stop-color="#00E5D4"/>
+              <animateTransform attributeName="gradientTransform" type="rotate" from="240 211 160" to="600 211 160" dur="9s" repeatCount="indefinite"/>
+            </linearGradient>
+          </defs>
+          <path d="M 0 0 L 160 0 C 160 22, 240 22, 240 0 L 400 0 L 400 120 C 422 120, 422 200, 400 200 L 400 320 L 0 320 L 0 200 C 22 200, 22 120, 0 120 L 0 0 Z"
+                fill="rgba(8,11,28,0.96)" stroke="url(#pp-grad-5)" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="puzzle-card__content">
+          <div class="puzzle-card__head">
+            <span class="puzzle-card__num">05 DIFFERENTIATION</span>
+            <div class="puzzle-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6M12 9l-5 5M12 9l5 5M7 14v7M17 14v7M7 14h10"/></svg></div>
+          </div>
+          <h3 class="puzzle-card__title">Market Differentiation</h3>
+          <p class="puzzle-card__desc">A sharp, defensible angle against competitors. Built on truth, not slogans. The reason a customer chooses you over the obvious alternative.</p>
+        </div>
+      </article>
+
+      <!-- 06 GOVERNANCE · BR · blank T, blank L -->
+      <article class="puzzle-card pp-6" tabindex="0">
+        <svg class="puzzle-card__shape" viewBox="0 0 400 320" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="pp-grad-6" x1="0" y1="0" x2="400" y2="320" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#00CCFF"/>
+              <stop offset="0.5" stop-color="#8B00FF"/>
+              <stop offset="1" stop-color="#E91E8C"/>
+              <animateTransform attributeName="gradientTransform" type="rotate" from="300 200 160" to="660 200 160" dur="9s" repeatCount="indefinite"/>
+            </linearGradient>
+          </defs>
+          <path d="M 0 0 L 160 0 C 160 22, 240 22, 240 0 L 400 0 L 400 320 L 0 320 L 0 200 C 22 200, 22 120, 0 120 L 0 0 Z"
+                fill="rgba(8,11,28,0.96)" stroke="url(#pp-grad-6)" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="puzzle-card__content">
+          <div class="puzzle-card__head">
+            <span class="puzzle-card__num">06 GOVERNANCE</span>
+            <div class="puzzle-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h11l3 3v15H5z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></div>
+          </div>
+          <h3 class="puzzle-card__title">Guidelines &amp; Governance</h3>
+          <p class="puzzle-card__desc">A single source of truth so internal teams, agencies, and contractors execute consistently. Without diluting what was built.</p>
+        </div>
+      </article>
+
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="svc-section brand-process">
+  <div class="svc-inner">
+    <div class="gsap-hidden">
+      <div class="svc-label">The Build</div>
+      <h2 class="svc-heading">From first principles to a <em>deployable system</em>.</h2>
+      <p class="svc-sub">Four phases, sequenced so strategy is locked before visuals begin and governance is shipped alongside the launch. Not bolted on after.</p>
+    </div>
+
+    <div class="build-flow">
+      <div class="build-track gsap-hidden" aria-hidden="true">
+        <div class="build-track__line"></div>
+        <div class="build-track__pulse"></div>
+      </div>
+
+      <div class="build-steps">
+        <article class="build-step bs-1 gsap-hidden">
+          <div class="build-step__node">
+            <div class="build-step__ring"></div>
+            <div class="build-step__node-inner"><span class="build-step__num">01</span></div>
+          </div>
+          <div class="build-step__meta">Phase 01</div>
+          <h4 class="build-step__title">Discovery</h4>
+          <p class="build-step__desc">Deep dive into business model, customer, competitive set, and the commercial outcome the brand has to drive.</p>
+        </article>
+
+        <article class="build-step bs-2 gsap-hidden">
+          <div class="build-step__node">
+            <div class="build-step__ring"></div>
+            <div class="build-step__node-inner"><span class="build-step__num">02</span></div>
+          </div>
+          <div class="build-step__meta">Phase 02</div>
+          <h4 class="build-step__title">Strategy</h4>
+          <p class="build-step__desc">Positioning, narrative architecture, and differentiation. Signed off before a single visual decision gets made.</p>
+        </article>
+
+        <article class="build-step bs-3 gsap-hidden">
+          <div class="build-step__node">
+            <div class="build-step__ring"></div>
+            <div class="build-step__node-inner"><span class="build-step__num">03</span></div>
+          </div>
+          <div class="build-step__meta">Phase 03</div>
+          <h4 class="build-step__title">Identity</h4>
+          <p class="build-step__desc">Naming where required, visual identity, voice, and the full creative system designed against the strategy.</p>
+        </article>
+
+        <article class="build-step bs-4 gsap-hidden">
+          <div class="build-step__node">
+            <div class="build-step__ring"></div>
+            <div class="build-step__node-inner"><span class="build-step__num">04</span></div>
+          </div>
+          <div class="build-step__meta">Phase 04</div>
+          <h4 class="build-step__title">Activation</h4>
+          <p class="build-step__desc">Guidelines, templates, governance, and rollout. So the brand can ship across every channel without losing fidelity.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OUTCOMES ===== -->
+<section class="svc-section brand-outcomes">
+  <div class="svc-inner">
+    <div class="gsap-hidden">
+      <div class="svc-label">What Changes</div>
+      <h2 class="svc-heading">A brand that <em>earns its keep</em>.</h2>
+      <p class="svc-sub">The point is never the brand itself. It's what the brand does — every day, in every channel, in every decision a customer makes about whether you're worth their attention and their money.</p>
+    </div>
+    <div class="outcomes-grid">
+      <!-- 01 PRICING POWER · Animated clock -->
+      <article class="outcome-item oc-1 gsap-hidden">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" aria-hidden="true">
+            <circle cx="40" cy="40" r="34" stroke-width="1.5" opacity="0.32"/>
+            <circle cx="40" cy="40" r="29" stroke-width="1.5" stroke-dasharray="4 7" opacity="0.55" class="oc-icon__ring-dash"/>
+            <line x1="40" y1="14" x2="40" y2="18" stroke-width="2" stroke-linecap="round"/>
+            <line x1="40" y1="62" x2="40" y2="66" stroke-width="2" stroke-linecap="round"/>
+            <line x1="14" y1="40" x2="18" y2="40" stroke-width="2" stroke-linecap="round"/>
+            <line x1="62" y1="40" x2="66" y2="40" stroke-width="2" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="40" y2="23" stroke-width="2.6" stroke-linecap="round" class="oc-icon__hand-fast"/>
+            <line x1="40" y1="40" x2="53" y2="40" stroke-width="2" stroke-linecap="round" class="oc-icon__hand-slow"/>
+            <circle cx="40" cy="40" r="3" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <h3 class="outcome-title">Pricing Power</h3>
+        <p class="outcome-desc">A position that commands premium without justifying itself line by line. The brand does the work.</p>
+      </article>
+
+      <!-- 02 QUALIFIED DEMAND · Animated bars + trend line -->
+      <article class="outcome-item oc-2 gsap-hidden">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" aria-hidden="true">
+            <path d="M 10 16 L 28 12 L 50 8 L 72 6" stroke-width="1.8" stroke-linecap="round" opacity="0.7" class="oc-icon__trend"/>
+            <circle cx="72" cy="6" r="2.4" fill="currentColor" stroke="none" opacity="0.85"/>
+            <rect x="12" y="46" width="10" height="24" rx="2" fill="currentColor" stroke="none" class="oc-icon__bar b1"/>
+            <rect x="28" y="38" width="10" height="32" rx="2" fill="currentColor" stroke="none" class="oc-icon__bar b2"/>
+            <rect x="44" y="28" width="10" height="42" rx="2" fill="currentColor" stroke="none" class="oc-icon__bar b3"/>
+            <rect x="60" y="18" width="10" height="52" rx="2" fill="currentColor" stroke="none" class="oc-icon__bar b4"/>
+          </svg>
+        </div>
+        <h3 class="outcome-title">Qualified Demand</h3>
+        <p class="outcome-desc">You attract customers who already understand the value before the first call. Shorter cycles, less discounting.</p>
+      </article>
+
+      <!-- 03 OPERATIONAL CONSISTENCY · 3×3 grid pulse wave -->
+      <article class="outcome-item oc-3 gsap-hidden">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 80 80" fill="currentColor" stroke="none" aria-hidden="true">
+            <rect x="12" y="12" width="16" height="16" rx="2" class="oc-icon__cell g1"/>
+            <rect x="32" y="12" width="16" height="16" rx="2" class="oc-icon__cell g2"/>
+            <rect x="52" y="12" width="16" height="16" rx="2" class="oc-icon__cell g3"/>
+            <rect x="12" y="32" width="16" height="16" rx="2" class="oc-icon__cell g4"/>
+            <rect x="32" y="32" width="16" height="16" rx="2" class="oc-icon__cell g5"/>
+            <rect x="52" y="32" width="16" height="16" rx="2" class="oc-icon__cell g6"/>
+            <rect x="12" y="52" width="16" height="16" rx="2" class="oc-icon__cell g7"/>
+            <rect x="32" y="52" width="16" height="16" rx="2" class="oc-icon__cell g8"/>
+            <rect x="52" y="52" width="16" height="16" rx="2" class="oc-icon__cell g9"/>
+          </svg>
+        </div>
+        <h3 class="outcome-title">Operational Consistency</h3>
+        <p class="outcome-desc">Every channel, every team, every vendor outputs work that looks and sounds like one company.</p>
+      </article>
+
+      <!-- 04 DEFENSIBLE ASSET · Shield with breathing star -->
+      <article class="outcome-item oc-4 gsap-hidden">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" aria-hidden="true">
+            <path d="M 40 8 L 64 18 L 64 40 C 64 56 52 68 40 72 C 28 68 16 56 16 40 L 16 18 Z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" class="oc-icon__shield"/>
+            <path d="M 40 26 L 43.2 35 L 53 35.8 L 45.6 42.2 L 47.6 51.6 L 40 46.4 L 32.4 51.6 L 34.4 42.2 L 27 35.8 L 36.8 35 Z" fill="currentColor" stroke="none" class="oc-icon__star"/>
+            <circle cx="22" cy="22" r="1.5" fill="currentColor" stroke="none" class="oc-icon__sparkle sp1"/>
+            <circle cx="58" cy="20" r="1.2" fill="currentColor" stroke="none" class="oc-icon__sparkle sp2"/>
+            <circle cx="60" cy="56" r="1.3" fill="currentColor" stroke="none" class="oc-icon__sparkle sp3"/>
+          </svg>
+        </div>
+        <h3 class="outcome-title">Defensible Asset</h3>
+        <p class="outcome-desc">An identity competitors can't easily copy. Because it's anchored in something they don't have.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORK SHOWCASE ===== -->
+<section class="svc-section brand-works">
+  <div class="svc-inner">
+    <div class="gsap-hidden">
+      <div class="svc-label">Brand in the Wild</div>
+      <h2 class="svc-heading">Strategy made <em>visible</em>.</h2>
+      <p class="svc-sub">A glimpse of recent brand systems — built across categories from luxury hospitality to clean technology and high-performance commerce.</p>
+    </div>
+    <div class="works__grid">
+      <a href="portfolio-livwater.html" class="work-card w1 gsap-hidden">
+        <img class="work-card__img" src="assets/images/1.png" alt="Livwater brand system" loading="lazy"/>
+        <div class="work-card__overlay"></div>
+        <div class="work-card__topline"></div>
+        <span class="work-card__tag">Hospitality Brand</span>
+        <span class="work-card__arrow">→</span>
+        <div class="work-card__content">
+          <h3 class="work-card__title">Livwater</h3>
+          <p class="work-card__sub">Luxury experience design with a brand system that scales across digital, print, and physical hospitality touchpoints.</p>
+        </div>
+      </a>
+      <a href="portfolio-grounza.html" class="work-card w2 gsap-hidden">
+        <img class="work-card__img" src="assets/images/20.png" alt="Grounza brand system" loading="lazy"/>
+        <div class="work-card__overlay"></div>
+        <div class="work-card__topline"></div>
+        <span class="work-card__tag">Tech Brand</span>
+        <span class="work-card__arrow">→</span>
+        <div class="work-card__content">
+          <h3 class="work-card__title">Grounza</h3>
+          <p class="work-card__sub">Technical clarity, expressed as a brand. Confident, modern, defensible.</p>
+        </div>
+      </a>
+      <a href="portfolio-precision.html" class="work-card w3 gsap-hidden">
+        <img class="work-card__img" src="assets/images/21.png" alt="Precision brand system" loading="lazy"/>
+        <div class="work-card__overlay"></div>
+        <div class="work-card__topline"></div>
+        <span class="work-card__tag">Commerce Brand</span>
+        <span class="work-card__arrow">→</span>
+        <div class="work-card__content">
+          <h3 class="work-card__title">Precision</h3>
+          <p class="work-card__sub">A performance brand built for credibility and conversion at scale.</p>
+        </div>
+      </a>
+      <a href="portfolio.html" class="work-card w4 gsap-hidden">
+        <img class="work-card__img" src="assets/images/22.png" alt="Portfolio of brand work" loading="lazy"/>
+        <div class="work-card__overlay"></div>
+        <div class="work-card__topline"></div>
+        <span class="work-card__tag">More Work</span>
+        <span class="work-card__arrow">→</span>
+        <div class="work-card__content">
+          <h3 class="work-card__title">See the Full Portfolio</h3>
+          <p class="work-card__sub">Brand systems across hospitality, technology, commerce, and consumer categories.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="svc-section svc-pricing" id="pricing">
+  <div class="svc-inner">
+    <div class="gsap-hidden">
+      <div class="svc-label">Investment</div>
+      <h2 class="svc-heading">Three packages. <em>Or build your own</em>.</h2>
+      <p class="svc-sub">Three productised brand packages plus individual services. Add what fits — totals build in your cart and turn into a tailored proposal once you send the enquiry.</p>
+    </div>
+
+    <div class="prc-tabs">
+      <button class="prc-tab is-active" data-tab="packages">Packages</button>
+      <button class="prc-tab" data-tab="individual">Individual Services</button>
+    </div>
+
+    <!-- PACKAGES -->
+    <div class="prc-panel is-active" data-panel="packages">
+      <div class="prc-pkgs">
+        <div class="prc-pkg">
+          <div class="prc-pkg-tier">Tier 01</div>
+          <h3 class="prc-pkg-name">Brand Essentials</h3>
+          <p class="prc-pkg-tag">A clean, commercially-ready brand for early-stage businesses.</p>
+          <div class="prc-price"><span class="prc-price-from">From</span><span class="prc-price-amount">R45,000</span></div>
+          <div class="prc-frame"><strong>4–5 weeks</strong>Fixed scope</div>
+          <p class="prc-pkg-desc">Sharp positioning, a confident identity, and the core brand assets you need to go to market with intent.</p>
+          <div class="prc-inc-label">Includes</div>
+          <ul class="prc-inc">
+            <li>Positioning &amp; Audience</li>
+            <li>Logo &amp; Wordmark</li>
+            <li>Colour &amp; Typography</li>
+            <li>One-page Brand Sheet</li>
+          </ul>
+          <div class="prc-actions">
+            <button class="prc-btn prc-btn--primary" data-add-cart data-id="brand-essentials" data-name="Brand Essentials" data-price="45000" data-type="package" data-section="Brand">Add to Cart</button>
+            <a href="contact.html" class="prc-btn prc-btn--ghost">Discuss</a>
+          </div>
+        </div>
+
+        <div class="prc-pkg is-featured">
+          <span class="prc-pkg-badge">Most Popular</span>
+          <div class="prc-pkg-tier">Tier 02</div>
+          <h3 class="prc-pkg-name">Brand Foundation</h3>
+          <p class="prc-pkg-tag">The full strategic brand build.</p>
+          <div class="prc-price"><span class="prc-price-from">From</span><span class="prc-price-amount">R95,000</span></div>
+          <div class="prc-frame"><strong>8–10 weeks</strong>Fixed scope</div>
+          <p class="prc-pkg-desc">Strategy, identity, voice, and a working system — everything you need to deploy the brand consistently across every channel.</p>
+          <div class="prc-inc-label">Includes</div>
+          <ul class="prc-inc">
+            <li>Brand Strategy &amp; Positioning</li>
+            <li>Visual Identity System</li>
+            <li>Voice &amp; Messaging Framework</li>
+            <li>Brand Guidelines (digital)</li>
+            <li>Launch Asset Pack</li>
+          </ul>
+          <div class="prc-actions">
+            <button class="prc-btn prc-btn--primary" data-add-cart data-id="brand-foundation" data-name="Brand Foundation" data-price="95000" data-type="package" data-section="Brand">Add to Cart</button>
+            <a href="contact.html" class="prc-btn prc-btn--ghost">Discuss</a>
+          </div>
+        </div>
+
+        <div class="prc-pkg">
+          <div class="prc-pkg-tier">Tier 03</div>
+          <h3 class="prc-pkg-name">Brand Engineered</h3>
+          <p class="prc-pkg-tag">A defensible, governed brand system at scale.</p>
+          <div class="prc-price"><span class="prc-price-from">From</span><span class="prc-price-amount">R180,000</span></div>
+          <div class="prc-frame"><strong>12–14 weeks</strong>Multi-phase</div>
+          <p class="prc-pkg-desc">For businesses operating across multiple products, markets, or teams. Includes architecture, governance, and an internal enablement workshop.</p>
+          <div class="prc-inc-label">Includes</div>
+          <ul class="prc-inc">
+            <li>Everything in Foundation</li>
+            <li>Brand Architecture</li>
+            <li>Sub-brand &amp; Product Systems</li>
+            <li>Governance &amp; Approval Flow</li>
+            <li>Internal Brand Enablement</li>
+            <li>Quarterly Brand Audits (Year 1)</li>
+          </ul>
+          <div class="prc-actions">
+            <button class="prc-btn prc-btn--primary" data-add-cart data-id="brand-engineered" data-name="Brand Engineered" data-price="180000" data-type="package" data-section="Brand">Add to Cart</button>
+            <a href="contact.html" class="prc-btn prc-btn--ghost">Discuss</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INDIVIDUAL -->
+    <div class="prc-panel" data-panel="individual">
+      <p class="prc-ind-intro">Standalone brand services — useful for businesses already mid-build, or teams who only need a specific module. Add multiple to combine.</p>
+      <div class="prc-ind-grid">
+        <div class="prc-ind">
+          <div class="prc-ind-head"><h4 class="prc-ind-name">Positioning Sprint</h4><span class="prc-ind-price">R18,000</span></div>
+          <p class="prc-ind-desc">Two-week intensive — competitive analysis, audience definition, and a signed-off positioning statement.</p>
+          <button class="prc-ind-btn" data-add-cart data-id="brand-positioning" data-name="Positioning Sprint" data-price="18000" data-type="service" data-section="Brand">+ Add to Cart</button>
+        </div>
+        <div class="prc-ind">
+          <div class="prc-ind-head"><h4 class="prc-ind-name">Brand Audit</h4><span class="prc-ind-price">R12,000</span></div>
+          <p class="prc-ind-desc">A full diagnostic of the existing brand — what's working, what's not, what should change first.</p>
+          <button class="prc-ind-btn" data-add-cart data-id="brand-audit" data-name="Brand Audit" data-price="12000" data-type="service" data-section="Brand">+ Add to Cart</button>
+        </div>
+        <div class="prc-ind">
+          <div class="prc-ind-head"><h4 class="prc-ind-name">Logo &amp; Wordmark</h4><span class="prc-ind-price">R14,000</span></div>
+          <p class="prc-ind-desc">Primary mark, wordmark, and lockup variations — delivered as a production-ready asset pack.</p>
+          <button class="prc-ind-btn" data-add-cart data-id="brand-logo" data-name="Logo &amp; Wordmark" data-price="14000" data-type="service" data-section="Brand">+ Add to Cart</button>
+        </div>
+        <div class="prc-ind">
+          <div class="prc-ind-head"><h4 class="prc-ind-name">Visual Identity System</h4><span class="prc-ind-price">R35,000</span></div>
+          <p class="prc-ind-desc">Complete visual language — logo, colour, type, imagery, iconography, motion principles.</p>
+          <button class="prc-ind-btn" data-add-cart data-id="brand-vis" data-name="Visual Identity System" data-price="35000" data-type="service" data-section="Brand">+ Add to Cart</button>
+        </div>
+        <div class="prc-ind">
+          <div class="prc-ind-head"><h4 class="prc-ind-name">Voice &amp; Messaging</h4><span class="prc-ind-price">R15,000</span></div>
+          <p class="prc-ind-desc">Tone framework, message hierarchy, and copy patterns so every channel sounds like one brand.</p>
+          <button class="prc-ind-btn" data-add-cart data-id="brand-voice" data-name="Voice &amp; Messaging" data-price="15000" data-type="service" data-section="Brand">+ Add to Cart</button>
+        </div>
+        <div class="prc-ind">
+          <div class="prc-ind-head"><h4 class="prc-ind-name">Brand Guidelines</h4><span class="prc-ind-price">R22,000</span></div>
+          <p class="prc-ind-desc">Digital guidelines document — single source of truth for teams, agencies, and contractors.</p>
+          <button class="prc-ind-btn" data-add-cart data-id="brand-guidelines" data-name="Brand Guidelines" data-price="22000" data-type="service" data-section="Brand">+ Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shop bridge — Shop is the central pricing hub -->
+    <div class="prc-shop-bridge gsap-hidden">
+      <div class="prc-shop-bridge__copy">
+        <span class="prc-shop-bridge__label">Shop · The Pricing Hub</span>
+        <div class="prc-shop-bridge__title">Browse every package and product across Brand, Business, Marketing, and AI.</div>
+      </div>
+      <a href="shop.html" class="prc-shop-bridge__link">Visit the Shop <span aria-hidden="true">→</span></a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== CTA ===== -->
+<section class="svc-cta">
+  <div class="svc-cta__inner gsap-hidden">
+    <div class="svc-cta__eyebrow">Ready when you are</div>
+    <h2 class="svc-cta__h">Let's build a brand that <em>earns its keep</em>.</h2>
+    <p class="svc-cta__sub">Most engagements start with a short conversation about the commercial outcome you're trying to drive. We'll tell you honestly whether brand is the right lever — and if so, what scope makes sense.</p>
+    <div class="svc-cta__actions">
+      <a href="contact.html" class="btn-primary">Start a Project</a>
+      <a href="portfolio.html" class="btn-ghost">See the Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <div class="footer__brand-row">
+        <svg viewBox="150 80 520 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#ffffff" d="M 420.789062 92.867188 L 279.285156 337.953125 C 282.851562 337.953125 286.414062 337.835938 289.972656 337.605469 C 293.53125 337.371094 297.078125 337.019531 300.613281 336.554688 C 304.148438 336.089844 307.664062 335.511719 311.164062 334.8125 C 314.660156 334.117188 318.132812 333.308594 321.574219 332.386719 C 325.019531 331.464844 328.429688 330.429688 331.808594 329.28125 C 335.183594 328.136719 338.519531 326.882812 341.8125 325.515625 C 345.109375 324.152344 348.355469 322.679688 351.554688 321.105469 C 354.75 319.527344 357.894531 317.847656 360.984375 316.0625 C 364.070312 314.28125 367.097656 312.398438 370.0625 310.417969 C 373.027344 308.4375 375.925781 306.359375 378.753906 304.191406 C 381.582031 302.019531 384.339844 299.757812 387.019531 297.40625 C 389.699219 295.054688 392.300781 292.621094 394.824219 290.097656 C 397.34375 287.578125 399.78125 284.976562 402.132812 282.296875 C 404.484375 279.613281 406.746094 276.859375 408.914062 274.03125 C 411.085938 271.203125 413.164062 268.304688 415.144531 265.339844 C 417.125 262.375 419.007812 259.347656 420.789062 256.261719 C 422.574219 253.171875 424.253906 250.027344 425.832031 246.832031 C 427.410156 243.632812 428.878906 240.386719 430.242188 237.089844 C 431.609375 233.796875 432.863281 230.460938 434.011719 227.085938 C 435.15625 223.707031 436.191406 220.296875 437.113281 216.851562 C 438.039062 213.40625 438.847656 209.9375 439.542969 206.441406 C 440.238281 202.941406 440.820312 199.425781 441.285156 195.890625 C 441.75 192.355469 442.097656 188.808594 442.332031 185.25 C 442.566406 181.691406 442.683594 178.128906 442.683594 174.5625 C 442.683594 170.996094 442.566406 167.433594 442.332031 163.875 C 442.097656 160.316406 441.75 156.769531 441.285156 153.234375 C 440.820312 149.699219 440.238281 146.183594 439.542969 142.6875 C 438.847656 139.1875 438.039062 135.71875 437.113281 132.273438 C 436.191406 128.828125 435.15625 125.417969 434.011719 122.042969 C 432.863281 118.664062 431.609375 115.328125 430.242188 112.035156 C 428.878906 108.738281 427.410156 105.492188 425.832031 102.296875 C 424.253906 99.097656 422.574219 95.953125 420.789062 92.867188 Z"/><path fill="#ffffff" d="M 515.125 419.667969 L 562.292969 501.367188 L 656.628906 501.367188 L 609.457031 419.667969 L 515.125 256.261719 L 420.789062 419.667969 Z"/><path fill="#ffffff" d="M 373.621094 501.347656 L 420.789062 419.667969 L 326.457031 419.667969 C 322.890625 419.667969 319.328125 419.785156 315.769531 420.015625 C 312.214844 420.25 308.667969 420.597656 305.128906 421.0625 C 301.59375 421.527344 298.078125 422.109375 294.582031 422.804688 C 291.085938 423.5 287.613281 424.308594 284.167969 425.230469 C 280.726562 426.152344 277.3125 427.1875 273.9375 428.332031 C 270.5625 429.480469 267.226562 430.734375 263.929688 432.097656 C 260.636719 433.464844 257.390625 434.933594 254.191406 436.511719 C 250.992188 438.085938 247.851562 439.765625 244.761719 441.550781 C 241.671875 443.332031 238.648438 445.214844 235.683594 447.195312 C 232.71875 449.175781 229.820312 451.25 226.992188 453.421875 C 224.160156 455.59375 221.40625 457.851562 218.726562 460.203125 C 216.042969 462.554688 213.441406 464.992188 210.921875 467.511719 C 208.398438 470.03125 205.964844 472.632812 203.613281 475.316406 C 201.261719 477.996094 199 480.75 196.828125 483.578125 C 194.65625 486.40625 192.582031 489.304688 190.601562 492.269531 C 188.617188 495.234375 186.738281 498.261719 184.953125 501.347656 Z"/></svg>
+        <span class="footer__brand-name">Archetype Studio</span>
+      </div>
+      <p class="footer__tagline">Build the brand. Architect the business.<br>Automate the growth.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Footer - Company">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__nav" aria-label="Footer - Services">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services-brand.html">Brand Development</a></li>
+        <li><a href="services-business.html">Business Architecture</a></li>
+        <li><a href="services-marketing.html">Marketing Studio</a></li>
+        <li><a href="services-ai.html">AI &amp; Automation</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__nav" aria-label="Footer - Connect">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="mailto:hello@archetypestudio.com">hello@archetypestudio.com</a></li>
+        <li><a href="tel:+27823477565">+27 82 347 7565</a></li>
+        <li><a href="#" rel="noopener">Instagram</a></li>
+        <li><a href="#" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <span>© Archetype Studio. All rights reserved.</span>
+    <span>Built to compound.</span>
+  </div>
+</footer>
+
+<!-- ===== FLOATING CART ===== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Your selection">
+  <header class="cart-drawer__head">
+    <h3 class="cart-drawer__title">Your <span>Selection</span></h3>
+    <button class="cart-drawer__close" id="cartClose" aria-label="Close cart">×</button>
+  </header>
+  <div class="cart-drawer__body" id="cartBody"></div>
+  <footer class="cart-drawer__foot">
+    <div class="cart-total"><span>Estimated Total</span><strong id="cartTotal">R0</strong></div>
+    <p class="cart-note">Prices are starting points. Final scope &amp; investment confirmed during the discovery conversation.</p>
+    <a href="contact.html" class="cart-checkout" id="cartCheckout">Send Enquiry</a>
+  </footer>
+</aside>
+
+<script>
+/* ===== NAV: SCROLL + MOBILE TOGGLE + MEGA MENU ===== */
+(function(){
+  var n=document.getElementById('site-nav');
+  if(!n) return;
+  var t=document.getElementById('site-nav-toggle');
+  function onScroll(){n.classList.toggle('scrolled',window.scrollY>40);}
+  onScroll();
+  window.addEventListener('scroll',onScroll,{passive:true});
+  if(t){
+    t.addEventListener('click',function(){
+      var open=n.classList.toggle('is-open');
+      t.setAttribute('aria-expanded',open?'true':'false');
+    });
+    n.querySelectorAll('.nav__links > li > a, .nav__dropdown a').forEach(function(a){
+      a.addEventListener('click',function(){
+        n.classList.remove('is-open');
+        if(t) t.setAttribute('aria-expanded','false');
+      });
+    });
+  }
+  var items=n.querySelectorAll('.nav__item--has-dropdown');
+  if(!items.length) return;
+  var bd=document.createElement('div');
+  bd.className='nav__mega-backdrop';
+  document.body.appendChild(bd);
+  function isDesktop(){return window.innerWidth>860;}
+  var closeTimer=null;
+  function closeAll(){items.forEach(function(it){it.classList.remove('is-mega-open');var tr=it.querySelector(':scope > a');var m=it.querySelector('.nav__mega');if(tr)tr.setAttribute('aria-expanded','false');if(m)m.setAttribute('aria-hidden','true');});bd.classList.remove('is-active');}
+  function openOnly(it){items.forEach(function(o){if(o!==it)o.classList.remove('is-mega-open');});it.classList.add('is-mega-open');bd.classList.add('is-active');var tr=it.querySelector(':scope > a');var m=it.querySelector('.nav__mega');if(tr)tr.setAttribute('aria-expanded','true');if(m)m.setAttribute('aria-hidden','false');}
+  items.forEach(function(item){
+    var trigger=item.querySelector(':scope > a');
+    var mega=item.querySelector('.nav__mega');
+    if(!trigger||!mega) return;
+    function scheduleClose(){clearTimeout(closeTimer);closeTimer=setTimeout(closeAll,750);}
+    function cancelClose(){clearTimeout(closeTimer);closeTimer=null;}
+    item.addEventListener('mouseenter',function(){if(isDesktop()){cancelClose();openOnly(item);}});
+    item.addEventListener('mouseleave',function(){if(isDesktop()) scheduleClose();});
+    mega.addEventListener('mouseenter',function(){if(isDesktop()) cancelClose();});
+    mega.addEventListener('mouseleave',function(){if(isDesktop()) scheduleClose();});
+    trigger.addEventListener('focus',function(){if(isDesktop()) openOnly(item);});
+  });
+  bd.addEventListener('click',closeAll);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape') closeAll();});
+})();
+
+/* ===== HERO FIXED SCROLL FADE ===== */
+(function(){
+  var hero=document.querySelector('.brand-hero');
+  if(!hero) return;
+  var pending=false;
+  function paint(){
+    pending=false;
+    var vh=window.innerHeight||document.documentElement.clientHeight;
+    var p=Math.min(1,Math.max(0,window.scrollY/vh));
+    var eased=1-Math.pow(1-p,1.6);
+    hero.style.setProperty('--hf',eased.toFixed(3));
+  }
+  function onScroll(){if(pending) return;pending=true;requestAnimationFrame(paint);}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll,{passive:true});
+  paint();
+})();
+
+/* ===== SCROLL REVEAL (gsap-hidden + manifesto fragments) ===== */
+(function(){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.gsap-hidden').forEach(function(el){io.observe(el);});
+
+  var io2=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target);}
+    });
+  },{threshold:0.3});
+  document.querySelectorAll('.manifesto__text .frag').forEach(function(el){io2.observe(el);});
+})();
+
+/* ===== CART + PRICING TABS ===== */
+(function(){
+  var KEY='archetype_cart_v1';
+  var fab=document.getElementById('cartFab');
+  if(!fab) return;
+  var drawer=document.getElementById('cartDrawer');
+  var overlay=document.getElementById('cartOverlay');
+  var body=document.getElementById('cartBody');
+  var total=document.getElementById('cartTotal');
+  var count=document.getElementById('cartCount');
+  var closeBtn=document.getElementById('cartClose');
+  var cart=[];
+  try{cart=JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){cart=[];}
+  function save(){localStorage.setItem(KEY,JSON.stringify(cart));render();markAddedButtons();}
+  function fmt(n){return 'R'+Number(n||0).toLocaleString('en-ZA');}
+  function totalAmount(){return cart.reduce(function(s,i){return s+(i.price*i.qty);},0);}
+  function totalQty(){return cart.reduce(function(s,i){return s+i.qty;},0);}
+  function render(){
+    var q=totalQty();
+    if(q>0){count.textContent=q;count.classList.remove('is-empty');}
+    else {count.classList.add('is-empty');}
+    total.textContent=fmt(totalAmount());
+    if(!cart.length){
+      body.innerHTML='<div class="cart-empty"><div class="cart-empty__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div><div class="cart-empty__t">Your selection is empty</div><p class="cart-empty__d">Add a package or service to start scoping your engagement.</p></div>';
+      return;
+    }
+    body.innerHTML=cart.map(function(i){
+      return '<div class="cart-item"><div class="cart-item__info"><div class="cart-item__name">'+i.name+'</div><div class="cart-item__type">'+(i.type==='package'?'Package':'Service')+''+i.section+'</div><div class="cart-item__qty"><button data-q="-" data-id="'+i.id+'" aria-label="Decrease">−</button><span>'+i.qty+'</span><button data-q="+" data-id="'+i.id+'" aria-label="Increase">+</button></div><button class="cart-item__remove" data-r="'+i.id+'">Remove</button></div><div class="cart-item__price">'+fmt(i.price*i.qty)+'</div></div>';
+    }).join('');
+    body.querySelectorAll('button[data-q]').forEach(function(b){b.addEventListener('click',function(){
+      var id=b.dataset.id;var op=b.dataset.q;
+      var it=cart.find(function(x){return x.id===id;});
+      if(!it) return;
+      if(op==='+') it.qty++; else it.qty=Math.max(1,it.qty-1);
+      save();
+    });});
+    body.querySelectorAll('button[data-r]').forEach(function(b){b.addEventListener('click',function(){
+      cart=cart.filter(function(x){return x.id!==b.dataset.r;});save();
+    });});
+  }
+  function markAddedButtons(){
+    document.querySelectorAll('[data-add-cart]').forEach(function(btn){
+      var id=btn.dataset.id;
+      var present=cart.some(function(i){return i.id===id;});
+      btn.classList.toggle('is-added',present);
+      if(present){btn.dataset._orig=btn.dataset._orig||btn.textContent;btn.textContent='Added ✓';}
+      else if(btn.dataset._orig){btn.textContent=btn.dataset._orig;}
+    });
+  }
+  document.querySelectorAll('[data-add-cart]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var id=btn.dataset.id;
+      var existing=cart.find(function(x){return x.id===id;});
+      if(existing){existing.qty++;}
+      else cart.push({id:id,name:btn.dataset.name,price:Number(btn.dataset.price)||0,type:btn.dataset.type||'service',section:btn.dataset.section||'',qty:1});
+      save();
+      fab.classList.add('is-pulse');setTimeout(function(){fab.classList.remove('is-pulse');},700);
+      drawer.classList.add('is-open');overlay.classList.add('is-open');
+    });
+  });
+  function openCart(){drawer.classList.add('is-open');overlay.classList.add('is-open');}
+  function closeCart(){drawer.classList.remove('is-open');overlay.classList.remove('is-open');}
+  fab.addEventListener('click',openCart);
+  closeBtn.addEventListener('click',closeCart);
+  overlay.addEventListener('click',closeCart);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape') closeCart();});
+
+  /* ===== PRICING VIEW TABS — smooth sliding-thumb switch ===== */
+  (function(){
+    var container=document.querySelector('.prc-tabs');
+    if(!container) return;
+    var tabs=container.querySelectorAll('.prc-tab');
+    if(!tabs.length) return;
+    function positionThumb(){
+      var a=container.querySelector('.prc-tab.is-active')||tabs[0];
+      if(!a) return;
+      container.style.setProperty('--thumb-x',a.offsetLeft+'px');
+      container.style.setProperty('--thumb-y',a.offsetTop+'px');
+      container.style.setProperty('--thumb-w',a.offsetWidth+'px');
+      container.style.setProperty('--thumb-h',a.offsetHeight+'px');
+    }
+    tabs.forEach(function(t){
+      t.addEventListener('click',function(){
+        var name=t.dataset.tab;
+        tabs.forEach(function(x){x.classList.toggle('is-active',x.dataset.tab===name);});
+        document.querySelectorAll('.prc-panel').forEach(function(x){x.classList.toggle('is-active',x.dataset.panel===name);});
+        positionThumb();
+      });
+    });
+    requestAnimationFrame(function(){
+      positionThumb();
+      requestAnimationFrame(function(){container.classList.add('is-ready');});
+    });
+    window.addEventListener('resize',positionThumb,{passive:true});
+    if(window.ResizeObserver){new ResizeObserver(positionThumb).observe(container);}
+  })();
+
+  render();markAddedButtons();
+})();
+</script>
+
+</body>
+</html>

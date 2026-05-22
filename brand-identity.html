@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archetype Studios — Brand Identity Pack 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --space:#070A17;--midnight:#0C1025;--void:#040610;
+  --blue:#00A8FF;--blue-glow:rgba(0,168,255,0.22);
+  --magenta:#E91E8C;--mag-glow:rgba(233,30,140,0.22);
+  --cyan:#00E5D4;--violet:#6B00C8;
+  --red:#BE1323;--gold:#FFB800;--brand-blue:#79BCEE;
+  --white:#FFFFFF;--off:#C8D0E0;--muted:#5A6478;
+  --border:rgba(255,255,255,0.07);--border-hi:rgba(255,255,255,0.14);
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth;scroll-padding-top:68px;}
+body{font-family:'DM Sans',sans-serif;background:var(--space);color:var(--off);overflow-x:hidden;line-height:1.6;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--void);}
+::-webkit-scrollbar-thumb{background:rgba(0,168,255,0.35);border-radius:3px;}
+
+/* ── NEON CANVAS ── */
+#neonCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.45;}
+
+/* ── PROGRESS BAR ── */
+#progress{position:fixed;top:0;left:0;height:2px;z-index:2000;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--magenta));width:0%;transition:width 0.1s linear;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;height:68px;z-index:1000;
+  display:flex;align-items:center;padding:0 52px;gap:40px;
+  background:rgba(4,6,16,0.82);backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-logo img{height:28px;width:auto;filter:drop-shadow(0 0 8px rgba(0,168,255,0.4));}
+.nav-brand{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--white);}
+.nav-links{display:flex;align-items:center;gap:28px;margin-left:auto;list-style:none;}
+.nav-links a{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--blue);}
+.nav-tag{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);flex-shrink:0;}
+
+/* ── COMMON SECTION ── */
+section{position:relative;overflow:hidden;padding:140px 88px 100px;}
+.section-inner{position:relative;z-index:2;}
+.s-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.s-label::after{content:'';flex:1;max-width:60px;height:1px;background:currentColor;opacity:0.4;}
+.s-label.blue{color:var(--blue);}
+.s-label.mag{color:var(--magenta);}
+.s-label.cyan{color:var(--cyan);}
+.s-label.gold{color:var(--gold);}
+h2.display{font-family:'Syne',sans-serif;font-size:clamp(40px,5.5vw,72px);font-weight:800;line-height:1.0;text-transform:uppercase;color:var(--white);margin-bottom:24px;}
+h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weight:800;text-transform:uppercase;color:var(--white);margin-bottom:20px;line-height:1.1;}
+.accent-blue{color:var(--blue);}
+.accent-mag{color:var(--magenta);}
+.accent-cyan{color:var(--cyan);}
+.accent-gold{color:var(--gold);}
+.grad{background:linear-gradient(135deg,var(--blue),var(--cyan) 40%,var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:0.08s;}
+.reveal-d2{transition-delay:0.16s;}
+.reveal-d3{transition-delay:0.24s;}
+.reveal-d4{transition-delay:0.32s;}
+.reveal-d5{transition-delay:0.40s;}
+
+/* ════════════════════════════════════
+   00  COVER
+════════════════════════════════════ */
+#cover{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:80px 40px;
+  background:var(--void);
+}
+.cover-bg{
+  position:absolute;inset:0;
+  background-image:url('assets/images/Introduction.png');
+  background-size:cover;background-position:center top;opacity:0.38;
+}
+.cover-overlay{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 50%,transparent 25%,rgba(4,6,16,0.5) 70%,rgba(4,6,16,0.9) 100%),
+    linear-gradient(to bottom,rgba(4,6,16,0.6) 0%,transparent 30%,transparent 70%,rgba(4,6,16,0.85) 100%),
+    radial-gradient(ellipse 60% 40% at 50% 50%,rgba(0,168,255,0.05),transparent 70%);
+}
+.cover-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:28px;max-width:900px;}
+.cover-mark{width:100px;height:auto;filter:drop-shadow(0 0 30px rgba(0,168,255,0.5)) drop-shadow(0 0 70px rgba(0,168,255,0.25));animation:markPulse 10s ease-in-out infinite;}
+@keyframes markPulse{0%,100%{filter:drop-shadow(0 0 24px rgba(0,168,255,0.4)) drop-shadow(0 0 60px rgba(0,168,255,0.18));opacity:0.9;}50%{filter:drop-shadow(0 0 50px rgba(0,168,255,0.7)) drop-shadow(0 0 110px rgba(0,168,255,0.35));opacity:1;}}
+.cover-rule{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--blue),var(--cyan),var(--magenta),transparent);}
+.cover-eyebrow{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);}
+.cover-title{font-family:'Syne',sans-serif;font-weight:800;text-transform:uppercase;line-height:1;}
+.cover-title .t-arrow{font-size:clamp(36px,5vw,70px);color:var(--red);line-height:1;font-weight:400;margin-right:14px;}
+.cover-title .t-grad{font-size:clamp(52px,8vw,110px);background:linear-gradient(135deg,var(--blue),var(--cyan) 35%,var(--magenta) 70%,var(--blue));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 10s ease-in-out infinite;}
+.cover-title .t-white{font-size:clamp(52px,8vw,110px);color:var(--white);display:block;}
+@keyframes gradShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.cover-tagline{font-family:'Space Grotesk',sans-serif;font-size:clamp(14px,1.5vw,17px);color:var(--off);line-height:1.65;max-width:520px;}
+.cover-tagline strong{color:var(--white);font-weight:500;}
+.cover-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.chip{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:6px 14px;border-radius:100px;border:1px solid;}
+.chip.blue{color:var(--blue);border-color:rgba(0,168,255,0.3);background:rgba(0,168,255,0.08);}
+.chip.mag{color:var(--magenta);border-color:rgba(233,30,140,0.3);background:rgba(233,30,140,0.08);}
+.chip.cyan{color:var(--cyan);border-color:rgba(0,229,212,0.3);background:rgba(0,229,212,0.08);}
+.cover-scroll{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:scrollBob 3s ease-in-out infinite;}
+.cover-scroll-label{font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);}
+.cover-scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,rgba(0,168,255,0.7),transparent);}
+@keyframes scrollBob{0%,100%{opacity:0.35;transform:translateX(-50%) translateY(0);}50%{opacity:0.7;transform:translateX(-50%) translateY(6px);}}
+.glow-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,168,255,0.15),rgba(0,229,212,0.12),transparent);overflow:hidden;}
+.glow-line::before{content:'';position:absolute;top:-4px;left:-20%;width:20%;height:10px;background:linear-gradient(90deg,transparent,var(--blue),var(--cyan),var(--magenta),transparent);filter:blur(4px);animation:beam 12s ease-in-out infinite;}
+.glow-line::after{content:'';position:absolute;top:0;left:-20%;width:20%;height:2px;background:linear-gradient(90deg,transparent,var(--blue),var(--cyan),var(--magenta),transparent);animation:beam 12s ease-in-out infinite;}
+@keyframes beam{0%{transform:translateX(-100%);opacity:0;}5%{opacity:1;}95%{opacity:1;}100%{transform:translateX(600%);opacity:0;}}
+
+/* ════════════════════════════════════
+   01  BRAND ESSENCE
+════════════════════════════════════ */
+#essence{background:var(--midnight);}
+.essence-bg{position:absolute;inset:0;background-image:url('assets/images/Philosophy.png');background-size:cover;background-position:center;opacity:0.08;}
+.essence-grid{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:start;margin-top:56px;}
+.essence-body{font-size:17px;line-height:1.78;color:var(--off);margin-bottom:22px;}
+.pos-card{background:rgba(0,168,255,0.05);border:1px solid rgba(0,168,255,0.18);border-radius:16px;padding:32px;margin-top:24px;}
+.pos-card .pc-eyebrow{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+.pos-card blockquote{font-family:'Syne',sans-serif;font-size:19px;font-weight:600;line-height:1.45;color:var(--white);font-style:italic;}
+.pillars{display:flex;flex-direction:column;gap:22px;}
+.pillar{padding:24px 24px 24px 22px;border-left:2px solid;border-radius:0 12px 12px 0;background:rgba(255,255,255,0.02);border-right:1px solid var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.pillar.p-blue{border-left-color:var(--blue);}
+.pillar.p-mag{border-left-color:var(--magenta);}
+.pillar.p-cyan{border-left-color:var(--cyan);}
+.pillar.p-gold{border-left-color:var(--gold);}
+.pillar-title{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.pillar p{font-size:13px;color:var(--muted);line-height:1.65;}
+.service-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px;}
+.snum{text-align:center;padding:22px 12px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,0.02);}
+.snum-n{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;line-height:1;}
+.snum-l{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-top:6px;}
+
+/* ════════════════════════════════════
+   02  THE MARK
+════════════════════════════════════ */
+#mark{background:var(--space);}
+.mark-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:88px;align-items:center;margin-top:56px;}
+.mark-stage{
+  display:flex;align-items:center;justify-content:center;
+  height:460px;border-radius:24px;
+  background:rgba(255,255,255,0.015);border:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.mark-grid-bg{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,168,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,168,255,0.04) 1px,transparent 1px);
+  background-size:44px 44px;border-radius:24px;
+}
+.mark-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,168,255,0.06),transparent 70%);}
+.mark-stage img{width:52%;height:auto;position:relative;z-index:2;filter:drop-shadow(0 0 40px rgba(0,168,255,0.35));animation:markPulse 8s ease-in-out infinite;}
+.mark-desc{font-size:16px;line-height:1.78;color:var(--off);margin-bottom:32px;}
+.anatomy{display:flex;flex-direction:column;gap:18px;}
+.anat-item{display:flex;align-items:flex-start;gap:16px;}
+.anat-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.anat-dot.blue{background:var(--blue);box-shadow:0 0 10px var(--blue);}
+.anat-dot.mag{background:var(--magenta);box-shadow:0 0 10px var(--magenta);}
+.anat-dot.cyan{background:var(--cyan);box-shadow:0 0 10px var(--cyan);}
+.anat-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--white);letter-spacing:0.06em;margin-bottom:4px;}
+.anat-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+.mark-note{margin-top:32px;padding:20px 24px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid var(--border);}
+.mark-note p{font-size:13px;color:var(--muted);line-height:1.65;}
+.mark-note strong{color:var(--off);font-weight:500;}
+
+/* ════════════════════════════════════
+   03  LOGO SYSTEM
+════════════════════════════════════ */
+#logos{background:linear-gradient(160deg,var(--space) 0%,var(--midnight) 100%);}
+.logo-section-head{margin-top:56px;}
+.logo-row-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;margin-top:36px;}
+.logo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.logo-row.duo{grid-template-columns:1fr 1fr;}
+.logo-card{
+  border-radius:18px;padding:44px 28px 36px;
+  display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;
+  border:1px solid var(--border);transition:border-color 0.3s,box-shadow 0.3s;
+  position:relative;overflow:hidden;
+}
+.logo-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,255,255,0.04),transparent 70%);pointer-events:none;}
+.logo-card:hover{border-color:var(--border-hi);box-shadow:0 16px 48px rgba(0,0,0,0.4);}
+.logo-card.dark{background:#080B1A;}
+.logo-card.light{background:#EDEEF2;}
+.logo-card img{max-width:200px;max-height:80px;height:auto;object-fit:contain;}
+.logo-card.light img{filter:invert(1);}
+.logo-card.lockup img{max-width:260px;max-height:56px;}
+.lc-stripe{height:3px;width:44px;border-radius:2px;margin-bottom:2px;}
+.lc-name{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;}
+.logo-card.dark .lc-name{color:var(--muted);}
+.logo-card.light .lc-name{color:#888;}
+.lc-use{font-size:12px;line-height:1.5;color:var(--muted);}
+.logo-card.light .lc-use{color:#999;}
+.logo-rules{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px;}
+.rule-box{border-radius:14px;padding:26px;border:1px solid;}
+.rule-box.do{border-color:rgba(0,229,212,0.18);background:rgba(0,229,212,0.03);}
+.rule-box.dont{border-color:rgba(255,45,85,0.18);background:rgba(255,45,85,0.03);}
+.rb-label{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:14px;}
+.rule-box.do .rb-label{color:var(--cyan);}
+.rule-box.dont .rb-label{color:#FF2D55;}
+.rule-box ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.rule-box ul li{font-size:13px;color:var(--off);padding-left:18px;position:relative;line-height:1.5;}
+.rule-box ul li::before{position:absolute;left:0;font-size:12px;}
+.rule-box.do ul li::before{content:'→';color:var(--cyan);}
+.rule-box.dont ul li::before{content:'×';color:#FF2D55;}
+
+/* ════════════════════════════════════
+   04  COLOUR
+════════════════════════════════════ */
+#colour{background:var(--space);}
+.colour-bg{position:absolute;inset:0;background-image:url('assets/images/6.png');background-size:cover;background-position:center;opacity:0.06;}
+.colour-primary{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:56px;position:relative;z-index:2;}
+.colour-secondary{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px;position:relative;z-index:2;}
+.swatch{border-radius:16px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:transform 0.25s var(--ease),box-shadow 0.25s;}
+.swatch:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,0.5);}
+.sw-color{height:130px;width:100%;position:relative;}
+.sw-copy{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);opacity:0;transition:opacity 0.2s;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#fff;}
+.swatch:hover .sw-copy{opacity:1;}
+.sw-info{padding:14px 14px 18px;background:rgba(255,255,255,0.025);}
+.sw-name{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--white);margin-bottom:3px;}
+.sw-hex{font-family:'Space Grotesk',monospace;font-size:11px;color:var(--muted);}
+.sw-role{font-size:11px;color:var(--muted);margin-top:3px;}
+.colour-notes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px;position:relative;z-index:2;}
+.cn{padding:26px;border-radius:14px;background:rgba(255,255,255,0.02);border:1px solid var(--border);}
+.cn-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.cn p{font-size:13px;color:var(--muted);line-height:1.65;}
+.gradient-chips{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;position:relative;z-index:2;}
+.grad-chip{height:36px;border-radius:100px;flex:1;min-width:160px;position:relative;overflow:hidden;}
+.grad-chip-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.85);}
+
+/* ════════════════════════════════════
+   05  TYPOGRAPHY
+════════════════════════════════════ */
+#typography{background:var(--midnight);}
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:56px;}
+.face-card{padding:44px;background:var(--space);border:1px solid var(--border);border-radius:22px;}
+.face-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;}
+.face-specimen{line-height:0.88;font-weight:800;color:var(--white);margin-bottom:18px;}
+.face-specimen.syne{font-family:'Syne',sans-serif;font-size:80px;}
+.face-specimen.grotesk{font-family:'Space Grotesk',sans-serif;font-size:64px;font-weight:700;}
+.face-specimen.dm{font-family:'DM Sans',sans-serif;font-size:52px;font-weight:300;}
+.face-name{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:3px;}
+.face-meta{font-size:13px;color:var(--muted);margin-bottom:18px;}
+.face-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:18px;}
+.weight-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.wtag{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;padding:4px 12px;border-radius:100px;background:rgba(255,255,255,0.06);color:var(--off);}
+.type-stack{display:flex;flex-direction:column;gap:24px;}
+.type-scale{grid-column:1/-1;padding:44px;background:var(--space);border:1px solid var(--border);border-radius:22px;margin-top:0;}
+.scale-row{display:flex;align-items:baseline;gap:28px;padding:18px 0;border-bottom:1px solid var(--border);}
+.scale-row:last-child{border-bottom:none;}
+.scale-meta{width:110px;flex-shrink:0;}
+.sm-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);}
+.sm-size{font-size:11px;color:var(--muted);margin-top:2px;}
+.scale-text{color:var(--white);font-family:'Syne',sans-serif;font-weight:800;flex:1;min-width:0;}
+
+/* ════════════════════════════════════
+   06  GRAPHIC LANGUAGE
+════════════════════════════════════ */
+#graphic{background:var(--space);}
+.graphic-bg{position:absolute;inset:0;background-image:url('assets/images/Portfolio.png');background-size:cover;background-position:center;opacity:0.1;}
+.graphic-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;position:relative;z-index:2;}
+.gc{border-radius:22px;padding:36px;border:1px solid var(--border);background:rgba(7,10,23,0.85);backdrop-filter:blur(12px);}
+.gc-demo{height:150px;border-radius:14px;margin-bottom:24px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+/* Glitch demo */
+.glitch-demo{background:var(--void);border:1px solid rgba(233,30,140,0.15);}
+.glitch-word{font-family:'Syne',sans-serif;font-size:46px;font-weight:800;color:var(--white);letter-spacing:0.05em;position:relative;animation:glitchFlicker 4s infinite;}
+.glitch-word::before{content:attr(data-t);position:absolute;left:-3px;top:0;color:var(--red);clip-path:polygon(0 30%,100% 30%,100% 50%,0 50%);opacity:0.85;}
+.glitch-word::after{content:attr(data-t);position:absolute;left:3px;top:0;color:var(--blue);clip-path:polygon(0 55%,100% 55%,100% 70%,0 70%);opacity:0.85;}
+@keyframes glitchFlicker{0%,88%,100%{transform:none;}90%{transform:skewX(-2deg);}92%{transform:skewX(1deg);}94%{transform:none;}}
+/* Neon demo */
+.neon-demo{background:#000;border:1px solid rgba(0,168,255,0.12);}
+.neon-ring{width:78px;height:78px;border-radius:50%;border:2px solid var(--blue);box-shadow:0 0 14px var(--blue),inset 0 0 14px rgba(0,168,255,0.1),0 0 40px rgba(0,168,255,0.3);animation:neonPulse 3s ease-in-out infinite;}
+@keyframes neonPulse{0%,100%{box-shadow:0 0 14px var(--blue),inset 0 0 14px rgba(0,168,255,0.1),0 0 40px rgba(0,168,255,0.3);}50%{box-shadow:0 0 24px var(--blue),inset 0 0 24px rgba(0,168,255,0.2),0 0 70px rgba(0,168,255,0.5);}}
+/* Horizon demo */
+.horizon-demo{background:linear-gradient(180deg,#040610 0%,#0C1025 60%,#040610 100%);border:1px solid rgba(0,229,212,0.08);}
+.horizon-l{position:absolute;bottom:28px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan) 20%,var(--blue) 50%,var(--magenta) 80%,transparent);box-shadow:0 0 14px var(--cyan);}
+.horizon-glow{position:absolute;bottom:22px;left:10%;right:10%;height:28px;background:radial-gradient(ellipse at center,rgba(0,229,212,0.2),transparent 70%);}
+.gc-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:var(--white);margin-bottom:8px;}
+.gc-desc{font-size:13px;color:var(--muted);line-height:1.65;}
+.graphic-secondary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;position:relative;z-index:2;}
+.gc-mini{padding:22px;border-radius:16px;border:1px solid var(--border);background:rgba(7,10,23,0.8);}
+.gc-mini-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:8px;}
+.gc-mini p{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ════════════════════════════════════
+   07  IMAGERY
+════════════════════════════════════ */
+#imagery{background:var(--midnight);padding-bottom:120px;}
+.imagery-head{display:grid;grid-template-columns:1fr 2fr;gap:72px;align-items:start;margin-top:56px;margin-bottom:56px;}
+.imagery-desc{font-size:16px;line-height:1.78;color:var(--off);margin-bottom:18px;}
+.imagery-rule{font-size:14px;color:var(--muted);line-height:1.7;}
+.imagery-rule strong{color:var(--off);}
+.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:10px;}
+.photo-cell{border-radius:14px;overflow:hidden;position:relative;border:1px solid var(--border);}
+.photo-cell img{width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(1.15);transition:transform 0.45s var(--ease),filter 0.45s;}
+.photo-cell:hover img{transform:scale(1.05);filter:brightness(1) saturate(1.25);}
+.photo-cell.tall{grid-row:span 2;}
+.photo-tag{position:absolute;bottom:10px;left:10px;font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:4px 10px;border-radius:100px;background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);color:var(--off);}
+.imagery-principles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px;}
+.ip-card{padding:22px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,0.02);}
+.ip-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:12px;}
+.ip-icon.blue{background:rgba(0,168,255,0.12);}
+.ip-icon.mag{background:rgba(233,30,140,0.12);}
+.ip-icon.cyan{background:rgba(0,229,212,0.12);}
+.ip-icon.violet{background:rgba(107,0,200,0.18);}
+.ip-title{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--white);margin-bottom:5px;}
+.ip-card p{font-size:12px;color:var(--muted);line-height:1.55;}
+
+/* ════════════════════════════════════
+   08  VOICE & TONE
+════════════════════════════════════ */
+#voice{background:var(--space);}
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:56px;}
+.trait-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px;}
+.trait-card{padding:22px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,0.02);}
+.trait-n{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;line-height:1;margin-bottom:6px;}
+.trait-n.blue{color:var(--blue);}
+.trait-n.mag{color:var(--magenta);}
+.trait-n.cyan{color:var(--cyan);}
+.trait-n.gold{color:var(--gold);}
+.trait-label{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--white);margin-bottom:4px;}
+.trait-card p{font-size:12px;color:var(--muted);line-height:1.55;}
+.voice-intro{font-size:16px;line-height:1.78;color:var(--off);margin-bottom:28px;}
+.voice-examples{display:flex;flex-direction:column;gap:16px;}
+.ve{border-radius:14px;padding:22px;border:1px solid;}
+.ve.on{border-color:rgba(0,229,212,0.18);background:rgba(0,229,212,0.04);}
+.ve.off{border-color:rgba(255,45,85,0.18);background:rgba(255,45,85,0.04);}
+.ve.neutral{border-color:rgba(0,168,255,0.18);background:rgba(0,168,255,0.04);}
+.ve-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;}
+.ve.on .ve-label{color:var(--cyan);}
+.ve.off .ve-label{color:#FF2D55;}
+.ve.neutral .ve-label{color:var(--blue);}
+.ve-text{font-size:14px;line-height:1.65;color:var(--off);}
+.ve.off .ve-text{text-decoration:line-through;color:var(--muted);}
+.ve.neutral .ve-text{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--white);}
+.msg-block{grid-column:1/-1;padding:40px;background:rgba(0,168,255,0.04);border:1px solid rgba(0,168,255,0.14);border-radius:20px;margin-top:8px;}
+.msg-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--blue);margin-bottom:22px;}
+.msg-rows{display:flex;flex-direction:column;gap:18px;}
+.msg-row{display:grid;grid-template-columns:130px 1fr;gap:28px;align-items:start;padding-bottom:18px;border-bottom:1px solid var(--border);}
+.msg-row:last-child{border-bottom:none;padding-bottom:0;}
+.msg-tag{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding-top:2px;}
+.msg-content{font-size:15px;line-height:1.65;color:var(--off);}
+.msg-content strong{color:var(--white);font-weight:600;}
+
+/* ════════════════════════════════════
+   09  APPLICATIONS
+════════════════════════════════════ */
+#applications{background:var(--midnight);}
+.apps-intro{font-size:17px;line-height:1.78;color:var(--off);max-width:680px;margin-top:24px;margin-bottom:56px;}
+.apps-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.app-card{border-radius:22px;overflow:hidden;border:1px solid var(--border);position:relative;transition:box-shadow 0.35s,transform 0.35s var(--ease);}
+.app-card:hover{box-shadow:0 24px 64px rgba(0,0,0,0.6);transform:translateY(-4px);}
+.app-card.wide{grid-column:span 2;}
+/* Business Card Mockup */
+.bcard-preview{height:280px;background:var(--void);display:flex;align-items:center;justify-content:center;padding:32px;gap:32px;position:relative;overflow:hidden;}
+.bcard-preview::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 30% 50%,rgba(0,168,255,0.07),transparent 70%),radial-gradient(ellipse 40% 40% at 70% 50%,rgba(233,30,140,0.05),transparent 70%);}
+.bc{width:200px;height:116px;border-radius:10px;flex-shrink:0;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.7);}
+.bc-front{background:linear-gradient(135deg,#080B1C 0%,#0E1235 100%);border:1px solid rgba(0,168,255,0.12);display:flex;flex-direction:column;justify-content:space-between;padding:16px;}
+.bc-back{background:linear-gradient(135deg,#070A17 0%,#0B0E25 100%);border:1px solid rgba(233,30,140,0.1);display:flex;align-items:center;justify-content:center;}
+.bc-logo{width:30px;height:auto;}
+.bc-name{font-family:'Syne',sans-serif;font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);}
+.bc-role{font-family:'Space Grotesk',sans-serif;font-size:7px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
+.bc-url{font-family:'Space Grotesk',sans-serif;font-size:7px;letter-spacing:0.1em;color:var(--blue);}
+.bc-back img{width:50%;opacity:0.85;}
+/* Deck Slide Mockup */
+.deck-preview{height:280px;background:var(--void);display:flex;align-items:center;justify-content:center;padding:32px;position:relative;overflow:hidden;}
+.deck-preview::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(107,0,200,0.06),transparent 70%);}
+.slide-mock{width:360px;height:204px;background:linear-gradient(135deg,#070A17,#0C1025);border:1px solid rgba(0,168,255,0.1);border-radius:10px;overflow:hidden;position:relative;box-shadow:0 16px 50px rgba(0,0,0,0.8);flex-shrink:0;}
+.slide-glow-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--magenta));}
+.slide-content{padding:24px;height:100%;display:flex;flex-direction:column;justify-content:center;}
+.slide-label{font-family:'Space Grotesk',sans-serif;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.slide-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--white);line-height:1.1;margin-bottom:6px;}
+.slide-sub{font-family:'DM Sans',sans-serif;font-size:10px;color:var(--muted);line-height:1.5;}
+.slide-logo{position:absolute;bottom:16px;right:16px;width:22px;opacity:0.7;}
+/* Social Mockup */
+.social-preview{height:280px;background:#0A0A14;display:flex;align-items:center;justify-content:center;padding:32px;gap:16px;}
+.social-tile{width:130px;height:130px;border-radius:14px;overflow:hidden;flex-shrink:0;position:relative;box-shadow:0 8px 30px rgba(0,0,0,0.7);}
+.st-1{background:linear-gradient(135deg,#070A17,#0B0E25);border:1px solid rgba(0,168,255,0.12);}
+.st-2{background:linear-gradient(135deg,#0A0617,#150B2A);border:1px solid rgba(107,0,200,0.15);}
+.st-3{background:linear-gradient(135deg,#0A0A14,#160818);border:1px solid rgba(233,30,140,0.12);}
+.st-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px;}
+.st-mark{width:36px;height:auto;}
+.st-text{font-family:'Syne',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;text-align:center;line-height:1.2;}
+/* Email Mockup */
+.email-preview{height:280px;background:#090B18;display:flex;align-items:center;justify-content:center;padding:32px;}
+.email-mock{width:340px;background:#0D1028;border:1px solid rgba(0,168,255,0.08);border-radius:12px;overflow:hidden;box-shadow:0 16px 50px rgba(0,0,0,0.8);}
+.email-header{background:linear-gradient(135deg,#070A17,#0B0E28);padding:20px 22px;border-bottom:1px solid rgba(0,168,255,0.08);display:flex;align-items:center;gap:12px;}
+.email-mark{width:22px;height:auto;}
+.email-from{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;color:var(--white);}
+.email-sub{font-family:'Space Grotesk',sans-serif;font-size:8px;color:var(--muted);}
+.email-body{padding:20px 22px;}
+.email-subj{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--white);margin-bottom:8px;line-height:1.2;}
+.email-copy{font-family:'DM Sans',sans-serif;font-size:9px;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+.email-cta{display:inline-block;padding:7px 16px;background:var(--blue);border-radius:100px;font-family:'Space Grotesk',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#fff;}
+.app-footer{padding:18px 24px;background:rgba(0,0,0,0.3);border-top:1px solid var(--border);}
+.app-footer-label{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);margin-bottom:2px;}
+.app-footer-desc{font-size:12px;color:var(--muted);}
+
+/* ════════════════════════════════════
+   10  BACK COVER
+════════════════════════════════════ */
+#backcover{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 40px;background:var(--void);}
+.bc-cover-bg{position:absolute;inset:0;background-image:url('assets/images/Process.png');background-size:cover;background-position:center;opacity:0.28;}
+.bc-cover-overlay{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(0,168,255,0.06),transparent 65%),linear-gradient(to bottom,rgba(4,6,16,0.55),rgba(4,6,16,0.2) 40%,rgba(4,6,16,0.2) 60%,rgba(4,6,16,0.8) 100%);}
+.bc-cover-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:28px;}
+.bc-mark{width:90px;height:auto;filter:drop-shadow(0 0 28px rgba(0,168,255,0.45));animation:markPulse 8s ease-in-out infinite;}
+.bc-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.38em;text-transform:uppercase;color:var(--white);}
+.bc-divider{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--blue),var(--magenta),transparent);}
+.bc-tagline{font-family:'Space Grotesk',sans-serif;font-size:18px;color:var(--off);max-width:440px;line-height:1.65;}
+.bc-tagline strong{color:var(--white);font-weight:600;}
+.bc-url{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.1em;color:var(--blue);}
+.bc-version{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);}
+.bc-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+
+/* ── MEDIA ── */
+@media(max-width:1100px){
+  section{padding:120px 48px 80px;}
+  .essence-grid,.mark-grid,.voice-grid{grid-template-columns:1fr;gap:48px;}
+  .colour-primary{grid-template-columns:repeat(3,1fr);}
+  .logo-row{grid-template-columns:1fr 1fr;}
+  .photo-grid{grid-template-columns:1fr 1fr;}
+  .apps-grid{grid-template-columns:1fr;}
+  .app-card.wide{grid-column:auto;}
+  .type-grid{grid-template-columns:1fr;}
+  nav ul{display:none;}
+}
+@media(max-width:720px){
+  section{padding:100px 28px 60px;}
+  .colour-primary,.colour-secondary{grid-template-columns:1fr 1fr;}
+  .logo-rules{grid-template-columns:1fr;}
+  .service-nums{grid-template-columns:1fr 1fr 1fr;}
+  .graphic-row,.graphic-secondary{grid-template-columns:1fr;}
+  .imagery-head{grid-template-columns:1fr;}
+  .imagery-principles{grid-template-columns:1fr 1fr;}
+  .colour-notes,.msg-block .msg-row{grid-template-columns:1fr;}
+  .trait-grid{grid-template-columns:1fr;}
+  .logo-rules,.logo-row.duo{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<canvas id="neonCanvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="../Logos/logomark-white.svg" alt="Archetype Studios">
+    <span class="nav-brand">Archetype Studios</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#essence">Essence</a></li>
+    <li><a href="#mark">Mark</a></li>
+    <li><a href="#logos">Logos</a></li>
+    <li><a href="#colour">Colour</a></li>
+    <li><a href="#typography">Type</a></li>
+    <li><a href="#graphic">Graphic</a></li>
+    <li><a href="#imagery">Imagery</a></li>
+    <li><a href="#voice">Voice</a></li>
+    <li><a href="#applications">Applications</a></li>
+  </ul>
+  <span class="nav-tag">Brand Identity Pack · 2025</span>
+</nav>
+
+<!-- 00 COVER -->
+<section id="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-overlay"></div>
+  <div class="cover-content">
+    <img class="cover-mark" src="../Logos/logomark-white.svg" alt="Archetype Studios">
+    <div class="cover-rule"></div>
+    <p class="cover-eyebrow">Brand Identity Pack · 2025</p>
+    <div class="cover-title">
+      <div style="display:flex;align-items:baseline;justify-content:center;gap:0.2em;flex-wrap:nowrap;">
+        <span class="t-arrow">→</span>
+        <span class="t-grad">Archetype</span>
+      </div>
+      <span class="t-white">Studios</span>
+    </div>
+    <p class="cover-tagline"><strong>Marketing with Purpose.</strong><br>Powered by Insight. Built on Strategy.</p>
+    <div class="cover-chips">
+      <span class="chip blue">Brand Identity</span>
+      <span class="chip mag">Visual System</span>
+      <span class="chip cyan">Voice & Tone</span>
+    </div>
+  </div>
+  <div class="cover-scroll">
+    <span class="cover-scroll-label">Explore</span>
+    <div class="cover-scroll-line"></div>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<!-- 01 BRAND ESSENCE -->
+<section id="essence">
+  <div class="essence-bg"></div>
+  <div class="section-inner">
+    <div class="s-label mag reveal">01 — Brand Essence</div>
+    <h2 class="display reveal reveal-d1">Who We <span class="accent-mag">Are</span></h2>
+    <div class="essence-grid">
+      <div>
+        <p class="essence-body reveal reveal-d2">Archetype Studios is a marketing studio where strategic intelligence meets creative precision. We don't do generic. We build brand systems, campaigns, and digital experiences that are purpose-built for the audiences they need to move.</p>
+        <p class="essence-body reveal reveal-d3" style="color:var(--muted);">Every project begins with insight — into the market, the audience, and the brief behind the brief. That insight is what makes the work land.</p>
+        <div class="pos-card reveal reveal-d4">
+          <div class="pc-eyebrow">Positioning Statement</div>
+          <blockquote>"We are the studio for brands that refuse to blend in — built at the intersection of strategic clarity and creative edge."</blockquote>
+        </div>
+        <div class="service-nums reveal reveal-d5">
+          <div class="snum"><div class="snum-n accent-blue">01</div><div class="snum-l">Strategy</div></div>
+          <div class="snum"><div class="snum-n accent-mag">02</div><div class="snum-l">Creative</div></div>
+          <div class="snum"><div class="snum-n accent-cyan">03</div><div class="snum-l">Execution</div></div>
+        </div>
+      </div>
+      <div class="pillars">
+        <div class="pillar p-blue reveal reveal-d1">
+          <div class="pillar-title">Purpose</div>
+          <p>We exist to give ambitious brands the marketing infrastructure they deserve — not just beautiful output, but ideas that drive real commercial momentum.</p>
+        </div>
+        <div class="pillar p-mag reveal reveal-d2">
+          <div class="pillar-title">Insight-Led</div>
+          <p>Data, audience research, and cultural awareness inform every creative decision. The work is instinctive because the thinking is rigorous.</p>
+        </div>
+        <div class="pillar p-cyan reveal reveal-d3">
+          <div class="pillar-title">Precision</div>
+          <p>We design with intention. Every visual, every word, every touchpoint is chosen because it earns its place in the system.</p>
+        </div>
+        <div class="pillar p-gold reveal reveal-d4">
+          <div class="pillar-title">Momentum</div>
+          <p>We are built for brands in motion. The studio never stands still — and neither should the work we create for you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<!-- 02 THE MARK -->
+<section id="mark">
+  <div class="section-inner">
+    <div class="s-label blue reveal">02 — The Mark</div>
+    <div class="mark-grid">
+      <div class="reveal reveal-d1">
+        <div class="mark-stage">
+          <div class="mark-grid-bg"></div>
+          <div class="mark-glow"></div>
+          <img src="../Logos/logomark-white.svg" alt="Archetype Studios mark">
+        </div>
+      </div>
+      <div>
+        <h3 class="sub reveal">Built From<br><span class="grad">First Principles</span></h3>
+        <p class="mark-desc reveal reveal-d1">The Archetype mark is a synthesis of two forces in tension: the arc of creative possibility and the structural certainty of the "A" form. Together, they encode the studio's dual mandate — insight and expression, strategy and craft.</p>
+        <p class="mark-desc reveal reveal-d2" style="color:var(--muted);">Geometric, modular, and designed to hold its integrity at every scale — from a favicon to a billboard, from monochrome to full colour.</p>
+        <div class="anatomy reveal reveal-d3">
+          <div class="anat-item">
+            <div class="anat-dot blue"></div>
+            <div>
+              <div class="anat-title">The Arc</div>
+              <p class="anat-desc">A crescent in ascent — representing creative vision, the horizon of possibility, and the illuminating power of insight.</p>
+            </div>
+          </div>
+          <div class="anat-item">
+            <div class="anat-dot mag"></div>
+            <div>
+              <div class="anat-title">The Peak</div>
+              <p class="anat-desc">The structural A-form — architectural, directional, grounded. The ambition to build something that lasts.</p>
+            </div>
+          </div>
+          <div class="anat-item">
+            <div class="anat-dot cyan"></div>
+            <div>
+              <div class="anat-title">The Curve</div>
+              <p class="anat-desc">A sweeping base that grounds the mark — suggesting momentum, forward motion, and a brand in full stride.</p>
+            </div>
+          </div>
+        </div>
+        <div class="mark-note reveal reveal-d4">
+          <p>The mark is always used from <strong>source SVG files</strong>. It is never recreated, distorted, outlined, or recoloured outside the approved variants. Minimum digital size: <strong>24px</strong>. Minimum print size: <strong>8mm</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<!-- 03 LOGO SYSTEM -->
+<section id="logos">
+  <div class="section-inner">
+    <div class="s-label cyan reveal">03 — Logo System</div>
+    <h2 class="display reveal reveal-d1">One Mark,<br><span class="accent-cyan">Six Expressions</span></h2>
+    <p class="reveal reveal-d2" style="color:var(--muted);font-size:15px;max-width:620px;margin-bottom:0;">The mark and full lockup are available in three colour variants — white, red, and blue — each designed for transparent-background deployment across print, digital, and environmental contexts.</p>
+
+    <div class="logo-section-head">
+      <div class="logo-row-label reveal">Logomark — Icon Only</div>
+      <div class="logo-row">
+        <div class="logo-card dark reveal reveal-d1">
+          <div class="lc-stripe" style="background:#FFFFFF;"></div>
+          <img src="../Logos/logomark-white.svg" alt="White mark">
+          <div class="lc-name" style="color:var(--off);">White</div>
+          <div class="lc-use">Primary — all dark brand surfaces</div>
+        </div>
+        <div class="logo-card dark reveal reveal-d2">
+          <div class="lc-stripe" style="background:#BE1323;"></div>
+          <img src="../Logos/logomark-red.svg" alt="Red mark">
+          <div class="lc-name" style="color:#CF4A56;">Red</div>
+          <div class="lc-use">Campaign &amp; high-impact contexts</div>
+        </div>
+        <div class="logo-card dark reveal reveal-d3">
+          <div class="lc-stripe" style="background:#79BCEE;"></div>
+          <img src="../Logos/logomark-blue.svg" alt="Blue mark">
+          <div class="lc-name" style="color:#79BCEE;">Blue</div>
+          <div class="lc-use">Digital, tech, and partner contexts</div>
+        </div>
+      </div>
+
+      <div class="logo-row-label reveal" style="margin-top:36px;">Full Lockup — Mark + Wordmark</div>
+      <div class="logo-row">
+        <div class="logo-card dark lockup reveal reveal-d1">
+          <div class="lc-stripe" style="background:#FFFFFF;"></div>
+          <img src="../Logos/logo-white.svg" alt="White lockup">
+          <div class="lc-name" style="color:var(--off);">White Lockup</div>
+          <div class="lc-use">Standard — presentations, proposals, collateral</div>
+        </div>
+        <div class="logo-card dark lockup reveal reveal-d2">
+          <div class="lc-stripe" style="background:#BE1323;"></div>
+          <img src="../Logos/logo-red.svg" alt="Red lockup">
+          <div class="lc-name" style="color:#CF4A56;">Red Lockup</div>
+          <div class="lc-use">Bold campaign applications, event signage</div>
+        </div>
+        <div class="logo-card dark lockup reveal reveal-d3">
+          <div class="lc-stripe" style="background:#79BCEE;"></div>
+          <img src="../Logos/logo-blue.svg" alt="Blue lockup">
+          <div class="lc-name" style="color:#79BCEE;">Blue Lockup</div>
+          <div class="lc-use">Digital-first, social, UI contexts</div>
+        </div>
+      </div>
+
+      <div class="logo-row-label reveal" style="margin-top:36px;">Light Background Reversal</div>
+      <div class="logo-row duo">
+        <div class="logo-card light reveal reveal-d1">
+          <img src="../Logos/logomark-white.svg" alt="Dark mark on light">
+          <div class="lc-name">Mark — Dark on Light</div>
+          <div class="lc-use">Print, stationery, co-branded materials</div>
+        </div>
+        <div class="logo-card light lockup reveal reveal-d2">
+          <img src="../Logos/logo-white.svg" alt="Dark lockup on light">
+          <div class="lc-name">Lockup — Dark on Light</div>
+          <div class="lc-use">Letterheads, formal documents, light-background digital</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="logo-rules reveal">
+      <div class="rule-box do">
+        <div class="rb-label">✓ Do</div>
+        <ul>
+          <li>Use white variant as default on all dark brand surfaces</li>
+          <li>Use red variant for bold campaign or event-driven contexts</li>
+          <li>Use blue variant for digital products, UI, and tech partnerships</li>
+          <li>Maintain clear space equal to the mark height on all sides</li>
+          <li>Always use original SVG files — vector output only</li>
+        </ul>
+      </div>
+      <div class="rule-box dont">
+        <div class="rb-label">✗ Don't</div>
+        <ul>
+          <li>Stretch, skew, rotate, or distort the mark</li>
+          <li>Place on mid-tone backgrounds that reduce contrast</li>
+          <li>Mix colour variants in the same composition</li>
+          <li>Outline, shadow, or emboss the mark</li>
+          <li>Recreate the mark — always use source SVG files</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<!-- 04 COLOUR -->
+<section id="colour">
+  <div class="colour-bg"></div>
+  <div class="section-inner">
+    <div class="s-label gold reveal">04 — Colour Architecture</div>
+    <h2 class="display reveal reveal-d1">The Palette of<br><span class="accent-gold">Electric Night</span></h2>
+
+    <div class="colour-primary">
+      <div class="swatch reveal reveal-d1" onclick="copyColor('#070A17')">
+        <div class="sw-color" style="background:#070A17;"><div class="sw-copy">Copy HEX</div></div>
+        <div class="sw-info"><div class="sw-name">Deep Space</div><div class="sw-hex">#070A17</div><div class="sw-role">Primary background</div></div>
+      </div>
+      <div class="swatch reveal reveal-d2" onclick="copyColor('#00A8FF')">
+        <div class="sw-color" style="background:linear-gradient(135deg,#00A8FF,#0066CC);"><div class="sw-copy">Copy HEX</div></div>
+        <div class="sw-info"><div class="sw-name">Electric Blue</div><div class="sw-hex">#00A8FF</div><div class="sw-role">Primary accent</div></div>
+      </div>
+      <div class="swatch reveal reveal-d3" onclick="copyColor('#E91E8C')">
+        <div class="sw-color" style="background:linear-gradient(135deg,#E91E8C,#A0006B);"><div class="sw-copy">Copy HEX</div></div>
+        <div class="sw-info"><div class="sw-name">Neon Magenta</div><div class="sw-hex">#E91E8C</div><div class="sw-role">Secondary accent</div></div>
+      </div>
+      <div class="swatch reveal reveal-d4" onclick="copyColor('#00E5D4')">
+        <div class="sw-color" style="background:linear-gradient(135deg,#00E5D4,#009980);"><div class="sw-copy">Copy HEX</div></div>
+        <div class="sw-info"><div class="sw-name">Cyan Signal</div><div class="sw-hex">#00E5D4</div><div class="sw-role">Tertiary accent</div></div>
+      </div>
+      <div class="swatch reveal reveal-d5" onclick="copyColor('#FFFFFF')">
+        <div class="sw-color" style="background:#FFFFFF;border-bottom:1px solid rgba(0,0,0,0.1);"><div class="sw-copy" style="color:#333;">Copy HEX</div></div>
+        <div class="sw-info"><div class="sw-name">Pure White</div><div class="sw-hex">#FFFFFF</div><div class="sw-role">Text / Reverse</div></div>
+      </div>
+    </div>
+
+    <div class="colour-secondary">
+      <div class="swatch reveal reveal-d1" onclick="copyColor('#0C1025')">
+        <div class="sw-color" style="background:#0C1025;"><div class="sw-copy">Copy HEX</div></div>
+        <div class="sw-info"><div class="sw-name">Midnight</div><div class="sw-hex">#0C1025</div><div class="sw-role">Alt background</div></div>
+      </div>
+      <div class="swatch reveal reveal-d2" onclick="copyColor('#BE1323')">
+        <div class="sw-color" style="background:#BE1323;"><div class="sw-copy">Copy HEX</div></div>
+        <div class="sw-info"><div class="sw-name">Brand Red</div><div class="sw-hex">#BE1323</div><div class="sw-role">Logo red variant</div></div>
+      </div>
+      <div class="swatch reveal reveal-d3" onclick="copyColor('#79BCEE')">
+        <div class="sw-color" style="background:#79BCEE;"><div class="sw-copy" style="color:#222;">Copy HEX</div></div>
+        <div class="sw-info"><div class="sw-name">Brand Blue</div><div class="sw-hex">#79BCEE</div><div class="sw-role">Logo blue variant</div></div>
+      </div>
+      <div class="swatch reveal reveal-d4" onclick="copyColor('#FFB800')">
+        <div class="sw-color" style="background:linear-gradient(135deg,#FFB800,#CC8800);"><div class="sw-copy" style="color:#222;">Copy HEX</div></div>
+        <div class="sw-info"><div class="sw-name">Solar Gold</div><div class="sw-hex">#FFB800</div><div class="sw-role">Highlight / Accent</div></div>
+      </div>
+    </div>
+
+    <div class="gradient-chips reveal">
+      <div class="grad-chip" style="background:linear-gradient(90deg,#00A8FF,#00E5D4);"><span class="grad-chip-label">Blue → Cyan · Data & Flow</span></div>
+      <div class="grad-chip" style="background:linear-gradient(90deg,#E91E8C,#6B00C8);"><span class="grad-chip-label">Magenta → Violet · Campaign & Emotion</span></div>
+      <div class="grad-chip" style="background:linear-gradient(90deg,#00A8FF,#00E5D4,#E91E8C);"><span class="grad-chip-label">Full Spectrum · Hero & Display</span></div>
+    </div>
+
+    <div class="colour-notes reveal">
+      <div class="cn">
+        <div class="cn-label">Hierarchy</div>
+        <p>Deep Space is the canvas. Electric Blue leads all active states and CTAs. Magenta punctuates — use sparingly for maximum impact. Red and Blue are logo-specific variants, not UI colours.</p>
+      </div>
+      <div class="cn">
+        <div class="cn-label">Gradients</div>
+        <p>Combine Blue → Cyan for data and flow contexts. Magenta → Violet for campaign and emotional moments. Never exceed two accent hues in a gradient. Full spectrum for hero sections only.</p>
+      </div>
+      <div class="cn">
+        <div class="cn-label">Accessibility</div>
+        <p>All body text must achieve WCAG AA contrast (4.5:1). Electric Blue on Deep Space passes at large sizes only. Always test body copy contrast before final output.</p>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<!-- 05 TYPOGRAPHY -->
+<section id="typography">
+  <div class="section-inner">
+    <div class="s-label blue reveal">05 — Typography System</div>
+    <h2 class="display reveal reveal-d1">Language in <span class="grad">Motion</span></h2>
+    <div class="type-grid">
+      <div class="face-card reveal reveal-d2">
+        <div class="face-label">Display / Headlines</div>
+        <div class="face-specimen syne">Aa Bb</div>
+        <div class="face-name">Syne</div>
+        <div class="face-meta">Geometric Display · Primary Voice</div>
+        <p class="face-desc">Syne carries the brand's architectural confidence. Used for all display type, headlines, section titles, and any moment that demands presence and weight.</p>
+        <div class="weight-tags">
+          <span class="wtag">Regular 400</span>
+          <span class="wtag">SemiBold 600</span>
+          <span class="wtag">Bold 700</span>
+          <span class="wtag">ExtraBold 800</span>
+        </div>
+      </div>
+      <div class="type-stack">
+        <div class="face-card reveal reveal-d3">
+          <div class="face-label">UI / Subheadings / Labels</div>
+          <div class="face-specimen grotesk" style="font-size:52px;">Ag 01</div>
+          <div class="face-name">Space Grotesk</div>
+          <div class="face-meta">Geometric Sans · Interface Voice</div>
+          <p class="face-desc">Space Grotesk handles labels, captions, navigation, metadata, and all UI-level communication. Precise and legible.</p>
+          <div class="weight-tags">
+            <span class="wtag">Light 300</span><span class="wtag">Regular 400</span>
+            <span class="wtag">Medium 500</span><span class="wtag">Bold 700</span>
+          </div>
+        </div>
+        <div class="face-card reveal reveal-d4">
+          <div class="face-label">Body / Long-form</div>
+          <div class="face-specimen dm" style="font-size:40px;">Reading.</div>
+          <div class="face-name">DM Sans</div>
+          <div class="face-meta">Humanist Sans · Reading Voice</div>
+          <p class="face-desc">DM Sans handles all body copy — comfortable at length, warm without being informal.</p>
+          <div class="weight-tags">
+            <span class="wtag">Light 300</span><span class="wtag">Regular 400</span><span class="wtag">Medium 500</span>
+          </div>
+        </div>
+      </div>
+      <div class="type-scale reveal">
+        <div class="face-label" style="margin-bottom:8px;">Type Scale</div>
+        <div class="scale-row">
+          <div class="scale-meta"><div class="sm-label">Display</div><div class="sm-size">72–108px · 800</div></div>
+          <div class="scale-text" style="font-size:clamp(44px,5.5vw,72px);">Archetype</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta"><div class="sm-label">H1</div><div class="sm-size">48–56px · 800</div></div>
+          <div class="scale-text" style="font-size:clamp(32px,4vw,48px);">Marketing with Purpose</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta"><div class="sm-label">H2</div><div class="sm-size">32–40px · 700</div></div>
+          <div class="scale-text" style="font-size:clamp(24px,3vw,36px);">Powered by Insight</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta"><div class="sm-label">H3</div><div class="sm-size">22–28px · 600</div></div>
+          <div class="scale-text" style="font-size:clamp(18px,2vw,24px);font-family:'Space Grotesk',sans-serif;font-weight:600;">Creative infrastructure that compounds</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta"><div class="sm-label">Body</div><div class="sm-size">15–17px · 400</div></div>
+          <div class="scale-text" style="font-size:16px;font-family:'DM Sans',sans-serif;font-weight:400;color:var(--off);">We build systems that think as hard as they look. Every campaign has architecture. Every asset has purpose.</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta"><div class="sm-label">Label</div><div class="sm-size">10–12px · 600</div></div>
+          <div class="scale-text" style="font-size:11px;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue);">Section Label · Reference Tag · Caption</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<!-- 06 GRAPHIC LANGUAGE -->
+<section id="graphic">
+  <div class="graphic-bg"></div>
+  <div class="section-inner">
+    <div class="s-label mag reveal">06 — Graphic Language</div>
+    <h2 class="display reveal reveal-d1">Signature <span class="grad">Devices</span></h2>
+    <div class="graphic-row">
+      <div class="gc reveal reveal-d1">
+        <div class="gc-demo glitch-demo">
+          <div class="glitch-word" data-t="ARCH">ARCH</div>
+        </div>
+        <div class="gc-title">Chromatic Glitch</div>
+        <p class="gc-desc">Cyan, magenta, and red channel separation applied to typography or the logomark. Signals digital-native edge. Use for campaigns, social content, and cultural moments. Reserved for impact — never overused.</p>
+      </div>
+      <div class="gc reveal reveal-d2">
+        <div class="gc-demo neon-demo">
+          <div class="neon-ring"></div>
+        </div>
+        <div class="gc-title">Neon Glow</div>
+        <p class="gc-desc">Electric colour applied as luminous light sources on dark fields — as if surfaces are emitting rather than reflecting light. Applied to the logomark and UI components in premium digital contexts.</p>
+      </div>
+      <div class="gc reveal reveal-d3">
+        <div class="gc-demo horizon-demo">
+          <div class="horizon-glow"></div>
+          <div class="horizon-l"></div>
+        </div>
+        <div class="gc-title">The Horizon Line</div>
+        <p class="gc-desc">A luminous horizontal line — the boundary between the known and the possible. Used as a section divider, compositional anchor, and spatial device in presentations and environmental applications.</p>
+      </div>
+    </div>
+    <div class="graphic-secondary">
+      <div class="gc-mini reveal reveal-d1">
+        <div class="gc-mini-label blue">Light Trails</div>
+        <p>Flowing, curved light paths suggesting speed, energy, and momentum. Always on dark backgrounds. Created through long-exposure photography or vector simulation.</p>
+      </div>
+      <div class="gc-mini reveal reveal-d2">
+        <div class="gc-mini-label mag">Grid Overlay</div>
+        <p>Fine dot or line grids at 3–6% opacity create depth behind logomark or typographic compositions. Never compete with foreground content.</p>
+      </div>
+      <div class="gc-mini reveal reveal-d3">
+        <div class="gc-mini-label cyan">Radial Burst</div>
+        <p>Circular rings of colour-segmented light used as full-frame abstract imagery or graphic punctuation. Electric colour only — never warm tones.</p>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<!-- 07 IMAGERY -->
+<section id="imagery">
+  <div class="section-inner">
+    <div class="s-label mag reveal">07 — Photography & Imagery</div>
+    <div class="imagery-head">
+      <div>
+        <h2 class="display reveal">The World<br>After <span class="accent-mag">Dark</span></h2>
+      </div>
+      <div>
+        <p class="imagery-desc reveal reveal-d1">Archetype's world is nocturnal and electric. Our imagery operates in the space between the organic and the technological — where neon light falls on natural forms, where screens glow in empty rooms, where human connection happens under dramatic, purposeful light.</p>
+        <p class="imagery-rule reveal reveal-d2">The visual palette is always: <strong>dark base, electric accent, cinematic framing</strong>. No harsh sunlight. No stock photography clichés. No natural daylight as primary context.</p>
+      </div>
+    </div>
+    <div class="photo-grid reveal">
+      <div class="photo-cell tall">
+        <img src="assets/images/Philosophy.png" alt="Philosophy" loading="lazy">
+        <span class="photo-tag">Connection</span>
+      </div>
+      <div class="photo-cell">
+        <img src="assets/images/Introduction.png" alt="Introduction" loading="lazy">
+        <span class="photo-tag">Organic · Neon</span>
+      </div>
+      <div class="photo-cell">
+        <img src="assets/images/About Us.png" alt="About" loading="lazy">
+        <span class="photo-tag">Technology</span>
+      </div>
+      <div class="photo-cell">
+        <img src="assets/images/Portfolio.png" alt="Portfolio" loading="lazy">
+        <span class="photo-tag">Flow · Light</span>
+      </div>
+      <div class="photo-cell">
+        <img src="assets/images/2.png" alt="Digital" loading="lazy">
+        <span class="photo-tag">Digital</span>
+      </div>
+      <div class="photo-cell">
+        <img src="assets/images/6.png" alt="Energy" loading="lazy">
+        <span class="photo-tag">Energy</span>
+      </div>
+      <div class="photo-cell">
+        <img src="assets/images/1.png" alt="Abstract" loading="lazy">
+        <span class="photo-tag">Abstract</span>
+      </div>
+    </div>
+    <div class="imagery-principles">
+      <div class="ip-card reveal reveal-d1">
+        <div class="ip-icon blue">🌑</div>
+        <div class="ip-title">Dark Field</div>
+        <p>Backgrounds are deep navy to near-black. Never flat white or natural daylight as primary context.</p>
+      </div>
+      <div class="ip-card reveal reveal-d2">
+        <div class="ip-icon mag">⚡</div>
+        <div class="ip-title">Electric Accent</div>
+        <p>Subjects illuminated by electric colour — blue, magenta, cyan. Studio-lit, not ambient.</p>
+      </div>
+      <div class="ip-card reveal reveal-d3">
+        <div class="ip-icon cyan">🌿</div>
+        <div class="ip-title">Organic · Digital</div>
+        <p>Juxtapose the natural and technological. Plants under neon. Hands with glowing cables.</p>
+      </div>
+      <div class="ip-card reveal reveal-d4">
+        <div class="ip-icon violet">💫</div>
+        <div class="ip-title">Motion & Light</div>
+        <p>Long-exposure trails, laser lines, light orbs. Abstract imagery reinforcing dynamism and momentum.</p>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<!-- 08 VOICE & TONE -->
+<section id="voice">
+  <div class="section-inner">
+    <div class="s-label gold reveal">08 — Brand Voice & Tone</div>
+    <h2 class="display reveal reveal-d1">Words That<br><span class="accent-gold">Mean Something</span></h2>
+    <div class="voice-grid">
+      <div>
+        <p class="voice-intro reveal reveal-d2">The Archetype voice is the verbal equivalent of the visual identity: sharp, purposeful, and quietly confident. We don't oversell. We say what we mean, precisely.</p>
+        <div class="trait-grid">
+          <div class="trait-card reveal reveal-d1">
+            <div class="trait-n blue">01</div>
+            <div class="trait-label">Purposeful</div>
+            <p>Every sentence earns its place. No filler, no fluff. If it doesn't add meaning, it doesn't make the cut.</p>
+          </div>
+          <div class="trait-card reveal reveal-d2">
+            <div class="trait-n mag">02</div>
+            <div class="trait-label">Intelligent</div>
+            <p>We write for smart audiences. We don't over-explain or dumb down. Complexity is respected, not avoided.</p>
+          </div>
+          <div class="trait-card reveal reveal-d3">
+            <div class="trait-n cyan">03</div>
+            <div class="trait-label">Confident</div>
+            <p>Declarative, not tentative. We make statements. Hedge words — 'perhaps', 'maybe', 'might' — are minimised.</p>
+          </div>
+          <div class="trait-card reveal reveal-d4">
+            <div class="trait-n gold">04</div>
+            <div class="trait-label">Human</div>
+            <p>Behind every brief is a person. We write with warmth and directness — never corporate, never robotic.</p>
+          </div>
+        </div>
+      </div>
+      <div class="voice-examples reveal reveal-d2">
+        <div class="ve on">
+          <div class="ve-label">✓ On-Brand</div>
+          <div class="ve-text">"We don't guess at what your audience wants. We build the systems to find out — then make something they can't ignore."</div>
+        </div>
+        <div class="ve off">
+          <div class="ve-label">✗ Off-Brand</div>
+          <div class="ve-text">"Our innovative, world-class team of passionate creatives leverages cutting-edge strategies to deliver amazing results for your business!"</div>
+        </div>
+        <div class="ve on">
+          <div class="ve-label">✓ On-Brand</div>
+          <div class="ve-text">"Strategy isn't the opposite of creativity. It's the reason creativity works."</div>
+        </div>
+        <div class="ve neutral">
+          <div class="ve-label">→ Tagline System</div>
+          <div class="ve-text">Marketing with Purpose.<br><span style="color:var(--muted);font-weight:400;font-size:15px;">Powered by Insight.</span></div>
+        </div>
+      </div>
+      <div class="msg-block reveal">
+        <div class="msg-label">Messaging Hierarchy</div>
+        <div class="msg-rows">
+          <div class="msg-row">
+            <div class="msg-tag">Core Tagline</div>
+            <div class="msg-content"><strong>Marketing with Purpose. Powered by Insight.</strong></div>
+          </div>
+          <div class="msg-row">
+            <div class="msg-tag">Elevator</div>
+            <div class="msg-content">Archetype Studios is a creative-strategic studio that builds marketing systems for ambitious brands — grounded in insight, executed with precision.</div>
+          </div>
+          <div class="msg-row">
+            <div class="msg-tag">Value Props</div>
+            <div class="msg-content">Strategy that earns its place in the boardroom. Creative that earns its place in culture. Execution that earns results in market.</div>
+          </div>
+          <div class="msg-row">
+            <div class="msg-tag">Proof Points</div>
+            <div class="msg-content">Research-led strategy. Campaign architecture. Brand identity systems. Digital-first content. Performance tracking. End-to-end marketing delivery.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<!-- 09 APPLICATIONS -->
+<section id="applications">
+  <div class="section-inner">
+    <div class="s-label cyan reveal">09 — Brand Applications</div>
+    <h2 class="display reveal reveal-d1">The Brand<br>in <span class="accent-cyan">Context</span></h2>
+    <p class="apps-intro reveal reveal-d2">How the identity performs across real touchpoints — from business communications to digital surfaces. Consistent application is what transforms a visual system into a recognisable brand.</p>
+
+    <div class="apps-grid">
+      <!-- Business Card -->
+      <div class="app-card reveal reveal-d1">
+        <div class="bcard-preview">
+          <div class="bc bc-front">
+            <div>
+              <img class="bc-logo" src="../Logos/logomark-white.svg" alt="mark">
+            </div>
+            <div>
+              <div class="bc-name">Andre Niemann</div>
+              <div class="bc-role">Creative Director</div>
+              <div class="bc-url">archetypestudios.com</div>
+            </div>
+          </div>
+          <div class="bc bc-back">
+            <img src="../Logos/logomark-white.svg" alt="mark" style="width:45%;opacity:0.7;">
+          </div>
+        </div>
+        <div class="app-footer">
+          <div class="app-footer-label">Business Card</div>
+          <div class="app-footer-desc">85 × 55mm · Dark on dark · White mark · Space Grotesk labels</div>
+        </div>
+      </div>
+
+      <!-- Deck Slide -->
+      <div class="app-card reveal reveal-d2">
+        <div class="deck-preview">
+          <div class="slide-mock">
+            <div class="slide-glow-line"></div>
+            <div class="slide-content">
+              <div class="slide-label">Brand Strategy · 2025</div>
+              <div class="slide-title">Marketing with Purpose.<br>Powered by Insight.</div>
+              <div class="slide-sub">Archetype Studios — Creative-strategic partners for brands that refuse to blend in.</div>
+            </div>
+            <img class="slide-logo" src="../Logos/logomark-white.svg" alt="mark">
+          </div>
+        </div>
+        <div class="app-footer">
+          <div class="app-footer-label">Presentation Deck</div>
+          <div class="app-footer-desc">16:9 · Dark base · Spectrum gradient header bar · Syne headlines</div>
+        </div>
+      </div>
+
+      <!-- Social Tiles -->
+      <div class="app-card reveal reveal-d3">
+        <div class="social-preview">
+          <div class="social-tile st-1">
+            <div class="st-inner">
+              <img class="st-mark" src="../Logos/logomark-white.svg" alt="mark">
+              <div class="st-text accent-blue" style="font-family:'Syne',sans-serif;font-size:9px;font-weight:800;letter-spacing:0.08em;">MARKETING<br>WITH PURPOSE</div>
+            </div>
+          </div>
+          <div class="social-tile st-2">
+            <div class="st-inner">
+              <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--magenta);line-height:1;">→</div>
+              <div class="st-text" style="font-family:'Syne',sans-serif;font-size:9px;font-weight:800;letter-spacing:0.06em;color:var(--white);">INSIGHT<br>FIRST</div>
+            </div>
+          </div>
+          <div class="social-tile st-3">
+            <div class="st-inner">
+              <div style="width:40px;height:1px;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--magenta));margin-bottom:10px;"></div>
+              <div class="st-text accent-cyan" style="font-family:'Space Grotesk',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;">Archetype<br>Studios</div>
+            </div>
+          </div>
+        </div>
+        <div class="app-footer">
+          <div class="app-footer-label">Social Tiles</div>
+          <div class="app-footer-desc">1:1 format · Dark base · Electric accent · Grid system alignment</div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="app-card reveal reveal-d4">
+        <div class="email-preview">
+          <div class="email-mock">
+            <div class="email-header">
+              <img class="email-mark" src="../Logos/logomark-white.svg" alt="mark">
+              <div>
+                <div class="email-from">Archetype Studios</div>
+                <div class="email-sub">studio@archetypestudios.com</div>
+              </div>
+            </div>
+            <div class="email-body">
+              <div class="email-subj">Your brand strategy brief is ready</div>
+              <div class="email-copy">We've reviewed the initial brief and have identified three strategic angles worth exploring before we commit to a direction. Insight-first, as always.</div>
+              <a class="email-cta" href="#">View Strategy Brief</a>
+            </div>
+          </div>
+        </div>
+        <div class="app-footer">
+          <div class="app-footer-label">Client Email</div>
+          <div class="app-footer-desc">Dark header · Mark only · Purposeful copy · Single CTA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<!-- 10 BACK COVER -->
+<section id="backcover">
+  <div class="bc-cover-bg"></div>
+  <div class="bc-cover-overlay"></div>
+  <div class="bc-cover-content">
+    <img class="bc-mark" src="../Logos/logomark-white.svg" alt="Archetype Studios">
+    <div class="bc-title">Archetype Studios</div>
+    <div class="bc-divider"></div>
+    <p class="bc-tagline"><strong>Marketing with Purpose.</strong><br>Powered by Insight.</p>
+    <div class="bc-divider"></div>
+    <div class="bc-chips">
+      <span class="chip blue">Brand Identity</span>
+      <span class="chip mag">Visual System</span>
+      <span class="chip cyan">Voice & Tone</span>
+    </div>
+    <a href="#cover" style="margin-top:8px;">
+      <span class="chip blue" style="cursor:pointer;">↑ Back to Top</span>
+    </a>
+    <p class="bc-url">archetypestudios.com</p>
+    <p class="bc-version">Brand Identity Pack · Version 2.0 · 2025</p>
+  </div>
+  <div class="glow-line"></div>
+</section>
+
+
+<script>
+/* ── NEON CANVAS ── */
+(function(){
+  const canvas=document.getElementById('neonCanvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[];
+  const COLORS=['rgba(0,168,255,','rgba(233,30,140,','rgba(0,229,212,','rgba(107,0,200,'];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  function Particle(){
+    this.x=Math.random()*W;this.y=Math.random()*H;
+    this.vx=(Math.random()-0.5)*0.4;this.vy=(Math.random()-0.5)*0.4;
+    this.r=Math.random()*1.8+0.4;
+    this.color=COLORS[Math.floor(Math.random()*COLORS.length)];
+    this.a=Math.random()*0.5+0.1;this.da=0;this.phase=Math.random()*Math.PI*2;
+  }
+  for(let i=0;i<90;i++)particles.push(new Particle());
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const t=Date.now()/1000;
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-50)p.x=W+50;if(p.x>W+50)p.x=-50;
+      if(p.y<-50)p.y=H+50;if(p.y>H+50)p.y=-50;
+      const alpha=p.a*(0.7+0.3*Math.sin(t+p.phase));
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.color+alpha+')';ctx.fill();
+    });
+    // draw connections
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<100){
+          ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=particles[i].color+(0.06*(1-d/100))+')';ctx.lineWidth=0.5;ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── SCROLL PROGRESS ── */
+(function(){
+  const bar=document.getElementById('progress');
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100;
+    bar.style.width=pct+'%';
+  },{passive:true});
+})();
+
+/* ── REVEAL ON SCROLL ── */
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.12});
+  els.forEach(el=>obs.observe(el));
+})();
+
+/* ── ACTIVE NAV ── */
+(function(){
+  const sections=document.querySelectorAll('section[id]');
+  const links=document.querySelectorAll('.nav-links a');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+e.target.id)l.classList.add('active');});
+      }
+    });
+  },{threshold:0.35});
+  sections.forEach(s=>obs.observe(s));
+})();
+
+/* ── COPY COLOUR ── */
+function copyColor(hex){
+  navigator.clipboard.writeText(hex).then(()=>{
+    const toast=document.createElement('div');
+    Object.assign(toast.style,{position:'fixed',bottom:'32px',left:'50%',transform:'translateX(-50%)',background:'rgba(0,168,255,0.18)',border:'1px solid rgba(0,168,255,0.4)',backdropFilter:'blur(12px)',color:'#fff',fontFamily:'Space Grotesk,sans-serif',fontSize:'12px',fontWeight:'600',letterSpacing:'0.1em',padding:'10px 20px',borderRadius:'100px',zIndex:'9999',pointerEvents:'none',transition:'opacity 0.4s'});
+    toast.textContent=hex+' copied';
+    document.body.appendChild(toast);
+    setTimeout(()=>{toast.style.opacity='0';setTimeout(()=>toast.remove(),400);},1800);
+  });
+}
+</script>
+</body>
+</html>

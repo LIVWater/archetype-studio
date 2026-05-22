@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Services — Archetype Studio</title>
+<meta name="description" content="Four disciplines, one integrated team. Brand, Business Architecture, Marketing Studio, and AI & Automation — engineered together to build market presence, sharpen commercial structure, and generate sustainable growth." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-deep:#070A17;--bg-mid:#0C1025;--bg-card:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.07);--electric:#00A8FF;--magenta:#E91E8C;
+  --cyan:#00E5D4;--violet:#6B00C8;
+  --text-primary:#F0F2FF;--text-secondary:rgba(240,242,255,0.58);--text-muted:rgba(240,242,255,0.3);
+  --font-d:'Helvetica Neue',Helvetica,Arial,sans-serif;--font-ui:'Space Grotesk',sans-serif;--font-b:'Montserrat',sans-serif;
+  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-b);overflow-x:hidden;line-height:1.6;}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+
+@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+
+/* ===== NAV (shared system) ===== */
+.nav{position:fixed;top:0;left:0;right:0;height:92px;z-index:1000;display:flex;align-items:center;padding:0 56px;background:linear-gradient(135deg,rgba(3,4,15,0.45) 0%,rgba(8,10,30,0.38) 55%,rgba(80,0,155,0.05) 100%);backdrop-filter:blur(14px) saturate(130%);-webkit-backdrop-filter:blur(14px) saturate(130%);border-bottom:1px solid rgba(255,255,255,0.04);box-shadow:0 1px 0 rgba(255,255,255,0.03) inset,0 4px 18px rgba(0,0,0,0.18);transition:height 1.8s var(--ease-out-expo),padding 1.8s var(--ease-out-expo),background 1.8s ease,backdrop-filter 1.8s ease,box-shadow 1.8s ease,border-color 1.8s ease;}
+.nav.scrolled{height:56px;padding:0 32px;background:linear-gradient(135deg,rgba(4,5,18,0.96) 0%,rgba(11,14,38,0.95) 45%,rgba(107,0,200,0.32) 100%);backdrop-filter:blur(36px) saturate(200%);-webkit-backdrop-filter:blur(36px) saturate(200%);border-bottom:1px solid rgba(0,168,255,0.22);box-shadow:0 1px 0 rgba(0,168,255,0.20) inset,0 18px 56px rgba(0,0,0,0.6),0 0 0 1px rgba(0,168,255,0.06);}.nav.scrolled .nav__mega{top:56px;}
+.nav__logo{display:flex;align-items:center;gap:14px;flex-shrink:0;text-decoration:none;transition:gap 1.8s var(--ease-out-expo);}
+.nav.scrolled .nav__logo{gap:0;}
+.nav__mark{width:42px;height:auto;transition:width 1.8s var(--ease-out-expo),filter 1.8s ease;filter:drop-shadow(0 0 0 transparent);}
+.nav.scrolled .nav__mark{width:26px;filter:drop-shadow(0 0 10px rgba(0,168,255,0.45));}
+.nav__wordmark{font-family:var(--font-d);font-size:16px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#fff;white-space:nowrap;overflow:hidden;max-width:240px;opacity:1;transform:translateX(0);transition:max-width 1.8s var(--ease-out-expo),opacity 1.3s ease,transform 1.8s var(--ease-out-expo),letter-spacing 1.8s ease,font-size 1.8s ease,margin 1.8s var(--ease-out-expo);}
+.nav.scrolled .nav__wordmark{max-width:0;opacity:0;transform:translateX(-14px);letter-spacing:0;margin-left:-14px;}
+.nav__links{display:flex;align-items:center;align-self:stretch;gap:44px;margin-left:auto;list-style:none;transition:gap 1.8s var(--ease-out-expo);}
+.nav.scrolled .nav__links{gap:32px;}
+.nav__links a{font-family:var(--font-ui);font-size:13px;font-weight:500;letter-spacing:0.10em;text-transform:uppercase;color:rgba(240,242,255,0.72);text-decoration:none;transition:color 1.8s ease,font-size 1.8s var(--ease-out-expo),letter-spacing 1.8s ease;position:relative;}
+.nav.scrolled .nav__links a{font-size:11px;letter-spacing:0.08em;color:rgba(240,242,255,0.88);}
+.nav__links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--electric);transition:width 0.3s var(--ease-out-expo);}
+.nav__links a:hover{color:#fff;}.nav__links a:hover::after{width:100%;}
+.nav__links a.active{color:#fff;}.nav__links a.active::after{width:100%;background:var(--magenta);}
+/* ===== MEGA MENU ===== */
+.nav__item--has-dropdown{position:static;align-self:stretch;display:flex;align-items:center;}
+.nav__caret{display:inline-block;margin-left:6px;font-size:9px;opacity:0.6;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),opacity 0.3s ease;}
+.nav__item--has-dropdown.is-mega-open .nav__caret{transform:rotate(180deg);opacity:1;}
+.nav__links a.services-trigger{cursor:pointer;}
+.nav__mega{position:fixed;top:92px;left:50%;transform:translateX(-50%) translateY(-12px);width:100vw;height:40vh;min-height:300px;background:linear-gradient(160deg,rgb(4,5,18) 0%,rgb(8,11,30) 55%,rgb(20,8,52) 100%);border-top:1px solid rgba(0,168,255,0.08);border-bottom:1px solid rgba(0,168,255,0.18);box-shadow:0 44px 100px rgba(0,0,0,0.75),0 0 0 1px rgba(0,168,255,0.05),inset 0 1px 0 rgba(255,255,255,0.03);opacity:0;pointer-events:none;transition:opacity 0.28s ease,transform 0.65s cubic-bezier(0.16,1,0.3,1);z-index:998;overflow:hidden;display:flex;align-items:center;}
+.nav__mega::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(0,168,255,0.55) 30%,rgba(139,0,255,0.55) 65%,transparent 100%);pointer-events:none;}
+.nav__item--has-dropdown.is-mega-open .nav__mega{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+.nav__mega-inner{width:100%;height:100%;max-width:1400px;margin:0 auto;padding:0 56px;display:flex;flex-direction:column;justify-content:center;gap:22px;}
+.nav__mega-label{font-family:var(--font-ui,sans-serif);font-size:10px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:rgba(0,168,255,0.6);display:flex;align-items:center;gap:14px;}
+.nav__mega-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,168,255,0.3),transparent);}
+.nav__mega-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.mega-card{position:relative;display:flex;flex-direction:column;gap:10px;padding:24px 24px 20px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02);text-decoration:none;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(18px);transition:opacity 0.5s ease,transform 0.5s cubic-bezier(0.16,1,0.3,1),border-color 0.4s ease,background 0.4s ease,box-shadow 0.4s ease;}
+.nav__item--has-dropdown.is-mega-open .mega-card{opacity:1;transform:translateY(0);}
+.nav__item--has-dropdown.is-mega-open .mega-card:nth-child(1){transition-delay:0.08s;}
+.nav__item--has-dropdown.is-mega-open .mega-card:nth-child(2){transition-delay:0.15s;}
+.nav__item--has-dropdown.is-mega-open .mega-card:nth-child(3){transition-delay:0.22s;}
+.nav__item--has-dropdown.is-mega-open .mega-card:nth-child(4){transition-delay:0.29s;}
+.mega-card::before{content:'';position:absolute;inset:0;border-radius:12px;background:radial-gradient(ellipse 90% 70% at 10% 0%,color-mix(in srgb,var(--mc,#00A8FF) 22%,transparent),transparent 70%);opacity:0;transition:opacity 0.4s ease;pointer-events:none;}
+.mega-card::after{content:'';position:absolute;inset:-1px;border-radius:13px;background:linear-gradient(135deg,var(--mc,#00A8FF),color-mix(in srgb,var(--mc,#00A8FF) 35%,transparent) 55%,transparent 85%);-webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:0;transition:opacity 0.4s ease;pointer-events:none;}
+.mega-card--brand{--mc:#00A8FF;}
+.mega-card--business{--mc:#FF0080;}
+.mega-card--marketing{--mc:#00E5D4;}
+.mega-card--ai{--mc:#8B5CF6;}
+.mega-card:hover{background:rgba(255,255,255,0.045);border-color:color-mix(in srgb,var(--mc,#00A8FF) 28%,rgba(255,255,255,0.08));transform:translateY(-5px)!important;box-shadow:0 20px 44px rgba(0,0,0,0.45),0 0 44px color-mix(in srgb,var(--mc,#00A8FF) 14%,transparent);}
+.mega-card:hover::before{opacity:1;}
+.mega-card:hover::after{opacity:0.75;}
+.mega-card__num{font-family:var(--font-ui,sans-serif);font-size:10px;font-weight:700;letter-spacing:0.18em;color:var(--mc,#00A8FF);opacity:0.65;transition:opacity 0.3s ease;}
+.mega-card:hover .mega-card__num{opacity:1;}
+.mega-card__title{font-family:var(--font-d,'Helvetica Neue',sans-serif);font-size:15px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.01em;margin:0;}
+.mega-card__desc{font-family:var(--font-b,sans-serif);font-size:12px;line-height:1.6;color:rgba(200,208,255,0.55);flex:1;margin:0;}
+.mega-card__arrow{font-size:16px;color:var(--mc,#00A8FF);opacity:0;transform:translateX(-8px);transition:opacity 0.3s ease,transform 0.35s cubic-bezier(0.16,1,0.3,1);align-self:flex-start;margin-top:auto;}
+.mega-card:hover .mega-card__arrow{opacity:1;transform:translateX(0);}
+.mega-footer-link{font-family:var(--font-ui,sans-serif);font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(240,242,255,0.38);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color 0.3s ease,gap 0.35s cubic-bezier(0.16,1,0.3,1);width:fit-content;}
+.mega-footer-link:hover{color:rgba(0,168,255,0.9);gap:16px;}
+.nav__mega-backdrop{position:fixed;inset:0;z-index:997;background:rgba(3,4,15,0.55);opacity:0;pointer-events:none;transition:opacity 0.35s ease;}
+.nav__mega-backdrop.is-active{opacity:1;pointer-events:auto;}
+/* hide old dropdown on desktop, show mega */
+.nav__dropdown{display:none;}
+.nav__cta{--bc1:var(--electric);--bc2:var(--cyan);--bc3:#8B00FF;margin-left:44px;padding:13px 28px;border-radius:100px;border:1px solid color-mix(in srgb,var(--bc2) 28%,rgba(255,255,255,0.08));background:linear-gradient(180deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 48%,rgba(0,0,0,0.18) 100%),linear-gradient(135deg,var(--bc1) 0%,var(--bc2) 45%,var(--bc3) 100%);background-size:100% 100%,220% 220%;background-position:center,0% 50%;font-family:var(--font-ui);font-size:13px;font-weight:600;letter-spacing:0.10em;text-transform:uppercase;color:#fff;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),inset 0 -1px 0 rgba(0,0,0,0.18),0 4px 14px rgba(0,0,0,0.28),0 0 16px color-mix(in srgb,var(--bc1) 18%,transparent);transition:background-position 0.85s var(--ease-out-expo),transform 0.55s var(--ease-out-expo),box-shadow 0.55s ease,border-color 0.55s ease,padding 1.8s var(--ease-out-expo),font-size 1.8s var(--ease-out-expo),margin 1.8s var(--ease-out-expo);}
+.nav.scrolled .nav__cta{padding:7px 18px;font-size:11px;margin-left:32px;letter-spacing:0.08em;}
+.nav__cta:hover{background-position:center,100% 50%;transform:translateY(-2px) scale(1.025);border-color:color-mix(in srgb,var(--bc2) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.30),inset 0 -1px 0 rgba(0,0,0,0.22),0 10px 28px rgba(0,0,0,0.4),0 0 26px color-mix(in srgb,var(--bc1) 48%,transparent),0 0 60px color-mix(in srgb,var(--bc3) 32%,transparent);}
+.nav__toggle{display:none;background:transparent;border:none;cursor:pointer;width:36px;height:36px;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0;margin-left:16px;}
+.nav__toggle span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s;}
+.nav.is-open .nav__toggle span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav.is-open .nav__toggle span:nth-child(2){opacity:0;}
+.nav.is-open .nav__toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:960px){.nav{padding:0 24px;}}
+@media(max-width:768px){
+  .nav__toggle{display:flex!important;}
+  .nav__cart{margin-left:auto;}
+  .nav__links{display:flex!important;position:fixed;top:68px;left:0;right:0;flex-direction:column;gap:0;padding:16px 20px;margin:0;background:linear-gradient(180deg,rgb(7,10,23),rgb(12,16,37));min-height:calc(100vh - 68px);overflow-y:auto;border-bottom:1px solid rgba(255,255,255,0.06);transform:translateY(-12px);opacity:0;pointer-events:none;transition:transform 0.32s var(--ease-out-expo),opacity 0.25s ease;z-index:999;}
+  .nav.is-open .nav__links{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .nav__links li{width:100%;list-style:none;}
+  .nav__links a{display:block;padding:14px 4px;font-size:14px;}
+  .nav__links a::after{display:none;}
+  .nav__cta{display:none;}
+  .nav{height:68px;padding:0 24px;}
+}
+@media(max-width:860px){
+  .nav__mega{display:none!important;}
+  .nav__dropdown{display:block;position:static;opacity:1;pointer-events:auto;transform:none;background:transparent;border:none;box-shadow:none;padding:0 0 8px 16px;min-width:0;backdrop-filter:none;-webkit-backdrop-filter:none;list-style:none;}
+  .nav__dropdown li{list-style:none;}
+  .nav__dropdown a{display:block;padding:10px 4px;font-family:var(--font-ui,sans-serif);font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;border-radius:0;}
+  .nav__dropdown a::after{display:none;}
+  .nav__dropdown a:hover,.nav__dropdown a.active{color:#fff;}
+  .nav__caret{display:none;}
+  .nav__item--has-dropdown::after{display:none;}
+}
+
+/* ===== UNIFIED PREMIUM NEON BUTTONS ===== */
+.btn-primary,.btn-ghost{
+  --bc1:var(--electric);--bc2:var(--cyan);--bc3:#8B00FF;
+  position:relative;display:inline-block;cursor:pointer;text-decoration:none;
+  font-family:var(--font-ui),'Space Grotesk',sans-serif;
+  font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  color:#fff;padding:14px 38px;border-radius:100px;
+  border:1px solid color-mix(in srgb,var(--bc2) 28%,rgba(255,255,255,0.08));
+  background:
+    linear-gradient(180deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 48%,rgba(0,0,0,0.18) 100%),
+    linear-gradient(135deg,var(--bc1) 0%,var(--bc2) 45%,var(--bc3) 100%);
+  background-size:100% 100%,220% 220%;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 -1px 0 rgba(0,0,0,0.18),
+    0 4px 14px rgba(0,0,0,0.28),
+    0 0 16px color-mix(in srgb,var(--bc1) 18%,transparent),
+    0 0 32px color-mix(in srgb,var(--bc3) 10%,transparent);
+  transition:background-position 0.85s var(--ease-out-expo),box-shadow 0.55s var(--ease-out-expo),border-color 0.55s ease,transform 0.55s var(--ease-out-expo);
+}
+.btn-primary{background-position:center,0% 50%;}
+.btn-ghost{background-position:center,100% 50%;font-weight:700;}
+.btn-primary:hover,.btn-ghost:hover{transform:translateY(-2px) scale(1.025);border-color:color-mix(in srgb,var(--bc2) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.30),inset 0 -1px 0 rgba(0,0,0,0.22),0 10px 28px rgba(0,0,0,0.4),0 0 26px color-mix(in srgb,var(--bc1) 48%,transparent),0 0 60px color-mix(in srgb,var(--bc3) 32%,transparent);}
+.btn-primary:hover{background-position:center,100% 50%;}
+.btn-ghost:hover{background-position:center,0% 50%;}
+
+/* ===== HERO (with video background) ===== */
+.svh{position:fixed;top:0;left:0;right:0;z-index:0;height:100vh;min-height:100vh;display:flex;align-items:center;padding:140px 5vw 120px;overflow:hidden;background:#04060F;isolation:isolate;--hf:0;}
+/* Spacer — first section pushed past the fixed hero */
+.svh + section.svp{margin-top:100vh;}
+/* Fade hero content as we scroll (driven by --hf, set by JS) */
+.svh .svh__inner{opacity:calc(1 - var(--hf,0));transform:translateY(calc(var(--hf,0) * -30px));transition:opacity 0.15s linear,transform 0.15s linear;will-change:opacity,transform;}
+.svh__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(0.85) contrast(1.05);}
+.svh__veil{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(4,6,15,0.82) 0%,rgba(4,6,15,0.65) 40%,rgba(4,6,15,0.78) 75%,rgba(4,6,15,0.95) 100%),radial-gradient(ellipse 80% 60% at 50% 40%,rgba(0,168,255,0.14) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 80% 80%,rgba(233,30,140,0.10) 0%,transparent 60%);pointer-events:none;}
+.svh__grid{position:absolute;inset:0;z-index:1;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,0.05) 1px,transparent 0);background-size:42px 42px;mask-image:radial-gradient(ellipse 70% 50% at 50% 50%,#000 30%,transparent 80%);pointer-events:none;}
+.svh__inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;width:100%;text-align:center;}
+@media (prefers-reduced-motion:reduce){.svh__video{display:none;}}
+.svh__title{font-family:var(--font-d);font-size:clamp(2.6rem,5.8vw,5rem);font-weight:800;line-height:1.02;letter-spacing:-0.02em;color:#fff;margin-bottom:24px;}
+.svh__title em{font-style:normal;background:linear-gradient(135deg,var(--electric) 0%,var(--cyan) 30%,#8B00FF 65%,var(--electric) 100%);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradientShift 22s ease-in-out infinite;}
+.svh__lead{font-size:1.1rem;line-height:1.75;color:var(--text-secondary);max-width:62ch;margin:0 auto 38px;}
+.svh__ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* ===== SECTION SCAFFOLD ===== */
+section.svp{position:relative;padding:120px 5vw;}
+.svp__inner{max-width:1280px;margin:0 auto;}
+.svp__heading{font-family:var(--font-d);font-size:clamp(2rem,3.8vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-0.01em;color:#fff;margin-bottom:20px;max-width:24ch;}
+.svp__sub{font-size:1.05rem;color:var(--text-secondary);max-width:64ch;line-height:1.75;}
+
+/* ===== DISCIPLINES GRID ===== */
+.disc{position:relative;background-color:var(--bg-deep);background-image:linear-gradient(180deg,rgba(4,6,15,0.92) 0%,rgba(6,8,22,0.88) 50%,rgba(11,14,38,0.94) 100%),url('assets/images/Introduction.png');background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat;}
+.disc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(135deg,var(--electric) 0%,var(--cyan) 30%,#8B00FF 65%,var(--electric) 100%);background-size:300% 300%;animation:gradientShift 22s ease-in-out infinite;filter:blur(0.6px);box-shadow:0 0 22px 8px rgba(0,168,255,0.45),0 0 44px 16px rgba(139,0,255,0.25);z-index:2;pointer-events:none;}
+.disc__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:56px;}
+.disc__card{position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:44px 40px;background:linear-gradient(180deg,rgba(255,255,255,0.025) 0%,rgba(255,255,255,0.008) 100%);border:2px solid var(--border);border-radius:18px;text-decoration:none;color:inherit;overflow:hidden;min-height:340px;transition:transform 0.55s var(--ease-out-expo),border-color 0.55s ease,box-shadow 0.55s ease;--da:var(--electric);}
+.disc__card.d1{--da:var(--electric);}
+.disc__card.d2{--da:var(--magenta);}
+.disc__card.d3{--da:var(--cyan);}
+.disc__card.d4{--da:#8B5CF6;}
+.disc__card::before{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,color-mix(in srgb,var(--da) 72%,#04060F) 0%,color-mix(in srgb,var(--da) 48%,#04060F) 42%,color-mix(in srgb,var(--da) 18%,rgba(4,6,15,0.9)) 100%);opacity:0;transition:opacity 0.55s var(--ease-out-expo);pointer-events:none;z-index:0;}
+.disc__card::after{content:'';position:absolute;inset:-2px;border-radius:18px;padding:2px;background:linear-gradient(135deg,var(--da),color-mix(in srgb,var(--da) 35%,transparent) 50%,transparent 85%);-webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0.4;transition:opacity 0.5s ease;pointer-events:none;z-index:1;}
+.disc__card:hover{transform:translateY(-6px);border-color:transparent;box-shadow:0 28px 70px rgba(0,0,0,0.6),0 0 100px color-mix(in srgb,var(--da) 28%,transparent),0 0 180px color-mix(in srgb,var(--da) 14%,transparent);}
+.disc__card:hover::before{opacity:1;}.disc__card:hover::after{opacity:1;}
+.disc__card-head{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+.disc__card-n{font-family:var(--font-d);font-size:0.7rem;font-weight:700;letter-spacing:0.24em;color:var(--da);}
+.disc__card-tag{font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:color-mix(in srgb,var(--da) 90%,transparent);padding:5px 12px;border:1px solid color-mix(in srgb,var(--da) 30%,transparent);border-radius:100px;background:color-mix(in srgb,var(--da) 8%,transparent);}
+.disc__card-title{position:relative;z-index:2;font-family:var(--font-d);font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px;}
+.disc__card-tagline{position:relative;z-index:2;font-family:var(--font-d);font-size:1rem;font-weight:400;line-height:1.45;color:var(--da);opacity:0.92;margin-bottom:18px;}
+.disc__card-desc{position:relative;z-index:2;font-family:var(--font-b);font-size:0.92rem;line-height:1.7;color:rgba(220,225,255,0.74);max-width:48ch;margin-bottom:auto;}
+.disc__card-footer{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;margin-top:32px;padding-top:22px;border-top:1px solid color-mix(in srgb,var(--da) 18%,rgba(255,255,255,0.05));}
+.disc__card-link{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--da);display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:100px;border:1px solid color-mix(in srgb,var(--da) 28%,rgba(255,255,255,0.06));background:color-mix(in srgb,var(--da) 7%,rgba(4,6,15,0.6));box-shadow:0 2px 8px rgba(0,0,0,0.35);transition:gap 0.45s var(--ease-out-expo),background 0.45s ease,box-shadow 0.45s ease,border-color 0.45s ease,color 0.35s ease;}
+.disc__card:hover .disc__card-link{gap:14px;color:#fff;background:linear-gradient(145deg,color-mix(in srgb,var(--da) 32%,#02040C) 0%,color-mix(in srgb,var(--da) 18%,#02040C) 60%,rgba(2,4,12,0.92) 100%);border-color:color-mix(in srgb,var(--da) 38%,transparent);box-shadow:0 3px 14px rgba(0,0,0,0.5),0 0 18px color-mix(in srgb,var(--da) 18%,transparent);}
+.disc__card-link svg{width:14px;height:14px;}
+.disc__card-items{position:relative;z-index:2;display:flex;flex-direction:column;gap:6px;margin-top:18px;}
+.disc__card-items li{list-style:none;font-family:var(--font-ui);font-size:0.78rem;color:rgba(200,208,255,0.66);display:flex;align-items:center;gap:8px;}
+.disc__card-items li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--da);flex-shrink:0;box-shadow:0 0 6px color-mix(in srgb,var(--da) 60%,transparent);}
+@media(max-width:900px){.disc__grid{grid-template-columns:1fr;}.disc__card{min-height:300px;padding:32px 28px;}}
+
+/* ===== APPROACH ===== */
+.appr{background:var(--bg-deep);}
+.appr__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;}
+.appr__card{padding:32px 28px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;transition:border-color 0.4s ease,transform 0.4s var(--ease-out-expo);position:relative;overflow:hidden;}
+.appr__card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--electric),var(--cyan),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.6s var(--ease-out-expo);}
+.appr__card:hover{border-color:rgba(0,168,255,0.2);transform:translateY(-4px);}
+.appr__card:hover::before{transform:scaleX(1);}
+.appr__card-n{font-family:var(--font-d);font-size:2.4rem;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--electric),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;}
+.appr__card-t{font-family:var(--font-d);font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:-0.01em;margin-bottom:10px;}
+.appr__card-d{font-size:0.9rem;color:var(--text-secondary);line-height:1.65;}
+@media(max-width:900px){.appr__grid{grid-template-columns:1fr;}}
+
+/* ===== CTA ===== */
+.svp__cta{position:relative;padding:120px 5vw;text-align:center;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(0,168,255,0.18) 0%,transparent 60%),var(--bg-deep);overflow:hidden;}
+.svp__cta-inner{max-width:760px;margin:0 auto;position:relative;z-index:1;}
+.svp__cta-h{font-family:var(--font-d);font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.0;letter-spacing:-0.02em;color:#fff;margin-bottom:22px;}
+.svp__cta-h em{font-style:normal;background:linear-gradient(135deg,var(--electric),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.svp__cta-sub{font-size:1.05rem;color:var(--text-secondary);max-width:54ch;margin:0 auto 40px;line-height:1.75;}
+.svp__cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* ===== FOOTER ===== */
+.footer{background:#04060F;padding:80px 5vw 40px;border-top:1px solid rgba(255,255,255,0.05);position:relative;z-index:1;}
+.footer__inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:60px;}
+.footer__brand-row{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.footer__brand-row svg{width:32px;height:auto;}
+.footer__brand-name{font-family:var(--font-d);font-size:14px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;}
+.footer__tagline{font-size:0.9rem;color:var(--text-secondary);line-height:1.7;max-width:34ch;}
+.footer__nav h4{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#fff;margin-bottom:22px;}
+.footer__nav ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.footer__nav a{font-size:0.88rem;color:var(--text-secondary);text-decoration:none;transition:color 0.2s ease;}
+.footer__nav a:hover{color:#fff;}
+.footer__bottom{max-width:1280px;margin:60px auto 0;padding-top:30px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;font-size:0.78rem;color:var(--text-muted);flex-wrap:wrap;gap:14px;}
+@media(max-width:900px){.footer__inner{grid-template-columns:1fr 1fr;gap:40px;}}
+@media(max-width:560px){.footer__inner{grid-template-columns:1fr;}}
+
+.gsap-hidden{opacity:0;transform:translateY(28px);transition:opacity 0.9s var(--ease-out-expo),transform 0.9s var(--ease-out-expo);}
+.gsap-hidden.in{opacity:1;transform:translateY(0);}
+
+    /* Shop dropdown — 2-card variant */
+    .nav__mega--small{height:auto !important;min-height:0 !important;padding:32px 0;}
+    .nav__mega-grid--two{grid-template-columns:repeat(2,1fr) !important;max-width:880px;margin:0 auto;}
+    .mega-card--solutions{--mc:#00A8FF;}
+    .mega-card--individual{--mc:#FFB800;}
+
+/* ===== UNIVERSAL NAV CART + DRAWER ===== */
+.nav__cart{position:relative;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);color:#fff;cursor:pointer;margin-left:14px;transition:border-color 0.3s ease,color 0.3s ease,background 0.3s ease,width 1.8s cubic-bezier(0.16,1,0.3,1),height 1.8s cubic-bezier(0.16,1,0.3,1),margin 1.8s cubic-bezier(0.16,1,0.3,1);}
+.nav__cart:hover{border-color:rgba(0,168,255,0.55);color:#00A8FF;background:rgba(0,168,255,0.08);}
+.nav__cart svg{width:18px;height:18px;transition:width 1.8s cubic-bezier(0.16,1,0.3,1),height 1.8s cubic-bezier(0.16,1,0.3,1);}
+.nav.scrolled .nav__cart{width:36px;height:36px;margin-left:10px;}
+.nav.scrolled .nav__cart svg{width:16px;height:16px;}
+.nav__cart .cart-fab__count{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:#E91E8C;color:#fff;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(233,30,140,0.55);pointer-events:none;}
+.nav__cart .cart-fab__count.is-empty{display:none;}
+@media(max-width:768px){.nav__cart{margin-left:auto;}}
+@keyframes cartPulseUniv{0%{transform:scale(1);}30%{transform:scale(1.15);}100%{transform:scale(1);}}
+.nav__cart.is-pulse{animation:cartPulseUniv 0.6s cubic-bezier(0.16,1,0.3,1);}
+
+.cart-overlay{position:fixed;inset:0;background:rgba(4,6,15,0.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:10999;opacity:0;pointer-events:none;transition:opacity 0.45s ease;}
+.cart-overlay.is-open{opacity:1;pointer-events:auto;}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:92vw;background:linear-gradient(180deg,#0A0E1C 0%,#070A17 100%);border-left:1px solid rgba(0,168,255,0.18);z-index:11000;transform:translateX(100%);transition:transform 0.55s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;box-shadow:-30px 0 80px rgba(0,0,0,0.5);}
+.cart-drawer.is-open{transform:translateX(0);}
+.cart-drawer__head{display:flex;align-items:center;justify-content:space-between;padding:24px 26px;border-bottom:1px solid rgba(255,255,255,0.07);position:relative;}
+.cart-drawer__head::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#00A8FF,transparent);opacity:0.4;}
+.cart-drawer__title{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:1.05rem;font-weight:700;color:#fff;letter-spacing:-0.01em;}
+.cart-drawer__title em{font-style:normal;color:#00A8FF;font-weight:800;}
+.cart-drawer__close{width:34px;height:34px;border:none;background:rgba(255,255,255,0.04);border-radius:50%;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.3s ease,transform 0.3s ease;}
+.cart-drawer__close:hover{background:rgba(0,168,255,0.18);transform:rotate(90deg);}
+.cart-drawer__body{flex:1;overflow-y:auto;padding:14px 22px;}
+.cart-empty{padding:60px 24px;text-align:center;}
+.cart-empty__icon{width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#00A8FF;}
+.cart-empty__icon svg{width:26px;height:26px;}
+.cart-empty__t{font-family:'Helvetica Neue',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px;}
+.cart-empty__d{font-size:0.85rem;color:rgba(220,225,255,0.55);line-height:1.6;margin-bottom:18px;}
+.cart-empty__cta{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#fff;text-decoration:none;padding:11px 22px;border-radius:50px;background:linear-gradient(135deg,#00A8FF,#8B00FF);box-shadow:0 4px 18px rgba(0,168,255,0.35);transition:transform 0.4s ease,box-shadow 0.4s ease,gap 0.4s ease;}
+.cart-empty__cta:hover{transform:translateY(-2px);gap:12px;box-shadow:0 8px 28px rgba(0,168,255,0.55);}
+.cart-item{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:18px 6px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.cart-item__info{flex:1;min-width:0;}
+.cart-item__name{font-family:'Helvetica Neue',sans-serif;font-size:0.94rem;font-weight:700;color:#fff;letter-spacing:-0.01em;margin-bottom:4px;line-height:1.3;}
+.cart-item__type{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#00A8FF;opacity:0.85;}
+.cart-item__qty{display:flex;align-items:center;gap:8px;margin-top:8px;}
+.cart-item__qty button{width:24px;height:24px;border-radius:50%;border:1px solid rgba(255,255,255,0.10);background:transparent;color:#fff;cursor:pointer;font-size:12px;line-height:1;transition:background 0.3s ease,border-color 0.3s ease;}
+.cart-item__qty button:hover{background:rgba(0,168,255,0.18);border-color:#00A8FF;}
+.cart-item__qty span{font-family:'Space Grotesk',sans-serif;font-size:0.82rem;color:#fff;min-width:18px;text-align:center;}
+.cart-item__price{font-family:'Helvetica Neue',sans-serif;font-size:0.95rem;font-weight:700;color:#fff;white-space:nowrap;}
+.cart-item__remove{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;background:transparent;border:none;color:rgba(220,225,255,0.45);cursor:pointer;padding:0;margin-top:6px;transition:color 0.3s ease;}
+.cart-item__remove:hover{color:#E91E8C;}
+.cart-drawer__foot{padding:22px 26px 26px;border-top:1px solid rgba(255,255,255,0.07);background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,0.3) 100%);}
+.cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;}
+.cart-total span{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(220,225,255,0.55);}
+.cart-total strong{font-family:'Helvetica Neue',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#00A8FF,#8B00FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+.cart-note{font-size:0.76rem;color:rgba(220,225,255,0.5);line-height:1.55;margin-bottom:16px;}
+.cart-checkout{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:14px 24px;border-radius:50px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#00A8FF,#8B00FF);box-shadow:0 4px 18px rgba(0,168,255,0.35);transition:transform 0.4s ease,box-shadow 0.4s ease,gap 0.4s ease;}
+.cart-checkout:hover{transform:translateY(-2px);gap:12px;box-shadow:0 8px 28px rgba(0,168,255,0.55);}
+@media(max-width:600px){.cart-drawer{width:100%;}}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" id="site-nav" role="navigation" aria-label="Main navigation">
+  <a class="nav__logo" href="index.html" aria-label="Archetype Studio home">
+    <svg class="nav__mark" viewBox="150 80 520 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="#ffffff" d="M 420.789062 92.867188 L 279.285156 337.953125 C 282.851562 337.953125 286.414062 337.835938 289.972656 337.605469 C 293.53125 337.371094 297.078125 337.019531 300.613281 336.554688 C 304.148438 336.089844 307.664062 335.511719 311.164062 334.8125 C 314.660156 334.117188 318.132812 333.308594 321.574219 332.386719 C 325.019531 331.464844 328.429688 330.429688 331.808594 329.28125 C 335.183594 328.136719 338.519531 326.882812 341.8125 325.515625 C 345.109375 324.152344 348.355469 322.679688 351.554688 321.105469 C 354.75 319.527344 357.894531 317.847656 360.984375 316.0625 C 364.070312 314.28125 367.097656 312.398438 370.0625 310.417969 C 373.027344 308.4375 375.925781 306.359375 378.753906 304.191406 C 381.582031 302.019531 384.339844 299.757812 387.019531 297.40625 C 389.699219 295.054688 392.300781 292.621094 394.824219 290.097656 C 397.34375 287.578125 399.78125 284.976562 402.132812 282.296875 C 404.484375 279.613281 406.746094 276.859375 408.914062 274.03125 C 411.085938 271.203125 413.164062 268.304688 415.144531 265.339844 C 417.125 262.375 419.007812 259.347656 420.789062 256.261719 C 422.574219 253.171875 424.253906 250.027344 425.832031 246.832031 C 427.410156 243.632812 428.878906 240.386719 430.242188 237.089844 C 431.609375 233.796875 432.863281 230.460938 434.011719 227.085938 C 435.15625 223.707031 436.191406 220.296875 437.113281 216.851562 C 438.039062 213.40625 438.847656 209.9375 439.542969 206.441406 C 440.238281 202.941406 440.820312 199.425781 441.285156 195.890625 C 441.75 192.355469 442.097656 188.808594 442.332031 185.25 C 442.566406 181.691406 442.683594 178.128906 442.683594 174.5625 C 442.683594 170.996094 442.566406 167.433594 442.332031 163.875 C 442.097656 160.316406 441.75 156.769531 441.285156 153.234375 C 440.820312 149.699219 440.238281 146.183594 439.542969 142.6875 C 438.847656 139.1875 438.039062 135.71875 437.113281 132.273438 C 436.191406 128.828125 435.15625 125.417969 434.011719 122.042969 C 432.863281 118.664062 431.609375 115.328125 430.242188 112.035156 C 428.878906 108.738281 427.410156 105.492188 425.832031 102.296875 C 424.253906 99.097656 422.574219 95.953125 420.789062 92.867188 Z"/>
+      <path fill="#ffffff" d="M 515.125 419.667969 L 562.292969 501.367188 L 656.628906 501.367188 L 609.457031 419.667969 L 515.125 256.261719 L 420.789062 419.667969 Z"/>
+      <path fill="#ffffff" d="M 373.621094 501.347656 L 420.789062 419.667969 L 326.457031 419.667969 C 322.890625 419.667969 319.328125 419.785156 315.769531 420.015625 C 312.214844 420.25 308.667969 420.597656 305.128906 421.0625 C 301.59375 421.527344 298.078125 422.109375 294.582031 422.804688 C 291.085938 423.5 287.613281 424.308594 284.167969 425.230469 C 280.726562 426.152344 277.3125 427.1875 273.9375 428.332031 C 270.5625 429.480469 267.226562 430.734375 263.929688 432.097656 C 260.636719 433.464844 257.390625 434.933594 254.191406 436.511719 C 250.992188 438.085938 247.851562 439.765625 244.761719 441.550781 C 241.671875 443.332031 238.648438 445.214844 235.683594 447.195312 C 232.71875 449.175781 229.820312 451.25 226.992188 453.421875 C 224.160156 455.59375 221.40625 457.851562 218.726562 460.203125 C 216.042969 462.554688 213.441406 464.992188 210.921875 467.511719 C 208.398438 470.03125 205.964844 472.632812 203.613281 475.316406 C 201.261719 477.996094 199 480.75 196.828125 483.578125 C 194.65625 486.40625 192.582031 489.304688 190.601562 492.269531 C 188.617188 495.234375 186.738281 498.261719 184.953125 501.347656 Z"/>
+    </svg>
+    <span class="nav__wordmark">Archetype Studio</span>
+  </a>
+  <ul class="nav__links">
+    <li><a href="about.html">About</a></li>
+    <li class="nav__item--has-dropdown">
+      <a href="services.html" class="active">Services<span class="nav__caret">▾</span></a>
+      <div class="nav__mega" aria-hidden="true">
+        <div class="nav__mega-inner">
+          <div class="nav__mega-label">Our Services</div>
+          <div class="nav__mega-grid">
+            <a href="services-brand.html" class="mega-card mega-card--brand">
+              <div class="mega-card__num">01</div>
+              <h3 class="mega-card__title">Brand Development</h3>
+              <p class="mega-card__desc">Identity systems, visual language, and brand positioning built to stand apart.</p>
+              <span class="mega-card__arrow">→</span>
+            </a>
+            <a href="services-business.html" class="mega-card mega-card--business">
+              <div class="mega-card__num">02</div>
+              <h3 class="mega-card__title">Business Architecture</h3>
+              <p class="mega-card__desc">Structure, systems, and strategy engineered for scale and operational clarity.</p>
+              <span class="mega-card__arrow">→</span>
+            </a>
+            <a href="services-marketing.html" class="mega-card mega-card--marketing">
+              <div class="mega-card__num">03</div>
+              <h3 class="mega-card__title">Marketing Studio</h3>
+              <p class="mega-card__desc">End-to-end campaigns, content, and demand generation that compounds over time.</p>
+              <span class="mega-card__arrow">→</span>
+            </a>
+            <a href="services-ai.html" class="mega-card mega-card--ai">
+              <div class="mega-card__num">04</div>
+              <h3 class="mega-card__title">AI &amp; Automation</h3>
+              <p class="mega-card__desc">Intelligent systems that eliminate friction and unlock exponential leverage.</p>
+              <span class="mega-card__arrow">→</span>
+            </a>
+          </div>
+          <a href="services.html" class="mega-footer-link">View all services <span>→</span></a>
+        </div>
+      </div>
+      <ul class="nav__dropdown">
+        <li><a href="services-brand.html">Brand Development</a></li>
+        <li><a href="services-business.html">Business Architecture</a></li>
+        <li><a href="services-marketing.html">Marketing Studio</a></li>
+        <li><a href="services-ai.html">AI &amp; Automation</a></li>
+      </ul>
+    </li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li class="nav__item--has-dropdown nav__item--shop">
+  <a href="shop.html">Shop<span class="nav__caret">▾</span></a>
+  <div class="nav__mega nav__mega--small" aria-hidden="true">
+    <div class="nav__mega-inner">
+      <div class="nav__mega-label">Browse the Shop</div>
+      <div class="nav__mega-grid nav__mega-grid--two">
+        <a href="solutions.html" class="mega-card mega-card--solutions">
+          <div class="mega-card__num">01</div>
+          <h3 class="mega-card__title">Packaged Solutions</h3>
+          <p class="mega-card__desc">Four service disciplines, three tiers each — or build your own tailored scope.</p>
+          <span class="mega-card__arrow">→</span>
+        </a>
+        <a href="shop.html#value-add" class="mega-card mega-card--individual">
+          <div class="mega-card__num">02</div>
+          <h3 class="mega-card__title">Individual Products</h3>
+          <p class="mega-card__desc">Individual deliverables, priced per unit and ready to order.</p>
+          <span class="mega-card__arrow">→</span>
+        </a>
+      </div>
+      <a href="shop.html" class="mega-footer-link">View everything <span>→</span></a>
+    </div>
+  </div>
+  <ul class="nav__dropdown">
+    <li><a href="solutions.html">Packaged Solutions</a></li>
+    <li><a href="shop.html#value-add">Individual Products</a></li>
+  </ul>
+</li>
+  <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav__cta">Start a Project</a>
+  <button class="nav__cart" id="cartFab" aria-label="View cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+    <span class="cart-fab__count is-empty" id="cartCount">0</span>
+  </button>
+  <button class="nav__toggle" id="site-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="svh">
+  <video class="svh__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true" poster="assets/images/Services.png">
+    <source src="assets/videos/services-hero.mp4" type="video/mp4"/>
+  </video>
+  <div class="svh__veil" aria-hidden="true"></div>
+  <div class="svh__grid" aria-hidden="true"></div>
+
+  <div class="svh__inner">
+    <h1 class="svh__title">Four disciplines.<br/><em>One integrated system.</em></h1>
+    <p class="svh__lead">Brand. Business Architecture. Marketing Studio. AI &amp; Automation. We don't run these as separate workstreams — we engineer them together, so the brand, the business model, the channels, and the technology all move as one.</p>
+    <div class="svh__ctas">
+      <a href="contact.html" class="btn-primary">Start a Project</a>
+      <a href="#disciplines" class="btn-ghost">Explore the Disciplines</a>
+    </div>
+  </div>
+</section>
+
+<!-- DISCIPLINES GRID -->
+<section class="svp disc" id="disciplines">
+  <div class="svp__inner">
+    <h2 class="svp__heading gsap-hidden">Built for businesses<br/>that need more than a vendor.</h2>
+    <p class="svp__sub gsap-hidden">Each discipline is a standalone engagement — and a connecting piece of the wider system. Click through to see scope, deliverables, process, and outcomes for each.</p>
+
+    <div class="disc__grid">
+
+      <a href="services-brand.html" class="disc__card d1 gsap-hidden">
+        <div class="disc__card-head">
+          <span class="disc__card-n">Service 01</span>
+          <span class="disc__card-tag">Brand</span>
+        </div>
+        <h3 class="disc__card-title">Brand Development</h3>
+        <p class="disc__card-tagline">Brands engineered for commercial intent.</p>
+        <p class="disc__card-desc">Positioning, identity, messaging, and differentiation — designed to earn attention, communicate value, and convert it into revenue. Not aesthetics for their own sake. Perception, engineered.</p>
+        <ul class="disc__card-items">
+          <li>Strategy &amp; Positioning</li>
+          <li>Identity, Naming &amp; Narrative</li>
+          <li>Visual &amp; Voice Systems</li>
+          <li>Guidelines &amp; Governance</li>
+        </ul>
+        <div class="disc__card-footer">
+          <span class="disc__card-link">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a href="services-business.html" class="disc__card d2 gsap-hidden">
+        <div class="disc__card-head">
+          <span class="disc__card-n">Service 02</span>
+          <span class="disc__card-tag">Architecture</span>
+        </div>
+        <h3 class="disc__card-title">Business Architecture</h3>
+        <p class="disc__card-tagline">Structure made operational.</p>
+        <p class="disc__card-desc">Business models, revenue structures, go-to-market strategy, and organisational design — the commercial frameworks that hold up when volume doubles. Strategy that lives in process, not slides.</p>
+        <ul class="disc__card-items">
+          <li>Model &amp; Revenue Structure</li>
+          <li>Go-to-Market &amp; Partnerships</li>
+          <li>Organisational Design</li>
+          <li>Scale Frameworks</li>
+        </ul>
+        <div class="disc__card-footer">
+          <span class="disc__card-link">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a href="services-marketing.html" class="disc__card d3 gsap-hidden">
+        <div class="disc__card-head">
+          <span class="disc__card-n">Service 03</span>
+          <span class="disc__card-tag">Marketing</span>
+        </div>
+        <h3 class="disc__card-title">Marketing Studio</h3>
+        <p class="disc__card-tagline">From concept to conversion, all in-house.</p>
+        <p class="disc__card-desc">Website and app builds, social, paid media, email, campaigns, SEO, and content — operated under one roof so strategy, execution, and performance stay connected. No briefing across five agencies.</p>
+        <ul class="disc__card-items">
+          <li>Web &amp; App Builds</li>
+          <li>Paid, Social, Email, Campaigns</li>
+          <li>Content &amp; Creative Direction</li>
+          <li>Funnel &amp; Conversion</li>
+        </ul>
+        <div class="disc__card-footer">
+          <span class="disc__card-link">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a href="services-ai.html" class="disc__card d4 gsap-hidden">
+        <div class="disc__card-head">
+          <span class="disc__card-n">Service 04</span>
+          <span class="disc__card-tag">AI</span>
+        </div>
+        <h3 class="disc__card-title">AI &amp; Automation</h3>
+        <p class="disc__card-tagline">AI as infrastructure, not gimmick.</p>
+        <p class="disc__card-desc">Workflow automation, AI-assisted content and customer engagement, process optimisation, and tool integration — applied practically to reduce friction, cut cost, and create operational leverage.</p>
+        <ul class="disc__card-items">
+          <li>Workflow &amp; Process Automation</li>
+          <li>AI Content &amp; Engagement</li>
+          <li>Tool Integration &amp; Orchestration</li>
+          <li>Internal AI Tooling</li>
+        </ul>
+        <div class="disc__card-footer">
+          <span class="disc__card-link">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="svp appr">
+  <div class="svp__inner">
+    <h2 class="svp__heading gsap-hidden">How we engage.</h2>
+    <p class="svp__sub gsap-hidden">Three ways to work with us — productised, integrated, or ongoing. Choose what fits the stage and shape of the business.</p>
+
+    <div class="appr__grid">
+      <div class="appr__card gsap-hidden">
+        <div class="appr__card-n">01</div>
+        <h3 class="appr__card-t">Productised Engagements</h3>
+        <p class="appr__card-d">Defined-scope sprints with fixed deliverables and timelines. Best when the problem is clear and the brief is tight. Available across all four disciplines via the shop.</p>
+      </div>
+      <div class="appr__card gsap-hidden">
+        <div class="appr__card-n">02</div>
+        <h3 class="appr__card-t">Integrated Builds</h3>
+        <p class="appr__card-d">Multi-discipline programmes for businesses launching, rebranding, or restructuring. Brand + architecture + marketing + AI — designed and shipped as one connected system.</p>
+      </div>
+      <div class="appr__card gsap-hidden">
+        <div class="appr__card-n">03</div>
+        <h3 class="appr__card-t">Ongoing Partnership</h3>
+        <p class="appr__card-d">Retained relationships where we run the studio function inside your business — strategy, creative, performance, and AI — accountable to monthly outcomes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="svp__cta">
+  <div class="svp__cta-inner gsap-hidden">
+    <h2 class="svp__cta-h">Let's design <em>what your business becomes</em>.</h2>
+    <p class="svp__cta-sub">Most engagements start with a short conversation about the commercial outcome you're trying to drive. We'll show you which combination of disciplines makes sense — and what shipping it looks like.</p>
+    <div class="svp__cta-actions">
+      <a href="contact.html" class="btn-primary">Start a Project</a>
+      <a href="shop.html" class="btn-ghost">Browse the Shop</a>
+      <a href="portfolio.html" class="btn-ghost">See the Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <div class="footer__brand-row">
+        <svg viewBox="150 80 520 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#ffffff" d="M 420.789062 92.867188 L 279.285156 337.953125 C 282.851562 337.953125 286.414062 337.835938 289.972656 337.605469 C 293.53125 337.371094 297.078125 337.019531 300.613281 336.554688 C 304.148438 336.089844 307.664062 335.511719 311.164062 334.8125 C 314.660156 334.117188 318.132812 333.308594 321.574219 332.386719 C 325.019531 331.464844 328.429688 330.429688 331.808594 329.28125 C 335.183594 328.136719 338.519531 326.882812 341.8125 325.515625 C 345.109375 324.152344 348.355469 322.679688 351.554688 321.105469 C 354.75 319.527344 357.894531 317.847656 360.984375 316.0625 C 364.070312 314.28125 367.097656 312.398438 370.0625 310.417969 C 373.027344 308.4375 375.925781 306.359375 378.753906 304.191406 C 381.582031 302.019531 384.339844 299.757812 387.019531 297.40625 C 389.699219 295.054688 392.300781 292.621094 394.824219 290.097656 C 397.34375 287.578125 399.78125 284.976562 402.132812 282.296875 C 404.484375 279.613281 406.746094 276.859375 408.914062 274.03125 C 411.085938 271.203125 413.164062 268.304688 415.144531 265.339844 C 417.125 262.375 419.007812 259.347656 420.789062 256.261719 C 422.574219 253.171875 424.253906 250.027344 425.832031 246.832031 C 427.410156 243.632812 428.878906 240.386719 430.242188 237.089844 C 431.609375 233.796875 432.863281 230.460938 434.011719 227.085938 C 435.15625 223.707031 436.191406 220.296875 437.113281 216.851562 C 438.039062 213.40625 438.847656 209.9375 439.542969 206.441406 C 440.238281 202.941406 440.820312 199.425781 441.285156 195.890625 C 441.75 192.355469 442.097656 188.808594 442.332031 185.25 C 442.566406 181.691406 442.683594 178.128906 442.683594 174.5625 C 442.683594 170.996094 442.566406 167.433594 442.332031 163.875 C 442.097656 160.316406 441.75 156.769531 441.285156 153.234375 C 440.820312 149.699219 440.238281 146.183594 439.542969 142.6875 C 438.847656 139.1875 438.039062 135.71875 437.113281 132.273438 C 436.191406 128.828125 435.15625 125.417969 434.011719 122.042969 C 432.863281 118.664062 431.609375 115.328125 430.242188 112.035156 C 428.878906 108.738281 427.410156 105.492188 425.832031 102.296875 C 424.253906 99.097656 422.574219 95.953125 420.789062 92.867188 Z"/><path fill="#ffffff" d="M 515.125 419.667969 L 562.292969 501.367188 L 656.628906 501.367188 L 609.457031 419.667969 L 515.125 256.261719 L 420.789062 419.667969 Z"/><path fill="#ffffff" d="M 373.621094 501.347656 L 420.789062 419.667969 L 326.457031 419.667969 C 322.890625 419.667969 319.328125 419.785156 315.769531 420.015625 C 312.214844 420.25 308.667969 420.597656 305.128906 421.0625 C 301.59375 421.527344 298.078125 422.109375 294.582031 422.804688 C 291.085938 423.5 287.613281 424.308594 284.167969 425.230469 C 280.726562 426.152344 277.3125 427.1875 273.9375 428.332031 C 270.5625 429.480469 267.226562 430.734375 263.929688 432.097656 C 260.636719 433.464844 257.390625 434.933594 254.191406 436.511719 C 250.992188 438.085938 247.851562 439.765625 244.761719 441.550781 C 241.671875 443.332031 238.648438 445.214844 235.683594 447.195312 C 232.71875 449.175781 229.820312 451.25 226.992188 453.421875 C 224.160156 455.59375 221.40625 457.851562 218.726562 460.203125 C 216.042969 462.554688 213.441406 464.992188 210.921875 467.511719 C 208.398438 470.03125 205.964844 472.632812 203.613281 475.316406 C 201.261719 477.996094 199 480.75 196.828125 483.578125 C 194.65625 486.40625 192.582031 489.304688 190.601562 492.269531 C 188.617188 495.234375 186.738281 498.261719 184.953125 501.347656 Z"/></svg>
+        <span class="footer__brand-name">Archetype Studio</span>
+      </div>
+      <p class="footer__tagline">Build the brand. Architect the business.<br>Automate the growth.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Footer - Company">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="shop.html">Shop</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__nav" aria-label="Footer - Services">
+      <h4>Disciplines</h4>
+      <ul>
+        <li><a href="services-brand.html">Brand Development</a></li>
+        <li><a href="services-business.html">Business Architecture</a></li>
+        <li><a href="services-marketing.html">Marketing Studio</a></li>
+        <li><a href="services-ai.html">AI &amp; Automation</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__nav" aria-label="Footer - Connect">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="mailto:hello@archetypestudio.com">hello@archetypestudio.com</a></li>
+        <li><a href="tel:+27823477565">+27 82 347 7565</a></li>
+        <li><a href="#" rel="noopener">Instagram</a></li>
+        <li><a href="#" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer__bottom">
+    <span>© Archetype Studio. All rights reserved.</span>
+    <span>Built to compound.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ===== NAV: SCROLL + MOBILE TOGGLE + MEGA MENU ===== */
+  var n = document.getElementById('site-nav');
+  if (n) {
+    var t = document.getElementById('site-nav-toggle');
+    function onScroll(){ n.classList.toggle('scrolled', window.scrollY > 40); }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    if (t) {
+      t.addEventListener('click', function(){
+        var open = n.classList.toggle('is-open');
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      n.querySelectorAll('.nav__links > li > a, .nav__dropdown a').forEach(function(a){
+        a.addEventListener('click', function(){
+          n.classList.remove('is-open');
+          if (t) t.setAttribute('aria-expanded','false');
+        });
+      });
+    }
+    var items = n.querySelectorAll('.nav__item--has-dropdown');
+      if (!items.length) return;
+      var bd = document.createElement('div');
+      bd.className = 'nav__mega-backdrop';
+      document.body.appendChild(bd);
+      function isDesktop(){ return window.innerWidth > 860; }
+      var openItem = null, closeTimer = null;
+      function closeAll(){ items.forEach(function(it){ it.classList.remove('is-mega-open'); var t = it.querySelector(':scope > a'); var m = it.querySelector('.nav__mega'); if (t) t.setAttribute('aria-expanded','false'); if (m) m.setAttribute('aria-hidden','true'); }); bd.classList.remove('is-active'); openItem = null; }
+      function openOnly(it){ items.forEach(function(o){ if (o !== it) o.classList.remove('is-mega-open'); }); it.classList.add('is-mega-open'); bd.classList.add('is-active'); var t = it.querySelector(':scope > a'); var m = it.querySelector('.nav__mega'); if (t) t.setAttribute('aria-expanded','true'); if (m) m.setAttribute('aria-hidden','false'); openItem = it; }
+      items.forEach(function(item){
+        var trigger = item.querySelector(':scope > a');
+        var mega = item.querySelector('.nav__mega');
+        if (!trigger || !mega) return;
+        function scheduleClose(){ clearTimeout(closeTimer); closeTimer = setTimeout(closeAll, 750); }
+        function cancelClose(){ clearTimeout(closeTimer); closeTimer = null; }
+        item.addEventListener('mouseenter', function(){ if(isDesktop()){ cancelClose(); openOnly(item); } });
+        item.addEventListener('mouseleave', function(){ if(isDesktop()) scheduleClose(); });
+        mega.addEventListener('mouseenter', function(){ if(isDesktop()) cancelClose(); });
+        mega.addEventListener('mouseleave', function(){ if(isDesktop()) scheduleClose(); });
+        trigger.addEventListener('focus', function(){ if (isDesktop()) openOnly(item); });
+      });
+      bd.addEventListener('click', closeAll);
+      document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeAll(); });
+    }
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.gsap-hidden').forEach(function(el){io.observe(el);});
+
+  /* Hero fixed + slow fade-out on scroll */
+  var hero=document.querySelector('.svh');
+  if(hero){
+    var pending=false;
+    function paint(){
+      pending=false;
+      var vh=window.innerHeight||document.documentElement.clientHeight;
+      var p=Math.min(1,Math.max(0,window.scrollY/vh));
+      var eased=1-Math.pow(1-p,1.6);
+      hero.style.setProperty('--hf',eased.toFixed(3));
+    }
+    function onScroll(){if(pending)return;pending=true;requestAnimationFrame(paint);}
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('resize',onScroll,{passive:true});
+    paint();
+  }
+})();
+</script>
+
+<!-- ===== UNIVERSAL CART DRAWER (shared via localStorage 'archetype_cart_v1') ===== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Your selection">
+  <header class="cart-drawer__head">
+    <span class="cart-drawer__title">Your <em>Selection</em></span>
+    <button class="cart-drawer__close" id="cartClose" aria-label="Close cart">×</button>
+  </header>
+  <div class="cart-drawer__body" id="cartBody"></div>
+  <footer class="cart-drawer__foot">
+    <div class="cart-total"><span>Estimated Total</span><strong id="cartTotal">R0</strong></div>
+    <p class="cart-note">Prices are starting points. Final scope confirmed during the discovery call.</p>
+    <a href="contact.html" class="cart-checkout">Send Enquiry <span aria-hidden="true">→</span></a>
+  </footer>
+</aside>
+<script>
+(function(){
+  var KEY='archetype_cart_v1';
+  var fab=document.getElementById('cartFab');
+  var drawer=document.getElementById('cartDrawer');
+  var overlay=document.getElementById('cartOverlay');
+  if(!fab||!drawer||!overlay) return;
+  var closeBtn=document.getElementById('cartClose');
+  var count=document.getElementById('cartCount');
+  var body=document.getElementById('cartBody');
+  var total=document.getElementById('cartTotal');
+  var cart=[];
+  try{cart=JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){cart=[];}
+  function fmt(n){return 'R'+Number(n||0).toLocaleString('en-ZA');}
+  function priceOf(i){return Number(i.price)||Number(i.priceRaw)||0;}
+  function totalQty(){return cart.reduce(function(s,i){return s+(i.qty||1);},0);}
+  function totalAmount(){return cart.reduce(function(s,i){return s+priceOf(i)*(i.qty||1);},0);}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(cart));}catch(e){}render();}
+  function render(){
+    var q=totalQty();
+    if(count){count.textContent=q;count.classList.toggle('is-empty',q===0);}
+    if(total) total.textContent=fmt(totalAmount());
+    if(!body) return;
+    if(!cart.length){
+      body.innerHTML='<div class="cart-empty"><div class="cart-empty__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div><div class="cart-empty__t">Your selection is empty</div><p class="cart-empty__d">Add packages or services from the shop to start scoping your engagement.</p><a href="shop.html" class="cart-empty__cta">Browse the Shop <span aria-hidden="true">→</span></a></div>';
+      return;
+    }
+    body.innerHTML=cart.map(function(i){
+      var p=priceOf(i)*(i.qty||1);
+      var section=i.section||(i.category?i.category.charAt(0).toUpperCase()+i.category.slice(1):'');
+      var typeLabel=i.type==='package'?'Package':(i.type==='product'?'Product':'Service');
+      return '<div class="cart-item"><div class="cart-item__info"><div class="cart-item__name">'+(i.name||'')+'</div><div class="cart-item__type">'+typeLabel+(section?' · '+section:'')+'</div><div class="cart-item__qty"><button data-q="-" data-id="'+i.id+'" aria-label="Decrease">−</button><span>'+(i.qty||1)+'</span><button data-q="+" data-id="'+i.id+'" aria-label="Increase">+</button></div><button class="cart-item__remove" data-r="'+i.id+'">Remove</button></div><div class="cart-item__price">'+fmt(p)+'</div></div>';
+    }).join('');
+    body.querySelectorAll('button[data-q]').forEach(function(b){
+      b.addEventListener('click',function(){
+        var id=b.dataset.id,op=b.dataset.q;
+        var it=cart.find(function(x){return x.id===id;});
+        if(!it)return;
+        if(op==='+') it.qty=(it.qty||1)+1; else it.qty=Math.max(1,(it.qty||1)-1);
+        save();
+      });
+    });
+    body.querySelectorAll('button[data-r]').forEach(function(b){
+      b.addEventListener('click',function(){
+        cart=cart.filter(function(x){return x.id!==b.dataset.r;});save();
+      });
+    });
+  }
+  function openCart(){drawer.classList.add('is-open');overlay.classList.add('is-open');}
+  function closeCart(){drawer.classList.remove('is-open');overlay.classList.remove('is-open');}
+  fab.addEventListener('click',openCart);
+  if(closeBtn) closeBtn.addEventListener('click',closeCart);
+  overlay.addEventListener('click',closeCart);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCart();});
+  window.addEventListener('storage',function(e){
+    if(e.key===KEY){
+      try{cart=JSON.parse(e.newValue||'[]');}catch(err){cart=[];}
+      render();
+    }
+  });
+  render();
+})();
+</script>
+
+</body>
+</html>
