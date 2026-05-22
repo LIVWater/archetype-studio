@@ -103,7 +103,7 @@ body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-
 .hero-glow-beam::after{display:none;}#hero{position:fixed;top:0;left:0;right:0;z-index:0;height:100vh;max-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 5vw 6rem;background:url('assets/images/Introduction.png') center center / cover no-repeat;background-color:#070A17;--hf:0;overflow:hidden;isolation:isolate;}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(0.92) contrast(1.04) brightness(0.95);pointer-events:none;}
 @media (prefers-reduced-motion:reduce){.hero-video{display:none;}}
-@media (max-width:768px){.hero-video{display:none;}}
+@media (max-width:768px){.hero-video{display:block;}}
 /* Spacer — first section pushed past the fixed hero */
 #welcome{margin-top:100vh;}
 
@@ -746,6 +746,21 @@ footer.footer .footer__social:hover{border-color:#00A8FF;color:#00A8FF;transform
 .cart-checkout{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:14px 24px;border-radius:50px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#00A8FF,#8B00FF);box-shadow:0 4px 18px rgba(0,168,255,0.35);transition:transform 0.4s ease,box-shadow 0.4s ease,gap 0.4s ease;}
 .cart-checkout:hover{transform:translateY(-2px);gap:12px;box-shadow:0 8px 28px rgba(0,168,255,0.55);}
 @media(max-width:600px){.cart-drawer{width:100%;}}
+
+/* === MOBILE NAV: compact horizontal bar (no hamburger) === */
+@media(max-width:768px){
+  .nav{height:56px!important;padding:0 16px!important;}
+  .nav__toggle{display:none!important;}
+  .nav__wordmark{display:none!important;}
+  .nav__links{display:flex!important;flex-direction:row!important;align-items:center!important;gap:clamp(8px,2.2vw,12px)!important;margin-left:auto!important;position:static!important;background:transparent!important;min-height:auto!important;overflow:visible!important;transform:none!important;opacity:1!important;pointer-events:auto!important;padding:0!important;z-index:auto!important;border:none!important;}
+  .nav.is-open .nav__links{transform:none!important;opacity:1!important;pointer-events:auto!important;}
+  .nav__links li{width:auto!important;}
+  .nav__links a{display:inline-flex!important;align-items:center!important;padding:0!important;font-size:10px!important;letter-spacing:0.05em!important;}
+  .nav__caret{display:none!important;}
+  .nav__dropdown{display:none!important;}
+  .nav__cta{display:none!important;}
+  .nav__cart{margin-left:12px!important;}
+}
 </style>
 </head>
 <body>
