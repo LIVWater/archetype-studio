@@ -282,21 +282,143 @@ section.svp{position:relative;padding:120px 5vw;}
 @media(max-width:600px){.cart-drawer{width:100%;}}
 
 
-/* === MOBILE NAV: compact horizontal bar (no hamburger) === */
+/* === MOBILE NAV: logo + toggle only; cart fixed bottom-right === */
 @media(max-width:768px){
-  .nav{height:56px!important;padding:0 16px!important;}
-  .nav__toggle{display:none!important;}
-  .nav__wordmark{display:none!important;}
-  .nav__links{display:flex!important;flex-direction:row!important;align-items:center!important;gap:clamp(8px,2.2vw,12px)!important;margin-left:auto!important;position:static!important;background:transparent!important;min-height:auto!important;overflow:visible!important;transform:none!important;opacity:1!important;pointer-events:auto!important;padding:0!important;z-index:auto!important;border:none!important;}
-  .nav.is-open .nav__links{transform:none!important;opacity:1!important;pointer-events:auto!important;}
-  .nav__links li{width:auto!important;}
-  .nav__links a{display:inline-flex!important;align-items:center!important;padding:0!important;font-size:10px!important;letter-spacing:0.05em!important;}
+  /* Nav bar: logo left, toggle right — nothing else */
+  .nav{height:68px!important;padding:0 20px!important;}
+  .nav__wordmark{display:inline!important;}
+  /* Toggle: always show, pushed right */
+  .nav__toggle{display:flex!important;margin-left:auto!important;}
+  /* Cart: fixed bottom-right FAB (moved outside nav via JS to escape stacking context) */
+  .nav__cart{
+    position:fixed!important;
+    bottom:24px!important;
+    right:20px!important;
+    margin:0!important;
+    width:52px!important;
+    height:52px!important;
+    z-index:11000!important;
+    background:linear-gradient(135deg,rgba(4,5,18,0.95),rgba(8,10,30,0.92))!important;
+    border:1px solid rgba(0,168,255,0.32)!important;
+    box-shadow:0 4px 22px rgba(0,0,0,0.65),0 0 18px rgba(0,168,255,0.14)!important;
+    backdrop-filter:blur(16px) saturate(160%)!important;
+    -webkit-backdrop-filter:blur(16px) saturate(160%)!important;
+    border-radius:50%!important;
+  }
+  .nav__cart svg{width:20px!important;height:20px!important;}
+  /* Nav links overlay: layout only — opacity/transform/transition handled by original CSS */
+  .nav__links{
+    display:flex!important;
+    position:fixed!important;
+    top:68px!important;
+    left:0!important;
+    right:0!important;
+    flex-direction:column!important;
+    gap:0!important;
+    padding:16px 20px!important;
+    margin:0!important;
+    background:linear-gradient(180deg,rgb(7,10,23),rgb(12,16,37))!important;
+    min-height:calc(100vh - 68px)!important;
+    overflow-y:auto!important;
+    border-bottom:1px solid rgba(255,255,255,0.06)!important;
+    z-index:999!important;
+  }
+  .nav__links li{width:100%!important;}
+  .nav__links a{display:block!important;padding:14px 4px!important;font-size:14px!important;letter-spacing:0.08em!important;}
+  .nav__links a::after{display:none!important;}
   .nav__caret{display:none!important;}
   .nav__dropdown{display:none!important;}
   .nav__cta{display:none!important;}
-  .nav__cart{margin-left:12px!important;}
+}
+  .nav__wordmark{display:inline!important;}
+  /* Restore toggle */
+  .nav__toggle{display:flex!important;margin-left:auto!important;}
+  /* Cart: removed from nav flow — fixed bottom-right FAB */
+  .nav__cart{
+    position:fixed!important;
+    bottom:24px!important;
+    right:20px!important;
+    margin:0!important;
+    width:52px!important;
+    height:52px!important;
+    z-index:11000!important;
+    background:linear-gradient(135deg,rgba(4,5,18,0.95),rgba(8,10,30,0.92))!important;
+    border:1px solid rgba(0,168,255,0.32)!important;
+    box-shadow:0 4px 22px rgba(0,0,0,0.65),0 0 18px rgba(0,168,255,0.14)!important;
+    backdrop-filter:blur(16px) saturate(160%)!important;
+    -webkit-backdrop-filter:blur(16px) saturate(160%)!important;
+    border-radius:50%!important;
+  }
+  .nav__cart svg{width:20px!important;height:20px!important;}
+  /* Restore hamburger slide-in menu */
+  .nav__links{
+    display:flex!important;
+    position:fixed!important;
+    top:68px!important;
+    left:0!important;
+    right:0!important;
+    flex-direction:column!important;
+    gap:0!important;
+    padding:16px 20px!important;
+    margin:0!important;
+    background:linear-gradient(180deg,rgb(7,10,23),rgb(12,16,37))!important;
+    min-height:calc(100vh - 68px)!important;
+    overflow-y:auto!important;
+    border-bottom:1px solid rgba(255,255,255,0.06)!important;
+    transform:translateY(-12px)!important;
+    opacity:0!important;
+    pointer-events:none!important;
+    transition:transform 0.32s cubic-bezier(0.16,1,0.3,1),opacity 0.25s ease!important;
+    z-index:999!important;
+  }
+  .nav.is-open .nav__links{
+    transform:translateY(0)!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+  .nav__links li{width:100%!important;}
+  .nav__links a{display:block!important;padding:14px 4px!important;font-size:14px!important;letter-spacing:0.08em!important;}
+  .nav__links a::after{display:none!important;}
+  .nav__caret{display:none!important;}
+  .nav__dropdown{display:none!important;}
+  .nav__cta{display:none!important;}
 }
 </style>
+<script>
+/* Mobile nav: move cart FAB + JS-driven open/close animation */
+(function(){
+  function initMobileNav(){
+    if(window.innerWidth > 768) return;
+    var nav = document.getElementById('site-nav');
+    var toggle = document.getElementById('site-nav-toggle');
+    if(!nav || !toggle) return;
+
+    /* Move cart FAB outside nav — backdrop-filter on nav traps fixed children */
+    var fab = document.getElementById('cartFab');
+    if(fab && fab.parentElement !== document.body) document.body.appendChild(fab);
+
+    /* JS-driven slide animation — CSS class transitions unreliable inside fixed+backdrop-filter */
+    var links = nav.querySelector('.nav__links');
+    if(!links) return;
+    links.style.transition = 'transform 0.32s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease';
+    links.style.transform = 'translateY(-12px)';
+    links.style.opacity = '0';
+    links.style.pointerEvents = 'none';
+
+    toggle.addEventListener('click', function(){
+      /* The original handler already toggled is-open; check post-toggle state */
+      setTimeout(function(){
+        var open = nav.classList.contains('is-open');
+        links.style.transform = open ? 'translateY(0)' : 'translateY(-12px)';
+        links.style.opacity   = open ? '1' : '0';
+        links.style.pointerEvents = open ? 'auto' : 'none';
+      }, 0);
+    });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMobileNav);
+  else initMobileNav();
+})();
+</script>
 </head>
 <body>
 
