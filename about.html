@@ -2126,6 +2126,7 @@
 <script>
 /* ===== HERO VIDEO: force play on mobile ===== */
 (function(){
+  function init(){
   var v = document.getElementById('heroVideoAbout');
   if (!v) return;
   var p = v.play();
@@ -2136,11 +2137,15 @@
       document.addEventListener('click', resume, { once: true });
     });
   }
+}
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 <script>
 /* ===== ABOUT STORY VIDEO: force play on mobile ===== */
 (function(){
+  function init(){
   var v = document.getElementById('aboutStoryVid');
   if (!v) return;
   var p = v.play();
@@ -2151,37 +2156,43 @@
       document.addEventListener('click', resume, { once: true });
     });
   }
+}
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 <script>
 /* ===== LAZY VIDEO LOADER: load + play videos as they enter viewport ===== */
 (function(){
-  var lazyVideos = document.querySelectorAll('video[data-lazy]');
-  if (!lazyVideos.length) return;
-  if (!('IntersectionObserver' in window)) {
-    // Fallback: load all immediately
-    lazyVideos.forEach(function(v){ loadVideo(v); });
-    return;
+  function init(){
+    var lazyVideos = document.querySelectorAll('video[data-lazy]');
+    if (!lazyVideos.length) return;
+    function loadVideo(v){
+      var sources = v.querySelectorAll('source[data-src]');
+      sources.forEach(function(s){ s.src = s.dataset.src; s.removeAttribute('data-src'); });
+      v.preload = 'auto';
+      v.load();
+      var p = v.play();
+      if (p !== undefined) p.catch(function(){
+        var resume = function(){ v.play(); document.removeEventListener('touchstart', resume); document.removeEventListener('click', resume); };
+        document.addEventListener('touchstart', resume, { once: true });
+        document.addEventListener('click', resume, { once: true });
+      });
+      v.removeAttribute('data-lazy');
+    }
+    if (!('IntersectionObserver' in window)) {
+      lazyVideos.forEach(loadVideo);
+      return;
+    }
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { loadVideo(e.target); obs.unobserve(e.target); }
+      });
+    }, { rootMargin: '400px 0px' });
+    lazyVideos.forEach(function(v){ obs.observe(v); });
   }
-  function loadVideo(v){
-    var sources = v.querySelectorAll('source[data-src]');
-    sources.forEach(function(s){ s.src = s.dataset.src; s.removeAttribute('data-src'); });
-    v.preload = 'auto';
-    v.load();
-    var p = v.play();
-    if (p !== undefined) p.catch(function(){
-      var resume = function(){ v.play(); document.removeEventListener('touchstart', resume); document.removeEventListener('click', resume); };
-      document.addEventListener('touchstart', resume, { once: true });
-      document.addEventListener('click', resume, { once: true });
-    });
-    v.removeAttribute('data-lazy');
-  }
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting) { loadVideo(e.target); obs.unobserve(e.target); }
-    });
-  }, { rootMargin: '200px 0px' });
-  lazyVideos.forEach(function(v){ obs.observe(v); });
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 <script>
@@ -2414,8 +2425,8 @@
 
     <!-- ===== STORY VIDEO ===== -->
     <section class="story-video" id="story" aria-label="Our story">
-      <video id="aboutStoryVid" class="story-video__bg" autoplay muted loop playsinline preload="none" data-lazy poster="assets/images/Introduction.png" aria-hidden="true">
-        <source data-src="assets/videos/arch-promo.mp4" type="video/mp4">
+      <video id="aboutStoryVid" class="story-video__bg" autoplay muted loop playsinline preload="metadata" poster="assets/images/Introduction.png" aria-hidden="true">
+        <source src="assets/videos/arch-promo.mp4" type="video/mp4">
       </video>
       <div class="story-video__overlay" aria-hidden="true"></div>
       <span class="story-video__beam" aria-hidden="true"></span>

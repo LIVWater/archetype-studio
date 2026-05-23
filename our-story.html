@@ -460,6 +460,7 @@
 <script>
 /* ===== STORY VIDEOS: force play on mobile ===== */
 (function(){
+  function init(){
   ['storyHeroVid','storyChapterVid'].forEach(function(id){
     var v = document.getElementById(id);
     if (!v) return;
@@ -472,37 +473,43 @@
       });
     }
   });
+}
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 <script>
 /* ===== LAZY VIDEO LOADER: load + play videos as they enter viewport ===== */
 (function(){
-  var lazyVideos = document.querySelectorAll('video[data-lazy]');
-  if (!lazyVideos.length) return;
-  if (!('IntersectionObserver' in window)) {
-    // Fallback: load all immediately
-    lazyVideos.forEach(function(v){ loadVideo(v); });
-    return;
+  function init(){
+    var lazyVideos = document.querySelectorAll('video[data-lazy]');
+    if (!lazyVideos.length) return;
+    function loadVideo(v){
+      var sources = v.querySelectorAll('source[data-src]');
+      sources.forEach(function(s){ s.src = s.dataset.src; s.removeAttribute('data-src'); });
+      v.preload = 'auto';
+      v.load();
+      var p = v.play();
+      if (p !== undefined) p.catch(function(){
+        var resume = function(){ v.play(); document.removeEventListener('touchstart', resume); document.removeEventListener('click', resume); };
+        document.addEventListener('touchstart', resume, { once: true });
+        document.addEventListener('click', resume, { once: true });
+      });
+      v.removeAttribute('data-lazy');
+    }
+    if (!('IntersectionObserver' in window)) {
+      lazyVideos.forEach(loadVideo);
+      return;
+    }
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { loadVideo(e.target); obs.unobserve(e.target); }
+      });
+    }, { rootMargin: '400px 0px' });
+    lazyVideos.forEach(function(v){ obs.observe(v); });
   }
-  function loadVideo(v){
-    var sources = v.querySelectorAll('source[data-src]');
-    sources.forEach(function(s){ s.src = s.dataset.src; s.removeAttribute('data-src'); });
-    v.preload = 'auto';
-    v.load();
-    var p = v.play();
-    if (p !== undefined) p.catch(function(){
-      var resume = function(){ v.play(); document.removeEventListener('touchstart', resume); document.removeEventListener('click', resume); };
-      document.addEventListener('touchstart', resume, { once: true });
-      document.addEventListener('click', resume, { once: true });
-    });
-    v.removeAttribute('data-lazy');
-  }
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting) { loadVideo(e.target); obs.unobserve(e.target); }
-    });
-  }, { rootMargin: '200px 0px' });
-  lazyVideos.forEach(function(v){ obs.observe(v); });
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 <script>
@@ -661,8 +668,8 @@
     <!-- ===== VIDEO INTERLUDE ===== -->
     <section class="vid-chapter" id="vid-interlude">
       <div class="vid-chapter__sticky">
-        <video id="storyChapterVid" class="vid-chapter__video" autoplay muted loop playsinline preload="none" data-lazy aria-hidden="true">
-          <source data-src="assets/videos/arch-background-v5.mp4" type="video/mp4" />
+        <video id="storyChapterVid" class="vid-chapter__video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+          <source src="assets/videos/arch-background-v5.mp4" type="video/mp4" />
         </video>
         <div class="vid-chapter__scrim" aria-hidden="true"></div>
         <div class="vid-manifesto">

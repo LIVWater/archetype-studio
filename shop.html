@@ -1562,6 +1562,7 @@
 <script>
 /* ===== HERO VIDEO: force play on mobile ===== */
 (function(){
+  function init(){
   var v = document.getElementById('heroVideoShop');
   if (!v) return;
   var p = v.play();
@@ -1572,6 +1573,9 @@
       document.addEventListener('click', resume, { once: true });
     });
   }
+}
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 <script>

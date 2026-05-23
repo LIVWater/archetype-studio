@@ -1381,8 +1381,8 @@ footer.footer .footer__social:hover{border-color:#00A8FF;color:#00A8FF;transform
   </div>
 </div>
 
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 
 /* ===== PACKAGE SELECTION + QUOTE ===== */
@@ -1464,6 +1464,7 @@ document.getElementById('quoteModal').addEventListener('click', function(e){
 /* ===== NEON CANVAS ===== */
 (function(){
   const canvas = document.getElementById('neonCanvas');
+  if (!canvas) return; // element not on this page — abort silently
   const ctx = canvas.getContext('2d', {alpha:true});
   let W, H, rafId = null;
   const COLORS = ['#00A8FF','#E91E8C','#00E5D4','#6B00C8','#00A8FF','#00A8FF'];
