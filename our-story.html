@@ -19,8 +19,8 @@
     }
     /* ===== RESET ===== */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;overflow-x:hidden;}
-    body{background:var(--deep-space);color:var(--off-white);font-family:var(--font-body);font-size:16px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    html{scroll-behavior:smooth;overflow-x:clip;}
+    body{background:var(--deep-space);color:var(--off-white);font-family:var(--font-body);font-size:16px;line-height:1.7;overflow-x:clip;-webkit-font-smoothing:antialiased;}
     img{max-width:100%;height:auto;display:block;}
     a{text-decoration:none;color:inherit;}
     /* ===== GRAIN ===== */
@@ -397,9 +397,11 @@
 
 /* === MOBILE NAV: logo + toggle only; cart fixed bottom-right === */
 @media(max-width:768px){
-  /* Prevent horizontal content overflow */
-  .wrap,main,section,article,.container{max-width:100vw;overflow-x:hidden;}
-  img,video,canvas,iframe{max-width:100%!important;height:auto;}
+  /* Prevent horizontal content overflow — use clip (not hidden) so position:sticky still works */
+  html,body{overflow-x:clip;max-width:100vw;}
+  .wrap,main,article,.container{max-width:100vw;overflow-x:clip;}
+  img,canvas,iframe{max-width:100%!important;height:auto;}
+  video{max-width:100%;}
   /* Nav bar: logo left, toggle right only */
   .nav{height:68px!important;padding:0 20px!important;}
   .nav__wordmark{display:inline!important;}
@@ -473,38 +475,48 @@
 })();
 </script>
 <script>
-/* Mobile nav: move cart FAB + JS-driven open/close animation */
+/* ===== LAZY VIDEO LOADER: load + play videos as they enter viewport ===== */
 (function(){
-  function initMobileNav(){
-    if(window.innerWidth > 768) return;
-    var nav = document.getElementById('site-nav');
-    var toggle = document.getElementById('site-nav-toggle');
-    if(!nav || !toggle) return;
-
-    /* Move cart FAB outside nav — backdrop-filter on nav traps fixed children */
-    var fab = document.getElementById('cartFab');
-    if(fab && fab.parentElement !== document.body) document.body.appendChild(fab);
-
-    /* JS-driven slide animation — CSS class transitions unreliable inside fixed+backdrop-filter */
-    var links = nav.querySelector('.nav__links');
-    if(!links) return;
-    links.style.transition = 'transform 0.32s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease';
-    links.style.transform = 'translateY(-12px)';
-    links.style.opacity = '0';
-    links.style.pointerEvents = 'none';
-
-    toggle.addEventListener('click', function(){
-      /* The original handler already toggled is-open; check post-toggle state */
-      setTimeout(function(){
-        var open = nav.classList.contains('is-open');
-        links.style.transform = open ? 'translateY(0)' : 'translateY(-12px)';
-        links.style.opacity   = open ? '1' : '0';
-        links.style.pointerEvents = open ? 'auto' : 'none';
-      }, 0);
-    });
+  var lazyVideos = document.querySelectorAll('video[data-lazy]');
+  if (!lazyVideos.length) return;
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: load all immediately
+    lazyVideos.forEach(function(v){ loadVideo(v); });
+    return;
   }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMobileNav);
-  else initMobileNav();
+  function loadVideo(v){
+    var sources = v.querySelectorAll('source[data-src]');
+    sources.forEach(function(s){ s.src = s.dataset.src; s.removeAttribute('data-src'); });
+    v.preload = 'auto';
+    v.load();
+    var p = v.play();
+    if (p !== undefined) p.catch(function(){
+      var resume = function(){ v.play(); document.removeEventListener('touchstart', resume); document.removeEventListener('click', resume); };
+      document.addEventListener('touchstart', resume, { once: true });
+      document.addEventListener('click', resume, { once: true });
+    });
+    v.removeAttribute('data-lazy');
+  }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { loadVideo(e.target); obs.unobserve(e.target); }
+    });
+  }, { rootMargin: '200px 0px' });
+  lazyVideos.forEach(function(v){ obs.observe(v); });
+})();
+</script>
+<script>
+/* Mobile nav: move cart FAB outside nav (escape backdrop-filter stacking context) */
+(function(){
+  function init(){
+    if(window.innerWidth > 768) return;
+    var cart = document.querySelector('.nav__cart');
+    if(cart && cart.parentElement && cart.parentElement.tagName !== 'BODY'){
+      document.body.appendChild(cart);
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 </head>
@@ -649,8 +661,8 @@
     <!-- ===== VIDEO INTERLUDE ===== -->
     <section class="vid-chapter" id="vid-interlude">
       <div class="vid-chapter__sticky">
-        <video id="storyChapterVid" class="vid-chapter__video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-          <source src="assets/videos/arch-background-v5.mp4" type="video/mp4" />
+        <video id="storyChapterVid" class="vid-chapter__video" autoplay muted loop playsinline preload="none" data-lazy aria-hidden="true">
+          <source data-src="assets/videos/arch-background-v5.mp4" type="video/mp4" />
         </video>
         <div class="vid-chapter__scrim" aria-hidden="true"></div>
         <div class="vid-manifesto">

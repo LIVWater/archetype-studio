@@ -24,8 +24,8 @@
   --accent:var(--electric);--accent-2:var(--cyan);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;overflow-x:hidden;}
-body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-b);overflow-x:hidden;line-height:1.6;}
+html{scroll-behavior:smooth;overflow-x:clip;}
+body{background:var(--bg-deep);color:var(--text-primary);font-family:var(--font-b);overflow-x:clip;line-height:1.6;}
 a{color:inherit;}
 img{max-width:100%;display:block;}
 
@@ -983,9 +983,11 @@ section.svc-section{position:relative;padding:120px 5vw;background:var(--bg-deep
 
 /* === MOBILE NAV: logo + toggle only; cart fixed bottom-right === */
 @media(max-width:768px){
-  /* Prevent horizontal content overflow */
-  .wrap,main,section,article,.container{max-width:100vw;overflow-x:hidden;}
-  img,video,canvas,iframe{max-width:100%!important;height:auto;}
+  /* Prevent horizontal content overflow — use clip (not hidden) so position:sticky still works */
+  html,body{overflow-x:clip;max-width:100vw;}
+  .wrap,main,article,.container{max-width:100vw;overflow-x:clip;}
+  img,canvas,iframe{max-width:100%!important;height:auto;}
+  video{max-width:100%;}
   /* Nav bar: logo left, toggle right only */
   .nav{height:68px!important;padding:0 20px!important;}
   .nav__wordmark{display:inline!important;}
@@ -1042,38 +1044,17 @@ section.svc-section{position:relative;padding:120px 5vw;background:var(--bg-deep
 }
 </style>
 <script>
-/* Mobile nav: move cart FAB + JS-driven open/close animation */
+/* Mobile nav: move cart FAB outside nav (escape backdrop-filter stacking context) */
 (function(){
-  function initMobileNav(){
+  function init(){
     if(window.innerWidth > 768) return;
-    var nav = document.getElementById('site-nav');
-    var toggle = document.getElementById('site-nav-toggle');
-    if(!nav || !toggle) return;
-
-    /* Move cart FAB outside nav — backdrop-filter on nav traps fixed children */
-    var fab = document.getElementById('cartFab');
-    if(fab && fab.parentElement !== document.body) document.body.appendChild(fab);
-
-    /* JS-driven slide animation — CSS class transitions unreliable inside fixed+backdrop-filter */
-    var links = nav.querySelector('.nav__links');
-    if(!links) return;
-    links.style.transition = 'transform 0.32s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease';
-    links.style.transform = 'translateY(-12px)';
-    links.style.opacity = '0';
-    links.style.pointerEvents = 'none';
-
-    toggle.addEventListener('click', function(){
-      /* The original handler already toggled is-open; check post-toggle state */
-      setTimeout(function(){
-        var open = nav.classList.contains('is-open');
-        links.style.transform = open ? 'translateY(0)' : 'translateY(-12px)';
-        links.style.opacity   = open ? '1' : '0';
-        links.style.pointerEvents = open ? 'auto' : 'none';
-      }, 0);
-    });
+    var cart = document.querySelector('.nav__cart');
+    if(cart && cart.parentElement && cart.parentElement.tagName !== 'BODY'){
+      document.body.appendChild(cart);
+    }
   }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMobileNav);
-  else initMobileNav();
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 </head>

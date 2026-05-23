@@ -19,8 +19,8 @@
   --border:rgba(255,255,255,0.07);--border-hi:rgba(255,255,255,0.14);
   --ease:cubic-bezier(0.16,1,0.3,1);
 }
-html{scroll-behavior:smooth;scroll-padding-top:68px;overflow-x:hidden;}
-body{font-family:'DM Sans',sans-serif;background:var(--space);color:var(--off);overflow-x:hidden;line-height:1.6;}
+html{scroll-behavior:smooth;scroll-padding-top:68px;overflow-x:clip;}
+body{font-family:'DM Sans',sans-serif;background:var(--space);color:var(--off);overflow-x:clip;line-height:1.6;}
 img{display:block;max-width:100%;}
 a{text-decoration:none;}
 ::-webkit-scrollbar{width:5px;}
@@ -461,7 +461,7 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <img src="../Logos/logomark-white.svg" alt="Archetype Studios">
+    <img src="../Logos/logomark-white.svg" alt="Archetype Studios" loading="lazy" decoding="async">
     <span class="nav-brand">Archetype Studios</span>
   </div>
   <ul class="nav-links">
@@ -483,7 +483,7 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
   <div class="cover-bg"></div>
   <div class="cover-overlay"></div>
   <div class="cover-content">
-    <img class="cover-mark" src="../Logos/logomark-white.svg" alt="Archetype Studios">
+    <img class="cover-mark" src="../Logos/logomark-white.svg" alt="Archetype Studios" loading="lazy" decoding="async">
     <div class="cover-rule"></div>
     <p class="cover-eyebrow">Brand Identity Pack · 2025</p>
     <div class="cover-title">
@@ -561,7 +561,7 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
         <div class="mark-stage">
           <div class="mark-grid-bg"></div>
           <div class="mark-glow"></div>
-          <img src="../Logos/logomark-white.svg" alt="Archetype Studios mark">
+          <img src="../Logos/logomark-white.svg" alt="Archetype Studios mark" loading="lazy" decoding="async">
         </div>
       </div>
       <div>
@@ -613,19 +613,19 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
       <div class="logo-row">
         <div class="logo-card dark reveal reveal-d1">
           <div class="lc-stripe" style="background:#FFFFFF;"></div>
-          <img src="../Logos/logomark-white.svg" alt="White mark">
+          <img src="../Logos/logomark-white.svg" alt="White mark" loading="lazy" decoding="async">
           <div class="lc-name" style="color:var(--off);">White</div>
           <div class="lc-use">Primary — all dark brand surfaces</div>
         </div>
         <div class="logo-card dark reveal reveal-d2">
           <div class="lc-stripe" style="background:#BE1323;"></div>
-          <img src="../Logos/logomark-red.svg" alt="Red mark">
+          <img src="../Logos/logomark-red.svg" alt="Red mark" loading="lazy" decoding="async">
           <div class="lc-name" style="color:#CF4A56;">Red</div>
           <div class="lc-use">Campaign &amp; high-impact contexts</div>
         </div>
         <div class="logo-card dark reveal reveal-d3">
           <div class="lc-stripe" style="background:#79BCEE;"></div>
-          <img src="../Logos/logomark-blue.svg" alt="Blue mark">
+          <img src="../Logos/logomark-blue.svg" alt="Blue mark" loading="lazy" decoding="async">
           <div class="lc-name" style="color:#79BCEE;">Blue</div>
           <div class="lc-use">Digital, tech, and partner contexts</div>
         </div>
@@ -635,19 +635,19 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
       <div class="logo-row">
         <div class="logo-card dark lockup reveal reveal-d1">
           <div class="lc-stripe" style="background:#FFFFFF;"></div>
-          <img src="../Logos/logo-white.svg" alt="White lockup">
+          <img src="../Logos/logo-white.svg" alt="White lockup" loading="lazy" decoding="async">
           <div class="lc-name" style="color:var(--off);">White Lockup</div>
           <div class="lc-use">Standard — presentations, proposals, collateral</div>
         </div>
         <div class="logo-card dark lockup reveal reveal-d2">
           <div class="lc-stripe" style="background:#BE1323;"></div>
-          <img src="../Logos/logo-red.svg" alt="Red lockup">
+          <img src="../Logos/logo-red.svg" alt="Red lockup" loading="lazy" decoding="async">
           <div class="lc-name" style="color:#CF4A56;">Red Lockup</div>
           <div class="lc-use">Bold campaign applications, event signage</div>
         </div>
         <div class="logo-card dark lockup reveal reveal-d3">
           <div class="lc-stripe" style="background:#79BCEE;"></div>
-          <img src="../Logos/logo-blue.svg" alt="Blue lockup">
+          <img src="../Logos/logo-blue.svg" alt="Blue lockup" loading="lazy" decoding="async">
           <div class="lc-name" style="color:#79BCEE;">Blue Lockup</div>
           <div class="lc-use">Digital-first, social, UI contexts</div>
         </div>
@@ -656,12 +656,12 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
       <div class="logo-row-label reveal" style="margin-top:36px;">Light Background Reversal</div>
       <div class="logo-row duo">
         <div class="logo-card light reveal reveal-d1">
-          <img src="../Logos/logomark-white.svg" alt="Dark mark on light">
+          <img src="../Logos/logomark-white.svg" alt="Dark mark on light" loading="lazy" decoding="async">
           <div class="lc-name">Mark — Dark on Light</div>
           <div class="lc-use">Print, stationery, co-branded materials</div>
         </div>
         <div class="logo-card light lockup reveal reveal-d2">
-          <img src="../Logos/logo-white.svg" alt="Dark lockup on light">
+          <img src="../Logos/logo-white.svg" alt="Dark lockup on light" loading="lazy" decoding="async">
           <div class="lc-name">Lockup — Dark on Light</div>
           <div class="lc-use">Letterheads, formal documents, light-background digital</div>
         </div>
@@ -1052,7 +1052,7 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
         <div class="bcard-preview">
           <div class="bc bc-front">
             <div>
-              <img class="bc-logo" src="../Logos/logomark-white.svg" alt="mark">
+              <img class="bc-logo" src="../Logos/logomark-white.svg" alt="mark" loading="lazy" decoding="async">
             </div>
             <div>
               <div class="bc-name">Andre Niemann</div>
@@ -1061,7 +1061,7 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
             </div>
           </div>
           <div class="bc bc-back">
-            <img src="../Logos/logomark-white.svg" alt="mark" style="width:45%;opacity:0.7;">
+            <img src="../Logos/logomark-white.svg" alt="mark" style="width:45%;opacity:0.7;" loading="lazy" decoding="async">
           </div>
         </div>
         <div class="app-footer">
@@ -1080,7 +1080,7 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
               <div class="slide-title">Marketing with Purpose.<br>Powered by Insight.</div>
               <div class="slide-sub">Archetype Studios — Creative-strategic partners for brands that refuse to blend in.</div>
             </div>
-            <img class="slide-logo" src="../Logos/logomark-white.svg" alt="mark">
+            <img class="slide-logo" src="../Logos/logomark-white.svg" alt="mark" loading="lazy" decoding="async">
           </div>
         </div>
         <div class="app-footer">
@@ -1094,7 +1094,7 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
         <div class="social-preview">
           <div class="social-tile st-1">
             <div class="st-inner">
-              <img class="st-mark" src="../Logos/logomark-white.svg" alt="mark">
+              <img class="st-mark" src="../Logos/logomark-white.svg" alt="mark" loading="lazy" decoding="async">
               <div class="st-text accent-blue" style="font-family:'Syne',sans-serif;font-size:9px;font-weight:800;letter-spacing:0.08em;">MARKETING<br>WITH PURPOSE</div>
             </div>
           </div>
@@ -1122,7 +1122,7 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
         <div class="email-preview">
           <div class="email-mock">
             <div class="email-header">
-              <img class="email-mark" src="../Logos/logomark-white.svg" alt="mark">
+              <img class="email-mark" src="../Logos/logomark-white.svg" alt="mark" loading="lazy" decoding="async">
               <div>
                 <div class="email-from">Archetype Studios</div>
                 <div class="email-sub">studio@archetypestudios.com</div>
@@ -1151,7 +1151,7 @@ h3.sub{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weigh
   <div class="bc-cover-bg"></div>
   <div class="bc-cover-overlay"></div>
   <div class="bc-cover-content">
-    <img class="bc-mark" src="../Logos/logomark-white.svg" alt="Archetype Studios">
+    <img class="bc-mark" src="../Logos/logomark-white.svg" alt="Archetype Studios" loading="lazy" decoding="async">
     <div class="bc-title">Archetype Studios</div>
     <div class="bc-divider"></div>
     <p class="bc-tagline"><strong>Marketing with Purpose.</strong><br>Powered by Insight.</p>
