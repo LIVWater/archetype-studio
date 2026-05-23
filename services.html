@@ -285,6 +285,9 @@ section.svp{position:relative;padding:120px 5vw;}
 /* === MOBILE NAV: logo + toggle only; cart fixed bottom-right === */
 @media(max-width:768px){
   /* Nav bar: logo left, toggle right — nothing else */
+  /* Prevent horizontal content overflow */
+  .wrap,main,section,article,.container{max-width:100vw;overflow-x:hidden;}
+  img,video,canvas,iframe{max-width:100%!important;height:auto;}
   .nav{height:68px!important;padding:0 20px!important;}
   .nav__wordmark{display:inline!important;}
   /* Toggle: always show, pushed right */
